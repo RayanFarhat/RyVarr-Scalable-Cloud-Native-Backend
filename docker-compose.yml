@@ -1,0 +1,27 @@
+version: '3.8'
+networks:
+  server-network:
+    driver: bridge
+# docker compose up -d
+# docker compose build
+# docker compose down
+
+
+services:
+  # important: not exposing ports so the server only listen to docker containers in his network
+  nginx:
+    build: ./nginx
+    ports:
+      - '80:80'
+      - '443:443'
+    networks:
+      - server-network
+
+  authservice:
+    build: ./AuthService
+    # only apply in dev mode and test with http://localhost/swagger
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ######################################
+    networks:
+      - server-network
