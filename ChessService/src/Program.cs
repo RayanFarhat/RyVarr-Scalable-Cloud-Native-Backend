@@ -1,3 +1,8 @@
+using ChessService;
+using System;
+
+var c = new ChessEngine();
+Console.WriteLine(c.ToString());
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
