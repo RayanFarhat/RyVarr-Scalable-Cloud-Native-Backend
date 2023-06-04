@@ -17,8 +17,32 @@ services:
     networks:
       - server-network
 
+  db:
+    image: postgres:15.2
+    ports:
+      - '5432:5432' # used with pgadmin and remove in production
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    networks:
+      - server-network
+    volumes:
+      - ./database/postgresql:/var/lib/postgresql/data
+
   authservice:
     build: ./AuthService
+    # only apply in dev mode and test with http://localhost/swagger
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    ######################################
+    networks:
+      - server-network
+
+  chessservice:
+    build: ./ChessService
     # only apply in dev mode and test with http://localhost/swagger
     environment:
       ASPNETCORE_ENVIRONMENT: Development

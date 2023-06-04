@@ -72,3 +72,7 @@ _[Ss]cripts
 *.dll
 *.nupkg
 *.ncrunchsolution
+
+# DB #
+######################
+database/postgresql
