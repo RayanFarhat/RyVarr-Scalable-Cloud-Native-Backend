@@ -5,6 +5,7 @@ public class ChessEngine
     private Board board;
     public ChessEngine()
     {
-        board = new Board();
+        this.board = new Board();
+        System.Console.WriteLine(this.board.GetFEN());
     }
 }

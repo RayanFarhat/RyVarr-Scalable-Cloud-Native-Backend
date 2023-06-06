@@ -1,8 +1,6 @@
 using ChessService.Chess;
-using System;
-
 var c = new ChessEngine();
-// Console.WriteLine(c.ToString());
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -27,4 +25,5 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+
+app.Run("http://127.0.0.1:8080");

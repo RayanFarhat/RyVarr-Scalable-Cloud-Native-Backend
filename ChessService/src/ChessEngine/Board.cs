@@ -3,35 +3,63 @@ namespace ChessService.Chess;
 public class Board
 {
     //remember that Y up/down, X left/Right, Z forward/backward
-    private char?[,,] board = new char?[8, 8, 8];
+    // point 0,0,0 is in the bottom board of the cube in the left up 
+    private char[] board = new char[512];// 8*8*8
 
     public Board()
     {
-        // init
-        for (int x = 0; x < board.GetLength(0); x++)
+        for (int i = 0; i < 512; i++)
         {
-            for (int y = 0; y < board.GetLength(1); y++)
-            {
-                for (int z = 0; z < board.GetLength(2); z++)
-                {
-                    board[x, y, z] = null;
-                }
-            }
+            board[i] = 'O';
         }
+        board[64] = 'H';
+        board[264] = 'X';
 
     }
+
+    public Stack<int> GetMoves(int index)
+    {
+        Stack<int> moves = new Stack<int>();
+        return moves;
+    }
+
+    //Upper case are whites
+    public string GetFEN()
+    {
+        string fen = "";
+        int tmp = 0;
+        for (int i = 0; i < 512; i++)
+        {
+            if (board[i] == 'O')
+            {
+                tmp += 1;
+            }
+            else
+            {
+                fen += tmp.ToString();
+                tmp = 0;
+                fen += board[i];
+            }
+        }
+        if (tmp > 0)
+            fen += tmp.ToString();
+        return fen;
+    }
+
+
     public override String ToString()
     {
         String s = "";
-        for (int x = 0; x < board.GetLength(0); x++)
+        for (int y = 0; y < 8; y++)
         {
-            s += "\nlayer " + (x + 1);
-            for (int y = 0; y < board.GetLength(1); y++)
+            s += "\nlayer " + (y + 1);
+
+            for (int z = 0; z < 8; z++)
             {
                 s += '\n';
-                for (int z = 0; z < board.GetLength(2); z++)
+                for (int x = 0; x < 8; x++)
                 {
-                    s += board[x, y, z];
+                    s += board[y * 64 + z * 8 + x];
                     s += ',';
                 }
             }
