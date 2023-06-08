@@ -6,7 +6,7 @@ public class ChessEngine
     public ChessEngine()
     {
         this.game = new Game();
-        System.Console.WriteLine(this.game);
+        System.Console.WriteLine(this.game.GetFEN());
     }
 
     public static bool IsValidSquare(int index)

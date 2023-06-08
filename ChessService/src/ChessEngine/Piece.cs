@@ -59,7 +59,7 @@ public abstract class Piece
                     moves.Push(nextmove);
                     nextmove = nextmove + movespattern[i];
                 }
-                if (this.IsEnemy(nextmove))
+                if (ChessEngine.IsValidSquare(nextmove) && this.IsEnemy(nextmove))
                 {
                     moves.Push(nextmove);
                 }
