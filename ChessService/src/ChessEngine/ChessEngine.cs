@@ -6,6 +6,6 @@ public class ChessEngine
     public ChessEngine()
     {
         this.board = new Board();
-        System.Console.WriteLine(this.board.GetFEN());
+        System.Console.WriteLine(Piece.XZ[0]);
     }
 }

@@ -1,13 +1,13 @@
 namespace ChessService.Chess;
 
-public class king : Piece
+public class Knight : Piece
 {
-    public king()
+    public Knight()
     {
 
     }
 
-    public abstract Stack<int> GetMoves()
+    public override Stack<int> GetMoves()
     {
         Stack<int> moves = new Stack<int>();
         return moves;

@@ -4,17 +4,27 @@ public class Board
 {
     //remember that Y up/down, X left/Right, Z forward/backward
     // point 0,0,0 is in the bottom board of the cube in the left up 
-    private char[] board = new char[512];// 8*8*8
+    /*
+    Rathar than have 8*8*8=512 blocks I use 0X88 so it be 1024 blocks
+    I also use somthing like 0X88 but also between every layer so it will be 2048 blocks
+    The trick is to replace 0X88 with 0x80 so we can make the first 128 blocks valid and the next are nor and keep going...
+    * when block index is & 0x80 bigger than 0 or block index is & 0x88 bigger than 0 then the block is not valid!
+
+    0 1 2 3 4 5 6 7 |8 9 10 11 12 13 14 15  <- the right is invalid
+    16 ...          |
+                        ... 124 125 126 127
+    128 .. 255                    <- is invalid
+    */
+    private char[] board = new char[2048];// (8*8*8)*2*2
 
     public Board()
     {
-        for (int i = 0; i < 512; i++)
+        for (int i = 0; i < 2048; i++)
         {
             board[i] = 'O';
         }
-        board[64] = 'H';
-        board[264] = 'X';
-
+        board[17] = 'l';
+        board[3] = 'v';
     }
 
     public Stack<int> GetMoves(int index)
@@ -28,17 +38,21 @@ public class Board
     {
         string fen = "";
         int tmp = 0;
-        for (int i = 0; i < 512; i++)
+        for (int i = 0; i < 2048; i++)
         {
-            if (board[i] == 'O')
+            // block is valid
+            if ((i & 0x80) == 0 && (i & 0x88) == 0)
             {
-                tmp += 1;
-            }
-            else
-            {
-                fen += tmp.ToString();
-                tmp = 0;
-                fen += board[i];
+                if (board[i] == 'O')
+                {
+                    tmp += 1;
+                }
+                else
+                {
+                    fen += tmp.ToString();
+                    tmp = 0;
+                    fen += board[i];
+                }
             }
         }
         if (tmp > 0)
@@ -50,18 +64,24 @@ public class Board
     public override String ToString()
     {
         String s = "";
-        for (int y = 0; y < 8; y++)
+        int l = 1;
+        for (int i = 0; i < 2048; i++)
         {
-            s += "\nlayer " + (y + 1);
-
-            for (int z = 0; z < 8; z++)
+            // block is valid
+            if ((i & 0x80) == 0 && (i & 0x88) == 0)
             {
-                s += '\n';
-                for (int x = 0; x < 8; x++)
+                if ((i % 8) == 0)
                 {
-                    s += board[y * 64 + z * 8 + x];
-                    s += ',';
+                    s += '\n';
                 }
+                if ((i % 128) == 0)
+                {
+                    s += "Layer " + l.ToString();
+                    l++;
+                    s += '\n';
+                }
+                s += board[i];
+                s += ',';
             }
         }
         return s;
