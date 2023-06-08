@@ -1,6 +1,6 @@
 namespace ChessService.Chess;
 
-public class Board
+public class Game
 {
     //remember that Y up/down, X left/Right, Z forward/backward
     // point 0,0,0 is in the bottom board of the cube in the left up 
@@ -15,22 +15,47 @@ public class Board
                         ... 124 125 126 127
     128 .. 255                    <- is invalid
     */
-    private char[] board = new char[2048];// (8*8*8)*2*2
+    private char[] board;
+    private King K;
+    private King k;
 
-    public Board()
+
+    public Game()
     {
+        this.board = new char[2048];// (8*8*8)*2*2
         for (int i = 0; i < 2048; i++)
         {
             board[i] = 'O';
         }
-        board[17] = 'l';
-        board[3] = 'v';
+        board[18] = 'k';
+        board[3] = 'K';
+
+        this.K = new King(COLOR.WHIRE, this.board);
+        this.k = new King(COLOR.BLACK, this.board);
+
+        //!test
+        Stack<int> moves = this.GetMoves(18);
+
+        while (moves.Count > 0)
+        {
+            int move = moves.Pop();
+            this.board[move] = 'X';
+        }
+
+
     }
 
     public Stack<int> GetMoves(int index)
     {
-        Stack<int> moves = new Stack<int>();
-        return moves;
+        switch (board[index])
+        {
+            case 'K':
+                return this.K.GetMoves(index);
+            case 'k':
+                return this.k.GetMoves(index);
+            default:
+                return new Stack<int>();
+        }
     }
 
     //Upper case are whites
@@ -41,7 +66,7 @@ public class Board
         for (int i = 0; i < 2048; i++)
         {
             // block is valid
-            if ((i & 0x80) == 0 && (i & 0x88) == 0)
+            if (ChessEngine.IsValidSquare(i))
             {
                 if (board[i] == 'O')
                 {
@@ -68,7 +93,7 @@ public class Board
         for (int i = 0; i < 2048; i++)
         {
             // block is valid
-            if ((i & 0x80) == 0 && (i & 0x88) == 0)
+            if (ChessEngine.IsValidSquare(i))
             {
                 if ((i % 8) == 0)
                 {

@@ -2,10 +2,16 @@ namespace ChessService.Chess;
 
 public class ChessEngine
 {
-    private Board board;
+    private Game game;
     public ChessEngine()
     {
-        this.board = new Board();
-        System.Console.WriteLine(Piece.XZ[0]);
+        this.game = new Game();
+        System.Console.WriteLine(this.game);
     }
+
+    public static bool IsValidSquare(int index)
+    {
+        return ((index & 0x80) == 0 && (index & 0x88) == 0 && index >= 0 && index <= 2048);
+    }
+
 }
