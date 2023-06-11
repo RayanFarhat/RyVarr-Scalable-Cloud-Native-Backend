@@ -2,6 +2,9 @@ namespace ChessService.Chess;
 
 public class Game
 {
+    private bool WhiteWon = false;
+    private bool BlackWon = false;
+
     //remember that Y up/down, X left/Right, Z forward/backward
     // point 0,0,0 is in the bottom board of the cube in the left up 
     /*
@@ -129,6 +132,33 @@ public class Game
             default:
                 return new Stack<int>();
         }
+    }
+
+    public bool Move(int from, int to)
+    {
+        Stack<int> moves = GetMoves(from);
+        int move;
+        while (moves.Count > 0)
+        {
+            move = moves.Pop();
+            if (to == move)
+            {
+                // if the eaten piece is the king
+                if (this.board[to] == 'k')
+                {
+                    this.WhiteWon = true;
+                }
+                else if (this.board[to] == 'K')
+                {
+                    this.BlackWon = true;
+                }
+                // update the board
+                this.board[to] = this.board[from];
+                this.board[from] = 'O';
+                return true;
+            }
+        }
+        return false;
     }
 
     //Upper case are whites
