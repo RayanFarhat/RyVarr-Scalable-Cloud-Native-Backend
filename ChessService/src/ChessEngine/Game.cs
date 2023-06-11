@@ -2,8 +2,8 @@ namespace ChessService.Chess;
 
 public class Game
 {
-    private bool WhiteWon = false;
-    private bool BlackWon = false;
+    public bool WhiteWon;
+    public bool BlackWon;
 
     //remember that Y up/down, X left/Right, Z forward/backward
     // point 0,0,0 is in the bottom board of the cube in the left up 
@@ -37,6 +37,10 @@ public class Game
 
     public Game()
     {
+
+        this.WhiteWon = false;
+        this.BlackWon = false;
+
         this.board = new char[2048];// (8*8*8)*2*2
         for (int i = 0; i < 2048; i++)
         {

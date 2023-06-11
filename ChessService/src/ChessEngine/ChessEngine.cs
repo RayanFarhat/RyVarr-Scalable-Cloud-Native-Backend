@@ -14,4 +14,9 @@ public class ChessEngine
         return ((index & 0x80) == 0 && (index & 0x88) == 0 && index >= 0 && index <= 2048);
     }
 
+    public override string ToString()
+    {
+        return "Chess Engine Started!";
+    }
+
 }

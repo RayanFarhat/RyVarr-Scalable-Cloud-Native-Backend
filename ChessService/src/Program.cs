@@ -1,5 +1,8 @@
+// * https://prodotnetmemory.com/slides/PerformancePatterns/#1
+
 using ChessService.Chess;
-var c = new ChessEngine();
+using ChessService;
+System.Console.WriteLine(G.chessEngine);
 
 var builder = WebApplication.CreateBuilder(args);
 
