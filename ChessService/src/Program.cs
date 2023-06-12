@@ -2,7 +2,7 @@
 
 using ChessService.Chess;
 using ChessService;
-System.Console.WriteLine(G.chessEngine);
+System.Console.WriteLine(G.gamesManager);
 
 var builder = WebApplication.CreateBuilder(args);
 
