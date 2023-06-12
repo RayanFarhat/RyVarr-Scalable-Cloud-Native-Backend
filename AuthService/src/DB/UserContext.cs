@@ -11,6 +11,7 @@ public class UserContext : DbContext
 
     public UserContext(DbContextOptions<UserContext> options) : base(options)
     {
+
         Users = Set<User>();
     }
 
@@ -21,6 +22,7 @@ public class UserContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.UseSerialColumns();
         modelBuilder.Entity<User>().ToTable("Users");
     }
 
