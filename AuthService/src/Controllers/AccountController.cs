@@ -5,14 +5,14 @@ using StackExchange.Redis;
 namespace AuthService.Controllers;
 
 
-[Route("[controller]")]
+[Route("auth/[controller]")]
 [ApiController]
-public class HelloWorldController : ControllerBase
+public class AccountController : ControllerBase
 {
     private readonly RyvarrDb _dbContext;
     private readonly IConnectionMultiplexer _redis;
 
-    public HelloWorldController(RyvarrDb dbContext, IConnectionMultiplexer redis)
+    public AccountController(RyvarrDb dbContext, IConnectionMultiplexer redis)
     {
         _dbContext = dbContext;
         _redis = redis;
@@ -24,6 +24,25 @@ public class HelloWorldController : ControllerBase
         return Ok("Hello, World!");
     }
 
+    [HttpPost]
+    public IActionResult Post()
+    {
+        return Ok("Post Hello, World!");
+    }
+
+    [HttpPatch]
+    public IActionResult Patch()
+    {
+        return Ok("Patch Hello, World!");
+    }
+
+    [HttpDelete]
+    public IActionResult Delete()
+    {
+        return Ok("Delete Hello, World!");
+    }
+
+    // test for redis
     [HttpGet("foo")]
     public async Task<IActionResult> Foo()
     {
