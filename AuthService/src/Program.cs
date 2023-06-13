@@ -1,6 +1,8 @@
 using AuthService.DB;
 using Microsoft.EntityFrameworkCore;
 using StackExchange.Redis;
+using AuthService.DTOs;
+
 
 
 
@@ -12,7 +14,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<UserContext>(options =>
+builder.Services.AddDbContext<RyvarrDb>(options =>
     options.UseNpgsql("Host=db;Port=5432;Database=ryvarrdb;Username=ryan;Password=ryan"));
 
 // Add Redis as a service
@@ -29,15 +31,16 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider
-        .GetRequiredService<UserContext>();
+        .GetRequiredService<RyvarrDb>();
 
     // Here is the migration executed 
     //* create the tables  based on the context
     dbContext.Database.Migrate();
 
-    // dbContext.users.Add(new User(3, "rrr", "eee", "ppp"));
-    // // Persist changes to the database
-    // dbContext.SaveChanges();
+    dbContext.users.Add(new User(0, "rrr", "eee", "ppp"));
+    dbContext.users.Add(new User(0, "rssrr", "essee", "pppss"));
+    // Persist changes to the database
+    dbContext.SaveChanges();
 }
 
 // Configure the HTTP request pipeline.

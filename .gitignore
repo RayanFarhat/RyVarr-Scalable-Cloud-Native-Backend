@@ -75,4 +75,6 @@ _[Ss]cripts
 
 # DB #
 ######################
-database/postgresql
+/database/postgresql/
+
+/sessionCache/redis_data/

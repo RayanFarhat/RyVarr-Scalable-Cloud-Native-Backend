@@ -9,10 +9,10 @@ namespace AuthService.Controllers;
 [ApiController]
 public class HelloWorldController : ControllerBase
 {
-    private readonly UserContext _dbContext;
+    private readonly RyvarrDb _dbContext;
     private readonly IConnectionMultiplexer _redis;
 
-    public HelloWorldController(UserContext dbContext, IConnectionMultiplexer redis)
+    public HelloWorldController(RyvarrDb dbContext, IConnectionMultiplexer redis)
     {
         _dbContext = dbContext;
         _redis = redis;
