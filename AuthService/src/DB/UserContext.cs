@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using Npgsql.EntityFrameworkCore.PostgreSQL;
 using AuthService.DTOs;
 
 namespace AuthService.DB;
@@ -7,12 +6,11 @@ namespace AuthService.DB;
 
 public class UserContext : DbContext
 {
-    public DbSet<User> Users { get; set; }
+    public DbSet<User> users { get; set; }
 
     public UserContext(DbContextOptions<UserContext> options) : base(options)
     {
-
-        Users = Set<User>();
+        users = Set<User>();
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -23,19 +21,7 @@ public class UserContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.UseSerialColumns();
-        modelBuilder.Entity<User>().ToTable("Users");
+        modelBuilder.Entity<User>().ToTable("users");
     }
 
-    public void EnsureUsersTableCreated()
-    {
-        string createTableSql = @"
-                CREATE TABLE IF NOT EXISTS Users (
-                    Id int PRIMARY KEY,
-                    Username varchar(255),
-                    Email varchar(255),
-                    Password varchar(255)
-                )";
-
-        Database.ExecuteSqlRaw(createTableSql);
-    }
 }

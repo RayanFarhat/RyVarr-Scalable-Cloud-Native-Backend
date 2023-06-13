@@ -27,6 +27,10 @@ using (var scope = app.Services.CreateScope())
     // Here is the migration executed 
     //* create the tables  based on the context
     dbContext.Database.Migrate();
+
+    dbContext.users.Add(new User(3, "rrr", "eee", "ppp"));
+    // Persist changes to the database
+    dbContext.SaveChanges();
 }
 
 // Configure the HTTP request pipeline.
