@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.5" />
+    <PackageReference Include="StackExchange.Redis" Version="2.6.111" />
         <!-- for swagger -->
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     <!-- _____________________________________For the DB_________________________________________ -->

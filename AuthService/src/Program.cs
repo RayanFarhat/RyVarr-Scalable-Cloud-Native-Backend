@@ -1,6 +1,7 @@
 using AuthService.DB;
-using AuthService.DTOs;
 using Microsoft.EntityFrameworkCore;
+using StackExchange.Redis;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,12 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<UserContext>(options =>
     options.UseNpgsql("Host=db;Port=5432;Database=ryvarrdb;Username=ryan;Password=ryan"));
 
+// Add Redis as a service
+builder.Services.AddSingleton<IConnectionMultiplexer>(provider =>
+{
+    var configuration = ConfigurationOptions.Parse("cache");
+    return ConnectionMultiplexer.Connect(configuration);
+});
 
 var app = builder.Build();
 
@@ -28,9 +35,9 @@ using (var scope = app.Services.CreateScope())
     //* create the tables  based on the context
     dbContext.Database.Migrate();
 
-    dbContext.users.Add(new User(3, "rrr", "eee", "ppp"));
-    // Persist changes to the database
-    dbContext.SaveChanges();
+    // dbContext.users.Add(new User(3, "rrr", "eee", "ppp"));
+    // // Persist changes to the database
+    // dbContext.SaveChanges();
 }
 
 // Configure the HTTP request pipeline.
@@ -47,5 +54,8 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+//zeros so he does not have ip and docker assign him one
+app.Run("http://0.0.0.0:9090");
 
-app.Run("http://127.0.0.1:9090");
+
+

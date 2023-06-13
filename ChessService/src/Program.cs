@@ -29,4 +29,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 
-app.Run("http://127.0.0.1:8080");
+app.Run("http://0.0.0.0:8080");
