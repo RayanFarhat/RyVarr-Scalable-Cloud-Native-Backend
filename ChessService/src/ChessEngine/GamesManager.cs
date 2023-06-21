@@ -21,7 +21,8 @@ public class GamesManager
     {
         if (this.openRooms.Count > 0)
         {
-
+            int roomid = this.openRooms.Dequeue();
+            
         }
     }
 
