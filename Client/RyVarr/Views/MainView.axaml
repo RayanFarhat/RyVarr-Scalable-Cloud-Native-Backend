@@ -3,14 +3,30 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:RyVarr.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:v="clr-namespace:RyVarr.Views"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
              x:Class="RyVarr.Views.MainView"
              x:DataType="vm:MainViewModel">
-  <Design.DataContext>
-    <!-- This only sets the DataContext for the previewer in an IDE,
-         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-    <vm:MainViewModel />
-  </Design.DataContext>
-
-  <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+	<Grid RowDefinitions="Auto,*,Auto">
+		<!-- Title bar-->
+		<Grid Grid.Row="0" Background="Green" Height="40"
+			  ColumnDefinitions="Auto, Auto,*,Auto,Auto">
+			<Rectangle Grid.Column="0" Width="40" Fill="Orange"></Rectangle>
+			<Rectangle Grid.Column="1" Width="40" Fill="Red"></Rectangle>
+			<StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+				<Label  FontWeight="Black">RyVarr</Label>
+				<Label>Username</Label>
+			</StackPanel>
+			<Rectangle Grid.Column="3" Width="40" Fill="Red"></Rectangle>
+			<Rectangle Grid.Column="4" Width="40" Fill="Red"></Rectangle>
+			
+		</Grid>
+		
+		<!-- Main-->
+		<Grid Grid.Row="1" Background="#333">
+			<v:RyPrimalView/>
+		</Grid>
+		<!-- Footer bar-->
+		<Grid Grid.Row="2"></Grid>
+	</Grid>
 </UserControl>
