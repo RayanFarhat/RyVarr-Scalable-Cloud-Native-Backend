@@ -4,10 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:vm="clr-namespace:RyVarr.ViewModels"
-             x:Class="RyVarr.Views.RyPrimalView">
-	
-	<Canvas x:Name="scene"   Background="BurlyWood" Width="500" Height="400" >
-	</Canvas>
-	
+             x:Class="RyVarr.Views.RyPrimalView"
+			 x:DataType="vm:RyPrimalViewModel">
+	<ContentControl>
+
+		<StackPanel>
+		<TextBlock Text="{Binding Greeting}"/>
+		<Canvas x:Name="scene"   Background="BurlyWood" Width="500" Height="400" Focusable="True" >
+		</Canvas>
+		</StackPanel>
+	</ContentControl>
+
 	
 </UserControl>
