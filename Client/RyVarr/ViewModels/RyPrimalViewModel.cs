@@ -31,19 +31,25 @@ public partial class RyPrimalViewModel : ViewModelBase
         gameTimer.Start();
 
         this.canvas = canvas;
+        this.canvas.Focusable = true;
+        this.canvas.Background = Brushes.BurlyWood;
+        canvas.Width = 500;
+        canvas.Height = 400;
 
         // Create a rectangle
         var rectangle = new Rectangle
         {
-            Width = 50,
+            Width = 150,
             Height = 50,
-            Fill = Brushes.White,
+            Fill = new SolidColorBrush(Color.Parse("#FF00FF80")),
             Stroke = Brushes.Black,
-            StrokeThickness = 2
+            StrokeThickness = 2,
+            RadiusY = 12,
+            RadiusX = 22
         };
 
         var ellipse = new Ellipse
-        {
+        {Tag="S",
             Width = 50,
             Height = 50,
             Fill = Brushes.White,
@@ -52,8 +58,9 @@ public partial class RyPrimalViewModel : ViewModelBase
         };
 
         // Set the position of the rectangle on the canvas
-        Canvas.SetLeft(rectangle, 250);
-        Canvas.SetTop(rectangle, 250);
+        Canvas.SetLeft(rectangle, canvas.Width/2 - rectangle.Width/2);
+        Canvas.SetTop(rectangle, canvas.Height / 2 - rectangle.Height / 2);
+
 
         // Add the rectangle to the canvas
         canvas.Children.Add(rectangle);

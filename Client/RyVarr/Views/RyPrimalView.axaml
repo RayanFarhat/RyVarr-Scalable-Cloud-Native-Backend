@@ -10,7 +10,7 @@
 
 		<StackPanel>
 		<TextBlock Text="{Binding Greeting}"/>
-		<Canvas x:Name="scene"   Background="BurlyWood" Width="500" Height="400" Focusable="True" >
+		<Canvas x:Name="scene" >
 		</Canvas>
 		</StackPanel>
 	</ContentControl>
