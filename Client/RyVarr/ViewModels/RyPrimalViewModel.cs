@@ -7,6 +7,12 @@ using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using Avalonia.Input;
+using Avalonia;
+using System.Reflection.Metadata;
+using Avalonia.LogicalTree;
+using RyVarr.GameEngine;
+using RyVarr.GameEngine.Adapter;
+using System.Drawing;
 
 namespace RyVarr.ViewModels;
 public partial class RyPrimalViewModel : ViewModelBase
@@ -19,7 +25,7 @@ public partial class RyPrimalViewModel : ViewModelBase
     private DateTime lastTickTime;
 
 
-    public Canvas canvas;
+    public Engine gameEngine;
 
     public RyPrimalViewModel(Canvas canvas)
     {
@@ -29,45 +35,12 @@ public partial class RyPrimalViewModel : ViewModelBase
         gameTimer.Interval = TimeSpan.FromMilliseconds(16);
         gameTimer.Tick += gameTick;
         gameTimer.Start();
+     
 
-        this.canvas = canvas;
-        this.canvas.Focusable = true;
-        this.canvas.Background = Brushes.BurlyWood;
-        canvas.Width = 500;
-        canvas.Height = 400;
+        gameEngine = new Engine(canvas);
+         RyVarr.GameEngine.Adapter.Rectangle rectangle = new RyVarr.GameEngine.Adapter.Rectangle("A", 60,60,"#FF0000FF");
+         gameEngine.Scene.AddGameObject(rectangle.Mesh);
 
-        // Create a rectangle
-        var rectangle = new Rectangle
-        {
-            Width = 150,
-            Height = 50,
-            Fill = new SolidColorBrush(Color.Parse("#FF00FF80")),
-            Stroke = Brushes.Black,
-            StrokeThickness = 2,
-            RadiusY = 12,
-            RadiusX = 22
-        };
-
-        var ellipse = new Ellipse
-        {Tag="S",
-            Width = 50,
-            Height = 50,
-            Fill = Brushes.White,
-            Stroke = Brushes.Black,
-            StrokeThickness = 2
-        };
-
-        // Set the position of the rectangle on the canvas
-        Canvas.SetLeft(rectangle, canvas.Width/2 - rectangle.Width/2);
-        Canvas.SetTop(rectangle, canvas.Height / 2 - rectangle.Height / 2);
-
-
-        // Add the rectangle to the canvas
-        canvas.Children.Add(rectangle);
-        canvas.Children.Add(ellipse);
-        canvas.KeyDown += keyDown;
-        canvas.KeyUp += keyUp;
-        canvas.PointerPressed += pointerPressed; 
 
     }
 
