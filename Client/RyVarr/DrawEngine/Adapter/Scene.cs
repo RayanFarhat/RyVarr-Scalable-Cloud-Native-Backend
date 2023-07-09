@@ -3,7 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia;
 
-namespace RyVarr.GameEngine.Adapter;
+namespace RyVarr.DrawEngine.Adapter;
 
 public class Scene
 {
@@ -23,5 +23,17 @@ public class Scene
     public void AddGameObject(Control mesh)
     {
         this.canvas.Children.Add(mesh);
+    }
+    public void AddKeyDownEvent(System.EventHandler<Avalonia.Input.KeyEventArgs> func)
+    {
+        this.canvas.KeyDown += func;
+    }
+    public void AddKeyUpEvent(System.EventHandler<Avalonia.Input.KeyEventArgs> func)
+    {
+        this.canvas.KeyUp += func;
+    }
+    public void AddPointerPressedEvent(System.EventHandler<Avalonia.Input.PointerPressedEventArgs> func)
+    {
+        this.canvas.PointerPressed += func;
     }
 }

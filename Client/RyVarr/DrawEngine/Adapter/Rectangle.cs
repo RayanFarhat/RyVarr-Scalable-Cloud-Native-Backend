@@ -3,9 +3,9 @@ using Avalonia.Controls.Shapes;
 using Avalonia.Controls;
 using Avalonia;
 
-namespace RyVarr.GameEngine.Adapter;
+namespace RyVarr.DrawEngine.Adapter;
 
-public class Rectangle : IGameObject<Avalonia.Controls.Shapes.Rectangle>
+public class Rectangle : IDrawObject<Avalonia.Controls.Shapes.Rectangle>
 {
     private Avalonia.Controls.Shapes.Rectangle _mesh;
     public Avalonia.Controls.Shapes.Rectangle Mesh {
@@ -16,13 +16,13 @@ public class Rectangle : IGameObject<Avalonia.Controls.Shapes.Rectangle>
     public double X
     {
         get { return _x; }
-        set { Canvas.SetLeft(Mesh, value - Mesh.Width / 2); _x = value; }
+        set { Canvas.SetLeft(Mesh, value); _x = value; }
     }
     private double _y;
     public double Y
     {
         get { return _y; }
-        set { Canvas.SetTop(Mesh, value - Mesh.Height / 2); _y = value; }
+        set { Canvas.SetTop(Mesh, -value); _y = value; }
     }
 
     private double _width;

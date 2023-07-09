@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Media;
 
-namespace RyVarr.GameEngine.Adapter;
-public class Ellipse : IGameObject<Avalonia.Controls.Shapes.Ellipse>
+namespace RyVarr.DrawEngine.Adapter;
+public class Ellipse : IDrawObject<Avalonia.Controls.Shapes.Ellipse>
 {
     private Avalonia.Controls.Shapes.Ellipse _mesh;
     public Avalonia.Controls.Shapes.Ellipse Mesh
@@ -19,13 +19,13 @@ public class Ellipse : IGameObject<Avalonia.Controls.Shapes.Ellipse>
     public double X
     {
         get { return _x; }
-        set { Canvas.SetLeft(Mesh, value - Mesh.Width / 2); _x = value; }
+        set { Canvas.SetLeft(Mesh, value ); _x = value; }
     }
     private double _y;
     public double Y
     {
         get { return _y; }
-        set { Canvas.SetTop(Mesh, value - Mesh.Height / 2); _y = value; }
+        set { Canvas.SetTop(Mesh,- value); _y = value; }
     }
 
     private double _width;

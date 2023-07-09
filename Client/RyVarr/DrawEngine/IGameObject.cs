@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls.Shapes;
 
-namespace RyVarr.GameEngine;
+namespace RyVarr.DrawEngine;
 
 /// <summary>
 /// Is the global type of the game objects and have the shared things betwwen them
 /// X and Y start from the top left in canvas
 /// </summary>
-public interface IGameObject<T>
+public interface IDrawObject<T>
 {
     public T Mesh { get; set; }
     public double X { get; set; }

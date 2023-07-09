@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
 
-namespace RyVarr.GameEngine.Adapter;
+namespace RyVarr.DrawEngine.Adapter;
 /// <summary>
 /// Complex Game object where it holds more than one gameobject that can move simulatly
 /// </summary>
-public class Container : IGameObject<Canvas>
+public class Container : IDrawObject<Canvas>
 {
     private Canvas _mesh;
     public Canvas Mesh
@@ -23,13 +23,13 @@ public class Container : IGameObject<Canvas>
     public double X
     {
         get { return _x; }
-        set { Canvas.SetLeft(Mesh, value - Mesh.Width / 2); _x = value; }
+        set { Canvas.SetLeft(Mesh, value); _x = value; }
     }
     private double _y;
     public double Y
     {
         get { return _y; }
-        set { Canvas.SetTop(Mesh, value - Mesh.Height / 2); _y = value; }
+        set { Canvas.SetTop(Mesh, - value); _y = value; }
     }
     private string _name;
     public string Name
