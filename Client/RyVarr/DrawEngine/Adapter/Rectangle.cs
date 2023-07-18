@@ -67,7 +67,9 @@ public class Rectangle : IDrawObject<Avalonia.Controls.Shapes.Rectangle>
         Y = 0;
         Width = width;
         Height = height;
+        _color = color;
         Color = color;
+        _borderColor = borderColor;
         BorderColor = borderColor;
         BorderSize = borderSize;
     }

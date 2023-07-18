@@ -7,26 +7,6 @@
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
              x:Class="RyVarr.Views.MainView"
              x:DataType="vm:MainViewModel">
-	<Grid RowDefinitions="Auto,*,Auto">
-		<!-- Title bar-->
-		<Grid Grid.Row="0" Background="Green" Height="40"
-			  ColumnDefinitions="Auto, Auto,*,Auto,Auto">
-			<Rectangle Grid.Column="0" Width="40" Fill="Orange"></Rectangle>
-			<Rectangle Grid.Column="1" Width="40" Fill="Red"></Rectangle>
-			<StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-				<Label  FontWeight="Black">RyVarr</Label>
-				<Label>Username</Label>
-			</StackPanel>
-			<Rectangle Grid.Column="3" Width="40" Fill="Red"></Rectangle>
-			<Rectangle Grid.Column="4" Width="40" Fill="Red"></Rectangle>
-			
-		</Grid>
-		
-		<!-- Main-->
-		<Grid Grid.Row="1" Background="#333">
-			<v:RyPrimalView/>
-		</Grid>
-		<!-- Footer bar-->
-		<Grid Grid.Row="2"></Grid>
-	</Grid>
+	<v:TutView />
+
 </UserControl>

@@ -70,7 +70,9 @@ public class Ellipse : IDrawObject<Avalonia.Controls.Shapes.Ellipse>
         Y = 0;
         Width = width;
         Height = height;
+        _color = color;
         Color = color;
+        _borderColor = borderColor;
         BorderColor = borderColor;
         BorderSize = borderSize;
     }

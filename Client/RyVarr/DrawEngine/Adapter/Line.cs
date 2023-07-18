@@ -36,6 +36,7 @@ public class Line : IDrawObject<Avalonia.Controls.Shapes.Line>
         _mesh = new Avalonia.Controls.Shapes.Line { Tag = id ,StartPoint = new Point(startX,startY), EndPoint = new Point(endX,endY) };
         X = 0;
         Y = 0;
+        _color = color;
         Color = color;
     }
 }

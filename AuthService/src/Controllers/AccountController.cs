@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using AuthService.DB;
 using StackExchange.Redis;
+using AuthService.DTOs;
+using System;
+
 
 namespace AuthService.Controllers;
 
@@ -18,28 +21,58 @@ public class AccountController : ControllerBase
         _redis = redis;
     }
 
-    [HttpGet]
-    public IActionResult Get()
+    [HttpGet("{sessionID}")]
+    public async Task<IActionResult> Get(string sessionID)
     {
-        return Ok("Hello, World!");
+        var db = _redis.GetDatabase();
+        var userID = await db.StringGetAsync(sessionID);
+        if (userID.HasValue)
+        {
+            return Ok(userID.ToString());
+        }
+        else
+            return Ok("not value found for this id");
     }
 
     [HttpPost]
-    public IActionResult Post()
+    public async Task<IActionResult> Post([FromBody] UserForRegister user)
     {
-        return Ok("Post Hello, World!");
+        if (_dbContext.GetByUsername(user.username) != null)
+        {
+            await _dbContext.Add(user);
+
+            string key = Guid.NewGuid().ToString("N");
+            var userAfterInserting = await _dbContext.GetByUsername(user.username);
+            TimeSpan expiration = TimeSpan.FromDays(7);
+            await _redis.GetDatabase().StringSetAsync(key, userAfterInserting.id.ToString(), expiration);
+
+            return Ok(key);
+        }
+        else
+        {
+            return Ok("user is exist, use other username");
+        }
     }
 
     [HttpPatch]
-    public IActionResult Patch()
+    public async Task<IActionResult> Patch([FromBody] User user)
     {
+        await _dbContext.Update(user);
         return Ok("Patch Hello, World!");
     }
 
-    [HttpDelete]
-    public IActionResult Delete()
+    [HttpDelete("{sessionID}")]
+    public async Task<IActionResult> Delete(string sessionID)
     {
-        return Ok("Delete Hello, World!");
+        var db = _redis.GetDatabase();
+        var userID = await db.StringGetAsync(sessionID);
+        if (userID.HasValue)
+        {
+            await _dbContext.Delete(userID.ToString());
+            return Ok("Delete Done");
+        }
+        else
+            return Ok("not value found for this id");
     }
 
     // test for redis

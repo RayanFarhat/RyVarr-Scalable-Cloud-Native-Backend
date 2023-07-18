@@ -34,11 +34,9 @@ using (var scope = app.Services.CreateScope())
         .GetRequiredService<RyvarrDb>();
 
     // Here is the migration executed 
+
     //* create the tables  based on the context
     dbContext.Database.Migrate();
-
-    dbContext.users.Add(new User(0, "rrr", "eee", "ppp"));
-    dbContext.users.Add(new User(0, "rssrr", "essee", "pppss"));
     // Persist changes to the database
     dbContext.SaveChanges();
 }
