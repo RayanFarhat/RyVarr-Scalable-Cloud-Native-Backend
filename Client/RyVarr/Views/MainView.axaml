@@ -4,9 +4,24 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:RyVarr.ViewModels"
 			 xmlns:v="clr-namespace:RyVarr.Views"
+			 xmlns:c="clr-namespace:RyVarr.Views.TemplatedControls"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
              x:Class="RyVarr.Views.MainView"
              x:DataType="vm:MainViewModel">
-	<v:TutView />
+	
+	<!--
+			<v:TutView />
+		-->
+	<UserControl.Styles>
+		<StyleInclude Source="/Views/TemplatedControls/InputControl.axaml"/>
+	</UserControl.Styles>
+
+	<ScrollViewer>
+		<Grid RowDefinitions="Auto,Auto,*">
+			<v:NavBarView Grid.Row="0"/>
+			<v:IntroView Grid.Row="1"/>
+			<c:InputControl  LabelName="aaa" WatermarkText="ss" Grid.Row="2"/>
+		</Grid>
+	</ScrollViewer>
 
 </UserControl>

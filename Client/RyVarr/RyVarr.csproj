@@ -11,6 +11,11 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
 
+  
+  <ItemGroup>
+    <None Remove="Assets\Icons\setting.png" />
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.0.0" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.0" />
@@ -28,6 +33,9 @@
   <ItemGroup>
     <Compile Update="Tut\TutView.axaml.cs">
       <DependentUpon>TutView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\NavBarView.axaml.cs">
+      <DependentUpon>NavBarView.axaml</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>

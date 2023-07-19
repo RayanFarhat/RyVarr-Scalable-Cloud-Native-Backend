@@ -1,0 +1,21 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:RyVarr.Views.TemplatedControls">
+  <Design.PreviewWith>
+    <controls:InputControl />
+  </Design.PreviewWith>
+
+  <Style Selector="controls|InputControl">
+    <!-- Set Defaults -->
+	  <Setter Property="Foreground" Value="Red"/>
+	  
+    <Setter Property="Template">
+      <ControlTemplate>
+		  <StackPanel Margin="10" Width="200" Height="200">
+			  <TextBlock Margin="0 5" Text="{TemplateBinding LabelName}" />
+			  <TextBox Watermark="{TemplateBinding WatermarkText}"/>
+		  </StackPanel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+</Styles>
