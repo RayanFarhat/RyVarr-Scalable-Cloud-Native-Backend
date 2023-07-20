@@ -4,24 +4,34 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:RyVarr.ViewModels"
 			 xmlns:v="clr-namespace:RyVarr.Views"
+			 xmlns:vmain="clr-namespace:RyVarr.Views.MainPage"
 			 xmlns:c="clr-namespace:RyVarr.Views.TemplatedControls"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
              x:Class="RyVarr.Views.MainView"
              x:DataType="vm:MainViewModel">
 	
-	<!--
-			<v:TutView />
-		-->
+	<Design.DataContext>
+		<vm:MainViewModel/>
+	</Design.DataContext>
+	
 	<UserControl.Styles>
 		<StyleInclude Source="/Views/TemplatedControls/InputControl.axaml"/>
+		<StyleInclude Source="/Views/TemplatedControls/CopyableTextControl.axaml"/>
 	</UserControl.Styles>
 
 	<ScrollViewer>
-		<Grid RowDefinitions="Auto,Auto,*">
-			<v:NavBarView Grid.Row="0"/>
-			<v:IntroView Grid.Row="1"/>
-			<c:InputControl  LabelName="aaa" WatermarkText="ss" Grid.Row="2"/>
-		</Grid>
+		<StackPanel>
+			<Grid IsVisible="{Binding MainPageIsOpen}" RowDefinitions="Auto,Auto,*">
+				<v:NavBarView Grid.Row="0"/>
+				<vmain:IntroView Grid.Row="1"/>
+			</Grid>
+			<Grid IsVisible="{Binding UserPageIsOpen}" RowDefinitions="Auto,Auto,*">
+				<v:NavBarView Grid.Row="0"/>
+			</Grid>
+			<Grid IsVisible="{Binding ProjectPageIsOpen}" RowDefinitions="Auto,Auto,*">
+				<v:NavBarView Grid.Row="0"/>
+			</Grid>
+		</StackPanel>
 	</ScrollViewer>
 
 </UserControl>

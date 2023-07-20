@@ -7,13 +7,18 @@
 
   <Style Selector="controls|InputControl">
     <!-- Set Defaults -->
-	  <Setter Property="Foreground" Value="Red"/>
-	  
-    <Setter Property="Template">
+	  <Setter Property="Foreground" Value="{DynamicResource green2}"/>
+	  <Setter Property="Template">
       <ControlTemplate>
-		  <StackPanel Margin="10" Width="200" Height="200">
-			  <TextBlock Margin="0 5" Text="{TemplateBinding LabelName}" />
-			  <TextBox Watermark="{TemplateBinding WatermarkText}"/>
+		  <StackPanel Margin="10">
+			  <TextBlock
+				  FontWeight="ExtraBold" Margin="0 5"
+				  Text="{TemplateBinding LabelName}"
+				  />
+			  <TextBox Watermark="{TemplateBinding WatermarkText}"
+					   Foreground="{DynamicResource yellow1}"
+					   BorderBrush="{DynamicResource green3}"
+					   />
 		  </StackPanel>
       </ControlTemplate>
     </Setter>

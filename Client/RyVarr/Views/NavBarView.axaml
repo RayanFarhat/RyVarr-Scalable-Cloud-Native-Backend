@@ -3,7 +3,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="40"
-             x:Class="RyVarr.Views.NavBarView">
+             x:Class="RyVarr.Views.NavBarView"
+			 xmlns:vm="clr-namespace:RyVarr.ViewModels"
+			 x:DataType="vm:MainViewModel">
 
 	<UserControl.Styles>
 		<Style Selector="Button">
@@ -22,9 +24,10 @@
 	</UserControl.Styles>
 	
 	<Grid ColumnDefinitions="Auto,*,Auto" Height="30">
-		<Button Grid.Column="0">User</Button>
-		<Label VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1"
-			   >RyVarr</Label>
-		<Label Grid.Column="2">Nav</Label>
+		<Button Command="{Binding OpenUserPageCommand}"  Grid.Column="0">User</Button>
+		<Button Command="{Binding OpenMainPageCommand}"
+			VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1"
+			   >RyVarr</Button>
+		<Button Command="{Binding OpenProjectPageCommand}" Grid.Column="2">My Projects</Button>
 	</Grid>
 </UserControl>

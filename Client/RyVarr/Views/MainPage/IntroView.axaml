@@ -1,0 +1,93 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="1600"
+			 xmlns:c="clr-namespace:RyVarr.Views.TemplatedControls"
+             x:Class="RyVarr.Views.MainPage.IntroView">
+
+	<UserControl.Styles>
+		<Style Selector="TextBlock.feature">
+			<Setter Property="Foreground" Value="{DynamicResource green2}"/>
+			<Setter Property="FontStyle" Value="Italic"/>
+			<Setter Property="FontWeight" Value="Bold"/>
+			<Setter Property="Margin" Value="0,5,15,0"/>
+			<Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+		</Style>
+		<Style Selector="TextBlock.limitation">
+			<Setter Property="Foreground" Value="{DynamicResource red2}"/>
+			<Setter Property="FontWeight" Value="Bold"/>
+			<Setter Property="Margin" Value="0,5,15,0"/>
+			<Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+		</Style>
+		<Style Selector="Label.characteristic">
+			<Setter Property="Foreground" Value="{DynamicResource green2}"/>
+			<Setter Property="Margin" Value="20,10,0,0"/>
+			<Setter Property="FontWeight" Value="Bold"/>
+		</Style>
+		<Style Selector="TextBlock.characteristic">
+			<Setter Property="Foreground" Value="{DynamicResource green2}"/>
+			<Setter Property="Margin" Value="50,5,15,0"/>
+		</Style>
+		<StyleInclude Source="/Views/TemplatedControls/CopyableTextControl.axaml"/>
+	</UserControl.Styles>
+	<WrapPanel HorizontalAlignment="Center">		
+		<!--Desc-->
+		<Grid Width="350" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" Background="Black">
+			<Label  Margin="20" FontWeight="ExtraBold" Foreground="{DynamicResource gold}" FontSize="20"
+					   Grid.Row="0">FullStack Cross platform Engineer</Label>
+		
+			<TextBlock  Margin="20,0,0,0" Grid.Row="1" TextWrapping="WrapWithOverflow"  Foreground="White">
+				From building a Cross Platform application (Windows, Mac, Linux,
+				Android, IOS, Web) to building Data Intensive Backend Infrastructure.
+			</TextBlock>
+		
+			<Label Grid.Row="2" Foreground="{DynamicResource green1}" FontWeight="ExtraBold"
+				   Margin="20,10,0,0">Features :</Label>
+			<StackPanel  Grid.Row="3" Margin="40,0,0,0">
+				<TextBlock Classes="feature">
+					- Building Pixel Perfect Cross Platform App
+					using AVALONIA framework (basically WPF but cross platform).
+				</TextBlock>
+				<TextBlock Classes="feature">
+					- Building and Securing The Backend and the Database for your App.
+				</TextBlock>
+			</StackPanel>
+
+			<Label Grid.Row="4" Foreground="{DynamicResource red1}" FontWeight="ExtraBold"
+				   Margin="20,10,0,0">What I can't provide :</Label>
+			<StackPanel  Grid.Row="5" Margin="40,0,0,0">
+				<TextBlock Classes="limitation">
+					- Building Fully Rich and Responsive UI. Unfortunately, the framework that I am using
+					lack of supporting some UI features that the regular Web framework do, So it is
+					HARD for me to make your app look insanely good like other front-end developer. 
+				</TextBlock>
+			</StackPanel>
+			<TextBlock Grid.Row="6" Foreground="{DynamicResource yellow1}" 
+					   TextWrapping="WrapWithOverflow" Margin="20">
+				So I am the right choice for you for building FullStack Cross platform app
+				that get the work DONE.
+				and not building a WONDERFUL UI.
+			</TextBlock>
+		</Grid>
+
+		<!--Rayan-->
+		<StackPanel Width="350" Background="Black">
+
+			<Label FontWeight="Bold" HorizontalAlignment="Center" Foreground="{DynamicResource green1}"
+				   >WHO AM I ?</Label>
+
+			<Image Margin="20" Height="200" Width="200"
+				Source="/Assets/Icons/dev.png"/>
+
+			<Label Classes="characteristic">Full Name :</Label>
+			<TextBlock Classes="characteristic">Rayan Farhat</TextBlock>
+			<Label Classes="characteristic">Focus :</Label>
+			<TextBlock Classes="characteristic">Data Intensive Backend Engineer</TextBlock>
+			<Label Classes="characteristic">Education :</Label>
+			<TextBlock Classes="characteristic">Bachelor's degree in Computer Science (BCS)</TextBlock>
+			<Label Classes="characteristic">Email :</Label>
+			<c:CopyableTextControl Margin="50,5,15,0" Text="rayanfarhat.sh@gmail.com"/>
+		</StackPanel>
+	</WrapPanel>
+</UserControl>

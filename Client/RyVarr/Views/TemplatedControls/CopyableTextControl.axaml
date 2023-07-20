@@ -1,0 +1,26 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:vm="clr-namespace:RyVarr.ViewModels"
+        xmlns:controls="using:RyVarr.Views.TemplatedControls"
+		x:DataType="vm:MainViewModel">
+  <Design.PreviewWith>
+    <controls:CopyableTextControl />
+  </Design.PreviewWith>
+
+
+  <Style Selector="controls|CopyableTextControl">
+    <!-- Set Defaults -->
+    <Setter Property="Template">
+      <ControlTemplate>
+		  <StackPanel Orientation="Horizontal">
+			  <TextBlock Foreground="{DynamicResource green2}"
+				  VerticalAlignment="Center" Text="{TemplateBinding Text}"/>
+			  <Button Background="Black" Width="30" Height="30" Cursor="Hand"
+				  CommandParameter="{TemplateBinding Text}" Command="{Binding CopyButton_OnClickCommand}" >
+				  <Image Source="/Assets/Icons/copy.png"/>
+			  </Button>
+		  </StackPanel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+</Styles>
