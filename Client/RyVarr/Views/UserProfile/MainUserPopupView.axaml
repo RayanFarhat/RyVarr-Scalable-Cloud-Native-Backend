@@ -1,0 +1,40 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
+             x:Class="RyVarr.Views.UserProfile.MainUserPopupView"
+			 xmlns:vm="clr-namespace:RyVarr.ViewModels"
+			 xmlns:vuser="clr-namespace:RyVarr.Views.UserProfile"
+			 x:DataType="vm:MainViewModel">
+	<Design.DataContext>
+		<vm:MainViewModel/>
+	</Design.DataContext>
+	<UserControl.Styles>
+		<Style Selector="Border.popup">
+			<Setter Property="Width" Value="0"/>
+			<Setter Property="Height" Value="0"/>
+			<Setter Property="Margin" Value="0,40,0,0"/>
+			<!--This mean whenever with change Width or Height it take 0.2 sec, easing is somthing to make it more bouncy and smooth-->
+			<Setter Property="Transitions">
+				<Transitions>
+					<DoubleTransition Property="Height" Duration="0:0:0.2" Easing="QuadraticEaseIn" />
+					<DoubleTransition Property="Width" Duration="0:0:0.2" Easing="QuadraticEaseIn" />
+				</Transitions>
+			</Setter>
+		</Style>
+		<Style Selector="Border.isopen">
+			<Setter Property="Width" Value="300"/>
+			<Setter Property="Height" Value="400"/>
+		</Style>
+	</UserControl.Styles>
+
+	<Border Background="{DynamicResource green1}" VerticalAlignment="Top" HorizontalAlignment="Left"
+			Grid.RowSpan="3" ZIndex="1" Classes="popup"
+			Classes.isopen="{Binding UserPageIsOpen}" Padding="2">
+		<StackPanel Background="Black">
+			<vuser:AnonymousUserView Margin="0,10" IsVisible="{Binding UserModel.IsNotLogin}" />
+			<vuser:RegisteredUserView IsVisible="{Binding UserModel.IsLogin}" />
+		</StackPanel>
+	</Border>
+</UserControl>

@@ -17,7 +17,7 @@ public class InputControl : TemplatedControl
     }
 
     public static readonly StyledProperty<string> WatermarkTextProperty =
-    AvaloniaProperty.Register<LargePanelControl, string>(nameof(WatermarkText), defaultValue: "Watermark text");
+    AvaloniaProperty.Register<LargePanelControl, string>(nameof(WatermarkText), defaultValue: "Enter here");
 
     public string WatermarkText
     {

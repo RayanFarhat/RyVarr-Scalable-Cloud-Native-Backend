@@ -34,7 +34,7 @@
 	<WrapPanel HorizontalAlignment="Center">		
 		<!--Desc-->
 		<Grid Width="350" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" Background="Black">
-			<Label  Margin="20" FontWeight="ExtraBold" Foreground="{DynamicResource gold}" FontSize="20"
+			<Label  Margin="20" FontWeight="ExtraBold" Foreground="{DynamicResource gold}" FontSize="18"
 					   Grid.Row="0">FullStack Cross platform Engineer</Label>
 		
 			<TextBlock  Margin="20,0,0,0" Grid.Row="1" TextWrapping="WrapWithOverflow"  Foreground="White">

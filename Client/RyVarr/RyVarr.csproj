@@ -14,7 +14,9 @@
   
   <ItemGroup>
     <None Remove="Assets\copy.png" />
+    <None Remove="Assets\Icons\copy.png" />
     <None Remove="Assets\Icons\dev.png" />
+    <None Remove="Assets\Icons\edit.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,7 +31,6 @@
 
   <ItemGroup>
     <Folder Include="Assets\Images\" />
-    <Folder Include="Models\" />
   </ItemGroup>
 
   <ItemGroup>

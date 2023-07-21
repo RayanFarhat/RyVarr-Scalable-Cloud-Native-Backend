@@ -5,8 +5,10 @@
              xmlns:vm="clr-namespace:RyVarr.ViewModels"
 			 xmlns:v="clr-namespace:RyVarr.Views"
 			 xmlns:vmain="clr-namespace:RyVarr.Views.MainPage"
+			 xmlns:vuser="clr-namespace:RyVarr.Views.UserProfile"
+			 xmlns:vproj="clr-namespace:RyVarr.Views.ProjectManager"
 			 xmlns:c="clr-namespace:RyVarr.Views.TemplatedControls"
-             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="850"
              x:Class="RyVarr.Views.MainView"
              x:DataType="vm:MainViewModel">
 	
@@ -15,23 +17,31 @@
 	</Design.DataContext>
 	
 	<UserControl.Styles>
+		<StyleInclude Source="/Views/TemplatedControls/IconBtnControl.axaml"/>
 		<StyleInclude Source="/Views/TemplatedControls/InputControl.axaml"/>
 		<StyleInclude Source="/Views/TemplatedControls/CopyableTextControl.axaml"/>
 	</UserControl.Styles>
 
 	<ScrollViewer>
-		<StackPanel>
-			<Grid IsVisible="{Binding MainPageIsOpen}" RowDefinitions="Auto,Auto,*">
-				<v:NavBarView Grid.Row="0"/>
-				<vmain:IntroView Grid.Row="1"/>
-			</Grid>
-			<Grid IsVisible="{Binding UserPageIsOpen}" RowDefinitions="Auto,Auto,*">
-				<v:NavBarView Grid.Row="0"/>
-			</Grid>
-			<Grid IsVisible="{Binding ProjectPageIsOpen}" RowDefinitions="Auto,Auto,*">
-				<v:NavBarView Grid.Row="0"/>
-			</Grid>
-		</StackPanel>
+		<Grid>
+			<StackPanel IsVisible="{Binding MainPageIsOpen}">
+				<v:NavBarView />
+				<vmain:IntroView />
+			</StackPanel>
+
+			<vuser:MainUserPopupView/>
+
+			<StackPanel IsVisible="{Binding ProjectPageIsOpen}">
+				<v:NavBarView />
+				<TextBlock Margin="20,50,20,0" IsVisible="{Binding UserModel.IsNotLogin}"
+					HorizontalAlignment="Center" TextWrapping="WrapWithOverflow"
+					Foreground="{DynamicResource green1}">
+					In order to use the project manager so we create projects together
+					you have to Sign In
+				</TextBlock>
+				<vproj:ProjectPageView IsVisible="{Binding UserModel.IsLogin}"/>
+			</StackPanel>
+		</Grid>
 	</ScrollViewer>
 
 </UserControl>

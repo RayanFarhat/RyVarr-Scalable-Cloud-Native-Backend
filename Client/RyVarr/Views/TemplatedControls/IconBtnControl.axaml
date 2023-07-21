@@ -1,0 +1,29 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:RyVarr.Views.TemplatedControls">
+  <Design.PreviewWith>
+    <controls:IconBtnControl Src="/Assets/Icons/copy.png"/>
+  </Design.PreviewWith>
+
+	<Style Selector="Button:pointerover /template/ ContentPresenter">
+		<Setter Property="Background" Value="{DynamicResource green3}"/>
+	</Style>
+	<Style Selector="Button:pressed /template/ ContentPresenter">
+		<Setter Property="Background" Value="{DynamicResource green3}"/>
+	</Style>
+
+  <Style Selector="controls|IconBtnControl">
+    <!-- Set Defaults -->
+    <Setter Property="Template">
+      <ControlTemplate>
+		  
+		  <Button CommandParameter="{TemplateBinding CommandParameter}"
+				  Command="{TemplateBinding Command}"
+			  Width="{TemplateBinding Size}" Height="{TemplateBinding Size}"
+				  Background="Black" Cursor="Hand">
+			  <Image Source="{TemplateBinding Src}"/>
+		  </Button>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+</Styles>

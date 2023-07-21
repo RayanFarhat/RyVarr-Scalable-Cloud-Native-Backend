@@ -8,8 +8,10 @@
 		<FluentTheme />
     </Application.Styles>
 	<Application.Resources>
+		<!--icon color-->
 		<Color x:Key="green1">#20C20E</Color>
 		<Color x:Key="green2">#149414</Color>
+		<!--icon background color-->
 		<Color x:Key="green3">#0e6b0e</Color>
 		<Color x:Key="green4">#649568</Color>
 		<Color x:Key="green5">#9ccc9c</Color>

@@ -18,18 +18,6 @@ public partial class MainViewModel : ViewModelBase
     private void OpenMainPage()
     {
         MainPageIsOpen = true;
-        UserPageIsOpen = false;
-        ProjectPageIsOpen = false;
-    }
-
-    [ObservableProperty]
-    private bool _userPageIsOpen = false;
-
-    [RelayCommand]
-    private void OpenUserPage()
-    {
-        MainPageIsOpen = false;
-        UserPageIsOpen = true;
         ProjectPageIsOpen = false;
     }
 
@@ -40,8 +28,15 @@ public partial class MainViewModel : ViewModelBase
     private void OpenProjectPage()
     {
         MainPageIsOpen = false;
-        UserPageIsOpen = false;
         ProjectPageIsOpen = true;
+    }
+
+    [ObservableProperty]
+    private bool _userPageIsOpen = false;
+    [RelayCommand]
+    private void UserBtnPressed()
+    {
+        UserPageIsOpen ^= true;
     }
 
     [ObservableProperty]
@@ -63,7 +58,7 @@ public partial class MainViewModel : ViewModelBase
     private static MainViewModel? _instance = null;
 
     // Private constructor to prevent external instantiation
-    private MainViewModel()// made public for design
+    public MainViewModel()// made public for design
     {
     }
 

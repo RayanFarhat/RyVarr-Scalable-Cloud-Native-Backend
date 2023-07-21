@@ -1,0 +1,30 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="using:RyVarr.Views.TemplatedControls">
+  <Design.PreviewWith>
+    <controls:TextBtnControl />
+  </Design.PreviewWith>
+
+
+	<Style Selector="Button:pointerover /template/ ContentPresenter">
+		<Setter Property="Background" Value="{DynamicResource green3}"/>
+		<Setter Property="Foreground" Value="{DynamicResource green1}"/>
+	</Style>
+	<Style Selector="Button:pressed /template/ ContentPresenter">
+		<Setter Property="Background" Value="{DynamicResource green3}"/>
+		<Setter Property="Foreground" Value="{DynamicResource green1}"/>
+	</Style>
+
+  <Style Selector="controls|TextBtnControl">
+    <!-- Set Defaults -->
+    <Setter Property="Template">
+      <ControlTemplate>
+		  <Button CommandParameter="{TemplateBinding CommandParameter}"
+			  Command="{TemplateBinding Command}"
+			  Foreground="{DynamicResource green1}"
+			  Background="Black" Cursor="Hand"
+				  Content="{TemplateBinding Text}"/>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+</Styles>

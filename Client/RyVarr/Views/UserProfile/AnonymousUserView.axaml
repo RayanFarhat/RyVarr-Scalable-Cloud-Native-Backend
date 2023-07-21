@@ -1,0 +1,52 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="450"
+			 xmlns:c="clr-namespace:RyVarr.Views.TemplatedControls"
+             x:Class="RyVarr.Views.UserProfile.AnonymousUserView"
+			 xmlns:vm="clr-namespace:RyVarr.ViewModels"
+			 x:DataType="vm:MainViewModel">
+	<UserControl.Styles>
+		<Style Selector="Button">
+			<Setter Property="Background" Value="Black"/>
+			<Setter Property="FontWeight" Value="Bold"/>
+			<Setter Property="Foreground" Value="{DynamicResource green1}"/>
+		</Style>
+		<StyleInclude Source="/Views/TemplatedControls/InputControl.axaml"/>
+	</UserControl.Styles>
+	
+	<Design.DataContext>
+		<vm:MainViewModel/>
+	</Design.DataContext>
+	
+	<StackPanel Width="300" Height="300">
+		<Label HorizontalAlignment="Center"
+			   Foreground="{DynamicResource red1}">YOU ARE NOT REGISTERED</Label>
+		<StackPanel IsVisible="{Binding UserModel.IsSignUp}">
+			<c:InputControl LabelName="UserName" />
+			<c:InputControl LabelName="Email" />
+			<c:InputControl LabelName="Password" Classes="password"/>
+		</StackPanel>
+		<Button IsVisible="{Binding UserModel.IsSignUp}"
+			Command="{Binding UserModel.SwitchBetweenRegistersCommand}">
+			SignIn?
+		</Button>
+		<Button HorizontalAlignment="Right" IsVisible="{Binding UserModel.IsSignUp}"
+			Command="{Binding UserModel.SwitchBetweenRegistersCommand}">
+			SIGN UP
+		</Button>
+
+		<StackPanel IsVisible="{Binding UserModel.IsSignin}">
+			<c:InputControl LabelName="Email" />
+			<c:InputControl LabelName="Password" Classes="password"/>
+		</StackPanel>
+		<Button IsVisible="{Binding UserModel.IsSignin}"
+			Command="{Binding UserModel.SwitchBetweenRegistersCommand}">
+			SignUp?</Button>
+		<Button HorizontalAlignment="Right" IsVisible="{Binding UserModel.IsSignin}"
+			Command="{Binding UserModel.SwitchBetweenRegistersCommand}">
+			SIGN IN
+		</Button>
+	</StackPanel>
+</UserControl>
