@@ -1,12 +1,13 @@
 using Avalonia.Controls;
+using Avalonia.Interactivity;
+using RyVarr.Models;
 
-namespace RyVarr.Views.ProjectManager
+namespace RyVarr.Views.ProjectManager;
+
+public partial class ProjectPageView : UserControl
 {
-    public partial class ProjectPageView : UserControl
+    public ProjectPageView()
     {
-        public ProjectPageView()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
     }
 }

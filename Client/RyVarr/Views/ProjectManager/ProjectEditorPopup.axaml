@@ -1,0 +1,24 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
+			 xmlns:vm="clr-namespace:RyVarr.ViewModels"
+			 xmlns:c="clr-namespace:RyVarr.Views.TemplatedControls"
+             x:Class="RyVarr.Views.ProjectManager.ProjectEditorPopup"
+			 x:DataType="vm:MainViewModel">
+	<Design.DataContext>
+		<vm:MainViewModel/>
+	</Design.DataContext>
+
+	<Border Background="{DynamicResource green1}" VerticalAlignment="Top" HorizontalAlignment="Center"
+			 Padding="2" >
+		<!--added IsVisible cuz there is proplem with TextBox-->
+		<StackPanel Background="Black">
+			<c:InputControl Margin="10" LabelName="Title"
+							InputText="{Binding ProjectsModel.SelectedProject.Title, Mode=TwoWay}"/>
+			<c:InputControl Margin="10" LabelName="Description"
+							InputText="{Binding ProjectsModel.SelectedProject.Description, Mode=TwoWay}"/>
+		</StackPanel>
+	</Border>
+</UserControl>

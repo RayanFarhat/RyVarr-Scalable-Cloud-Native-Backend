@@ -4,8 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="750"
 			 xmlns:vm="clr-namespace:RyVarr.ViewModels"
+			 xmlns:vproj="clr-namespace:RyVarr.Views.ProjectManager"
 			 xmlns:c="clr-namespace:RyVarr.Views.TemplatedControls"
              x:Class="RyVarr.Views.ProjectManager.ProjectPageView"
+			 x:CompileBindings="False"
 			 x:DataType="vm:MainViewModel">
 
 	<Design.DataContext>
@@ -18,38 +20,51 @@
 	</UserControl.Styles >
 
 	<StackPanel Margin="20">
-		<ItemsControl  Background="Black"
-				 ItemsSource="{Binding ProjectsModel.List}" >
+		<ScrollViewer>
+			<ListBox  Height="80" Background="Black"
+				 ItemsSource="{Binding ProjectsModel.Projects,Mode=TwoWay}" 
+				  x:Name="projectList"
+				  SelectedItem="{Binding ProjectsModel.SelectedProject, Mode=TwoWay}">
 
-			<ItemsControl.ItemsPanel>
+			<ListBox.Styles>
+				<Style Selector="ListBoxItem">
+					<Setter Property="Padding" Value="5"/>
+				</Style>
+				<Style Selector="ListBoxItem:selected /template/ ContentPresenter">
+					<Setter Property="Background" Value="{DynamicResource green3}"/>
+					<Setter Property="Padding" Value="5"/>
+				</Style>
+				<Style Selector="ListBoxItem:pointerover /template/ ContentPresenter">
+					<Setter Property="Background" Value="{DynamicResource green3}"/>
+					<Setter Property="Padding" Value="5"/>
+				</Style>
+				
+			</ListBox.Styles>
+			
+			<ListBox.ItemsPanel>
 				<ItemsPanelTemplate>
 					<WrapPanel  />
 				</ItemsPanelTemplate>
-			</ItemsControl.ItemsPanel>
-			<ItemsControl.ItemTemplate>
+			</ListBox.ItemsPanel>
+			<ListBox.ItemTemplate>
 				<DataTemplate>
-						<Border Background="{DynamicResource green1}"
-							Padding="2" Margin="10" Width="300" Height="300">
-							<ScrollViewer>
-								<StackPanel Background="Black">
-									<Label Foreground="{DynamicResource green1}"
-										   Margin="10,10,0,0" Content="{Binding Title}"/>
-
-									<TextBlock Foreground="{DynamicResource green2}"
-												TextWrapping="WrapWithOverflow"
-										Margin="10" Text="{Binding Description}" />
-
-									<c:IconBtnControl
-										VerticalAlignment="Bottom"
-										Margin="10" Size="40" Src="/Assets/Icons/edit.png"/>
-								</StackPanel>
-							</ScrollViewer>
+					<Border CornerRadius="20" Background="{DynamicResource green1}"
+						Padding="2"  Width="200" Height="50">
+						<StackPanel Background="Black">
+							<TextBlock TextWrapping="Wrap"
+								HorizontalAlignment="Center" VerticalAlignment="Center"
+								   Foreground="{DynamicResource green1}"
+								Margin="10,10,0,0" Text="{Binding Title}"/>
+						</StackPanel>
 					</Border>
-
 				</DataTemplate>
-			</ItemsControl.ItemTemplate>
-		</ItemsControl >
-	
-	<c:TextBtnControl Text="ADD NEW PROJECT"/>
+			</ListBox.ItemTemplate>
+		</ListBox >
+		</ScrollViewer>
+	<c:TextBtnControl Command="{Binding ProjectsModel.AddProjectCommand}" 
+					  Text="ADD NEW PROJECT"/>
+
+		<vproj:ProjectEditorPopup />
+
 	</StackPanel>
 </UserControl>

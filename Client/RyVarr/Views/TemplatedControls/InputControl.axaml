@@ -18,7 +18,8 @@
 			  <TextBox Watermark="{TemplateBinding WatermarkText}"
 					   Foreground="{DynamicResource yellow1}"
 					   BorderBrush="{DynamicResource green3}"
-					   />
+					   TextWrapping="Wrap"
+					   Text="{TemplateBinding InputText, Mode=TwoWay}"/>
 		  </StackPanel>
       </ControlTemplate>
     </Setter>

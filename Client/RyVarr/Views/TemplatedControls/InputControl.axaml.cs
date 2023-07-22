@@ -24,4 +24,13 @@ public class InputControl : TemplatedControl
         get => GetValue(WatermarkTextProperty);
         set => SetValue(WatermarkTextProperty, value);
     }
+
+    public static readonly StyledProperty<string> InputTextProperty =
+    AvaloniaProperty.Register<LargePanelControl, string>(nameof(InputText), defaultValue: "");
+
+    public string InputText
+    {
+        get => GetValue(InputTextProperty);
+        set => SetValue(InputTextProperty, value);
+    }
 }
