@@ -20,33 +20,35 @@
 		<vm:MainViewModel/>
 	</Design.DataContext>
 	
-	<StackPanel Width="300" Height="300">
+	<StackPanel Width="300" Height="500">
 		<Label HorizontalAlignment="Center"
 			   Foreground="{DynamicResource red1}">YOU ARE NOT REGISTERED</Label>
-		<StackPanel IsVisible="{Binding UserModel.IsSignUp}">
+		<StackPanel IsVisible="{Binding !UserModel.IsSignin}">
 			<c:InputControl LabelName="UserName" />
 			<c:InputControl LabelName="Email" />
 			<c:InputControl LabelName="Password" Classes="password"/>
 		</StackPanel>
-		<Button IsVisible="{Binding UserModel.IsSignUp}"
+		<Button IsVisible="{Binding !UserModel.IsSignin}"
 			Command="{Binding UserModel.SwitchBetweenRegistersCommand}">
 			SignIn?
 		</Button>
-		<Button HorizontalAlignment="Right" IsVisible="{Binding UserModel.IsSignUp}"
+		<Button HorizontalAlignment="Right" IsVisible="{Binding !UserModel.IsSignin}"
 			Command="{Binding UserModel.SwitchBetweenRegistersCommand}">
 			SIGN UP
 		</Button>
 
 		<StackPanel IsVisible="{Binding UserModel.IsSignin}">
-			<c:InputControl LabelName="Email" />
-			<c:InputControl LabelName="Password" Classes="password"/>
+			<StackPanel>
+				<c:InputControl LabelName="Email" />
+				<c:InputControl LabelName="Password" Classes="password"/>
+			</StackPanel>
+			<Button
+				Command="{Binding UserModel.SwitchBetweenRegistersCommand}">
+				SignUp?</Button>
+			<Button HorizontalAlignment="Right"
+				Command="{Binding UserModel.SwitchBetweenRegistersCommand}">
+				SIGN IN
+			</Button>
 		</StackPanel>
-		<Button IsVisible="{Binding UserModel.IsSignin}"
-			Command="{Binding UserModel.SwitchBetweenRegistersCommand}">
-			SignUp?</Button>
-		<Button HorizontalAlignment="Right" IsVisible="{Binding UserModel.IsSignin}"
-			Command="{Binding UserModel.SwitchBetweenRegistersCommand}">
-			SIGN IN
-		</Button>
 	</StackPanel>
 </UserControl>

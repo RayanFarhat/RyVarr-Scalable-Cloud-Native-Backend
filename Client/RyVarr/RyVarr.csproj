@@ -37,8 +37,14 @@
     <Compile Update="Tut\TutView.axaml.cs">
       <DependentUpon>TutView.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\MainPage\RyVarrAnimatedView.axaml.cs">
+      <DependentUpon>RyVarrAnimatedView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\NavBarView.axaml.cs">
       <DependentUpon>NavBarView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ProjectManager\ProjectEditorView.axaml.cs">
+      <DependentUpon>ProjectEditorView.axaml</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>

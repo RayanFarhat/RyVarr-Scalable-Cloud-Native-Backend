@@ -12,18 +12,13 @@ public partial class UserViewModel : ViewModelBase
     [ObservableProperty]
     private string _userName = "User";
     [ObservableProperty]
-    private bool _isLogin = true;
-    [ObservableProperty]
-    private bool _isNotLogin = true;
+    private bool _isLogin = false;
 
     [ObservableProperty]
     private bool _isSignin = true;
-    [ObservableProperty]
-    private bool _isSignUp = false;
     [RelayCommand]
     private void SwitchBetweenRegisters()
     {
         IsSignin ^= true;
-        IsSignUp ^= true;
     }
 }

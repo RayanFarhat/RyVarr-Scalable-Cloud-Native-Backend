@@ -64,7 +64,7 @@
 	<c:TextBtnControl Command="{Binding ProjectsModel.AddProjectCommand}" 
 					  Text="ADD NEW PROJECT"/>
 
-		<vproj:ProjectEditorPopup />
+		<vproj:ProjectEditorView />
 
 	</StackPanel>
 </UserControl>

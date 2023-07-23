@@ -1,9 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System.IO;
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Input.Platform;
 using Avalonia.Interactivity;
+using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
@@ -51,6 +53,30 @@ public partial class MainViewModel : ViewModelBase
     private async Task CopyButton_OnClick(string msg)
     {
         if (Clipboard != null) { await Clipboard.SetTextAsync(msg); }
+    }
+
+    // for open and saving files
+    public IStorageProvider? StorageProvider;
+    [RelayCommand]
+    private async Task OpenFile()
+    {
+        if (StorageProvider != null)
+        {
+            // Start async operation to open the dialog.
+            var files = await StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
+            {
+                Title = "Open Text File",
+                AllowMultiple = false
+            });
+            if (files.Count >= 1)
+            {
+                // Open reading stream from the first file.
+                await using var stream = await files[0].OpenReadAsync();
+                using var streamReader = new StreamReader(stream);
+                // Reads all the content of file as a text.
+                var fileContent = await streamReader.ReadToEndAsync();
+            }
+        }
     }
 
     ///////////////////////// Singleton //////////////////////////////////

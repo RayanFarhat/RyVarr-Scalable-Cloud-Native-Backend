@@ -27,6 +27,14 @@ public partial class ProjectsViewModel : ViewModelBase
 
     [ObservableProperty]
     private Project? _selectedProject = null;
+
+    [RelayCommand]
+    private void SaveChanges()
+    {
+        //send the saves to the backend
+    }
+
+
     public ProjectsViewModel()
     {
         SelectedProject = Projects.Last();

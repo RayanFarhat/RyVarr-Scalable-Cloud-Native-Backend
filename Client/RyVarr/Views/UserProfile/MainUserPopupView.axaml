@@ -33,7 +33,7 @@
 			Grid.RowSpan="3" ZIndex="1" Classes="popup"
 			Classes.isopen="{Binding UserPageIsOpen}" Padding="2">
 		<StackPanel Background="Black">
-			<vuser:AnonymousUserView Margin="0,10" IsVisible="{Binding UserModel.IsNotLogin}" />
+			<vuser:AnonymousUserView Margin="0,10" IsVisible="{Binding !UserModel.IsLogin}" />
 			<vuser:RegisteredUserView IsVisible="{Binding UserModel.IsLogin}" />
 		</StackPanel>
 	</Border>

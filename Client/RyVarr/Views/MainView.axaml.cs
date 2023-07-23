@@ -21,6 +21,7 @@ public partial class MainView : UserControl
         //allow using Clipboard
         if(DataContext  != null) {
             ((MainViewModel)DataContext).Clipboard = TopLevel.GetTopLevel(this)?.Clipboard;
+            ((MainViewModel)DataContext).StorageProvider = TopLevel.GetTopLevel(this)?.StorageProvider;
         }
     }
 

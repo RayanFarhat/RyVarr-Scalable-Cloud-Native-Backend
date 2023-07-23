@@ -23,17 +23,20 @@
 	</UserControl.Styles>
 
 	<ScrollViewer>
-		<Grid>
-			<StackPanel IsVisible="{Binding MainPageIsOpen}">
-				<v:NavBarView />
-				<vmain:IntroView />
-			</StackPanel>
+		<Grid Background="Black">
+			<Grid RowDefinitions="Auto,Auto,Auto" IsVisible="{Binding MainPageIsOpen}">
+				<v:NavBarView Grid.Row="0"/>
+				<vmain:IntroView Grid.Row="1" />
+				<vmain:IntroView Grid.Row="2" />
+				<!--must be rowspan with all the rows so to be background for all the page-->
+				<vmain:RyVarrAnimatedView Grid.RowSpan="3" ZIndex="-1"/>
+			</Grid>
 
 			<vuser:MainUserPopupView/>
 
 			<StackPanel IsVisible="{Binding ProjectPageIsOpen}">
 				<v:NavBarView />
-				<TextBlock Margin="20,50,20,0" IsVisible="{Binding UserModel.IsNotLogin}"
+				<TextBlock Margin="20,50,20,0" IsVisible="{Binding !UserModel.IsLogin}"
 					HorizontalAlignment="Center" TextWrapping="WrapWithOverflow"
 					Foreground="{DynamicResource green1}">
 					In order to use the project manager so we create projects together

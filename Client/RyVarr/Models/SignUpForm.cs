@@ -5,41 +5,45 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Avalonia.Controls;
-using Avalonia.Data;
-using Avalonia.Data.Core.Plugins;
+using Avalonia;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ryvarr.models;
 
 namespace RyVarr.Models;
 
-//we need ObservableValidator, it is ObservableProperty and also for data validation,
-//and also so when we change project values in the list it is not updated
-public partial class Project :  ObservableValidator
+public partial class SignUpForm : ObservableValidator
 {
     [Required]
     [MaxLength(30)]
     [ObservableProperty]
-    private string _title;
+    private string _userName;
 
     [Required]
+    [EmailAddress]
+    [MaxLength(30)]
     [ObservableProperty]
-    private string _description;
+    private string _email;
 
+    [Required]
+    [MaxLength(30)]
+    [PasswordPropertyText]
+    [ObservableProperty]
+    private string _password;
     public DataValidator dataValidator { get; set; }
 
-    public Project(string title, string description)
+    public SignUpForm(string userName, string email, string password)
     {
-        Title = title;
-        Description = description;
+        UserName = userName;
+        Email = email;
+        Password = password;
 
         dataValidator = new DataValidator(this);
         ErrorsChanged += dataValidator.OnError;
     }
 
     [RelayCommand]
-    private void Save()
+    private void SignUp()
     {
         ValidateAllProperties();
         dataValidator.Validate();

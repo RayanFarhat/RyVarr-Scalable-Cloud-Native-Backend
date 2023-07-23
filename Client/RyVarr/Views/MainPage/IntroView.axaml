@@ -31,9 +31,9 @@
 		</Style>
 		<StyleInclude Source="/Views/TemplatedControls/CopyableTextControl.axaml"/>
 	</UserControl.Styles>
-	<WrapPanel HorizontalAlignment="Center">		
+	<WrapPanel Background="Transparent" HorizontalAlignment="Center">		
 		<!--Desc-->
-		<Grid Width="350" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto" Background="Black">
+		<Grid Width="350" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto">
 			<Label  Margin="20" FontWeight="ExtraBold" Foreground="{DynamicResource gold}" FontSize="18"
 					   Grid.Row="0">FullStack Cross platform Engineer</Label>
 		
@@ -72,7 +72,7 @@
 		</Grid>
 
 		<!--Rayan-->
-		<StackPanel Width="350" Background="Black">
+		<StackPanel Width="350">
 
 			<Label FontWeight="Bold" HorizontalAlignment="Center" Foreground="{DynamicResource green1}"
 				   >WHO AM I ?</Label>

@@ -5,11 +5,17 @@
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
 			 xmlns:vm="clr-namespace:RyVarr.ViewModels"
 			 xmlns:c="clr-namespace:RyVarr.Views.TemplatedControls"
-             x:Class="RyVarr.Views.ProjectManager.ProjectEditorPopup"
+             x:Class="RyVarr.Views.ProjectManager.ProjectEditorView"
 			 x:DataType="vm:MainViewModel">
 	<Design.DataContext>
 		<vm:MainViewModel/>
 	</Design.DataContext>
+	<UserControl.Styles>
+		<StyleInclude Source="/Views/TemplatedControls/InputControl.axaml"/>
+		<StyleInclude Source="/Views/TemplatedControls/TextBtnControl.axaml"/>
+		<StyleInclude Source="/Views/TemplatedControls/ErrorListControl.axaml"/>
+	</UserControl.Styles>
+	
 
 	<Border Background="{DynamicResource green1}" VerticalAlignment="Top" HorizontalAlignment="Center"
 			 Padding="2" >
@@ -19,6 +25,11 @@
 							InputText="{Binding ProjectsModel.SelectedProject.Title, Mode=TwoWay}"/>
 			<c:InputControl Margin="10" LabelName="Description"
 							InputText="{Binding ProjectsModel.SelectedProject.Description, Mode=TwoWay}"/>
+			
+			<c:ErrorListControl ErrorMessages="{Binding ProjectsModel.SelectedProject.dataValidator.ErrorMessages}"/>
+			
+			<c:TextBtnControl Margin="10" Command="{Binding ProjectsModel.SelectedProject.SaveCommand}"
+							  Text="Save Changes"/>
 		</StackPanel>
 	</Border>
 </UserControl>

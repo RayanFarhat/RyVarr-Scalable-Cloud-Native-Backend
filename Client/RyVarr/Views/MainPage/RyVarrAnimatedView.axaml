@@ -1,0 +1,115 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
+             x:Class="RyVarr.Views.MainPage.RyVarrAnimatedView">
+
+	<UserControl.Styles>
+		<Style Selector="Label">
+			<Setter Property="Foreground" Value="{DynamicResource green2}"/>
+			<Setter Property="Opacity" Value="0.4"/>
+			<Setter Property="Padding" Value="5,0"/>
+		</Style>
+		<Style Selector="StackPanel.up">
+			<Style.Animations>
+				<Animation IterationCount="INFINITE" Duration="0:0:6">
+					<KeyFrame Cue="0%">
+						<Setter Property="Margin" Value="0,0,0,0"/>
+					</KeyFrame>
+					<KeyFrame Cue="50%">
+						<Setter Property="Margin" Value="0,800,0,0"/>
+					</KeyFrame>
+					<KeyFrame Cue="100%">
+						<Setter Property="Margin" Value="0,0,0,0"/>
+					</KeyFrame>
+				</Animation>
+			</Style.Animations>
+		</Style>
+		<Style Selector="StackPanel.down">
+			<Style.Animations>
+				<Animation IterationCount="INFINITE" Duration="0:0:6">
+					<KeyFrame Cue="0%">
+						<Setter Property="Margin" Value="0,800,0,0"/>
+					</KeyFrame>
+					<KeyFrame Cue="50%">
+						<Setter Property="Margin" Value="0,0,0,0"/>
+					</KeyFrame>
+					<KeyFrame Cue="100%">
+						<Setter Property="Margin" Value="0,800,0,0"/>
+					</KeyFrame>
+				</Animation>
+			</Style.Animations>
+		</Style>
+	</UserControl.Styles>
+
+	<!--RyVarr in binary-->
+	<Grid Margin="20" ColumnDefinitions="2*,*,*,*,*,*">
+		<!--01010010-->
+		<StackPanel HorizontalAlignment="Center" Grid.Column="0" Classes="down">
+			<Label>0</Label>
+			<Label>1</Label>
+			<Label>0</Label>
+			<Label>1</Label>
+			<Label>0</Label>
+			<Label>0</Label>
+			<Label>1</Label>
+			<Label>0</Label>
+		</StackPanel>
+		<!--01111001 -->
+		<StackPanel Grid.Column="1" Classes="up">
+			<Label>0</Label>
+			<Label>1</Label>
+			<Label>1</Label>
+			<Label>1</Label>
+			<Label>1</Label>
+			<Label>0</Label>
+			<Label>0</Label>
+			<Label>1</Label>
+		</StackPanel>
+		<!--01010110 -->
+		<StackPanel Grid.Column="2" Classes="down">
+			<Label>0</Label>
+			<Label>1</Label>
+			<Label>0</Label>
+			<Label>1</Label>
+			<Label>0</Label>
+			<Label>1</Label>
+			<Label>1</Label>
+			<Label>0</Label>
+		</StackPanel>
+		<!--01100001-->
+		<StackPanel Grid.Column="3" Classes="up">
+			<Label>0</Label>
+			<Label>1</Label>
+			<Label>1</Label>
+			<Label>0</Label>
+			<Label>0</Label>
+			<Label>0</Label>
+			<Label>0</Label>
+			<Label>1</Label>
+		</StackPanel>
+		<!--01110010-->
+		<StackPanel Grid.Column="4" Classes="down">
+			<Label>0</Label>
+			<Label>1</Label>
+			<Label>1</Label>
+			<Label>1</Label>
+			<Label>0</Label>
+			<Label>0</Label>
+			<Label>1</Label>
+			<Label>0</Label>
+		</StackPanel>
+		<!--01110010 -->
+		<StackPanel Grid.Column="5" Classes="up">
+			<Label>0</Label>
+			<Label>1</Label>
+			<Label>1</Label>
+			<Label>1</Label>
+			<Label>0</Label>
+			<Label>0</Label>
+			<Label>1</Label>
+			<Label>0</Label>
+		</StackPanel>
+	</Grid>
+</UserControl>
