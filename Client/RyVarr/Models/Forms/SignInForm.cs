@@ -1,24 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Avalonia;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using ryvarr.models;
 
-namespace RyVarr.Models;
+namespace RyVarr.Models.Forms;
 
-public partial class SignUpForm : ObservableValidator
+public partial class SignInForm : ObservableValidator
 {
-    [Required]
-    [MaxLength(30)]
-    [ObservableProperty]
-    private string _userName;
-
     [Required]
     [EmailAddress]
     [MaxLength(30)]
@@ -32,9 +21,8 @@ public partial class SignUpForm : ObservableValidator
     private string _password;
     public DataValidator dataValidator { get; set; }
 
-    public SignUpForm(string userName, string email, string password)
+    public SignInForm( string email, string password)
     {
-        UserName = userName;
         Email = email;
         Password = password;
 

@@ -1,0 +1,9 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<!--include this when including templated controls-->    
+	<StyleInclude Source="/Views/TemplatedControls/CopyableTextControl.axaml"/>
+	<StyleInclude Source="/Views/TemplatedControls/ErrorListControl.axaml"/>
+	<StyleInclude Source="/Views/TemplatedControls/IconBtnControl.axaml"/>
+	<StyleInclude Source="/Views/TemplatedControls/InputControl.axaml"/>
+	<StyleInclude Source="/Views/TemplatedControls/TextBtnControl.axaml"/>
+</Styles>

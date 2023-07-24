@@ -7,12 +7,12 @@
 
 
 	<Style Selector="Button:pointerover /template/ ContentPresenter">
-		<Setter Property="Background" Value="{DynamicResource green3}"/>
-		<Setter Property="Foreground" Value="{DynamicResource green1}"/>
+		<Setter Property="Background" Value="{DynamicResource green2}"/>
+		<Setter Property="Foreground" Value="Black"/>
 	</Style>
 	<Style Selector="Button:pressed /template/ ContentPresenter">
-		<Setter Property="Background" Value="{DynamicResource green3}"/>
-		<Setter Property="Foreground" Value="{DynamicResource green1}"/>
+		<Setter Property="Background" Value="{DynamicResource green2}"/>
+		<Setter Property="Foreground" Value="Black"/>
 	</Style>
 
   <Style Selector="controls|TextBtnControl">

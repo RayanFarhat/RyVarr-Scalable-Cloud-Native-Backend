@@ -14,9 +14,31 @@
   
   <ItemGroup>
     <None Remove="Assets\copy.png" />
-    <None Remove="Assets\Icons\copy.png" />
-    <None Remove="Assets\Icons\dev.png" />
-    <None Remove="Assets\Icons\edit.png" />
+    <None Remove="Assets\skills\cad.png" />
+    <None Remove="Assets\skills\engineering.png" />
+    <None Remove="Assets\svg\android.png" />
+    <None Remove="Assets\svg\apple.png" />
+    <None Remove="Assets\svg\azure.png" />
+    <None Remove="Assets\svg\coolemoji.png" />
+    <None Remove="Assets\svg\copy.png" />
+    <None Remove="Assets\svg\crossplatform.png" />
+    <None Remove="Assets\svg\database.png" />
+    <None Remove="Assets\svg\dev.png" />
+    <None Remove="Assets\svg\docker.png" />
+    <None Remove="Assets\svg\edit.png" />
+    <None Remove="Assets\svg\git.png" />
+    <None Remove="Assets\svg\github.png" />
+    <None Remove="Assets\svg\kubernates.png" />
+    <None Remove="Assets\svg\linux.png" />
+    <None Remove="Assets\svg\lock.png" />
+    <None Remove="Assets\svg\paypal.png" />
+    <None Remove="Assets\svg\postgre.png" />
+    <None Remove="Assets\svg\redis.png" />
+    <None Remove="Assets\svg\restAPI.png" />
+    <None Remove="Assets\svg\reverseproxy.png" />
+    <None Remove="Assets\svg\security.png" />
+    <None Remove="Assets\svg\webassembly.png" />
+    <None Remove="Assets\svg\windows.png" />
   </ItemGroup>
 
   <ItemGroup>

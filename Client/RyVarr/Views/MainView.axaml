@@ -17,9 +17,7 @@
 	</Design.DataContext>
 	
 	<UserControl.Styles>
-		<StyleInclude Source="/Views/TemplatedControls/IconBtnControl.axaml"/>
-		<StyleInclude Source="/Views/TemplatedControls/InputControl.axaml"/>
-		<StyleInclude Source="/Views/TemplatedControls/CopyableTextControl.axaml"/>
+		<StyleInclude Source="/Views/TemplatedControls/TemplatedControlsStyles.axaml"/>
 	</UserControl.Styles>
 
 	<ScrollViewer>
@@ -27,7 +25,7 @@
 			<Grid RowDefinitions="Auto,Auto,Auto" IsVisible="{Binding MainPageIsOpen}">
 				<v:NavBarView Grid.Row="0"/>
 				<vmain:IntroView Grid.Row="1" />
-				<vmain:IntroView Grid.Row="2" />
+				<vmain:SkillsView Grid.Row="2" />
 				<!--must be rowspan with all the rows so to be background for all the page-->
 				<vmain:RyVarrAnimatedView Grid.RowSpan="3" ZIndex="-1"/>
 			</Grid>

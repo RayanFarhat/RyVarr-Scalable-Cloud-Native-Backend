@@ -15,7 +15,7 @@
 		  <StackPanel Orientation="Horizontal">
 			  <TextBlock Foreground="{DynamicResource green2}"
 				  VerticalAlignment="Center" Text="{TemplateBinding Text}"/>
-			  <c:IconBtnControl Src="/Assets/Icons/copy.png" Size="30"
+			  <c:IconBtnControl Src="/Assets/svg/copy.png" Size="30"
 				  Command="{Binding CopyButton_OnClickCommand}"
 				  CommandParameter="{TemplateBinding Text}"/>
 		  </StackPanel>
