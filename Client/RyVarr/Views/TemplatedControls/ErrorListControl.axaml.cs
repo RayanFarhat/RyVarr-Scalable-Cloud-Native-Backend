@@ -20,7 +20,5 @@ public class ErrorListControl : TemplatedControl
         ErrorMessages.Clear();
         ErrorMessages.Add("Error Msg1");
         ErrorMessages.Add("Error Msg2");
-        ErrorMessages.Add("Error Msg3");
-
     }
 }

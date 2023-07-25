@@ -107,21 +107,21 @@
 					<TextBlock>Paypal</TextBlock>
 				</StackPanel>
 			</Border>
-			<Border>
+			<Border IsVisible="False">
 				<StackPanel>
 					<Label>Ci/CD</Label>
 					<Image Source="/Assets/skills/github.png"/>
 					<TextBlock>Github Actions</TextBlock>
 				</StackPanel>
 			</Border>
-			<Border>
+			<Border IsVisible="False">
 				<StackPanel>
 					<Label>Microservices</Label>
 					<Image Source="/Assets/skills/kubernates.png"/>
 					<TextBlock>Kubernates</TextBlock>
 				</StackPanel>
 			</Border>
-			<Border>
+			<Border IsVisible="False">
 				<StackPanel>
 					<Label>Cloud Provider</Label>
 					<Image Source="/Assets/skills/azure.png"/>

@@ -6,4 +6,5 @@
 	<StyleInclude Source="/Views/TemplatedControls/IconBtnControl.axaml"/>
 	<StyleInclude Source="/Views/TemplatedControls/InputControl.axaml"/>
 	<StyleInclude Source="/Views/TemplatedControls/TextBtnControl.axaml"/>
+	<StyleInclude Source="/Views/TemplatedControls/TypewriteAnimationTextControl.axaml"/>
 </Styles>

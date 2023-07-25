@@ -8,6 +8,10 @@ networks:
 
 
 services:
+  client:
+      build: ./Client
+      networks:
+        - server-network
   # important: not exposing ports so the server only listen to docker containers in his network
   nginx:
     build: ./nginx
@@ -47,6 +51,8 @@ services:
     environment:
       ASPNETCORE_ENVIRONMENT: Development
     ######################################
+    depends_on:
+      - db
     networks:
       - server-network
 

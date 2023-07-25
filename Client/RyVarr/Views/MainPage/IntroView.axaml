@@ -26,10 +26,12 @@
 			<Setter Property="Margin" Value="50,5,15,0"/>
 		</Style>
 	</UserControl.Styles>
+	
+	
 	<WrapPanel Background="Transparent" HorizontalAlignment="Center">		
 		<!--Desc-->
 		<Grid Width="350" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto">
-			<Label  Margin="20" FontWeight="ExtraBold" Foreground="{DynamicResource green1}" FontSize="18"
+			<Label Margin="20" FontWeight="ExtraBold" Foreground="{DynamicResource green1}" FontSize="18"
 					   Grid.Row="0">FullStack Cross platform Engineer</Label>
 		
 			<TextBlock  Margin="20,0,0,0" Grid.Row="1" TextWrapping="WrapWithOverflow" 
@@ -82,7 +84,8 @@
 		<!--Rayan-->
 		<StackPanel Width="350">
 
-			<Label FontWeight="Bold" HorizontalAlignment="Center" Foreground="{DynamicResource green1}"
+			<Label
+				FontWeight="Bold" HorizontalAlignment="Center" Foreground="{DynamicResource green1}"
 				   Margin="0,15,0,0" FontSize="25">WHO AM I ?</Label>
 
 			<Image Margin="20" Height="200" Width="200"

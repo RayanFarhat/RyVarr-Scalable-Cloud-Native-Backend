@@ -17,6 +17,7 @@
 	</Design.DataContext>
 	
 	<UserControl.Styles>
+		<StyleInclude Source="/Views/Styles/Styles.axaml"/>
 		<StyleInclude Source="/Views/TemplatedControls/TemplatedControlsStyles.axaml"/>
 	</UserControl.Styles>
 
