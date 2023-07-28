@@ -68,7 +68,7 @@
 				<TextBlock Classes="feature">
 					- Building, Deploying and Securing The Backend and the Database for your App.
 				</TextBlock>
-				<TextBlock Classes="feature">
+				<TextBlock IsVisible="False" Classes="feature">
 					- Building AutoCAD Plugins for Civil Engineers.
 				</TextBlock>
 				<StackPanel Orientation="Horizontal">
