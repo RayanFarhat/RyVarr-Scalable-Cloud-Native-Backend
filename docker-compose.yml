@@ -35,15 +35,7 @@ services:
       - server-network
     volumes:
       - ./database/postgresql:/var/lib/postgresql/data
-
-  cache:
-    image: 'redis:7.0'
-    networks:
-      - server-network
-    ports:
-      - "6379:6379" # used with RedisInsight and remove in production
-    volumes:
-      - ./sessionCache/redis_data:/data
+      
     ######################################
   authservice:
     build: ./AuthService
@@ -55,6 +47,7 @@ services:
       - db
     networks:
       - server-network
+    command: ["dotnet", "ef", "database update"]
 
   chessservice:
     build: ./ChessService

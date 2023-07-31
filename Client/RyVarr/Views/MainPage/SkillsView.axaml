@@ -7,7 +7,7 @@
 
 	<UserControl.Styles>
 	    <StyleInclude Source="/Views/TemplatedControls/TemplatedControlsStyles.axaml"/>
-		<Style Selector="StackPanel">
+		<Style Selector="StackPanel.skill">
 			<Setter Property="Width" Value="190"/>
 			<Setter Property="Height" Value="120"/>
 			<Setter Property="Margin" Value="2"/>
@@ -24,6 +24,12 @@
 			<Setter Property="HorizontalAlignment" Value="Center"/>
 			<Setter Property="Margin" Value="0,0,0,5"/>
 		</Style>
+		<Style Selector="TextBlock.also">
+			<Setter Property="Foreground" Value="{DynamicResource green1}"/>
+			<Setter Property="HorizontalAlignment" Value="Left"/>
+			<Setter Property="Margin" Value="5"/>
+			<Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+		</Style>
 		<Style Selector="Image">
 			<Setter Property="Width" Value="50"/>
 			<Setter Property="Height" Value="50"/>
@@ -39,109 +45,110 @@
 	</UserControl.Styles>
 	
 	
-	<Grid RowDefinitions="Auto,Auto,Auto,Auto">
+	<Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto">
 		<TextBlock  Grid.Row="0">_______________________________________</TextBlock>
 		<Label Grid.Row="1">SKILLS</Label>
 		<TextBlock  Grid.Row="2">_______________________________________</TextBlock>
 		<WrapPanel Grid.Row="3" HorizontalAlignment="Center">
 			<Border>
-				<StackPanel>
+				<StackPanel Classes="skill">
 					<Label>Engineering</Label>
 					<Image Source="/Assets/skills/engineering.png"/>
 					<TextBlock>Building Clean C# Code</TextBlock>
 				</StackPanel>
 			</Border>
 			<Border>
-			<StackPanel>
+			<StackPanel Classes="skill">
 				<Label>Front-end</Label>
 				<Image Source="/Assets/skills/crossplatform.png"/>
 				<TextBlock>Avalonia UI Framework</TextBlock>
 			</StackPanel>
 			</Border>
 			<Border>
-			<StackPanel>
+			<StackPanel Classes="skill">
 				<Label>Back-end</Label>
 				<Image Source="/Assets/svg/restAPI.png"/>
 				<TextBlock>ASP.NET Framework</TextBlock>
 			</StackPanel>
 			</Border>
 			<Border>
-				<StackPanel>
+				<StackPanel Classes="skill">
 					<Label>Relational Database</Label>
 					<Image Source="/Assets/skills/postgre.png"/>
 					<TextBlock>PostgreSQL</TextBlock>
 				</StackPanel>
 			</Border>
 			<Border>
-				<StackPanel>
-					<Label>Caching / Message Broker</Label>
-					<Image Source="/Assets/skills/redis.png"/>
-					<TextBlock>Redis</TextBlock>
-				</StackPanel>
-			</Border>
-			<Border>
-				<StackPanel>
+				<StackPanel Classes="skill">
 					<Label>Version Control</Label>
 					<Image Source="/Assets/skills/git.png"/>
 					<TextBlock>Git</TextBlock>
 				</StackPanel>
 			</Border>
 			<Border>
-				<StackPanel>
+				<StackPanel Classes="skill">
 					<Label>Containerization</Label>
 					<Image Source="/Assets/skills/docker.png"/>
 					<TextBlock>Docker / Docker Compose</TextBlock>
 				</StackPanel>
 			</Border>
 			<Border>
-				<StackPanel>
+				<StackPanel Classes="skill">
 					<Label>Reverse Proxy</Label>
 					<Image Source="/Assets/skills/reverseproxy.png"/>
 					<TextBlock>NGINX</TextBlock>
 				</StackPanel>
 			</Border>
 			<Border IsVisible="False">
-				<StackPanel>
+				<StackPanel Classes="skill">
 					<Label>E-Commerce Integration</Label>
 					<Image Source="/Assets/skills/paypal.png"/>
 					<TextBlock>Paypal</TextBlock>
 				</StackPanel>
 			</Border>
 			<Border>
-				<StackPanel>
+				<StackPanel Classes="skill">
 					<Label>Ci/CD</Label>
 					<Image Source="/Assets/skills/github.png"/>
 					<TextBlock>Github Actions</TextBlock>
 				</StackPanel>
 			</Border>
 			<Border IsVisible="False">
-				<StackPanel>
+				<StackPanel Classes="skill">
 					<Label>Microservices</Label>
 					<Image Source="/Assets/skills/kubernates.png"/>
 					<TextBlock>Kubernates</TextBlock>
 				</StackPanel>
 			</Border>
 			<Border IsVisible="False">
-				<StackPanel>
+				<StackPanel Classes="skill">
 					<Label>Cloud Provider</Label>
 					<Image Source="/Assets/skills/azure.png"/>
 					<TextBlock>Azure</TextBlock>
 				</StackPanel>
 			</Border>
 			<Border IsVisible="False">
-				<StackPanel>
+				<StackPanel Classes="skill">
 					<Label>CAD Plugins</Label>
 					<Image Source="/Assets/skills/cad.png"/>
 					<TextBlock>AutoCAD API</TextBlock>
 				</StackPanel>
 			</Border>
 			<Border IsVisible="False">
-				<StackPanel>
-					<Label>API Hacking/Debugging</Label>
+				<StackPanel Classes="skill">
+					<Label>API Securing</Label>
 					<Image Source="/Assets/skills/hacker.png"/>
-					<TextBlock>Burp Suite + Postman</TextBlock>
+					<TextBlock>OWASP API Security</TextBlock>
 				</StackPanel>
 			</Border>
 		</WrapPanel>
+		<Label Grid.Row="4">Also more skills if you want to dive deeper with me:</Label>
+		<StackPanel Grid.Row="5">
+			<TextBlock Classes="also">* A good grasp of common web identity protocols like OAuth, OIDC, SAML.</TextBlock>
+			<TextBlock Classes="also">* A good grasp of common network protocolslike HTTP, TLS, SSH.</TextBlock>
+			<TextBlock Classes="also">* An understanding of cryptography and PKI.</TextBlock>
+			<TextBlock Classes="also">* Deploying and building authentication and access control to the system 
+			(securing passwords in the database,managing roles of users in the system).</TextBlock>
+		</StackPanel>
 	</Grid>
 </UserControl>
