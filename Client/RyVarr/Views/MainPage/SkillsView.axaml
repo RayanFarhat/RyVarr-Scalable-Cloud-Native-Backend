@@ -113,13 +113,7 @@
 					<TextBlock>Github Actions</TextBlock>
 				</StackPanel>
 			</Border>
-			<Border IsVisible="False">
-				<StackPanel Classes="skill">
-					<Label>Microservices</Label>
-					<Image Source="/Assets/skills/kubernates.png"/>
-					<TextBlock>Kubernates</TextBlock>
-				</StackPanel>
-			</Border>
+
 			<Border IsVisible="False">
 				<StackPanel Classes="skill">
 					<Label>Cloud Provider</Label>
@@ -134,7 +128,7 @@
 					<TextBlock>AutoCAD API</TextBlock>
 				</StackPanel>
 			</Border>
-			<Border IsVisible="False">
+			<Border IsVisible="True">
 				<StackPanel Classes="skill">
 					<Label>API Securing</Label>
 					<Image Source="/Assets/skills/hacker.png"/>
@@ -145,8 +139,9 @@
 		<Label Grid.Row="4">Also more skills if you want to dive deeper with me:</Label>
 		<StackPanel Grid.Row="5">
 			<TextBlock Classes="also">* A good grasp of common web identity protocols like OAuth, OIDC, SAML.</TextBlock>
-			<TextBlock Classes="also">* A good grasp of common network protocolslike HTTP, TLS, SSH.</TextBlock>
+			<TextBlock Classes="also">* A good grasp of common network protocols like HTTP, TLS, SSH.</TextBlock>
 			<TextBlock Classes="also">* An understanding of cryptography and PKI.</TextBlock>
+			<TextBlock Classes="also">* A good grasp of Entity Framework and ASP.Net Identity and REST API Controls.</TextBlock>
 			<TextBlock Classes="also">* Deploying and building authentication and access control to the system 
 			(securing passwords in the database,managing roles of users in the system).</TextBlock>
 		</StackPanel>

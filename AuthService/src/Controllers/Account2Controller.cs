@@ -82,6 +82,9 @@ public class Account2Controller : ControllerBase
             UserName = model.Username
         };
         var result = await userManager.CreateAsync(user, model.Password);
+
+        System.Console.WriteLine(result.ToString());
+
         if (!result.Succeeded)
             return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
 
