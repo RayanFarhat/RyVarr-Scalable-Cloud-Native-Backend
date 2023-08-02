@@ -24,7 +24,7 @@ builder.Services.AddControllers();
 ////////////////////////////
 // For Entity Framework  
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseNpgsql("Host=localhost;Port=5432;Database=ryvarrdb;Username=ryan;Password=ryan"));
+    options.UseNpgsql("Host=db;Port=5432;Database=ryvarrdb;Username=ryan;Password=ryan"));
 // For Identity  
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
@@ -88,29 +88,6 @@ builder.Services.AddSwaggerGen(c =>
 //     options.UseNpgsql("Host=db;Port=5432;Database=ryvarrdb;Username=ryan;Password=ryan"));
 
 var app = builder.Build();
-
-
-//* important
-// Migrate latest database changes during startup
-using (var scope = app.Services.CreateScope())
-{
-    // var dbContext = scope.ServiceProvider
-    //     .GetRequiredService<RyvarrDb>();
-
-    // var dbContextaaa = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    // if (dbContextaaa.Database.GetPendingMigrations().Any())
-    // {
-    //     dbContextaaa.Database.Migrate();
-    //     dbContextaaa.SaveChanges();
-    // }
-
-    // //Here is the migration executed
-
-    // // *create the tables  based on the context
-    // dbContext.Database.Migrate();
-    // // Persist changes to the database
-    // dbContext.SaveChanges();
-}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
