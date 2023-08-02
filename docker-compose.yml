@@ -37,23 +37,13 @@ services:
       - ./database/postgresql:/var/lib/postgresql/data
       
     ######################################
-  authservice:
-    build: ./AuthService
+  backendserver:
+    build: ./BackendServer
     # only apply in dev mode and test with http://localhost/swagger
     environment:
       ASPNETCORE_ENVIRONMENT: Development
     ######################################
     depends_on:
       - db
-    networks:
-      - server-network
-    command: ["dotnet", "ef", "database update"]
-
-  chessservice:
-    build: ./ChessService
-    # only apply in dev mode and test with http://localhost/swagger
-    environment:
-      ASPNETCORE_ENVIRONMENT: Development
-    ######################################
     networks:
       - server-network
