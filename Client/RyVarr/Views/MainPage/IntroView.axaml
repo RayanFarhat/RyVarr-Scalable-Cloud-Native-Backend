@@ -99,6 +99,8 @@
 			<TextBlock Classes="characteristic">Bachelor's degree in Computer Science (BCS)</TextBlock>
 			<Label Classes="characteristic">Email :</Label>
 			<c:CopyableTextControl Margin="50,5,15,0" Text="rayanfarhat.sh@gmail.com"/>
+			<Label Classes="characteristic">Linkedin :</Label>
+			<c:CopyableTextControl Margin="40,5,15,0" Text="linkedin.com/in/rayan-farhat-227266236"/>
 		</StackPanel>
 	</WrapPanel>
 </UserControl>

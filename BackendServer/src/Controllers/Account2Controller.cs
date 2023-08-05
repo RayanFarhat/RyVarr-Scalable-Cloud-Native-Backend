@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace BackendServer.Controllers;
 
-[Route("auth/[controller]")]
+[Route("api/[controller]")]
 [ApiController]
 public class Account2Controller : ControllerBase
 {
@@ -32,7 +32,7 @@ public class Account2Controller : ControllerBase
     [Route("login")]
     public async Task<IActionResult> Login([FromBody] LoginModel model)
     {
-        var user = await userManager.FindByNameAsync(model.Username);
+        var user = await userManager.FindByNameAsync(model.Email);
         if (user != null && user.UserName != null && await userManager.CheckPasswordAsync(user, model.Password))
         {
             var userRoles = await userManager.GetRolesAsync(user);
@@ -92,8 +92,8 @@ public class Account2Controller : ControllerBase
     }
 
     [HttpPost]
-    [Route("register-admin")]
-    public async Task<IActionResult> RegisterAdmin([FromBody] RegisterModel model)
+    [Route("register-userpro")]
+    public async Task<IActionResult> RegisterUserPro([FromBody] RegisterModel model)
     {
         var userExists = await userManager.FindByNameAsync(model.Username);
         if (userExists != null)
@@ -110,14 +110,14 @@ public class Account2Controller : ControllerBase
             return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
 
         // create roles if they are not exist
-        if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
-            await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+        if (!await roleManager.RoleExistsAsync(UserRoles.UserPro))
+            await roleManager.CreateAsync(new IdentityRole(UserRoles.UserPro));
         if (!await roleManager.RoleExistsAsync(UserRoles.User))
             await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
-        // if Admin role exist then add the user as admin
-        if (await roleManager.RoleExistsAsync(UserRoles.Admin))
+        // if UserPro role exist then add the user as UserPro
+        if (await roleManager.RoleExistsAsync(UserRoles.UserPro))
         {
-            await userManager.AddToRoleAsync(user, UserRoles.Admin);
+            await userManager.AddToRoleAsync(user, UserRoles.UserPro);
         }
 
         return Ok(new Response { Status = "Success", Message = "User created successfully!" });

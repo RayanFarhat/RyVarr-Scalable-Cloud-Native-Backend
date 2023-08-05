@@ -9,7 +9,7 @@ using Avalonia.Controls.Shapes;
 namespace RyVarr.DrawEngine;
 
 /// <summary>
-/// Is the global type of the game objects and have the shared things betwwen them
+/// Is the global type of the game objects and have the shared things between them
 /// X and Y start from the top left in canvas
 /// </summary>
 public interface IDrawObject<T>
