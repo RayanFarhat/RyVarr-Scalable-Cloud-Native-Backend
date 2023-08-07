@@ -23,18 +23,21 @@
 		<vm:MainViewModel/>
 	</Design.DataContext>
 		<Grid  Width="300" Height="500">
-			<StackPanel IsVisible="{Binding !UserModel.IsSignin}">
+			<StackPanel IsVisible="{Binding !UserModel.IsSigninWindow}">
 			<Label HorizontalAlignment="Center"
 				   Foreground="{DynamicResource red1}">YOU ARE NOT REGISTERED</Label>
 			<StackPanel>
-				<c:InputControl LabelName="UserName" />
-				<c:InputControl LabelName="Email" />
-				<c:InputControl LabelName="Password" Classes="password"/>
+				<c:InputControl LabelName="UserName"
+					InputText="{Binding UserModel.Form.UserNameRegister, Mode=TwoWay}"/>
+				<c:InputControl LabelName="Email"
+					InputText="{Binding UserModel.Form.EmailRegister, Mode=TwoWay}"/>
+				<c:InputControl LabelName="Password" Classes="password"
+					InputText="{Binding UserModel.Form.PasswordRegister, Mode=TwoWay}"/>
 			</StackPanel>
 			
-			<c:ErrorListControl/>
+			<c:ErrorListControl ErrorMessages="{Binding UserModel.Form.ErrorsRegister}"/>
 			
-			<Button
+			<Button Opacity="0.6"
 				Command="{Binding UserModel.SwitchBetweenRegistersCommand}">
 				SignIn?
 			</Button>
@@ -43,18 +46,21 @@
 			</Button>
 		</StackPanel>
 		
-		<StackPanel IsVisible="{Binding UserModel.IsSignin}">
+		<StackPanel IsVisible="{Binding UserModel.IsSigninWindow}">
 			<StackPanel>
-				<c:InputControl LabelName="Email" />
-				<c:InputControl LabelName="Password" Classes="password"/>
+				<c:InputControl LabelName="Email"
+					InputText="{Binding UserModel.Form.EmailLogin, Mode=TwoWay}"/>
+				<c:InputControl LabelName="Password" Classes="password"
+					InputText="{Binding UserModel.Form.PasswordLogin, Mode=TwoWay}"/>
 			</StackPanel>
 
-			<c:ErrorListControl/>
+			<c:ErrorListControl ErrorMessages="{Binding UserModel.Form.ErrorsLogin}"/>
 			
-			<Button
+			<Button Opacity="0.6"
 				Command="{Binding UserModel.SwitchBetweenRegistersCommand}">
 				SignUp?</Button>
-			<Button HorizontalAlignment="Right">
+			<Button HorizontalAlignment="Right"
+				Command="{Binding UserModel.onLoginCommand}">
 				SIGN IN
 			</Button>
 		</StackPanel>
