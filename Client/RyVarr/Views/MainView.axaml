@@ -41,7 +41,7 @@
 					In order to use the project manager so we create projects together
 					you have to Sign In
 				</TextBlock>
-				<vproj:ProjectPageView IsVisible="{Binding UserModel.IsLogin}"/>
+				<vproj:ProjectPageView IsVisible="{Binding !UserModel.IsLogin}"/>
 			</StackPanel>
 		</Grid>
 	</ScrollViewer>

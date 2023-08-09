@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
@@ -7,10 +8,10 @@ namespace RyVarr.Views.TemplatedControls;
 
 public class ErrorListControl : TemplatedControl
 {
-    public static readonly StyledProperty<List<string>> ErrorMessagesProperty =
-    AvaloniaProperty.Register<ErrorListControl, List<string>>(nameof(ErrorMessages), defaultValue: new List<string>());
+    public static readonly StyledProperty<ObservableCollection<string>> ErrorMessagesProperty =
+    AvaloniaProperty.Register<ErrorListControl, ObservableCollection<string>>(nameof(ErrorMessages), defaultValue: new ObservableCollection<string>());
 
-    public List<string> ErrorMessages
+    public ObservableCollection<string> ErrorMessages
     {
         get => GetValue(ErrorMessagesProperty);
         set => SetValue(ErrorMessagesProperty, value);

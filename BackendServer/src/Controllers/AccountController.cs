@@ -28,6 +28,30 @@ public class AccountController : ControllerBase
     [Route("login")]
     public async Task<IActionResult> Login([FromBody] LoginModel model)
     {
+        try
+        {
+            // Set AllowSynchronousIO to true
+            HttpContext.Request.EnableBuffering();
+            // Get the request body stream
+            using (StreamReader reader = new StreamReader(Request.Body, Encoding.UTF8))
+            {
+                string requestBody = reader.ReadToEnd();
+
+                // Log the request body to the console
+                Console.WriteLine("Request Body:");
+                Console.WriteLine(requestBody);
+
+                // You can also use a logger here to log the request body
+                // _logger.LogInformation("Request Body: {RequestBody}", requestBody);
+
+                // Process the request and return a response
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
+        }
+
         var user = await userManager.FindByEmailAsync(model.Email);
         if (user != null && user.UserName != null && await userManager.CheckPasswordAsync(user, model.Password))
         {

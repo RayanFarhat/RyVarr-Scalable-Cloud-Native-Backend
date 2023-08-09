@@ -40,7 +40,7 @@
 							 Foreground="{DynamicResource yellow1}"
 							 BorderBrush="{DynamicResource green3}"
 							  PasswordChar="*"
-					   />
+					   Text="{TemplateBinding InputText, Mode=TwoWay}"/>
 				</StackPanel>
 			</ControlTemplate>
 		</Setter>

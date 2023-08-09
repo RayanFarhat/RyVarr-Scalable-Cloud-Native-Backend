@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,11 +11,11 @@ namespace RyVarr.ViewModels.User;
 public partial class LoginRegisterViewModel : ViewModelBase
 {
     [ObservableProperty]
-    private string _emailLogin = "";
+    private string _emailLogin = "22";
     [ObservableProperty]
-    private string _passwordLogin = "";
+    private string _passwordLogin = "22";
     [ObservableProperty]
-    private List<string> _errorsLogin = new List<string>();
+    private ObservableCollection<string> _errorsLogin = new ObservableCollection<string>();
 
     [ObservableProperty]
     private string _userNameRegister = "";
@@ -23,6 +24,6 @@ public partial class LoginRegisterViewModel : ViewModelBase
     [ObservableProperty]
     private string _passwordRegister = "";
     [ObservableProperty]
-    private List<string> _errorsRegister = new List<string>();
+    private ObservableCollection<string> _errorsRegister = new ObservableCollection<string>();
 
 }

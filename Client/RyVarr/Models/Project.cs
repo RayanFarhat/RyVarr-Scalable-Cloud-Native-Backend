@@ -21,11 +21,11 @@ public partial class Project :  ObservableValidator
     [Required]
     [MaxLength(30)]
     [ObservableProperty]
-    private string _title;
+    private string _title="";
 
     [Required]
     [ObservableProperty]
-    private string _description;
+    private string _description="";
 
     public DataValidator dataValidator { get; set; }
 

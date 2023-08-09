@@ -14,13 +14,11 @@ using Microsoft.OpenApi.Models;
 
 using BackendServer.Authentication;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-
 ////////////////////////////
 // For Entity Framework  
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
