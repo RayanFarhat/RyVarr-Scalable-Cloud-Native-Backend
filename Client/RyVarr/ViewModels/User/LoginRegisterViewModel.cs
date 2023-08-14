@@ -25,5 +25,6 @@ public partial class LoginRegisterViewModel : ViewModelBase
     private string _passwordRegister = "";
     [ObservableProperty]
     private ObservableCollection<string> _errorsRegister = new ObservableCollection<string>();
+    //todo make 3 error list
 
 }

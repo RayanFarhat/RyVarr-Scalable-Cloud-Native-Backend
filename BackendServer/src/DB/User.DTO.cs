@@ -33,3 +33,21 @@ public record User
 public record UserForRegister(string username, string email, string password);
 public record UserForlogin(string email, string password);
 
+public record AcountData
+{
+    [Key]
+    public int UserId { get; init; }
+
+    [Required]
+    public string Username { get; init; }
+
+    [Required]
+    public bool IsPro { get; init; }
+
+    public AcountData(int UserId, string Username, bool IsPro)
+    {
+        this.UserId = UserId;
+        this.Username = Username;
+        this.IsPro = IsPro;
+    }
+}

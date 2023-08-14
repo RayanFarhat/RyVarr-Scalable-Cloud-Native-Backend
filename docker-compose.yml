@@ -47,3 +47,11 @@ services:
       - db
     networks:
       - server-network
+
+  # for orleans clustering
+  redis:
+    image: redis:latest
+    ports:
+      - '6379:6379'
+    networks:
+      - server-network

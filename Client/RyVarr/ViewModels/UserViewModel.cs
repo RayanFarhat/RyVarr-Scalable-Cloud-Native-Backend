@@ -26,6 +26,16 @@ public partial class UserViewModel : ViewModelBase
         IsSigninWindow ^= true;
     }
 
+
+    [RelayCommand]
+    private async Task onRegister()
+    {
+        await onLogin();
+        HttpClientHandler clientHandler = new HttpClientHandler();
+
+        
+    }
+
     [RelayCommand]
     private async Task onLogin()
     {
@@ -35,6 +45,7 @@ public partial class UserViewModel : ViewModelBase
         
         if (res == null)
         {
+            Form.ErrorsLogin.Clear();
             Form.ErrorsLogin.Add("Somthing wrong with the login response!");
             return;
         }
@@ -43,26 +54,12 @@ public partial class UserViewModel : ViewModelBase
             LoginRes200? res200 = await clientHandler.Deserialize<LoginRes200>(res);
             if (res200 == null)
             {
+                Form.ErrorsLogin.Clear();
                 Form.ErrorsLogin.Add("Somthing wrong with Deserialize LoginRes200");
                 return;
             }
             HttpClientHandler.AuthToken = res200.token;
-            res = await clientHandler.Req<IReq>("/Account", "GET",null);
-            if (res == null)
-            {
-                Form.ErrorsLogin.Add("Somthing wrong with getting acount data!");
-                return;
-            }
-            // get user data
-            AccountRes200? accountRes200 = await clientHandler.Deserialize<AccountRes200>(res);
-            if (accountRes200 == null)
-            {
-                Form.ErrorsLogin.Add("Somthing wrong with Deserialize AccountRes200");
-                return;
-            }
-            IsLogin = true;
-            UserName = accountRes200.message;
-
+            await _getUserDataReq();
         }
 
         else if (res.StatusCode == System.Net.HttpStatusCode.BadRequest)
@@ -70,6 +67,7 @@ public partial class UserViewModel : ViewModelBase
             LoginRes400? res400 = await clientHandler.Deserialize<LoginRes400>(res);
             if (res400 == null)
             {
+                Form.ErrorsLogin.Clear();
                 Form.ErrorsLogin.Add("Somthing wrong with Deserialize LoginRes400");
                 return;
             }
@@ -80,11 +78,34 @@ public partial class UserViewModel : ViewModelBase
             LoginRes401? res401 = await clientHandler.Deserialize<LoginRes401>(res);
             if (res401 == null)
             {
+                Form.ErrorsLogin.Clear();
                 Form.ErrorsLogin.Add("Somthing wrong with Deserialize LoginRes401");
                 return;
             }
             Form.ErrorsLogin.Clear();
             Form.ErrorsLogin.Add("Unauthorized : Your email or password might be wrong!");
         }
+    }
+
+    private async Task _getUserDataReq()
+    {
+        HttpClientHandler clientHandler = new HttpClientHandler();
+        var res = await clientHandler.Req<IReq>("/Account", "GET", null);
+        if (res == null)
+        {
+            Form.ErrorsLogin.Clear();
+            Form.ErrorsLogin.Add("Somthing wrong with getting acount data!");
+            return;
+        }
+        // get user data
+        AccountRes200? accountRes200 = await clientHandler.Deserialize<AccountRes200>(res);
+        if (accountRes200 == null)
+        {
+            Form.ErrorsLogin.Clear();
+            Form.ErrorsLogin.Add("Somthing wrong with Deserialize AccountRes200");
+            return;
+        }
+        IsLogin = true;
+        UserName = accountRes200.message;
     }
 }

@@ -41,7 +41,8 @@
 				Command="{Binding UserModel.SwitchBetweenRegistersCommand}">
 				SignIn?
 			</Button>
-			<Button HorizontalAlignment="Right">
+			<Button HorizontalAlignment="Right"
+				Command="{Binding UserModel.onRegisterCommand}">
 				SIGN UP
 			</Button>
 		</StackPanel>

@@ -27,6 +27,10 @@
     </PackageReference>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.4" />
     <!-- ________________________________________________________________________________________ -->
+    <!-- _____________________________________For Orleans_________________________________________ -->
+    <PackageReference Include="Microsoft.Orleans.Server" Version="7.2.1" />
+    <PackageReference Include="Orleans.Clustering.Redis" Version="7.0.0" />
+    <!-- ________________________________________________________________________________________ -->
   </ItemGroup>
 
 </Project>
