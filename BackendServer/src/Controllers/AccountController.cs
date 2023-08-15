@@ -13,11 +13,11 @@ namespace BackendServer.Controllers;
 [ApiController]
 public class AccountController : ControllerBase
 {
-    private readonly UserManager<ApplicationUser> userManager;
+    private readonly UserManager<IdentityUser> userManager;
     private readonly RoleManager<IdentityRole> roleManager;
     private readonly IConfiguration _configuration;
 
-    public AccountController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration)
+    public AccountController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration)
     {
         this.userManager = userManager;
         this.roleManager = roleManager;
@@ -100,7 +100,7 @@ public class AccountController : ControllerBase
         if (userExists != null)
             return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Email already exists!" });
 
-        ApplicationUser user = new ApplicationUser()
+        IdentityUser user = new IdentityUser()
         {
             Email = model.Email,
             SecurityStamp = Guid.NewGuid().ToString(),
@@ -126,7 +126,7 @@ public class AccountController : ControllerBase
         if (userExists != null)
             return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
 
-        ApplicationUser user = new ApplicationUser()
+        IdentityUser user = new IdentityUser()
         {
             Email = model.Email,
             SecurityStamp = Guid.NewGuid().ToString(),

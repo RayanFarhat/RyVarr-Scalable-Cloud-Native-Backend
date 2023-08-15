@@ -34,7 +34,7 @@ builder.Host.UseOrleans((_, silo) => silo
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseNpgsql("Host=db;Port=5432;Database=ryvarrdb;Username=ryan;Password=ryan"));
 // For Identity  
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
 // Adding Authentication  
