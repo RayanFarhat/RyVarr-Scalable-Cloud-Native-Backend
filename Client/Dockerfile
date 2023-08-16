@@ -2,9 +2,9 @@
 FROM mcr.microsoft.com/dotnet/sdk:7.0 
 
 # for wasm compiling
-RUN dotnet workload install wasm-tools
 RUN apt-get update
 RUN apt-get install -y python3
+RUN dotnet workload install wasm-tools
 
 WORKDIR /app
 

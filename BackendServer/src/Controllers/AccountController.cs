@@ -1,4 +1,5 @@
 using BackendServer.Authentication;
+using BackendServer.DB;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
@@ -13,12 +14,15 @@ namespace BackendServer.Controllers;
 [ApiController]
 public class AccountController : ControllerBase
 {
+    private readonly RyvarrDb db;
+
     private readonly UserManager<IdentityUser> userManager;
     private readonly RoleManager<IdentityRole> roleManager;
     private readonly IConfiguration _configuration;
 
-    public AccountController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration)
+    public AccountController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration, RyvarrDb db)
     {
+        this.db = db;
         this.userManager = userManager;
         this.roleManager = roleManager;
         _configuration = configuration;

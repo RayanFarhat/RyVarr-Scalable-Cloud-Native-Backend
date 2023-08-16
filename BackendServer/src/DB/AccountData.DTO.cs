@@ -1,7 +1,10 @@
 namespace BackendServer.DTOs;
 
 using System.ComponentModel.DataAnnotations;
-public record AcountData
+
+
+[Serializable]
+public record AccountData
 {
     [Key]
     public int Id { get; init; }
@@ -12,8 +15,7 @@ public record AcountData
     [Required]
     public bool IsPro { get; init; }
 
-    // todo make grain that store this class as state and then do cache write through with the accountData table
-    public AcountData(int Id, string Username, bool IsPro)
+    public AccountData(int Id, string Username, bool IsPro)
     {
         this.Id = Id;
         this.Username = Username;

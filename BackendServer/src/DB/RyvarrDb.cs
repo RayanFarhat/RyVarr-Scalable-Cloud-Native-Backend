@@ -1,66 +1,59 @@
-// using Microsoft.EntityFrameworkCore;
-// using BackendServer.DTOs;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using BackendServer.DTOs;
+using Microsoft.AspNetCore.Identity;
 
-// namespace BackendServer.DB;
+namespace BackendServer.DB;
+public class RyvarrDb : IdentityDbContext
+{
+    public DbSet<AccountData> accountData { get; set; }
 
+    public RyvarrDb(DbContextOptions<RyvarrDb> options) : base(options)
+    {
+        accountData = Set<AccountData>();
+    }
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+        builder.Entity<IdentityRole>().ToTable(name: "Roles");
+        builder.Entity<IdentityUser>().ToTable(name: "Users");
+        builder.Entity<IdentityUserRole<string>>().ToTable(name: "UserRoles");
+        // adding Indexing
+        builder.Entity<AccountData>().ToTable("AcountData")
+            .HasIndex(p => p.Id)
+            .IsUnique();
+    }
 
-// public class RyvarrDb : DbContext
-// {
-//     // every DbSet is for a table in ryvarrdb
-//     public DbSet<User> users { get; set; }
+    // public async Task Add(AccountData user)
+    // {
+    //     AccountData u = new User(id: 0, username: user.username, email: user.email, password: user.password);
+    //     await this.users.AddAsync(u);
+    //     await this.SaveChangesAsync();
+    // }
+    // public async Task<AccountData> Get(string id)
+    // {
+    //     return await this.accountData.FindAsync(id);
+    // }
+    // public async Task<AccountData> GetByUsername(string username)
+    // {
+    //     return await this.accountData.FindAsync(username);
+    // }
+    public async Task<IEnumerable<AccountData>> GetAll()
+    {
+        return await this.accountData.ToListAsync();
+    }
+    public async Task Update(AccountData user)
+    {
+        this.accountData.Update(user);
+        await this.SaveChangesAsync();
+    }
+    public async Task Delete(string id)
+    {
+        var user = await this.accountData.FindAsync(id);
+        if (user == null)
+            return;
 
-//     public RyvarrDb(DbContextOptions<RyvarrDb> options) : base(options)
-//     {
-//         users = Set<User>();
-//     }
-
-//     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//     {
-//         //db here is pointed to the ip that docker assign to postgre
-//         optionsBuilder.UseNpgsql("Host=db;Port=5432;Database=ryvarrdb;Username=ryan;Password=ryan");
-//     }
-
-//     protected override void OnModelCreating(ModelBuilder modelBuilder)
-//     {
-//         base.OnModelCreating(modelBuilder);
-
-//         modelBuilder.Entity<User>().ToTable("users");
-//         // modelBuilder.Entity<User>().HasKey(u => new { u.id, u.username });
-//         // modelBuilder.UseSerialColumns();
-//         // modelBuilder.UseIdentityColumns();
-//         // modelBuilder.Entity<User>().Property(u => u.id).UseIdentityAlwaysColumn();
-//     }
-
-//     public async Task Add(UserForRegister user)
-//     {
-//         User u = new User(id: 0, username: user.username, email: user.email, password: user.password);
-//         await this.users.AddAsync(u);
-//         await this.SaveChangesAsync();
-//     }
-//     public async Task<User> Get(string id)
-//     {
-//         return await this.users.FindAsync(id);
-//     }
-//     public async Task<User> GetByUsername(string username)
-//     {
-//         return await this.users.FindAsync(username);
-//     }
-//     public async Task<IEnumerable<User>> GetAll()
-//     {
-//         return await this.users.ToListAsync();
-//     }
-//     public async Task Update(User user)
-//     {
-//         this.users.Update(user);
-//         await this.SaveChangesAsync();
-//     }
-//     public async Task Delete(string id)
-//     {
-//         var user = await this.users.FindAsync(id);
-//         if (user == null)
-//             return;
-
-//         this.users.Remove(user);
-//         await this.SaveChangesAsync();
-//     }
-// }
+        this.accountData.Remove(user);
+        await this.SaveChangesAsync();
+    }
+}
