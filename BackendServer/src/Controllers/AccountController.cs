@@ -1,5 +1,6 @@
 using BackendServer.Authentication;
 using BackendServer.DB;
+using BackendServer.DistributedGrains;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
@@ -14,48 +15,25 @@ namespace BackendServer.Controllers;
 [ApiController]
 public class AccountController : ControllerBase
 {
-    private readonly RyvarrDb db;
+    private readonly AccountDataCache accountDataCache;
 
     private readonly UserManager<IdentityUser> userManager;
     private readonly RoleManager<IdentityRole> roleManager;
     private readonly IConfiguration _configuration;
 
-    public AccountController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration, RyvarrDb db)
+    public AccountController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration,
+     RyvarrDb db, IClusterClient clusterClient)
     {
-        this.db = db;
         this.userManager = userManager;
         this.roleManager = roleManager;
         _configuration = configuration;
+        accountDataCache = new AccountDataCache(clusterClient, db);
     }
 
     [HttpPost]
     [Route("login")]
     public async Task<IActionResult> Login([FromBody] LoginModel model)
     {
-        try
-        {
-            // Set AllowSynchronousIO to true
-            HttpContext.Request.EnableBuffering();
-            // Get the request body stream
-            using (StreamReader reader = new StreamReader(Request.Body, Encoding.UTF8))
-            {
-                string requestBody = reader.ReadToEnd();
-
-                // Log the request body to the console
-                Console.WriteLine("Request Body:");
-                Console.WriteLine(requestBody);
-
-                // You can also use a logger here to log the request body
-                // _logger.LogInformation("Request Body: {RequestBody}", requestBody);
-
-                // Process the request and return a response
-            }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex);
-        }
-
         var user = await userManager.FindByEmailAsync(model.Email);
         if (user != null && user.UserName != null && await userManager.CheckPasswordAsync(user, model.Password))
         {
@@ -63,7 +41,7 @@ public class AccountController : ControllerBase
 
             var authClaims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, user.UserName),
+                    new Claim(ClaimTypes.NameIdentifier, user.Id),
                     new Claim(ClaimTypes.DateOfBirth, DateTime.Now.AddDays(7).ToString("dd-MM-yyyy hh:mm:ss")),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 };
@@ -119,9 +97,12 @@ public class AccountController : ControllerBase
         if (!result.Succeeded)
             return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
 
+        // when all ok add to Acountdata with isPro == false
+        await accountDataCache.AddOrUpdate(new DTOs.AccountData(user.Id, user.UserName, false));
         return Ok(new Response { Status = "Success", Message = "User created successfully!" });
     }
 
+    // todo this is not right we need to make login user update to pro when paying
     [HttpPost]
     [Route("register-userpro")]
     public async Task<IActionResult> RegisterUserPro([FromBody] RegisterModel model)
@@ -150,9 +131,9 @@ public class AccountController : ControllerBase
 
     [Authorize]
     [HttpGet]
-    public IActionResult GetAccountData()
+    public async Task<IActionResult> GetAccountData()
     {
-        string? userName = User.FindFirst(ClaimTypes.Name)?.Value;
+        string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value!;
         string expireDateString = User.FindFirst(ClaimTypes.DateOfBirth)?.Value!;
         DateTime expireDate = DateTime.ParseExact(expireDateString, "dd-MM-yyyy hh:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
 
@@ -161,7 +142,8 @@ public class AccountController : ControllerBase
             return StatusCode(StatusCodes.Status401Unauthorized, new Response { Status = "Error", Message = "Your token has been expired !!!" });
         else
             // the date is in the future
-            return Ok(new Response { Status = "Success", Message = $"your username is  {userName}!!! and your token expire in {expireDateString}" });
+            // then get the data
+            return Ok(await accountDataCache.Get(userId));
     }
 
     private async Task _createRoles()

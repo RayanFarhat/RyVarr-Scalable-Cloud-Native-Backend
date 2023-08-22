@@ -10,9 +10,16 @@ public class DB_Auth_Startup
 {
     public static void Init(WebApplicationBuilder builder)
     {
+        string postgreConnectionstring = "Host=localhost;Port=5432;Database=ryvarrdb;Username=ryan;Password=ryan";
+        string? environmentVariableValue = Environment.GetEnvironmentVariable("RUNNING_IN_DOCKER");
+        if (environmentVariableValue == "true")
+        {
+            postgreConnectionstring = "Host=db;Port=5432;Database=ryvarrdb;Username=ryan;Password=ryan";
+        }
+
         // For Entity Framework  
         builder.Services.AddDbContext<RyvarrDb>(options =>
-            options.UseNpgsql("Host=db;Port=5432;Database=ryvarrdb;Username=ryan;Password=ryan"));
+            options.UseNpgsql(postgreConnectionstring));
         // For Identity  
         builder.Services.AddIdentity<IdentityUser, IdentityRole>()
             .AddEntityFrameworkStores<RyvarrDb>().AddDefaultTokenProviders();

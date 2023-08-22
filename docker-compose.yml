@@ -42,6 +42,7 @@ services:
     # only apply in dev mode and test with http://localhost/swagger
     environment:
       ASPNETCORE_ENVIRONMENT: Development
+      RUNNING_IN_DOCKER: true
     ######################################
     depends_on:
       - db

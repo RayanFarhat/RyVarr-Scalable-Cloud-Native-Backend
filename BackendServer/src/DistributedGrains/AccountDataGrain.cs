@@ -2,10 +2,11 @@ using Orleans.Runtime;
 using BackendServer.DTOs;
 namespace BackendServer.DistributedGrains;
 
-public interface IAccountDataGrain : IGrainWithIntegerKey
+public interface IAccountDataGrain : IGrainWithStringKey
 {
     Task Set(AccountData accountData);
     Task<AccountData> Get();
+    Task Clear();
 }
 
 public class AccountDataGrain : Grain, IAccountDataGrain
@@ -26,5 +27,10 @@ public class AccountDataGrain : Grain, IAccountDataGrain
     public Task<AccountData> Get()
     {
         return Task.FromResult(_state.State);
+    }
+
+    public async Task Clear()
+    {
+        await _state.ClearStateAsync();
     }
 }

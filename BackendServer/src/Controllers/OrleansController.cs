@@ -24,6 +24,14 @@ public class HelloController : ControllerBase
         var state = await helloGrain.SetUrl(message);
         return Ok(new Res(await helloGrain.GetUrl(), state, dns));
     }
+    [HttpGet("{id}")]
+    public async Task<IActionResult> Get2(int id)
+    {
+        System.Console.WriteLine("hi");
+        var dns = Dns.GetHostName();
+        var helloGrain = _clusterClient.GetGrain<IHelloGrain>(id); // Use appropriate grain key
+        return Ok(new Res(await helloGrain.GetUrl(), await helloGrain.GetUrl(), dns));
+    }
 }
 public interface IHelloGrain : IGrainWithIntegerKey
 {
@@ -37,8 +45,7 @@ public class HelloGrain : Grain, IHelloGrain
 
     public HelloGrain(
         [PersistentState(
-            stateName: "url",
-            storageName: "urls")]
+            stateName: "url")]
             IPersistentState<UrlDetails> state) => _state = state;
 
     public async Task<string> SetUrl(string fullUrl)
@@ -50,7 +57,7 @@ public class HelloGrain : Grain, IHelloGrain
 
         await _state.WriteStateAsync();
 
-        return Dns.GetHostName();
+        return _state.State.FullUrl;
     }
 
     public Task<string> GetUrl() =>
@@ -58,6 +65,7 @@ public class HelloGrain : Grain, IHelloGrain
 }
 
 [Serializable]
+[GenerateSerializer]
 public record class UrlDetails
 {
     [Id(0)]

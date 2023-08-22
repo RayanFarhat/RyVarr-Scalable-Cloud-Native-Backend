@@ -4,21 +4,29 @@ using System.ComponentModel.DataAnnotations;
 
 
 [Serializable]
+[GenerateSerializer]
 public record AccountData
 {
     [Key]
-    public int Id { get; init; }
+    [Id(0)]
+    public string Id { get; init; } = "";
 
     [Required]
-    public string Username { get; init; }
+    [Id(1)]
+    public string Username { get; init; } = "";
 
     [Required]
-    public bool IsPro { get; init; }
+    [Id(2)]
+    public bool IsPro { get; init; } = false;
 
-    public AccountData(int Id, string Username, bool IsPro)
+    public AccountData(string Id, string Username, bool IsPro)
     {
         this.Id = Id;
         this.Username = Username;
         this.IsPro = IsPro;
+    }
+    // need parameterless constructor for  orleans runtime
+    public AccountData()
+    {
     }
 }

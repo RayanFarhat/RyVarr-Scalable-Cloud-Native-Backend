@@ -6,11 +6,10 @@ using Microsoft.AspNetCore.Identity;
 namespace BackendServer.DB;
 public class RyvarrDb : IdentityDbContext
 {
-    public DbSet<AccountData> accountData { get; set; }
-
+    public DbSet<AccountData> AccountData { get; set; }
     public RyvarrDb(DbContextOptions<RyvarrDb> options) : base(options)
     {
-        accountData = Set<AccountData>();
+        AccountData = Set<AccountData>();
     }
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -40,20 +39,20 @@ public class RyvarrDb : IdentityDbContext
     // }
     public async Task<IEnumerable<AccountData>> GetAll()
     {
-        return await this.accountData.ToListAsync();
+        return await this.AccountData.ToListAsync();
     }
     public async Task Update(AccountData user)
     {
-        this.accountData.Update(user);
+        this.AccountData.Update(user);
         await this.SaveChangesAsync();
     }
     public async Task Delete(string id)
     {
-        var user = await this.accountData.FindAsync(id);
+        var user = await this.AccountData.FindAsync(id);
         if (user == null)
             return;
 
-        this.accountData.Remove(user);
+        this.AccountData.Remove(user);
         await this.SaveChangesAsync();
     }
 }
