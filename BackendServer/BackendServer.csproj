@@ -27,12 +27,14 @@
     <!-- _____________________________________For Identity_________________________________________ -->
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.9" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="7.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.9" />
     <!-- ________________________________________________________________________________________ -->
     <!-- _____________________________________For Orleans_________________________________________ -->
     <PackageReference Include="Microsoft.Orleans.Server" Version="7.2.1" />
     <PackageReference Include="Orleans.Clustering.Redis" Version="7.0.0" />
+    <!-- ________________________________________________________________________________________ -->
+        <!-- _____________________________________For paypal_________________________________________ -->
+    <PackageReference Include="PayPal" Version="1.9.1" />
     <!-- ________________________________________________________________________________________ -->
   </ItemGroup>
 
