@@ -29,7 +29,7 @@ public class AccountDataCache
             _db.AccountData.Add(entity);
         else
             _db.AccountData.Update(entity);
-        _db.SaveChanges();
+        await _db.SaveChangesAsync();
     }
     public async Task<AccountData?> Get(string UserId)
     {

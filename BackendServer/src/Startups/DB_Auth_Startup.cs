@@ -19,7 +19,7 @@ public class DB_Auth_Startup
 
         // For Entity Framework  
         builder.Services.AddDbContext<RyvarrDb>(options =>
-            options.UseNpgsql(postgreConnectionstring));
+            options.UseNpgsql(postgreConnectionstring), ServiceLifetime.Singleton);
         // For Identity  
         builder.Services.AddIdentity<IdentityUser, IdentityRole>()
             .AddEntityFrameworkStores<RyvarrDb>().AddDefaultTokenProviders();

@@ -9,15 +9,15 @@ public record AccountData
 {
     [Key]
     [Id(0)]
-    public string Id { get; init; } = "";
+    public string Id { get; set; } = "";
 
     [Required]
     [Id(1)]
-    public string Username { get; init; } = "";
+    public string Username { get; set; } = "";
 
     [Required]
     [Id(2)]
-    public bool IsPro { get; init; } = false;
+    public bool IsPro { get; set; } = false;
 
     public AccountData(string Id, string Username, bool IsPro)
     {
