@@ -1,6 +1,7 @@
 using Orleans.Runtime;
 using BackendServer.DTOs;
 using BackendServer.DB;
+using Microsoft.EntityFrameworkCore;
 
 namespace BackendServer.DistributedGrains;
 
@@ -28,7 +29,11 @@ public class AccountDataCache
         if (row == null)
             _db.AccountData.Add(entity);
         else
+        {
+            _db.Entry(row).State = EntityState.Detached;
             _db.AccountData.Update(entity);
+        }
+
         await _db.SaveChangesAsync();
     }
     public async Task<AccountData?> Get(string UserId)

@@ -1,9 +1,11 @@
 using System.Drawing.Text;
 using System.Security.Claims;
+using BackendServer.Authentication;
 using BackendServer.DB;
 using BackendServer.DistributedGrains;
 using BackendServer.DTOs;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PayPal.Api;
@@ -17,13 +19,15 @@ public class PaymentController : ControllerBase
 {
     private APIContext _apiContext;
     private readonly RyvarrDb _db;
+    private readonly UserManager<IdentityUser> userManager;
     private readonly AccountDataCache accountDataCache;
 
 
-    public PaymentController(RyvarrDb db, IClusterClient clusterClient)
+    public PaymentController(RyvarrDb db, IClusterClient clusterClient, UserManager<IdentityUser> userManager)
     {
         accountDataCache = new AccountDataCache(clusterClient, db);
         _db = db;
+        this.userManager = userManager;
         // Set up API context with sandbox credentials
         var clientId = "AQVwEIKS5RtVs9KT8CzUZTyPr9SEmOptrqetrJidhXxWeuY5h2UJNw5gR1QdV1VaPxvzYtTIOdMPRc1T";
         var clientSecret = "EG-X_Ri5AyuI3GEt7Qu3-ZvD7IvUECODBxOZVOzMOWqGkD8MUC7AtXjrKzPPqwS-XfNGQwG6ztURJ5I7";
@@ -43,8 +47,8 @@ public class PaymentController : ControllerBase
         var row = await accountDataCache.Get(userId);
         if (row == null)
             return NotFound("Cannot find your user data");
-        if (row.IsPro == true)
-            return BadRequest("you are already a pro user");
+        // if (row.IsPro == true)
+        //     return BadRequest("you are already a pro user");
         // Create payment details
         var payment = new Payment
         {
@@ -81,9 +85,7 @@ public class PaymentController : ControllerBase
         var paymentExecution = new PaymentExecution { payer_id = PayerID };
         var payment = new Payment { id = paymentId };
 
-        var row = await accountDataCache.Get(userId);
-        if (row == null)
-            return "Cannot find your user data";
+
 
         // Execute payment to complete the transaction
         var executedPayment = payment.Execute(_apiContext, paymentExecution);
@@ -92,9 +94,15 @@ public class PaymentController : ControllerBase
         // Payment was successful
         if (executedPayment.state == "approved")
         {
+            var row = await accountDataCache.Get(userId);
+            if (row == null)
+                return "Cannot find your user data";
             // make the user pro
             row.IsPro = true;
             await accountDataCache.AddOrUpdate(row);
+            //make his role as userPro
+            await AddRoleUserPro(userId);
+
             return "Your payment has succeeded! please return to RyVarr app";
         }
         // Payment was not successful
@@ -103,5 +111,11 @@ public class PaymentController : ControllerBase
             // Handle accordingly
             return "Your payment has failed! please return to RyVarr app";
         }
+    }
+    private async Task AddRoleUserPro(string userId)
+    {
+        var user = await userManager.FindByIdAsync(userId);
+        await userManager.AddToRoleAsync(user!, UserRoles.UserPro);
+        await userManager.RemoveFromRoleAsync(user!, UserRoles.User);
     }
 }

@@ -82,7 +82,7 @@ public class AccountController : ControllerBase
         if (userExists != null)
             return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Email already exists!" });
 
-        IdentityUser user = new IdentityUser()
+        var user = new IdentityUser()
         {
             Email = model.Email,
             SecurityStamp = Guid.NewGuid().ToString(),
@@ -90,7 +90,7 @@ public class AccountController : ControllerBase
         };
         var result = await userManager.CreateAsync(user, model.Password);
 
-        await _createRoles();
+        await CreateRoles();
         //add the user role as User
         await userManager.AddToRoleAsync(user, UserRoles.User);
 
@@ -111,7 +111,7 @@ public class AccountController : ControllerBase
         if (userExists != null)
             return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
 
-        IdentityUser user = new IdentityUser()
+        var user = new IdentityUser()
         {
             Email = model.Email,
             SecurityStamp = Guid.NewGuid().ToString(),
@@ -121,7 +121,7 @@ public class AccountController : ControllerBase
         if (!result.Succeeded)
             return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
 
-        await _createRoles();
+        await CreateRoles();
         //add the user role as UserPro
         await userManager.AddToRoleAsync(user, UserRoles.UserPro);
 
@@ -146,7 +146,7 @@ public class AccountController : ControllerBase
             return Ok(await accountDataCache.Get(userId));
     }
 
-    private async Task _createRoles()
+    private async Task CreateRoles()
     {
         // create roles if they are not exist
         if (!await roleManager.RoleExistsAsync(UserRoles.UserPro))
