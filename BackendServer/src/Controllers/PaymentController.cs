@@ -17,8 +17,7 @@ namespace BackendServer.Controllers;
 [ApiController]
 public class PaymentController : ControllerBase
 {
-    private APIContext _apiContext;
-    private readonly RyvarrDb _db;
+    private readonly APIContext _apiContext;
     private readonly UserManager<IdentityUser> userManager;
     private readonly AccountDataCache accountDataCache;
 
@@ -26,14 +25,15 @@ public class PaymentController : ControllerBase
     public PaymentController(RyvarrDb db, IClusterClient clusterClient, UserManager<IdentityUser> userManager)
     {
         accountDataCache = new AccountDataCache(clusterClient, db);
-        _db = db;
         this.userManager = userManager;
         // Set up API context with sandbox credentials
         var clientId = "AQVwEIKS5RtVs9KT8CzUZTyPr9SEmOptrqetrJidhXxWeuY5h2UJNw5gR1QdV1VaPxvzYtTIOdMPRc1T";
         var clientSecret = "EG-X_Ri5AyuI3GEt7Qu3-ZvD7IvUECODBxOZVOzMOWqGkD8MUC7AtXjrKzPPqwS-XfNGQwG6ztURJ5I7";
 
-        var payPalConfig = new Dictionary<string, string>();
-        payPalConfig.Add("mode", "sandbox");
+        var payPalConfig = new Dictionary<string, string>
+        {
+            { "mode", "sandbox" }
+        };
         OAuthTokenCredential tokenCredential = new(clientId, clientSecret, payPalConfig);
         string accessToken = tokenCredential.GetAccessToken();
         _apiContext = new APIContext(accessToken);
