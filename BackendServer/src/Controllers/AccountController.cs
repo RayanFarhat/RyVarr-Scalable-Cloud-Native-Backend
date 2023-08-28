@@ -102,33 +102,6 @@ public class AccountController : ControllerBase
         return Ok(new Response { Status = "Success", Message = "User created successfully!" });
     }
 
-    // todo this is not right we need to make login user update to pro when paying
-    [HttpPost]
-    [Route("register-userpro")]
-    public async Task<IActionResult> RegisterUserPro([FromBody] RegisterModel model)
-    {
-        var userExists = await userManager.FindByNameAsync(model.Username);
-        if (userExists != null)
-            return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User already exists!" });
-
-        var user = new IdentityUser()
-        {
-            Email = model.Email,
-            SecurityStamp = Guid.NewGuid().ToString(),
-            UserName = model.Username
-        };
-        var result = await userManager.CreateAsync(user, model.Password);
-        if (!result.Succeeded)
-            return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
-
-        await CreateRoles();
-        //add the user role as UserPro
-        await userManager.AddToRoleAsync(user, UserRoles.UserPro);
-
-
-        return Ok(new Response { Status = "Success", Message = "User created successfully!" });
-    }
-
     [Authorize]
     [HttpGet]
     public async Task<IActionResult> GetAccountData()

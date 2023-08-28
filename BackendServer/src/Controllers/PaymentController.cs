@@ -65,7 +65,7 @@ public class PaymentController : ControllerBase
             redirect_urls = new RedirectUrls
             {
                 return_url = $"http://localhost/api/Payment/return/{userId}",
-                cancel_url = "http://yourwebsite.com/cancel"
+                cancel_url = "localhost/api/Payment/cancel"
             }
         };
 
@@ -112,6 +112,11 @@ public class PaymentController : ControllerBase
             return "Your payment has failed! please return to RyVarr app";
         }
     }
+    [AllowAnonymous]
+    [HttpGet]
+    [Route("cancel")]
+    public string PayPalCancelAsync()
+    { return "Your payment has been canceled! please return to RyVarr app"; }
     private async Task AddRoleUserPro(string userId)
     {
         var user = await userManager.FindByIdAsync(userId);
