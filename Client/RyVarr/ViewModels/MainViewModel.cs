@@ -46,8 +46,6 @@ public partial class MainViewModel : ViewModelBase
     public UserViewModel _userModel = new UserViewModel();
     [ObservableProperty]
     public ProjectsViewModel _projectsModel = new ProjectsViewModel();
-    [ObservableProperty]
-    public PaymentViewModel _paymentModel = new PaymentViewModel();
 
 
     // Ctrl-C to msg string

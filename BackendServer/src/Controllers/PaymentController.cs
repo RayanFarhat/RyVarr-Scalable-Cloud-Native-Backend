@@ -65,7 +65,7 @@ public class PaymentController : ControllerBase
             redirect_urls = new RedirectUrls
             {
                 return_url = $"http://localhost/api/Payment/return/{userId}",
-                cancel_url = "localhost/api/Payment/cancel"
+                cancel_url = "http://localhost/api/Payment/cancel"
             }
         };
 

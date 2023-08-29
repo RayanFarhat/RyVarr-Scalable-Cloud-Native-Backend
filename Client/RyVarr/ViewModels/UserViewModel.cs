@@ -23,6 +23,8 @@ public partial class UserViewModel : ViewModelBase
 
     [ObservableProperty]
     public LoginRegisterViewModel _form = new LoginRegisterViewModel();
+    [ObservableProperty]
+    public PaymentViewModel _paymentModel = new PaymentViewModel();
 
     [RelayCommand]
     private void SwitchBetweenRegisters()
