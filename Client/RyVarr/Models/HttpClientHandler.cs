@@ -64,7 +64,9 @@ public class HttpClientHandler
     }
 }
 
-public record RegisterErrorsList(IReadOnlyList<string> Email, IReadOnlyList<string> Password);
+public record RegisterErrorsList(IReadOnlyList<string> Username, IReadOnlyList<string> Email, IReadOnlyList<string> Password);
+public record LoginErrorsList( IReadOnlyList<string> Email, IReadOnlyList<string> Password);
+
 
 public interface IReq { }
 public record RegisterReq(string username, string email, string password):IReq;
@@ -75,7 +77,7 @@ public record RegisterRes400(string type, string title, int status, string trace
 public record RegisterRes200(string status,string message): IRes;
 
 public record LoginRes200(string token, DateTime expiration): IRes;
-public record LoginRes400(string type, string title, int status, string traceId, RegisterErrorsList errors) : IRes;
+public record LoginRes400(string type, string title, int status, string traceId, LoginErrorsList errors) : IRes;
 public record LoginRes401(string type,string title, int status,string traceId): IRes;
 
-public record AccountRes200(string status, string message) : IRes;
+public record AccountRes200(string id, string username,bool isPro) : IRes;

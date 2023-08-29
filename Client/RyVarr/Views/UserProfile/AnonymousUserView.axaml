@@ -2,7 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="650"
 			 xmlns:c="clr-namespace:RyVarr.Views.TemplatedControls"
              x:Class="RyVarr.Views.UserProfile.AnonymousUserView"
 			 xmlns:vm="clr-namespace:RyVarr.ViewModels"
@@ -22,29 +22,45 @@
 	<Design.DataContext>
 		<vm:MainViewModel/>
 	</Design.DataContext>
-		<Grid  Width="300" Height="500">
+
+	<ScrollViewer Height="500">
+		<Grid  Width="300" >
 			<StackPanel IsVisible="{Binding !UserModel.IsSigninWindow}">
 			<Label HorizontalAlignment="Center"
 				   Foreground="{DynamicResource red1}">YOU ARE NOT REGISTERED</Label>
+				
 			<StackPanel>
 				<c:InputControl LabelName="UserName"
 					InputText="{Binding UserModel.Form.UserNameRegister, Mode=TwoWay}"/>
+				<c:ErrorListControl ErrorMessages="{Binding UserModel.Form.ErrorsUserNameRegister}"/>
+				
 				<c:InputControl LabelName="Email"
 					InputText="{Binding UserModel.Form.EmailRegister, Mode=TwoWay}"/>
+				<c:ErrorListControl ErrorMessages="{Binding UserModel.Form.ErrorsEmailRegister}"/>
+
 				<c:InputControl LabelName="Password" Classes="password"
 					InputText="{Binding UserModel.Form.PasswordRegister, Mode=TwoWay}"/>
+				<c:ErrorListControl ErrorMessages="{Binding UserModel.Form.ErrorsPasswordRegister}"/>
 			</StackPanel>
-			
-			<c:ErrorListControl ErrorMessages="{Binding UserModel.Form.ErrorsRegister}"/>
-			
-			<Button Opacity="0.6"
+				<c:ErrorListControl ErrorMessages="{Binding UserModel.Form.ErrorsRegister}"/>
+
+				<Button Opacity="0.6"
 				Command="{Binding UserModel.SwitchBetweenRegistersCommand}">
 				SignIn?
 			</Button>
 			<Button HorizontalAlignment="Right"
+					IsVisible="{Binding !UserModel.OnRegisterSuccess}"
 				Command="{Binding UserModel.onRegisterCommand}">
 				SIGN UP
 			</Button>
+				<Label HorizontalAlignment="Center" IsVisible="{Binding UserModel.OnRegisterSuccess}"
+					 FontSize="15"  Foreground="{DynamicResource green1}">
+					YOU REGISTERED SUCCESSFULLY
+				</Label>
+				<Label HorizontalAlignment="Center" IsVisible="{Binding UserModel.OnRegisterSuccess}"
+					 Foreground="{DynamicResource green1}">
+					Please go to signIn
+				</Label>
 		</StackPanel>
 		
 		<StackPanel IsVisible="{Binding UserModel.IsSigninWindow}">
@@ -66,4 +82,5 @@
 			</Button>
 		</StackPanel>
 	</Grid>
+	</ScrollViewer>
 </UserControl>

@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -18,6 +19,9 @@ public partial class UserViewModel : ViewModelBase
     private bool _isSigninWindow = true;
 
     [ObservableProperty]
+    private bool _onRegisterSuccess = false;
+
+    [ObservableProperty]
     public LoginRegisterViewModel _form = new LoginRegisterViewModel();
 
     [RelayCommand]
@@ -30,11 +34,74 @@ public partial class UserViewModel : ViewModelBase
     [RelayCommand]
     private async Task onRegister()
     {
-        await onLogin();
+        RegisterReq req = new RegisterReq(Form.UserNameRegister, Form.EmailRegister, Form.PasswordRegister);
         HttpClientHandler clientHandler = new HttpClientHandler();
+        var res = await clientHandler.Req<RegisterReq>("/api/Account/register", "POST", req);
+        if (res == null)
+        {
+            Form.ErrorsRegister.Clear();
+            Form.ErrorsRegister.Add("Somthing wrong with the register response!");
+            return;
+        }
+        if (res.IsSuccessStatusCode)
+        {
+            RegisterRes200? res200 = await clientHandler.Deserialize<RegisterRes200>(res);
+            Form.ErrorsUserNameRegister.Clear();
+            Form.ErrorsEmailRegister.Clear();
+            Form.ErrorsPasswordRegister.Clear();
+            Form.ErrorsRegister.Clear();
+            if (res200 == null)
+            {
+                Form.ErrorsRegister.Add("Somthing wrong with Deserialize RegisterRes200");
+                return;
+            }
+            // show thing that tell that the registerations is done
+            OnRegisterSuccess = true;
+            await Task.Delay(10000);
+            OnRegisterSuccess = false;
+        }
+        else if (res.StatusCode == System.Net.HttpStatusCode.BadRequest)
+        {
+            RegisterRes400? res400 = await clientHandler.Deserialize<RegisterRes400>(res);
+            if (res400 == null)
+            {
+                Form.ErrorsUserNameRegister.Clear();
+                Form.ErrorsEmailRegister.Clear();
+                Form.ErrorsPasswordRegister.Clear();
+                Form.ErrorsRegister.Clear();
+                Form.ErrorsRegister.Add("Somthing wrong with Deserialize RegisterRes400");
+                return;
+            }
+            if (res400.errors != null) {
+                Form.ErrorsRegister.Clear();
 
-        
+                if (res400.errors.Username != null)
+                    Form.ErrorsUserNameRegister = new ObservableCollection<string>(res400.errors.Username.ToList());
+                if (res400.errors.Email != null)
+                    Form.ErrorsEmailRegister = new ObservableCollection<string>(res400.errors.Email.ToList());
+                if (res400.errors.Password != null)
+                    Form.ErrorsPasswordRegister = new ObservableCollection<string>(res400.errors.Password.ToList());
+            }
+            else {
+                Form.ErrorsUserNameRegister.Clear();
+                Form.ErrorsEmailRegister.Clear();
+                Form.ErrorsPasswordRegister.Clear();
+                Form.ErrorsRegister.Clear();
+                Form.ErrorsRegister.Add("res400.errors == null");
+                return;
+            }
+        }
+        else
+        {
+            Form.ErrorsUserNameRegister.Clear();
+            Form.ErrorsEmailRegister.Clear();
+            Form.ErrorsPasswordRegister.Clear();
+            Form.ErrorsRegister.Clear();
+            Form.ErrorsRegister.Add($"Got the status {res.StatusCode}");
+            return;
+        }
     }
+
 
     [RelayCommand]
     private async Task onLogin()
@@ -90,22 +157,31 @@ public partial class UserViewModel : ViewModelBase
     private async Task _getUserDataReq()
     {
         HttpClientHandler clientHandler = new HttpClientHandler();
-        var res = await clientHandler.Req<IReq>("/Account", "GET", null);
+        Form.ErrorsLogin.Add($"Got the token {HttpClientHandler.AuthToken}");
+        var res = await clientHandler.Req<IReq>("/api/Account", "GET", null);
         if (res == null)
         {
-            Form.ErrorsLogin.Clear();
+            //Form.ErrorsLogin.Clear();
             Form.ErrorsLogin.Add("Somthing wrong with getting acount data!");
             return;
         }
-        // get user data
-        AccountRes200? accountRes200 = await clientHandler.Deserialize<AccountRes200>(res);
-        if (accountRes200 == null)
+        if (res.IsSuccessStatusCode)
         {
-            Form.ErrorsLogin.Clear();
-            Form.ErrorsLogin.Add("Somthing wrong with Deserialize AccountRes200");
-            return;
+            // get user data
+            var accountRes200 = await clientHandler.Deserialize<AccountRes200>(res);
+            if (accountRes200 == null)
+            {
+                // Form.ErrorsLogin.Clear();
+                Form.ErrorsLogin.Add("Somthing wrong with Deserialize AccountRes200");
+                return;
+            }
+            IsLogin = true;
+            UserName = accountRes200.username;
         }
-        IsLogin = true;
-        UserName = accountRes200.message;
+        else
+        {
+            Form.ErrorsLogin.Add($"Got the status {res.StatusCode}");
+        }
+
     }
 }
