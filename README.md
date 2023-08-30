@@ -21,7 +21,7 @@ This is the main repo for RyVarr company project.
 - [ ] Adding HamzaCAD service page.
 - [ ] Adding profile page to allow user edit there account info.
 ### HamzaCAD
-- [ ] Making the UI instead of CLI inside AutoCAD.
+- [ ] Making HamzaCAD addon work in UI instead of CLI inside AutoCAD.
 - [ ] Analyzing user architecture as an input and sending it to the server.
 - [ ] Allowing access only by pro users by providing there token id.
 - [ ] Making the server handle calculations logic and sending the final drawing to the client.
