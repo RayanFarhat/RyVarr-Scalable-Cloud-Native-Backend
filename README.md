@@ -17,7 +17,7 @@ This is the main repo for RyVarr company project.
 - [X] Make the frontend work on Windows, Mac, Linux, Android, IOS and Web.
 - [X] Adding main page as my portfolio .
 - [X] Handling user authentication and authorization API.
-- [ ] Handling Payment API.
+- [X] Handling Payment API.
 - [ ] Adding HamzaCAD service page.
 - [ ] Adding profile page to allow user edit there account info.
 ### HamzaCAD
