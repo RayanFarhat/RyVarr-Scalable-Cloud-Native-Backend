@@ -17,7 +17,7 @@
 				  VerticalAlignment="Center" Text="{TemplateBinding Text}"/>
 			  <c:IconBtnControl Src="/Assets/svg/copy.png" Size="30"
 				  Command="{Binding CopyButton_OnClickCommand}"
-				  CommandParameter="{TemplateBinding Text}"/>
+				  CommandParameter="{TemplateBinding TextToCopy}"/>
 		  </StackPanel>
       </ControlTemplate>
     </Setter>

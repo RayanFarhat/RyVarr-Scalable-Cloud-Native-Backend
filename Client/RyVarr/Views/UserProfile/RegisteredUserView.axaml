@@ -2,9 +2,57 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="550"
+			 xmlns:c="clr-namespace:RyVarr.Views.TemplatedControls"
              x:Class="RyVarr.Views.UserProfile.RegisteredUserView"
 			 xmlns:vm="clr-namespace:RyVarr.ViewModels"
 			 x:DataType="vm:MainViewModel">
-	<TextBlock Text="{Binding UserModel.UserName}"/>
+
+	<Design.DataContext>
+		<vm:MainViewModel/>
+	</Design.DataContext>
+	<UserControl.Styles>
+		<Style Selector="StackPanel.main">
+			<Setter Property="Margin" Value="10"/>
+		</Style>
+		<StyleInclude Source="/Views/TemplatedControls/TemplatedControlsStyles.axaml"/>
+	</UserControl.Styles>
+	
+	<ScrollViewer Height="500">
+		<Grid  Width="300" >
+			<StackPanel Classes="main">
+				<TextBlock Text="{Binding UserModel.UserName,
+						   StringFormat= '\{0\} Profile'}"
+						   Foreground="{DynamicResource green1}"
+						   HorizontalAlignment="Center"
+						   FontWeight="Bold"
+						   FontSize="18"/>
+				<TextBlock Text="Pro User"
+						   IsVisible="{Binding UserModel.PaymentModel.IsPro}"
+						   Foreground="{DynamicResource green1}"
+						   HorizontalAlignment="Center"/>
+				
+				<StackPanel IsVisible="{Binding !UserModel.PaymentModel.IsPro}">
+					<TextBlock Foreground="{DynamicResource red2}"
+						   Text="________________________________________"
+						   HorizontalAlignment="Center"/>
+					
+					<TextBlock Text="You don't have Pro subscribtion!" 
+							   Foreground="{DynamicResource red1}"/>
+					<c:TextBtnControl 
+						Command="{Binding UserModel.PaymentModel.GetPaymentLinkCommand}"
+						Text="Press to get the link for subscription"
+						HorizontalAlignment="Center"/>
+					<c:CopyableTextControl IsVisible="{Binding UserModel.PaymentModel.ShowLink}"
+						Text="Copy Link"
+						TextToCopy="{Binding UserModel.PaymentModel.PaymentLink}"
+					HorizontalAlignment="Center"/>
+					
+					<TextBlock Foreground="{DynamicResource red2}"
+					    Text="________________________________________"
+						HorizontalAlignment="Center"/>
+				</StackPanel>
+			</StackPanel>
+	</Grid>
+	</ScrollViewer>
 </UserControl>

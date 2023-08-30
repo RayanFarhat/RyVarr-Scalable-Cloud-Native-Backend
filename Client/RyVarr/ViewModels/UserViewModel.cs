@@ -22,7 +22,8 @@ public partial class UserViewModel : ViewModelBase
     private bool _onRegisterSuccess = false;
 
     [ObservableProperty]
-    public LoginRegisterViewModel _form = new LoginRegisterViewModel();
+    private LoginRegisterViewModel _form = new LoginRegisterViewModel();
+
     [ObservableProperty]
     public PaymentViewModel _paymentModel = new PaymentViewModel();
 
@@ -163,7 +164,7 @@ public partial class UserViewModel : ViewModelBase
         var res = await clientHandler.Req<IReq>("/api/Account", "GET", null);
         if (res == null)
         {
-            //Form.ErrorsLogin.Clear();
+            Form.ErrorsLogin.Clear();
             Form.ErrorsLogin.Add("Somthing wrong with getting acount data!");
             return;
         }
@@ -173,12 +174,13 @@ public partial class UserViewModel : ViewModelBase
             var accountRes200 = await clientHandler.Deserialize<AccountRes200>(res);
             if (accountRes200 == null)
             {
-                // Form.ErrorsLogin.Clear();
+                Form.ErrorsLogin.Clear();
                 Form.ErrorsLogin.Add("Somthing wrong with Deserialize AccountRes200");
                 return;
             }
             IsLogin = true;
             UserName = accountRes200.username;
+            PaymentModel.IsPro = accountRes200.isPro;
         }
         else
         {
