@@ -17,9 +17,11 @@ public partial class MainViewModel : ViewModelBase
     [ObservableProperty]
     private bool _mainPageIsOpen = true;
 
+
     [RelayCommand]
     private void OpenMainPage()
     {
+        ServicesPageIsOpen = false;
         MainPageIsOpen = true;
         ProjectPageIsOpen = false;
     }
@@ -30,8 +32,20 @@ public partial class MainViewModel : ViewModelBase
     [RelayCommand]
     private void OpenProjectPage()
     {
+        ServicesPageIsOpen = false;
         MainPageIsOpen = false;
         ProjectPageIsOpen = true;
+    }
+
+    [ObservableProperty]
+    private bool _servicesPageIsOpen = false;
+
+    [RelayCommand]
+    private void OpenServicesPage()
+    {
+        ServicesPageIsOpen = true;
+        MainPageIsOpen = false;
+        ProjectPageIsOpen = false;
     }
 
     [ObservableProperty]

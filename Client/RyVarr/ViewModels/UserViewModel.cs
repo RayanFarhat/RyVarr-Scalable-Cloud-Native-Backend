@@ -13,6 +13,8 @@ public partial class UserViewModel : ViewModelBase
     [ObservableProperty]
     private string _userName = "User";
     [ObservableProperty]
+    private string _tokenId = "";
+    [ObservableProperty]
     private bool _isLogin = false;
 
     [ObservableProperty]
@@ -160,7 +162,6 @@ public partial class UserViewModel : ViewModelBase
     private async Task _getUserDataReq()
     {
         HttpClientHandler clientHandler = new HttpClientHandler();
-        Form.ErrorsLogin.Add($"Got the token {HttpClientHandler.AuthToken}");
         var res = await clientHandler.Req<IReq>("/api/Account", "GET", null);
         if (res == null)
         {
@@ -181,6 +182,7 @@ public partial class UserViewModel : ViewModelBase
             IsLogin = true;
             UserName = accountRes200.username;
             PaymentModel.IsPro = accountRes200.isPro;
+            TokenId = HttpClientHandler.AuthToken;
         }
         else
         {

@@ -7,6 +7,7 @@
 			 xmlns:vmain="clr-namespace:RyVarr.Views.MainPage"
 			 xmlns:vuser="clr-namespace:RyVarr.Views.UserProfile"
 			 xmlns:vproj="clr-namespace:RyVarr.Views.ProjectManager"
+			 xmlns:vserv="clr-namespace:RyVarr.Views.ServicesPage"
 			 xmlns:c="clr-namespace:RyVarr.Views.TemplatedControls"
              mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="850"
              x:Class="RyVarr.Views.MainView"
@@ -31,8 +32,6 @@
 				<vmain:RyVarrAnimatedView Grid.RowSpan="3" ZIndex="-1"/>
 			</Grid>
 
-			<vuser:MainUserPopupView/>
-
 			<StackPanel IsVisible="{Binding ProjectPageIsOpen}">
 				<v:NavBarView />
 				<TextBlock Margin="20,50,20,0" IsVisible="{Binding !UserModel.IsLogin}"
@@ -43,6 +42,14 @@
 				</TextBlock>
 				<vproj:ProjectPageView IsVisible="{Binding !UserModel.IsLogin}"/>
 			</StackPanel>
+
+			<StackPanel IsVisible="{Binding ServicesPageIsOpen}">
+				<v:NavBarView />
+				<vserv:ServicesPage/>
+			</StackPanel>
+
+			<vuser:MainUserPopupView/>
+
 		</Grid>
 	</ScrollViewer>
 

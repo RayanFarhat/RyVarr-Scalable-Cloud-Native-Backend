@@ -30,10 +30,10 @@
 	</UserControl.Styles>
 
 	<Border Background="{DynamicResource green1}" VerticalAlignment="Top" HorizontalAlignment="Left"
-			Grid.RowSpan="3" ZIndex="1" Classes="popup"
+			Grid.RowSpan="3" ZIndex="3" Classes="popup"
 			Classes.isopen="{Binding UserPageIsOpen}" Padding="2">
 		<ScrollViewer>
-		<StackPanel Background="Black">
+		<StackPanel Background="Black" ZIndex="3">
 			<vuser:AnonymousUserView Margin="0,10" IsVisible="{Binding !UserModel.IsLogin}" />
 			<vuser:RegisteredUserView IsVisible="{Binding UserModel.IsLogin}" />
 		</StackPanel>
