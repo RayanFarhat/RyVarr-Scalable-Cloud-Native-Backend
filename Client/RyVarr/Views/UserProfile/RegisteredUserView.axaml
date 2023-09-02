@@ -52,9 +52,9 @@
 					    Text="________________________________________"
 						HorizontalAlignment="Center"/>
 				</StackPanel>
-				<c:CopyableTextControl IsVisible="{Binding UserModel.TokenId}"
+				<c:CopyableTextControl
 						Text="Copy TokenID"
-						TextToCopy="{Binding UserModel.PaymentModel.PaymentLink}"
+						TextToCopy="{Binding UserModel.TokenId}"
 					HorizontalAlignment="Center"/>
 			</StackPanel>
 	</Grid>
