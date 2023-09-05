@@ -110,6 +110,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BarsComputation\BarsComputer.cs" />
+    <Compile Include="BarsComputation\Rotator.cs" />
+    <Compile Include="BarsComputation\Utils.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="FirstBtn.cs" />
     <Compile Include="MenuManager.cs" />

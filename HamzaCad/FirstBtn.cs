@@ -7,6 +7,7 @@ using Autodesk.AutoCAD.EditorInput;
 using Autodesk.Windows;
 using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.DatabaseServices;
+using HamzaCad.BarsComputation;
 using Autodesk.AutoCAD.Geometry;
 using System.Xml.Linq;
 
@@ -31,6 +32,7 @@ namespace HamzaCad
 
                 Document doc = Application.DocumentManager.MdiActiveDocument;
                 Editor ed = doc.Editor;
+                BarsComputer.ed = ed;
                 Database acCurDb = doc.Database;
 
                 doc.LockDocument();
@@ -65,15 +67,13 @@ namespace HamzaCad
                             {
                                 // now every time we parse selected polyline here to read its data
                                 Polyline p = trans.GetObject(sObj.ObjectId, OpenMode.ForRead) as Polyline;
-                                int numVertices = p.NumberOfVertices;
-                                for (int i = 0; i < numVertices; i++)
+
+                                List<Polyline> bars = BarsComputer.getBars(p);
+                                foreach (Polyline bar in bars)
                                 {
-                                    Point2d vertex = p.GetPoint2dAt(i);
-                                    ed.WriteMessage($"\nVertex {i + 1}: X={vertex.X}, Y={vertex.Y}");
+                                    acBlkTblRec.AppendEntity(bar);
+                                    trans.AddNewlyCreatedDBObject(bar, true);
                                 }
-                                Line l = new Line(new Point3d(0,0,0),new Point3d(p.GetPoint2dAt(0).X, p.GetPoint2dAt(0).Y,0));
-                                acBlkTblRec.AppendEntity(l);
-                                trans.AddNewlyCreatedDBObject(l, true);
                             }
                         }
                         else
