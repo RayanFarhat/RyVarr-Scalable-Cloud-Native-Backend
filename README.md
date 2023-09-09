@@ -13,6 +13,7 @@ This is the main repo for RyVarr company project.
 - [ ] Adding and managing users login using google OAuth 2.0 instead of my user managing system.
 - [ ] Working with HamzaCAD service to allow only Pro users to use it.
 - [ ] Allow Users to read/change/delete there account.(rename email,username, or delete there entire account).
+- [ ] Add Signalr/Orleans realtime api to how the server work so the client read it and visualizate it.
 ### Frontend
 - [X] Make the frontend work on Windows, Mac, Linux, Android, IOS and Web.
 - [X] Adding main page as my portfolio .
@@ -20,6 +21,7 @@ This is the main repo for RyVarr company project.
 - [X] Handling Payment API.
 - [ ] Adding HamzaCAD service page.
 - [ ] Adding profile page to allow user edit there account info.
+- [ ] Add Realtime visualization to how the server handle the the requests and responses with Signalr Client.
 ### HamzaCAD
 - [ ] Making HamzaCAD addon work in UI instead of CLI inside AutoCAD.
 - [ ] Analyzing user architecture as an input and sending it to the server.
