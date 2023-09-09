@@ -121,11 +121,11 @@
 					<TextBlock>Azure</TextBlock>
 				</StackPanel>
 			</Border>
-			<Border IsVisible="False">
+			<Border IsVisible="True">
 				<StackPanel Classes="skill">
-					<Label>CAD Plugins</Label>
+					<Label>CAD/BIM Plugins</Label>
 					<Image Source="/Assets/skills/cad.png"/>
-					<TextBlock>AutoCAD API</TextBlock>
+					<TextBlock>AutoCAD/Revit API</TextBlock>
 				</StackPanel>
 			</Border>
 			<Border IsVisible="True">
