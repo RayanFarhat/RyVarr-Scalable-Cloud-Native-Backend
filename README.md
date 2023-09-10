@@ -23,6 +23,7 @@ this project keeps private but i show how the backend work with realtime visuali
 - [ ] Adding HamzaCAD service page.
 - [ ] Adding profile page to allow user edit there account info.
 - [ ] Add Realtime visualization to how the server handle the the requests and responses with Signalr Client.
+- [ ] add sqlite to save localdata(even on webassembly).
 ### HamzaCAD
 - [ ] Making HamzaCAD addon work in UI instead of CLI inside AutoCAD.
 - [ ] Analyzing user architecture as an input and sending it to the server.
