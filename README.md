@@ -15,7 +15,6 @@ this project keeps private but i show how the backend work with realtime visuali
 - [ ] Working with HamzaCAD service to allow only Pro users to use it.
 - [ ] Allow Users to read/change/delete there account.(rename email,username, or delete there entire account).
 - [ ] Add Signalr/Orleans realtime api to how the server work so the client read it and visualizate it.
-- [ ] Add api for RyPrimal game.
 ### Frontend
 - [X] Make the frontend work on Windows, Mac, Linux, Android, IOS and Web.
 - [X] Adding main page as my portfolio .
@@ -29,8 +28,3 @@ this project keeps private but i show how the backend work with realtime visuali
 - [ ] Analyzing user architecture as an input and sending it to the server.
 - [ ] Allowing access only by pro users by providing there token id.
 - [ ] Making the server handle calculations logic and sending the final drawing to the client.
-### RyPrimal
-imagine the game realtime multiplayer, but instead of realtime we do time based that the player can move or shoot with object or multiple objects every 5 secs so not turnbased and not expensive.
-- [ ] Make login with ryvarr account
-- [ ] join room from match making service in the backend.
-- [ ] visualizate game.
