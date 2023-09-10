@@ -14,7 +14,7 @@ this project keeps private but i show how the backend work with realtime visuali
 - [ ] Adding and managing users login using google OAuth 2.0 instead of my user managing system.
 - [ ] Working with HamzaCAD service to allow only Pro users to use it.
 - [ ] Allow Users to read/change/delete there account.(rename email,username, or delete there entire account).
-- [ ] Add Signalr/Orleans realtime api to how the server work so the client read it and visualizate it.
+- [ ] Add Signalr/Orleans realtime api to how the server work so the client read it and visualizate it, and scale it with build in redis support.
 ### Frontend
 - [X] Make the frontend work on Windows, Mac, Linux, Android, IOS and Web.
 - [X] Adding main page as my portfolio .
