@@ -1,6 +1,11 @@
 # RyVarr
-This is the main repo for RyVarr company project.
-this project keeps private but i show how the backend work with realtime visualization. so now i can show off my projects Commercial projects without afraid of stealing it.
+This is the main repo for RyVarr project.
+This project is fullstack (backend oriented) that handle user identity and payment with Paypal. And once the user has paid the subscribtion, He can use Autocad Plugin library called hamzacad that only allow paid users use it. while the main page of the frontend is also a portfolio for the developer of this project.
+## Backend Architecture:
+
+## Frontwnd photos:
+![image](https://github.com/RayanFarhat/RyVarr/assets/100049997/d244ca80-c4a2-431b-8dfe-bceb8d1b0ac8)
+![image](https://github.com/RayanFarhat/RyVarr/assets/100049997/2d477ecf-c5df-4199-8524-53fdb9b26480)
 
 ## Features
 ### Backend
