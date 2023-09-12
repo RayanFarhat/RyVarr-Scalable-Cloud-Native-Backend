@@ -36,3 +36,15 @@ The frontend client is build with AvaloniaUI(WPF like framework) that make my fr
 - [ ] Analyzing user architecture as an input and sending it to the server.
 - [ ] Allowing access only by pro users by providing there token id.
 - [ ] Making the server handle calculations logic and sending the final drawing to the client.
+
+## Frontend photos
+![image](https://github.com/RayanFarhat/RyVarr/assets/100049997/f19d29ff-7770-4d4b-912f-2ecaa27b60d1)
+![image](https://github.com/RayanFarhat/RyVarr/assets/100049997/4e46a156-ffa0-46a9-a9c6-966ee08236bb)
+![image](https://github.com/RayanFarhat/RyVarr/assets/100049997/c5592ecc-17f8-4b97-a5fc-329c0f21fa30)
+![image](https://github.com/RayanFarhat/RyVarr/assets/100049997/2bedb91e-2ded-4f4b-b999-933dceb4e8fa)
+copy subscription link and pay with paypal
+![image](https://github.com/RayanFarhat/RyVarr/assets/100049997/def0b81b-8505-4ca3-a208-3e1429d7197d)
+
+
+
+
