@@ -20,6 +20,7 @@ The frontend client is build with AvaloniaUI(WPF like framework) that make my fr
 - [X] Adding subscription with payment using Paypal API and make the user as Pro User.
 - [ ] Adding and managing users login using google OAuth 2.0 instead of my user managing system.
 - [ ] Working with HamzaCAD service to allow only Pro users to use it.
+- [ ] Remove Pro subscribtion when month pass.
 - [ ] Allow Users to read/change/delete there account.(rename email,username, or delete there entire account).
 - [ ] Add Signalr/Orleans realtime api to how the server work so the client read it and visualizate it, and scale it with build in redis support.
 ### Frontend
