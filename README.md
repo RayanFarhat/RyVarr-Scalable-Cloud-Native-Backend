@@ -18,6 +18,7 @@ The frontend client is build with AvaloniaUI(WPF like framework) that make my fr
 - [X] Making the backend cloud native and can be scaled and distributed, so it works on monolithic or microservices architecture the same way.
 - [X] Caching the most used data from database by spreading them across the distributed containers.
 - [X] Adding subscription with payment using Paypal API and make the user as Pro User.
+- [ ] Make subscription option for month or year.
 - [ ] Adding and managing users login using google OAuth 2.0 instead of my user managing system.
 - [ ] Working with HamzaCAD service to allow only Pro users to use it.
 - [ ] Remove Pro subscribtion when month pass.
