@@ -9,7 +9,7 @@ networks:
 
 services:
   client:
-      build: ./Client
+      build: ./ClientAvalonia
       networks:
         - server-network
   # important: not exposing ports so the server only listen to docker containers in his network
