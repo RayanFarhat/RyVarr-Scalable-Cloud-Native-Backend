@@ -111,10 +111,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BarsComputation\BarsComputer.cs" />
+    <Compile Include="BarsComputation\MergeSortVerticalLine.cs" />
     <Compile Include="BarsComputation\PointInsidePolygoncs.cs" />
     <Compile Include="BarsComputation\Rotator.cs" />
     <Compile Include="BarsComputation\Utils.cs" />
     <Compile Include="BarsComputation\VerticalBars.cs" />
+    <Compile Include="BarsComputation\VerticalBars_FindIntersectVerticalLine.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="FirstBtn.cs" />
     <Compile Include="MenuManager.cs" />

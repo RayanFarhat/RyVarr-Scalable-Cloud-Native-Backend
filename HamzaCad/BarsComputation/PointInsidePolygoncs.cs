@@ -3,18 +3,18 @@ using System.Collections.Generic;
 
 namespace HamzaCad.BarsComputation
 {
-    internal class PointInsidePolygoncs
+    public class PointInsidePolygoncs
     {
-        static int onLine(Line2D l1, Point2D p)
+        static bool onLine(Line2D l1, Point2D p)
         {
             // Check whether p is on the line or not
             if (p.X <= Math.Max(l1.StartPoint.X, l1.EndPoint.X)
                 && p.X >= Math.Min(l1.StartPoint.X, l1.EndPoint.X)
                 && (p.Y <= Math.Max(l1.StartPoint.Y, l1.EndPoint.Y)
                     && p.Y >= Math.Min(l1.StartPoint.Y, l1.EndPoint.Y)))
-                return 1;
+                return true;
 
-            return 0;
+            return false;
         }
 
         static int direction(Point2D a, Point2D b, Point2D c)
@@ -49,30 +49,30 @@ namespace HamzaCad.BarsComputation
                 return 1;
 
             // When p2 of line2 are on the line1
-            if (dir1 == 0 && onLine(l1, l2.StartPoint) == 1)
+            if (dir1 == 0 && onLine(l1, l2.StartPoint))
                 return 1;
 
             // When p1 of line2 are on the line1
-            if (dir2 == 0 && onLine(l1, l2.EndPoint) == 1)
+            if (dir2 == 0 && onLine(l1, l2.EndPoint))
                 return 1;
 
             // When p2 of line1 are on the line2
-            if (dir3 == 0 && onLine(l2, l1.StartPoint) == 1)
+            if (dir3 == 0 && onLine(l2, l1.StartPoint))
                 return 1;
 
             // When p1 of line1 are on the line2
-            if (dir4 == 0 && onLine(l2, l1.EndPoint) == 1)
+            if (dir4 == 0 && onLine(l2, l1.EndPoint))
                 return 1;
 
             return 0;
         }
 
-        public static int checkInside(List<Point2D> poly, int n, Point2D p)
+        public static bool checkInside(List<Point2D> poly, int n, Point2D p)
         {
 
             // When polygon has less than 3 edge, it is not polygon
             if (n < 3)
-                return 0;
+                return false;
 
             // Create a point at infinity, y is same as point p
             Point2D pt = new Point2D(999999.0, p.Y);
@@ -96,8 +96,10 @@ namespace HamzaCad.BarsComputation
                 i = (i + 1) % n;
             } while (i != 0);
 
+            // When count is even
+            if ((count & 1) == 0) return false;
             // When count is odd
-            return count & 1;
+            return true;
         }
     }
 }

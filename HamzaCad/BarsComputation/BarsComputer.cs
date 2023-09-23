@@ -45,6 +45,8 @@ namespace HamzaCad.BarsComputation
             }
             bars.Add(polyline);
             ////////////////////
+            ///
+            List<Polyline> v = VerticalBars.getVerticalBars(vertices);
             return bars;
         }
     }
