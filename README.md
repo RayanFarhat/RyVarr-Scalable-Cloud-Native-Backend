@@ -23,7 +23,6 @@ The frontend client is build with AvaloniaUI(WPF like framework) that make my fr
 - [ ] Working with HamzaCAD service to allow only Pro users to use it.
 - [ ] Remove Pro subscribtion when month pass.
 - [ ] Allow Users to read/change/delete there account.(rename email,username, or delete there entire account).
-- [ ] Add Signalr/Orleans realtime api to how the server work so the client read it and visualizate it, and scale it with build in redis support.
 ### Frontend
 - [X] Make the frontend work on Windows, Mac, Linux, Android, IOS and Web.
 - [X] Adding main page as my portfolio .
@@ -31,8 +30,6 @@ The frontend client is build with AvaloniaUI(WPF like framework) that make my fr
 - [X] Handling Payment API.
 - [ ] Adding HamzaCAD service page.
 - [ ] Adding profile page to allow user edit there account info.
-- [ ] Add Realtime visualization to how the server handle the the requests and responses with Signalr Client.
-- [ ] add sqlite to save localdata(even on webassembly).
 ### HamzaCAD
 - [ ] Making HamzaCAD addon work in UI instead of CLI inside AutoCAD.
 - [ ] Analyzing user architecture as an input and sending it to the server.
