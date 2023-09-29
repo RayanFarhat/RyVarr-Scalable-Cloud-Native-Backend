@@ -43,12 +43,17 @@ public class AccountDataCache
         var value = await grain.Get();
         if (value.Id == "")
         {
-            AccountData? row = _db.AccountData.Where(row => row.Id == UserId).FirstOrDefault();
-            if (row == null)
+            value = _db.AccountData.Where(row => row.Id == UserId).FirstOrDefault();
+            if (value == null)
                 return null;
 
-            await grain.Set(row);
-            return row;
+            await grain.Set(value);
+        }
+
+        if (NeedToCancelPro(value))
+        {
+            value.IsPro = false;
+            await AddOrUpdate(value);
         }
         return value;
     }
@@ -62,5 +67,15 @@ public class AccountDataCache
         _db.AccountData.Remove(row);
         _db.SaveChanges();
         return true;
+    }
+
+    private bool NeedToCancelPro(AccountData entity)
+    {
+        DateTime d = DateTime.ParseExact(entity.ProEndingDate, "dd-MM-yyyy hh:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+        if (d < DateTime.Now && entity.IsPro == true)
+        {
+            return true;
+        }
+        return false;
     }
 }

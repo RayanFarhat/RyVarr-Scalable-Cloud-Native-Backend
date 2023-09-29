@@ -55,4 +55,6 @@ public class RyvarrDb : IdentityDbContext
         this.AccountData.Remove(user);
         await this.SaveChangesAsync();
     }
+
+
 }

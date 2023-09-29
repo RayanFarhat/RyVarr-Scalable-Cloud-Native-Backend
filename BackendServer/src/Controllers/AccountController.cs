@@ -98,7 +98,7 @@ public class AccountController : ControllerBase
             return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User creation failed! Please check user details and try again." });
 
         // when all ok add to Acountdata with isPro == false
-        await accountDataCache.AddOrUpdate(new DTOs.AccountData(user.Id, user.UserName, false));
+        await accountDataCache.AddOrUpdate(new DTOs.AccountData(user.Id, user.UserName, false, DateTime.Now.AddDays(-1).ToString("dd-MM-yyyy hh:mm:ss")));
         return Ok(new Response { Status = "Success", Message = "User created successfully!" });
     }
 

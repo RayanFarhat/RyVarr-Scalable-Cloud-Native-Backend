@@ -19,7 +19,7 @@ public class AccountDataGrain : Grain, IAccountDataGrain
 
     public async Task Set(AccountData accountData)
     {
-        _state.State = new AccountData(accountData.Id, accountData.Username, accountData.IsPro);
+        _state.State = new AccountData(accountData.Id, accountData.Username, accountData.IsPro, accountData.ProEndingDate);
 
         await _state.WriteStateAsync();
     }

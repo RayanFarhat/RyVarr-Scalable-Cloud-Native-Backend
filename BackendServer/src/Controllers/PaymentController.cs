@@ -41,7 +41,55 @@ public class PaymentController : ControllerBase
 
     [Authorize]
     [HttpGet]
-    public async Task<IActionResult> PayPalLinkAsync()
+    [Route("Month")]
+    public async Task<IActionResult> PayPalLinkMonth()
+    {
+        return await PayPalLinkShared("returnMonth", "5.00");
+    }
+
+    [Authorize]
+    [HttpGet]
+    [Route("Year")]
+    public async Task<IActionResult> PayPalLinkYear()
+    {
+        return await PayPalLinkShared("returnYear", "50.00");
+    }
+
+    [AllowAnonymous]
+    [HttpGet]
+    [Route("returnMonth/{userId}")]
+    public async Task<string> PayPalReturnMonth([FromRoute] string userId, [FromQuery] string paymentId,
+        [FromQuery] string token, [FromQuery] string PayerID)
+    {
+        return await PayPalReturnShared(userId, paymentId, PayerID, 1);
+    }
+
+
+    [AllowAnonymous]
+    [HttpGet]
+    [Route("returnYear/{userId}")]
+    public async Task<string> PayPalReturnYear([FromRoute] string userId, [FromQuery] string paymentId,
+        [FromQuery] string token, [FromQuery] string PayerID)
+    {
+        return await PayPalReturnShared(userId, paymentId, PayerID, 12);
+    }
+
+
+    [AllowAnonymous]
+    [HttpGet]
+    [Route("cancel")]
+    public string PayPalCancelAsync()
+    { return "Your payment has been canceled! please return to RyVarr app"; }
+
+
+    private async Task AddRoleUserPro(string userId)
+    {
+        var user = await userManager.FindByIdAsync(userId);
+        await userManager.AddToRoleAsync(user!, UserRoles.UserPro);
+        await userManager.RemoveFromRoleAsync(user!, UserRoles.User);
+    }
+
+    private async Task<IActionResult> PayPalLinkShared(string ReturnUrl, string Price)
     {
         string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value!;
         var row = await accountDataCache.Get(userId);
@@ -58,13 +106,13 @@ public class PaymentController : ControllerBase
              {
             new Transaction
             {
-                amount = new Amount { currency = "USD", total = "1.00" },
+                amount = new Amount { currency = "USD", total = Price },
                 description = "RyVarr Pro Subscribtion"
             }
              },
             redirect_urls = new RedirectUrls
             {
-                return_url = $"http://localhost/api/Payment/return/{userId}",
+                return_url = $"http://localhost/api/Payment/{ReturnUrl}/{userId}",
                 cancel_url = "http://localhost/api/Payment/cancel"
             }
         };
@@ -75,11 +123,7 @@ public class PaymentController : ControllerBase
         return Ok(approvalUrl);
     }
 
-    [AllowAnonymous]
-    [HttpGet]
-    [Route("return/{userId}")]
-    public async Task<string> PayPalReturnAsync([FromRoute] string userId, [FromQuery] string paymentId,
-    [FromQuery] string token, [FromQuery] string PayerID)
+    private async Task<string> PayPalReturnShared(string userId, string paymentId, string PayerID, int months)
     {
         // Use paymentId, token, and payerId to execute payment
         var paymentExecution = new PaymentExecution { payer_id = PayerID };
@@ -97,8 +141,19 @@ public class PaymentController : ControllerBase
             var row = await accountDataCache.Get(userId);
             if (row == null)
                 return "Cannot find your user data";
-            // make the user pro
-            row.IsPro = true;
+            // make the user pro and date until sub expired
+            if (row.IsPro == false)
+            {
+                row.IsPro = true;
+                row.ProEndingDate = DateTime.Now.AddMonths(months).ToString("dd-MM-yyyy hh:mm:ss");
+            }
+            //if user already pro
+            else
+            {
+                row.ProEndingDate = DateTime.ParseExact(row.ProEndingDate, "dd-MM-yyyy hh:mm:ss", System.Globalization.CultureInfo.InvariantCulture)
+                    .AddMonths(months).ToString("dd-MM-yyyy hh:mm:ss");
+            }
+
             await accountDataCache.AddOrUpdate(row);
             //make his role as userPro
             await AddRoleUserPro(userId);
@@ -111,16 +166,5 @@ public class PaymentController : ControllerBase
             // Handle accordingly
             return "Your payment has failed! please return to RyVarr app";
         }
-    }
-    [AllowAnonymous]
-    [HttpGet]
-    [Route("cancel")]
-    public string PayPalCancelAsync()
-    { return "Your payment has been canceled! please return to RyVarr app"; }
-    private async Task AddRoleUserPro(string userId)
-    {
-        var user = await userManager.FindByIdAsync(userId);
-        await userManager.AddToRoleAsync(user!, UserRoles.UserPro);
-        await userManager.RemoveFromRoleAsync(user!, UserRoles.User);
     }
 }

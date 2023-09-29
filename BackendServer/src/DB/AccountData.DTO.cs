@@ -19,11 +19,17 @@ public record AccountData
     [Id(2)]
     public bool IsPro { get; set; } = false;
 
-    public AccountData(string Id, string Username, bool IsPro)
+    [Required]
+    [Id(3)]
+    //dd-MM-yyyy hh:mm:ss
+    public string ProEndingDate { get; set; } = "";
+
+    public AccountData(string Id, string Username, bool IsPro, string ProEndingDate)
     {
         this.Id = Id;
         this.Username = Username;
         this.IsPro = IsPro;
+        this.ProEndingDate = ProEndingDate;
     }
     // need parameterless constructor for  orleans runtime
     public AccountData()

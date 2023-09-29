@@ -8,11 +8,11 @@ networks:
 
 
 services:
-  client:
-      build: ./ClientAvalonia
-      networks:
-        - server-network
-  # important: not exposing ports so the server only listen to docker containers in his network
+  # client:
+  #     build: ./ClientAvalonia
+  #     networks:
+  #       - server-network
+  # # important: not exposing ports so the server only listen to docker containers in his network
   nginx:
     build: ./nginx
     ports:
