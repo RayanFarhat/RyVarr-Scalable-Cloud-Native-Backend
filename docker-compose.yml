@@ -44,6 +44,7 @@ services:
       ASPNETCORE_ENVIRONMENT: Development
       RUNNING_IN_DOCKER: true
     ######################################
+    #scale: 5
     depends_on:
       - db
     networks:
