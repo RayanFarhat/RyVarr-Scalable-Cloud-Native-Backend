@@ -23,6 +23,7 @@ The frontend client is build with AvaloniaUI(WPF like framework) that make my fr
 - [ ] Working with HamzaCAD service to allow only Pro users to use it.
 - [ ] Prevent sharing accounts with SignalR.
 - [ ] Allow Users to read/change/delete there account.(rename email,username, or delete there entire account).
+- [ ] Setup continuous deployment to VPS.
 ### Frontend
 - [X] Make the frontend work on Windows, Mac, Linux, Android, IOS and Web.
 - [X] Adding main page as my portfolio .
