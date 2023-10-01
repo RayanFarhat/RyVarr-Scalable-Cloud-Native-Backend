@@ -24,7 +24,7 @@ public class PaymentController : ControllerBase
 
     public PaymentController(RyvarrDb db, IClusterClient clusterClient, UserManager<IdentityUser> userManager)
     {
-        accountDataCache = new AccountDataCache(clusterClient, db);
+        accountDataCache = new AccountDataCache(clusterClient, db, userManager);
         this.userManager = userManager;
         // Set up API context with sandbox credentials
         var clientId = "AQVwEIKS5RtVs9KT8CzUZTyPr9SEmOptrqetrJidhXxWeuY5h2UJNw5gR1QdV1VaPxvzYtTIOdMPRc1T";
@@ -88,6 +88,7 @@ public class PaymentController : ControllerBase
         await userManager.AddToRoleAsync(user!, UserRoles.UserPro);
         await userManager.RemoveFromRoleAsync(user!, UserRoles.User);
     }
+
 
     private async Task<IActionResult> PayPalLinkShared(string ReturnUrl, string Price)
     {

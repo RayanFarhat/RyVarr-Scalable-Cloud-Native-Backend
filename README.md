@@ -19,7 +19,7 @@ The frontend client is build with AvaloniaUI(WPF like framework) that make my fr
 - [X] Caching the most used data from database by spreading them across the distributed containers.
 - [X] Adding subscription with payment using Paypal API and make the user as Pro User.
 - [X] Make subscription option for month or year, And enables the extension of the subscription period in cases where the user is already a pro member.
-- [X] Terminate the Pro subscription once the subscription period has elapsed.
+- [X] Terminate the Pro subscription once the subscription period has elapsed, Including reset the role of the user.
 - [ ] Working with HamzaCAD service to allow only Pro users to use it.
 - [ ] Prevent sharing accounts with SignalR.
 - [ ] Allow Users to read/change/delete there account.(rename email,username, or delete there entire account).

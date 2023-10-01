@@ -23,7 +23,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
-app.MapHub<HamzaCADHub>("api/myhub");
+app.MapHub<HamzaCADHub>("api/hamzacadhub");
 //zeros so he does not have ip and docker assign him one
 app.Run("http://0.0.0.0:9090");
 //app.Run("http://localhost:9090");

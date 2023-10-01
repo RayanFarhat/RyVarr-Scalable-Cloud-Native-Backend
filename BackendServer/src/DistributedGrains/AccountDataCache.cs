@@ -2,6 +2,8 @@ using Orleans.Runtime;
 using BackendServer.DTOs;
 using BackendServer.DB;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using BackendServer.Authentication;
 
 namespace BackendServer.DistributedGrains;
 
@@ -9,11 +11,13 @@ public class AccountDataCache
 {
     private readonly IClusterClient _clusterClient;
     private readonly RyvarrDb _db;
+    private readonly UserManager<IdentityUser> _userManager;
 
-    public AccountDataCache(IClusterClient clusterClient, RyvarrDb db)
+    public AccountDataCache(IClusterClient clusterClient, RyvarrDb db, UserManager<IdentityUser> userManager)
     {
         _db = db;
         _clusterClient = clusterClient;
+        _userManager = userManager;
     }
 
     // use write-through
@@ -54,6 +58,8 @@ public class AccountDataCache
         {
             value.IsPro = false;
             await AddOrUpdate(value);
+            //also change role
+            await RemoveRoleUserPro(value.Id);
         }
         return value;
     }
@@ -69,7 +75,7 @@ public class AccountDataCache
         return true;
     }
 
-    private bool NeedToCancelPro(AccountData entity)
+    private static bool NeedToCancelPro(AccountData entity)
     {
         DateTime d = DateTime.ParseExact(entity.ProEndingDate, "dd-MM-yyyy hh:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
         if (d < DateTime.Now && entity.IsPro == true)
@@ -77,5 +83,11 @@ public class AccountDataCache
             return true;
         }
         return false;
+    }
+    private async Task RemoveRoleUserPro(string userId)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+        await _userManager.RemoveFromRoleAsync(user!, UserRoles.UserPro);
+        await _userManager.AddToRoleAsync(user!, UserRoles.User);
     }
 }

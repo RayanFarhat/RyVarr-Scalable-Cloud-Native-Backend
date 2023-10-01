@@ -27,7 +27,7 @@ public class AccountController : ControllerBase
         this.userManager = userManager;
         this.roleManager = roleManager;
         _configuration = configuration;
-        accountDataCache = new AccountDataCache(clusterClient, db);
+        accountDataCache = new AccountDataCache(clusterClient, db, userManager);
     }
 
     [HttpPost]
