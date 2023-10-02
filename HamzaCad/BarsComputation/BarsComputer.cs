@@ -15,7 +15,7 @@ namespace HamzaCad.BarsComputation
         public static Editor ed;
         public static List<Polyline> bars;
 
-        public static List<Polyline> getBars(Polyline shape)
+        public static List<DrawingBar> getBars(Polyline shape)
         {
             bars = new List<Polyline>();
             List<Point2D> vertices = new List<Point2D>();
@@ -44,10 +44,9 @@ namespace HamzaCad.BarsComputation
                 polyline.AddVertexAt(i, new Point2d(vertices[i].X, vertices[i].Y), 0, 0, 0);
             }
             bars.Add(polyline);
+            bars.Clear();
             ////////////////////
-            ///
-            List<Polyline> v = VerticalBars.getVerticalBars(vertices);
-            return bars;
+            return VerticalBars.getVerticalBars(vertices);
         }
     }
 }

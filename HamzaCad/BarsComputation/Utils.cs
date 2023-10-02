@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Autodesk.AutoCAD.DatabaseServices;
+
 
 namespace HamzaCad.BarsComputation
 {
@@ -26,6 +23,33 @@ namespace HamzaCad.BarsComputation
         {
             StartPoint = startPoint;
             EndPoint = endPoint;
+        }
+    }
+    public class DrawingBar
+    {
+        public Polyline Polygon { get; set; }
+        public DBText Text { get; set; }
+
+        public DrawingBar(Polyline Polygon, DBText text)
+        {
+            this.Polygon = Polygon;
+            this.Text = text;
+        }
+    }
+
+    public class Rectangle
+    {
+        public double Yupper { get; set; }
+        public double Ylower { get; set; }
+        public double Xleft { get; set; }
+        public double Xright { get; set; }
+
+        public Rectangle(double yu, double yl,double xl,double xr)
+        {
+            Yupper = yu;
+            Ylower = yl;
+            Xleft = xl;
+            Xright = xr;
         }
     }
 }

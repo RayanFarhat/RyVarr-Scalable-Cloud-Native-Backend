@@ -22,7 +22,6 @@ namespace HamzaCad.BarsComputation
                 upperPoint = new Point2D(l.StartPoint.X, l.StartPoint.Y);
                 lowerPoint = new Point2D(l.EndPoint.X, l.EndPoint.Y);
             }
-
             Line2D lowestLineUpportPoint = getLowestLineUpportPoint(vertices, Hlines, upperPoint);
             Line2D highestLineLowerPoint = getHighestLineLowerPoint(vertices, Hlines, lowerPoint);
 
@@ -87,19 +86,30 @@ namespace HamzaCad.BarsComputation
             //           |
             //___________*lowerPoint
             //      outside poly
-            return new Line2D(upperPoint, lowerPoint); ;
+            return new Line2D(upperPoint, lowerPoint);
         }
         private static Line2D getLowestLineUpportPoint(List<Point2D> poly, List<Line2D> horizontalLines, Point2D upperPoint)
         {
             // check  horizontal line that is on the top of the upper point
-            double Y = horizontalLines[0].StartPoint.Y;
+            double? Y = null;
             Line2D chosenLine = null;
             for (int i = 0; i < horizontalLines.Count; i++)
             {
-                if (upperPoint.Y < horizontalLines[i].StartPoint.Y && Y > horizontalLines[i].StartPoint.Y)
+                if (Y == null)
                 {
-                    Y = horizontalLines[i].StartPoint.Y;
-                    chosenLine = horizontalLines[i];
+                    if (upperPoint.Y < horizontalLines[i].StartPoint.Y)
+                    {
+                        Y = horizontalLines[i].StartPoint.Y;
+                        chosenLine = horizontalLines[i];
+                    }
+                }
+                else
+                {
+                    if (upperPoint.Y < horizontalLines[i].StartPoint.Y && Y > horizontalLines[i].StartPoint.Y)
+                    {
+                        Y = horizontalLines[i].StartPoint.Y;
+                        chosenLine = horizontalLines[i];
+                    }
                 }
             }
             // check if the line between this line and upper point is inside or outside the polygon
@@ -107,36 +117,54 @@ namespace HamzaCad.BarsComputation
             //    P
             // upperPoint
             // p is in middle
-            Point2D p = new Point2D(upperPoint.X, (Y + upperPoint.Y) / 2);
-            if (PointInsidePolygoncs.checkInside(poly, poly.Count, p))
+            if (Y != null)
             {
-                return chosenLine;
+                Point2D p = new Point2D(upperPoint.X, ((double)Y + upperPoint.Y) / 2);
+                if (PointInsidePolygoncs.checkInside(poly, poly.Count, p))
+                {
+                    return chosenLine;
+                }
             }
             return null;
         }
         private static Line2D getHighestLineLowerPoint(List<Point2D> poly, List<Line2D> horizontalLines, Point2D lowerPoint)
         {
-            // check  horizontal line that is on the top of the upper point
-            double Y = horizontalLines[0].StartPoint.Y;
+            // check  horizontal line that is on the lower of the upper point
+            double? Y = null;
             Line2D chosenLine = null;
             for (int i = 0; i < horizontalLines.Count; i++)
             {
-                if (lowerPoint.Y > horizontalLines[i].StartPoint.Y && Y < horizontalLines[i].StartPoint.Y)
+                if (Y == null)
                 {
-                    Y = horizontalLines[i].StartPoint.Y;
-                    chosenLine = horizontalLines[i];
+                    if (lowerPoint.Y > horizontalLines[i].StartPoint.Y)
+                    {
+                        Y = horizontalLines[i].StartPoint.Y;
+                        chosenLine = horizontalLines[i];
+                    }
                 }
+                else
+                {
+                    if (lowerPoint.Y > horizontalLines[i].StartPoint.Y && Y < horizontalLines[i].StartPoint.Y)
+                    {
+                        Y = horizontalLines[i].StartPoint.Y;
+                        chosenLine = horizontalLines[i];
+                    }
+                }
+                
             }
             // check if the line between this line and upper point is inside or outside the polygon
             // lowerPoint
             //    P
             // _______________
             // p is in middle
-            Point2D p = new Point2D(lowerPoint.X, (Y + lowerPoint.Y) / 2);
-            if (PointInsidePolygoncs.checkInside(poly, poly.Count, p))
-            {
-                return chosenLine;
+            if (Y != null) {
+                Point2D p = new Point2D(lowerPoint.X, ((double)Y + lowerPoint.Y) / 2);
+                if (PointInsidePolygoncs.checkInside(poly, poly.Count, p))
+                {
+                    return chosenLine;
+                }
             }
+
             return null;
         }
     }

@@ -68,11 +68,13 @@ namespace HamzaCad
                                 // now every time we parse selected polyline here to read its data
                                 Polyline p = trans.GetObject(sObj.ObjectId, OpenMode.ForRead) as Polyline;
 
-                                List<Polyline> bars = BarsComputer.getBars(p);
-                                foreach (Polyline bar in bars)
+                                List<DrawingBar> bars = BarsComputer.getBars(p);
+                                foreach (DrawingBar bar in bars)
                                 {
-                                    acBlkTblRec.AppendEntity(bar);
-                                    trans.AddNewlyCreatedDBObject(bar, true);
+                                    acBlkTblRec.AppendEntity(bar.Polygon);
+                                    trans.AddNewlyCreatedDBObject(bar.Polygon, true);
+                                    acBlkTblRec.AppendEntity(bar.Text);
+                                    trans.AddNewlyCreatedDBObject(bar.Text, true);
                                 }
                             }
                         }
