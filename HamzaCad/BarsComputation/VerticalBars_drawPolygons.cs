@@ -9,6 +9,16 @@ namespace HamzaCad.BarsComputation
     {
         private static List<DrawingBar> DrawingPolygons(List<Rectangle> rectangles)
         {
+            for (int i = 0; i < rectangles.Count; i++)
+            {
+                BarsComputer.ed.WriteMessage("____________________________\n");
+
+                BarsComputer.ed.WriteMessage("top y " + rectangles[i].Yupper +"\n");
+                BarsComputer.ed.WriteMessage("down y " + rectangles[i].Ylower + "\n");
+                BarsComputer.ed.WriteMessage("left y " + rectangles[i].Xleft + "\n");
+                BarsComputer.ed.WriteMessage("right y " + rectangles[i].Xright + "\n");
+
+            }
             List<DrawingBar> verticalBars = new List<DrawingBar>();
             for (int i = 0; i < rectangles.Count; i++)
             {
@@ -16,8 +26,8 @@ namespace HamzaCad.BarsComputation
                 var top = rectangles[i].Yupper - BarsComputer.BarSpacing;
                 var down = rectangles[i].Ylower + BarsComputer.BarSpacing;
                 DBText dbText = new DBText();
-                dbText.TextString = "12";
-                dbText.Position = new Point3d(x, (top+down)/2, 0.0);
+                dbText.TextString = ((rectangles[i].Xright -rectangles[i].Xleft) /BarsComputer.BarSpacing).ToString("0");
+                dbText.Position = new Point3d(x+ (BarsComputer.BarSpacing/5), (top+down)/2, 0.0);
                 dbText.Height = 12.0;
                 verticalBars.Add(new DrawingBar(getBarpolyline(top,down,x), dbText));
             }
@@ -42,12 +52,6 @@ namespace HamzaCad.BarsComputation
             polyline.AddVertexAt(4, new Point2d(x - BarsComputer.BarSpacing, top - (BarsComputer.BarSpacing / 3)), 0, 0, 0);
             polyline.AddVertexAt(5, new Point2d(x - BarsComputer.BarSpacing, top ), 0, 0, 0);
             polyline.AddVertexAt(6, new Point2d(x, top), 0, 0, 0);
-            for (int i = 0; i < 7; i++)
-            {
-                Point2d vertex = polyline.GetPoint2dAt(i);
-                BarsComputer.ed.WriteMessage(" y "+ vertex.Y+ " x "+ vertex.X+ "\n");
-            }
-            BarsComputer.ed.WriteMessage("__________________________________\n");
             return polyline;
         }
     }
