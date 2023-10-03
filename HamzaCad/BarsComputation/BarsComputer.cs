@@ -14,6 +14,7 @@ namespace HamzaCad.BarsComputation
     {
         public static Editor ed;
         public static List<Polyline> bars;
+        public static double BarSpacing = 30.0;
 
         public static List<DrawingBar> getBars(Polyline shape)
         {
@@ -44,9 +45,15 @@ namespace HamzaCad.BarsComputation
                 polyline.AddVertexAt(i, new Point2d(vertices[i].X, vertices[i].Y), 0, 0, 0);
             }
             bars.Add(polyline);
-            bars.Clear();
+            //bars.Clear();
             ////////////////////
             return VerticalBars.getVerticalBars(vertices);
+            var x = new List<DrawingBar>();
+            for (int i = 0; i < bars.Count; i++)
+            {
+                x.Add(new DrawingBar(bars[i], new DBText()));
+            }
+            return x;
         }
     }
 }

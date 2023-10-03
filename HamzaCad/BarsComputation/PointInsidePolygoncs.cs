@@ -7,11 +7,17 @@ namespace HamzaCad.BarsComputation
     {
         static bool onLine(Line2D l1, Point2D p)
         {
+            var maxX = Math.Max(l1.StartPoint.X, l1.EndPoint.X);
+            var minX = Math.Min(l1.StartPoint.X, l1.EndPoint.X);
+            var maxY = Math.Max(l1.StartPoint.Y, l1.EndPoint.Y);
+            var minY = Math.Min(l1.StartPoint.Y, l1.EndPoint.Y);
             // Check whether p is on the line or not
-            if (p.X <= Math.Max(l1.StartPoint.X, l1.EndPoint.X)
-                && p.X >= Math.Min(l1.StartPoint.X, l1.EndPoint.X)
-                && (p.Y <= Math.Max(l1.StartPoint.Y, l1.EndPoint.Y)
-                    && p.Y >= Math.Min(l1.StartPoint.Y, l1.EndPoint.Y)))
+            if ((p.X < maxX || Math.Abs(p.X - maxX) < 0.0001)
+                && (p.X > minX || Math.Abs(p.X - minX) < 0.0001)
+                && (
+                (p.Y < maxY || Math.Abs(p.Y - maxY) < 0.0001)
+                    && (p.Y > minY || Math.Abs(p.Y - minY) < 0.0001)
+                    ))
                 return true;
 
             return false;
@@ -22,10 +28,10 @@ namespace HamzaCad.BarsComputation
             double val = (b.Y - a.Y) * (c.X - b.X)
               - (b.X - a.X) * (c.Y - b.Y);
 
-            if (val == 0)
-
-                // Collinear
-                return 0;
+            //if (val == 0)
+            if (Math.Abs(val) < 0.0001)
+                    // Collinear
+                    return 0;
 
             else if (val < 0)
 

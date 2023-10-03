@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Autodesk.AutoCAD.GraphicsInterface;
 
 namespace HamzaCad.BarsComputation
 {
@@ -95,9 +96,12 @@ namespace HamzaCad.BarsComputation
             Line2D chosenLine = null;
             for (int i = 0; i < horizontalLines.Count; i++)
             {
+                // if line is not intersect the x of the line then ignore
+                if (!isPointXbetweenHorizontalLine(horizontalLines[i], upperPoint))
+                    continue;
                 if (Y == null)
                 {
-                    if (upperPoint.Y < horizontalLines[i].StartPoint.Y)
+                    if (upperPoint.Y < horizontalLines[i].StartPoint.Y && !isEqual(upperPoint.Y, horizontalLines[i].StartPoint.Y))
                     {
                         Y = horizontalLines[i].StartPoint.Y;
                         chosenLine = horizontalLines[i];
@@ -105,7 +109,8 @@ namespace HamzaCad.BarsComputation
                 }
                 else
                 {
-                    if (upperPoint.Y < horizontalLines[i].StartPoint.Y && Y > horizontalLines[i].StartPoint.Y)
+                    if (upperPoint.Y < horizontalLines[i].StartPoint.Y && Y > horizontalLines[i].StartPoint.Y &&
+                        !isEqual(upperPoint.Y, horizontalLines[i].StartPoint.Y) && !isEqual((double)Y, horizontalLines[i].StartPoint.Y))
                     {
                         Y = horizontalLines[i].StartPoint.Y;
                         chosenLine = horizontalLines[i];
@@ -134,9 +139,12 @@ namespace HamzaCad.BarsComputation
             Line2D chosenLine = null;
             for (int i = 0; i < horizontalLines.Count; i++)
             {
+                // if line is not intersect the x of the line then ignore
+                if (!isPointXbetweenHorizontalLine(horizontalLines[i], lowerPoint))
+                    continue;
                 if (Y == null)
                 {
-                    if (lowerPoint.Y > horizontalLines[i].StartPoint.Y)
+                    if (lowerPoint.Y > horizontalLines[i].StartPoint.Y && !isEqual(lowerPoint.Y, horizontalLines[i].StartPoint.Y))
                     {
                         Y = horizontalLines[i].StartPoint.Y;
                         chosenLine = horizontalLines[i];
@@ -144,7 +152,8 @@ namespace HamzaCad.BarsComputation
                 }
                 else
                 {
-                    if (lowerPoint.Y > horizontalLines[i].StartPoint.Y && Y < horizontalLines[i].StartPoint.Y)
+                    if (lowerPoint.Y > horizontalLines[i].StartPoint.Y && Y < horizontalLines[i].StartPoint.Y &&
+                        !isEqual(lowerPoint.Y, horizontalLines[i].StartPoint.Y) && !isEqual((double)Y, horizontalLines[i].StartPoint.Y))
                     {
                         Y = horizontalLines[i].StartPoint.Y;
                         chosenLine = horizontalLines[i];
@@ -166,6 +175,25 @@ namespace HamzaCad.BarsComputation
             }
 
             return null;
+        }
+        
+        private static bool isPointXbetweenHorizontalLine(Line2D horizontalLine,Point2D p)
+        {
+            if (horizontalLine.StartPoint.X > horizontalLine.EndPoint.X)
+            {
+                if (p.X < horizontalLine.StartPoint.X && p.X > horizontalLine.EndPoint.X)
+                {
+                   return true;
+                }
+            }
+            if (horizontalLine.StartPoint.X < horizontalLine.EndPoint.X)
+            {
+                if (p.X > horizontalLine.StartPoint.X && p.X < horizontalLine.EndPoint.X)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
