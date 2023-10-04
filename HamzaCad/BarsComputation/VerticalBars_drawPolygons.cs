@@ -9,16 +9,7 @@ namespace HamzaCad.BarsComputation
     {
         private static List<DrawingBar> DrawingPolygons(List<Rectangle> rectangles)
         {
-            for (int i = 0; i < rectangles.Count; i++)
-            {
-                BarsComputer.ed.WriteMessage("____________________________\n");
-
-                BarsComputer.ed.WriteMessage("top y " + rectangles[i].Yupper +"\n");
-                BarsComputer.ed.WriteMessage("down y " + rectangles[i].Ylower + "\n");
-                BarsComputer.ed.WriteMessage("left y " + rectangles[i].Xleft + "\n");
-                BarsComputer.ed.WriteMessage("right y " + rectangles[i].Xright + "\n");
-
-            }
+            
             List<DrawingBar> verticalBars = new List<DrawingBar>();
             for (int i = 0; i < rectangles.Count; i++)
             {
@@ -27,7 +18,7 @@ namespace HamzaCad.BarsComputation
                 var down = rectangles[i].Ylower + BarsComputer.BarSpacing;
                 DBText dbText = new DBText();
                 dbText.TextString = ((rectangles[i].Xright -rectangles[i].Xleft) /BarsComputer.BarSpacing).ToString("0");
-                dbText.Position = new Point3d(x+ (BarsComputer.BarSpacing/5), (top+down)/2, 0.0);
+                dbText.Position = new Point3d(x+ (BarsComputer.BarSpacing/4), (top+down)/2, 0.0);
                 dbText.Height = 12.0;
                 verticalBars.Add(new DrawingBar(getBarpolyline(top,down,x), dbText));
             }

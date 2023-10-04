@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Media;
 using Autodesk.AutoCAD.DatabaseServices;
 
 
@@ -29,6 +30,11 @@ namespace HamzaCad.BarsComputation
                 if (Math.Abs(vertices[i].Y - vertices[i + 1].Y) < 0.0001)
                 {
                     Line2D l = new Line2D(vertices[i], vertices[i + 1]);
+                    // startpoint is always left
+                    if (vertices[i].Y > vertices[i + 1].Y)
+                    {
+                        l = new Line2D(vertices[i + 1], vertices[i]);
+                    }
                     Hlines.Add(l);
                 }
             }

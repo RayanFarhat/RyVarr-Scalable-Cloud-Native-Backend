@@ -84,7 +84,7 @@ namespace HamzaCad
                         }
                     }
                     catch (System.Exception ex) {
-                       ed.WriteMessage("Erorrr:  " + ex.Message);
+                       ed.WriteMessage("Erorrr:  " + ex.Message + " from "+ex.StackTrace+"\n");
                     }
                     trans.Commit();
                     trans.Dispose();

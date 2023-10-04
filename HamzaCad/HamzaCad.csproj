@@ -119,6 +119,7 @@
     <Compile Include="BarsComputation\VerticalBars_drawPolygons.cs" />
     <Compile Include="BarsComputation\VerticalBars_FindIntersectVerticalLine.cs" />
     <Compile Include="BarsComputation\VerticalBars_getRectangles.cs" />
+    <Compile Include="BarsComputation\VerticalBars_readPoints.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="FirstBtn.cs" />
     <Compile Include="MenuManager.cs" />

@@ -1,13 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Autodesk.AutoCAD.DatabaseServices;
+using Autodesk.AutoCAD.Geometry;
 
 namespace HamzaCad.BarsComputation
 {
     public class Rotator
     {
+        public static void RotatePolylinebars(
+              List<DrawingBar> bars,
+              double angle,
+              Point2D orginPoint)
+        {
+            angle = angle * Math.PI / 180;//convert degrees to radians
+
+            double cx = orginPoint.X;
+            double cy = orginPoint.Y;
+            double cos = Math.Cos(angle);
+            double sin = Math.Sin(angle);
+            double temp;
+            for (int i = 0; i < bars.Count;i++)
+            {
+                // rotate polyline
+                for (int j = 0; j < 7; j++)
+                {
+                    Point2d vertex = bars[i].Polygon.GetPoint2dAt(j);
+                    temp = ((vertex.X - cx) * cos - (vertex.Y - cy) * sin) + cx;
+                    double Y = ((vertex.X - cx) * sin + (vertex.Y - cy) * cos) + cy;
+                    double X = temp;
+                    bars[i].Polygon.RemoveVertexAt(j);
+                    bars[i].Polygon.AddVertexAt(j, new Point2d(X, Y), 0, 0, 0);
+                }
+                Point3d pos = bars[i].Text.Position;
+                temp = ((pos.X - cx) * cos - (pos.Y - cy) * sin) + cx;
+                double Y2 = ((pos.X - cx) * sin + (pos.Y - cy) * cos) + cy;
+                double X2 = temp;
+                bars[i].Text.Position = new Point3d(X2, Y2, 0);
+            }
+            
+        }
         public static void RotatePoints(
           List<Point2D> points,
           double angle)

@@ -91,12 +91,14 @@ namespace HamzaCad.BarsComputation
                 // Forming a line from two consecutive points of
                 // poly
                 Line2D side = new Line2D(poly[i], poly[(i + 1) % n]);
+                // If side is intersects exline
                 if (isIntersect(side, exline) == 1)
                 {
-
-                    // If side is intersects exline
                     if (direction(side.StartPoint, p, side.EndPoint) == 0)
-                        return onLine(side, p);
+                    {
+                        // this not 100% right
+                        return !onLine(side, p);
+                    }
                     count++;
                 }
                 i = (i + 1) % n;
@@ -104,6 +106,7 @@ namespace HamzaCad.BarsComputation
 
             // When count is even
             if ((count & 1) == 0) return false;
+
             // When count is odd
             return true;
         }

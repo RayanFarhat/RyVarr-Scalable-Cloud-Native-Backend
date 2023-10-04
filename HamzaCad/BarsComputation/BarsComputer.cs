@@ -7,18 +7,18 @@ using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.EditorInput;
 using Autodesk.AutoCAD.Geometry;
 
-
 namespace HamzaCad.BarsComputation
 {
     public class BarsComputer
     {
         public static Editor ed;
-        public static List<Polyline> bars;
+        public static List<DrawingBar> bars;
         public static double BarSpacing = 30.0;
+        public static bool isHorizontal;
+
 
         public static List<DrawingBar> getBars(Polyline shape)
         {
-            bars = new List<Polyline>();
             List<Point2D> vertices = new List<Point2D>();
             int numVertices = shape.NumberOfVertices;
             for (int i = 0; i < numVertices; i++)
@@ -36,24 +36,16 @@ namespace HamzaCad.BarsComputation
             //// Rotator.RotatePoints(bars, -angle);
 
             /* now we work with Rectilinear polygon that his lines always parallel to X or Y */
+            isHorizontal = false;
+            bars =  VerticalBars.getVerticalBars(vertices);
 
-
-            // test
-            Polyline polyline = new Polyline();
-            for (int i = 0; i < numVertices; i++)
-            {
-                polyline.AddVertexAt(i, new Point2d(vertices[i].X, vertices[i].Y), 0, 0, 0);
-            }
-            bars.Add(polyline);
-            //bars.Clear();
-            ////////////////////
-            return VerticalBars.getVerticalBars(vertices);
-            var x = new List<DrawingBar>();
-            for (int i = 0; i < bars.Count; i++)
-            {
-                x.Add(new DrawingBar(bars[i], new DBText()));
-            }
-            return x;
+            List<Point2D> clonedvertices = new List<Point2D>(vertices);
+            isHorizontal = true;
+            var Hbars = VerticalBars.getVerticalBars(clonedvertices);
+            bars.AddRange(Hbars);
+            //rotate to orginal shape
+            Rotator.RotatePolylinebars(bars, -angle, vertices[0]);
+            return bars;
         }
     }
 }
