@@ -22,7 +22,7 @@ namespace HamzaCad.BarsComputation
             for (int i = 0; i < bars.Count;i++)
             {
                 // rotate polyline
-                for (int j = 0; j < 7; j++)
+                for (int j = 0; j < 3; j++)
                 {
                     Point2d vertex = bars[i].Polygon.GetPoint2dAt(j);
                     temp = ((vertex.X - cx) * cos - (vertex.Y - cy) * sin) + cx;

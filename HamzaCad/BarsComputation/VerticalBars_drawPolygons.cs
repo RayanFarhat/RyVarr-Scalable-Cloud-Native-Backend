@@ -36,13 +36,9 @@ namespace HamzaCad.BarsComputation
         private static Polyline getBarpolyline(double top, double down,double x)
         {
             Polyline polyline = new Polyline();
-            polyline.AddVertexAt(0, new Point2d(x, top), 0, 0, 0);
-            polyline.AddVertexAt(1, new Point2d(x, down), 0, 0, 0);
-            polyline.AddVertexAt(2, new Point2d(x - (BarsComputer.BarSpacing / 3), down), 0, 0, 0);
-            polyline.AddVertexAt(3, new Point2d(x - (BarsComputer.BarSpacing / 3), top -(BarsComputer.BarSpacing / 3) ), 0, 0, 0);
-            polyline.AddVertexAt(4, new Point2d(x - BarsComputer.BarSpacing, top - (BarsComputer.BarSpacing / 3)), 0, 0, 0);
-            polyline.AddVertexAt(5, new Point2d(x - BarsComputer.BarSpacing, top ), 0, 0, 0);
-            polyline.AddVertexAt(6, new Point2d(x, top), 0, 0, 0);
+            polyline.AddVertexAt(0, new Point2d(x, down), 0, 0, 0);
+            polyline.AddVertexAt(1, new Point2d(x, top), 0, 0, 0);
+            polyline.AddVertexAt(2, new Point2d(x - BarsComputer.BarSpacing, top), 0, 0, 0);
             return polyline;
         }
     }
