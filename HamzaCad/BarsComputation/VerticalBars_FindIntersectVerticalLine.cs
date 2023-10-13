@@ -101,7 +101,7 @@ namespace HamzaCad.BarsComputation
                     continue;
                 if (Y == null)
                 {
-                    if (upperPoint.Y < horizontalLines[i].StartPoint.Y && !isEqual(upperPoint.Y, horizontalLines[i].StartPoint.Y))
+                    if (upperPoint.Y < horizontalLines[i].StartPoint.Y && !DoubleUtils.IsEqual(upperPoint.Y, horizontalLines[i].StartPoint.Y))
                     {
                         Y = horizontalLines[i].StartPoint.Y;
                         chosenLine = horizontalLines[i];
@@ -110,7 +110,7 @@ namespace HamzaCad.BarsComputation
                 else
                 {
                     if (upperPoint.Y < horizontalLines[i].StartPoint.Y && Y > horizontalLines[i].StartPoint.Y &&
-                        !isEqual(upperPoint.Y, horizontalLines[i].StartPoint.Y) && !isEqual((double)Y, horizontalLines[i].StartPoint.Y))
+                        !DoubleUtils.IsEqual(upperPoint.Y, horizontalLines[i].StartPoint.Y) && !DoubleUtils.IsEqual((double)Y, horizontalLines[i].StartPoint.Y))
                     {
                         Y = horizontalLines[i].StartPoint.Y;
                         chosenLine = horizontalLines[i];
@@ -144,7 +144,7 @@ namespace HamzaCad.BarsComputation
                     continue;
                 if (Y == null)
                 {
-                    if (lowerPoint.Y > horizontalLines[i].StartPoint.Y && !isEqual(lowerPoint.Y, horizontalLines[i].StartPoint.Y))
+                    if (lowerPoint.Y > horizontalLines[i].StartPoint.Y && !DoubleUtils.IsEqual(lowerPoint.Y, horizontalLines[i].StartPoint.Y))
                     {
                         Y = horizontalLines[i].StartPoint.Y;
                         chosenLine = horizontalLines[i];
@@ -153,7 +153,7 @@ namespace HamzaCad.BarsComputation
                 else
                 {
                     if (lowerPoint.Y > horizontalLines[i].StartPoint.Y && Y < horizontalLines[i].StartPoint.Y &&
-                        !isEqual(lowerPoint.Y, horizontalLines[i].StartPoint.Y) && !isEqual((double)Y, horizontalLines[i].StartPoint.Y))
+                        !DoubleUtils.IsEqual(lowerPoint.Y, horizontalLines[i].StartPoint.Y) && !DoubleUtils.IsEqual((double)Y, horizontalLines[i].StartPoint.Y))
                     {
                         Y = horizontalLines[i].StartPoint.Y;
                         chosenLine = horizontalLines[i];

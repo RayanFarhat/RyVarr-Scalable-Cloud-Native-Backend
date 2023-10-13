@@ -54,7 +54,9 @@ namespace HamzaCad.BarsComputation
             MergeVerticalLinesWithSameX(AllVerticalLines, vertices);
             MergeSortVerticalLine.Sort(AllVerticalLines);
 
-            return DrawingPolygons(getRectangles(AllVerticalLines, Hlines, vertices));
+            return DrawingBarGenerator.DrawingPolygons(
+                RectangleBuilder.getRectangles(AllVerticalLines, Hlines, vertices)
+                );
         }
 
         // merge lines with same X to one line if it is inside the polygon
@@ -69,7 +71,7 @@ namespace HamzaCad.BarsComputation
                     if (Math.Abs(lines[i].StartPoint.X - lines[j].StartPoint.X) < 0.0001)
                     {
                         // we know that startpoint is the upperpoint
-                        if (isFirstSmallerOrEqualThanSecond(lines[i].StartPoint.Y, lines[j].EndPoint.Y))
+                        if (DoubleUtils.IsFirstSmallerOrEqualThanSecond(lines[i].StartPoint.Y, lines[j].EndPoint.Y))
                         {
                             Point2D p = new Point2D(lines[i].StartPoint.X, (lines[i].StartPoint.Y + lines[j].EndPoint.Y) / 2);
                             // if can be merged
@@ -78,7 +80,7 @@ namespace HamzaCad.BarsComputation
                                 sameXDic.Add(lines[i], lines[j]);
                             }
                         }
-                        else if (isFirstSmallerOrEqualThanSecond(lines[j].StartPoint.Y, lines[i].EndPoint.Y))
+                        else if (DoubleUtils.IsFirstSmallerOrEqualThanSecond(lines[j].StartPoint.Y, lines[i].EndPoint.Y))
                         {
                             Point2D p = new Point2D(lines[i].StartPoint.X, (lines[j].StartPoint.Y + lines[i].EndPoint.Y) / 2);
                             // if can be merged
@@ -87,13 +89,13 @@ namespace HamzaCad.BarsComputation
                                 sameXDic.Add(lines[i], lines[j]);
                             }
                         }
-                        else if(isFirstBiggerOrEqualThanSecond(lines[i].StartPoint.Y, lines[j].EndPoint.Y) && 
-                            isFirstSmallerOrEqualThanSecond(lines[i].StartPoint.Y, lines[j].StartPoint.Y))
+                        else if(DoubleUtils.IsFirstBiggerOrEqualThanSecond(lines[i].StartPoint.Y, lines[j].EndPoint.Y) &&
+                            DoubleUtils.IsFirstSmallerOrEqualThanSecond(lines[i].StartPoint.Y, lines[j].StartPoint.Y))
                         {
                             sameXDic.Add(lines[i], lines[j]);
                         }
-                        else if (isFirstBiggerOrEqualThanSecond(lines[j].StartPoint.Y, lines[i].EndPoint.Y) && 
-                            isFirstSmallerOrEqualThanSecond(lines[j].StartPoint.Y, lines[i].StartPoint.Y))
+                        else if (DoubleUtils.IsFirstBiggerOrEqualThanSecond(lines[j].StartPoint.Y, lines[i].EndPoint.Y) &&
+                            DoubleUtils.IsFirstSmallerOrEqualThanSecond(lines[j].StartPoint.Y, lines[i].StartPoint.Y))
                         {
                             sameXDic.Add(lines[i], lines[j]);
                         }
@@ -128,28 +130,6 @@ namespace HamzaCad.BarsComputation
                 lines.Add(new Line2D(upper, lower));
             }
 
-        }
-        private static bool isFirstBiggerOrEqualThanSecond(double d1, double d2)
-        {
-            if (d1 > d2)
-                return true;
-            if(Math.Abs(d1 - d2) < 0.0001)
-                return true;
-            return false;
-        }
-        private static bool isFirstSmallerOrEqualThanSecond(double d1, double d2)
-        {
-            if (d1 < d2)
-                return true;
-            if (Math.Abs(d1 - d2) < 0.0001)
-                return true;
-            return false;
-        }
-        private static bool isEqual(double d1, double d2)
-        {
-            if (Math.Abs(d1 - d2) < 0.0001)
-                return true;
-            return false;
         }
         private static bool existOnLines(List<Line2D> lines, Line2D l)
         {
