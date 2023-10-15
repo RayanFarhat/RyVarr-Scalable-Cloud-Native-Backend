@@ -51,7 +51,19 @@ namespace HamzaCad.BarsComputation
                 }
             }
 
-            MergeVerticalLinesWithSameX(AllVerticalLines, vertices);
+            for (int i = 0; i < AllVerticalLines.Count; i++)
+            {
+                BarsComputer.ed.WriteMessage("_________________\n");
+                BarsComputer.ed.WriteMessage("x "+ AllVerticalLines[i].StartPoint.X + "\n");
+                BarsComputer.ed.WriteMessage("y top " + AllVerticalLines[i].StartPoint.X + "\n");
+
+
+            }
+
+            while (MergeVerticalLinesWithSameX(AllVerticalLines, vertices))
+            {
+                // keep merging until no merging left
+            }
             MergeSortVerticalLine.Sort(AllVerticalLines);
 
             return DrawingBarGenerator.DrawingPolygons(
@@ -60,7 +72,7 @@ namespace HamzaCad.BarsComputation
         }
 
         // merge lines with same X to one line if it is inside the polygon
-        private static void MergeVerticalLinesWithSameX(List<Line2D> lines, List<Point2D> vertices)
+        private static bool MergeVerticalLinesWithSameX(List<Line2D> lines, List<Point2D> vertices)
         {
             var sameXDic = new Dictionary<Line2D, Line2D>();
             for (int i = 0; i < lines.Count; i++)
@@ -75,7 +87,7 @@ namespace HamzaCad.BarsComputation
                         {
                             Point2D p = new Point2D(lines[i].StartPoint.X, (lines[i].StartPoint.Y + lines[j].EndPoint.Y) / 2);
                             // if can be merged
-                            if (PointInsidePolygoncs.checkInside(vertices, vertices.Count, p))
+                            if (PointInsidePolygon.checkInside(vertices, vertices.Count, p))
                             {
                                 sameXDic.Add(lines[i], lines[j]);
                             }
@@ -84,7 +96,7 @@ namespace HamzaCad.BarsComputation
                         {
                             Point2D p = new Point2D(lines[i].StartPoint.X, (lines[j].StartPoint.Y + lines[i].EndPoint.Y) / 2);
                             // if can be merged
-                            if (PointInsidePolygoncs.checkInside(vertices, vertices.Count, p))
+                            if (PointInsidePolygon.checkInside(vertices, vertices.Count, p))
                             {
                                 sameXDic.Add(lines[i], lines[j]);
                             }
@@ -130,6 +142,9 @@ namespace HamzaCad.BarsComputation
                 lines.Add(new Line2D(upper, lower));
             }
 
+            // if we merge lines this time
+            if (sameXDic.Count > 0) return true;
+            else return false;
         }
         private static bool existOnLines(List<Line2D> lines, Line2D l)
         {

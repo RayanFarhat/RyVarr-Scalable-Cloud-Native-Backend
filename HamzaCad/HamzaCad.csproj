@@ -114,7 +114,7 @@
     <Compile Include="BarsComputation\BarsComputer.cs" />
     <Compile Include="BarsComputation\DrawingBarGenerator.cs" />
     <Compile Include="BarsComputation\MergeSortVerticalLine.cs" />
-    <Compile Include="BarsComputation\PointInsidePolygoncs.cs" />
+    <Compile Include="BarsComputation\PointInsidePolygon.cs" />
     <Compile Include="BarsComputation\RectangleBuilder.cs" />
     <Compile Include="BarsComputation\Rotator.cs" />
     <Compile Include="BarsComputation\Utils.cs" />

@@ -30,10 +30,7 @@ namespace HamzaCad.BarsComputation
 
             // rotate the polygon
             double angle = Rotator.GetRotationAngleToXOrY(vertices[0], vertices[1]);
-            //Rotator.RotatePoints(vertices, angle);
-
-            // then once we add all the bars we want to rotate them to match the orginal polygon with -angle
-            //// Rotator.RotatePoints(bars, -angle);
+            Rotator.RotatePoints(vertices, angle);
 
             /* now we work with Rectilinear polygon that his lines always parallel to X or Y */
             isHorizontal = false;
@@ -46,7 +43,7 @@ namespace HamzaCad.BarsComputation
             Rotator.RotatePolylinebars(Hbars, -90, vertices[0]);
             bars.AddRange(Hbars);
             //rotate to orginal shape
-            //Rotator.RotatePolylinebars(bars, -angle, vertices[0]);
+            Rotator.RotatePolylinebars(bars, -angle, vertices[0]);
             return bars;
         }
     }

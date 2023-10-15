@@ -125,7 +125,7 @@ namespace HamzaCad.BarsComputation
             if (Y != null)
             {
                 Point2D p = new Point2D(upperPoint.X, ((double)Y + upperPoint.Y) / 2);
-                if (PointInsidePolygoncs.checkInside(poly, poly.Count, p))
+                if (PointInsidePolygon.checkInside(poly, poly.Count, p))
                 {
                     return chosenLine;
                 }
@@ -168,7 +168,7 @@ namespace HamzaCad.BarsComputation
             // p is in middle
             if (Y != null) {
                 Point2D p = new Point2D(lowerPoint.X, ((double)Y + lowerPoint.Y) / 2);
-                if (PointInsidePolygoncs.checkInside(poly, poly.Count, p))
+                if (PointInsidePolygon.checkInside(poly, poly.Count, p))
                 {
                     return chosenLine;
                 }
