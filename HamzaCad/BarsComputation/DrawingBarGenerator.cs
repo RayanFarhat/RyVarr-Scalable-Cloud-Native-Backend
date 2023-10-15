@@ -41,7 +41,10 @@ namespace HamzaCad.BarsComputation
             Polyline polyline = new Polyline();
             polyline.AddVertexAt(0, new Point2d(x, down), 0, 0, 0);
             polyline.AddVertexAt(1, new Point2d(x, top), 0, 0, 0);
-            polyline.AddVertexAt(2, new Point2d(x - BarsComputer.BarSpacing, top), 0, 0, 0);
+            if (BarsComputer.withEar)
+            {
+                polyline.AddVertexAt(2, new Point2d(x - BarsComputer.earLength, top), 0, 0, 0);
+            }
             return polyline;
         }
     }

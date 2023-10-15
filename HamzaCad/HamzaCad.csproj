@@ -102,6 +102,8 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -113,6 +115,12 @@
   <ItemGroup>
     <Compile Include="BarsComputation\BarsComputer.cs" />
     <Compile Include="BarsComputation\DrawingBarGenerator.cs" />
+    <Compile Include="BarsComputation\MainWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BarsComputation\MainWindow.Designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="BarsComputation\MergeSortVerticalLine.cs" />
     <Compile Include="BarsComputation\PointInsidePolygon.cs" />
     <Compile Include="BarsComputation\RectangleBuilder.cs" />
@@ -127,6 +135,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="load.scr" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BarsComputation\MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
