@@ -28,9 +28,22 @@ namespace HamzaCad.BarsComputation
 
             withEar.Checked = BarsComputer.withEar;
             withEar.CheckedChanged += onCheck;
-            SpacingInput.Text = BarsComputer.earLength.ToString();
+
+            EarLength.Text = BarsComputer.earLength.ToString();
             EarLength.ValidatingType = typeof(double);
             EarLength.TextChanged += onEar;
+
+            ArrowScale.Text = BarsComputer.arrowScale.ToString();
+            ArrowScale.ValidatingType = typeof(double);
+            ArrowScale.TextChanged += onArrowScale;
+
+            ArrowBlockingLineLength.Text = BarsComputer.arrowBlockingLineLength.ToString();
+            ArrowBlockingLineLength.ValidatingType = typeof(double);
+            ArrowBlockingLineLength.TextChanged += onArrowBlockingLineLength;
+
+            FontSize.Text = BarsComputer.fontSize.ToString();
+            FontSize.ValidatingType = typeof(double);
+            FontSize.TextChanged += onFontSize;
         }
         public void onCheck(object sender, EventArgs e)
         {
@@ -74,6 +87,39 @@ namespace HamzaCad.BarsComputation
                 catch {
                     MessageBox.Show("Input must be a number.");
                 }
+            }
+        }
+        private void onArrowScale(object sender, EventArgs e)
+        {
+            try
+            {
+                BarsComputer.arrowScale = Double.Parse(ArrowScale.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Input must be a number.");
+            }
+        }
+        private void onArrowBlockingLineLength(object sender, EventArgs e)
+        {
+            try
+            {
+                BarsComputer.arrowBlockingLineLength = Double.Parse(ArrowBlockingLineLength.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Input must be a number.");
+            }
+        }
+        private void onFontSize(object sender, EventArgs e)
+        {
+            try
+            {
+                BarsComputer.fontSize = Double.Parse(FontSize.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Input must be a number.");
             }
         }
     }

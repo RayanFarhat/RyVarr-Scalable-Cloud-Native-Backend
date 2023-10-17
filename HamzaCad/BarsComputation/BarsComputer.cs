@@ -17,7 +17,11 @@ namespace HamzaCad.BarsComputation
         public static bool drawVertical { get; set; } = true ;
         public static bool drawHorizantal { get; set; } = true;
         public static bool withEar { get; set; } = true;
-        public static double earLength = 15.0;
+        public static double earLength { get; set; } = 15.0;
+        public static double arrowScale { get; set; } = 5.0;
+        public static double arrowBlockingLineLength { get; set; } = 15.0;
+        public static double fontSize { get; set; } = 15.0;
+
 
 
         public static List<DrawingBar> getBars(Polyline shape)

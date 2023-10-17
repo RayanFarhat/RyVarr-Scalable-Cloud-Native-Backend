@@ -38,13 +38,19 @@
             this.withEar = new System.Windows.Forms.CheckBox();
             this.earLabel = new System.Windows.Forms.Label();
             this.EarLength = new System.Windows.Forms.MaskedTextBox();
+            this.arrowScalelabel = new System.Windows.Forms.Label();
+            this.ArrowScale = new System.Windows.Forms.MaskedTextBox();
+            this.ArrowBlockingLineLengthLabel = new System.Windows.Forms.Label();
+            this.ArrowBlockingLineLength = new System.Windows.Forms.MaskedTextBox();
+            this.FontSizeLabel = new System.Windows.Forms.Label();
+            this.FontSize = new System.Windows.Forms.MaskedTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // drawVertical
             // 
             this.drawVertical.AutoSize = true;
-            this.drawVertical.Location = new System.Drawing.Point(259, 25);
+            this.drawVertical.Location = new System.Drawing.Point(230, 20);
             this.drawVertical.Name = "drawVertical";
             this.drawVertical.Size = new System.Drawing.Size(104, 20);
             this.drawVertical.TabIndex = 0;
@@ -54,7 +60,7 @@
             // drawHorizontal
             // 
             this.drawHorizontal.AutoSize = true;
-            this.drawHorizontal.Location = new System.Drawing.Point(259, 64);
+            this.drawHorizontal.Location = new System.Drawing.Point(230, 59);
             this.drawHorizontal.Name = "drawHorizontal";
             this.drawHorizontal.Size = new System.Drawing.Size(118, 20);
             this.drawHorizontal.TabIndex = 1;
@@ -63,9 +69,9 @@
             // 
             // ExitBtn
             // 
-            this.ExitBtn.Location = new System.Drawing.Point(140, 398);
+            this.ExitBtn.Location = new System.Drawing.Point(125, 378);
             this.ExitBtn.Name = "ExitBtn";
-            this.ExitBtn.Size = new System.Drawing.Size(75, 23);
+            this.ExitBtn.Size = new System.Drawing.Size(86, 63);
             this.ExitBtn.TabIndex = 2;
             this.ExitBtn.Text = "Draw";
             this.ExitBtn.UseVisualStyleBackColor = true;
@@ -88,7 +94,7 @@
             // withEar
             // 
             this.withEar.AutoSize = true;
-            this.withEar.Location = new System.Drawing.Point(47, 128);
+            this.withEar.Location = new System.Drawing.Point(447, 20);
             this.withEar.Name = "withEar";
             this.withEar.Size = new System.Drawing.Size(79, 20);
             this.withEar.TabIndex = 5;
@@ -98,7 +104,7 @@
             // earLabel
             // 
             this.earLabel.AutoSize = true;
-            this.earLabel.Location = new System.Drawing.Point(44, 164);
+            this.earLabel.Location = new System.Drawing.Point(444, 56);
             this.earLabel.Name = "earLabel";
             this.earLabel.Size = new System.Drawing.Size(71, 16);
             this.earLabel.TabIndex = 8;
@@ -106,16 +112,70 @@
             // 
             // EarLength
             // 
-            this.EarLength.Location = new System.Drawing.Point(47, 184);
+            this.EarLength.Location = new System.Drawing.Point(447, 76);
             this.EarLength.Name = "EarLength";
             this.EarLength.Size = new System.Drawing.Size(100, 22);
             this.EarLength.TabIndex = 9;
+            // 
+            // arrowScalelabel
+            // 
+            this.arrowScalelabel.AutoSize = true;
+            this.arrowScalelabel.Location = new System.Drawing.Point(447, 117);
+            this.arrowScalelabel.Name = "arrowScalelabel";
+            this.arrowScalelabel.Size = new System.Drawing.Size(79, 16);
+            this.arrowScalelabel.TabIndex = 10;
+            this.arrowScalelabel.Text = "Arrow Scale";
+            // 
+            // ArrowScale
+            // 
+            this.ArrowScale.Location = new System.Drawing.Point(447, 136);
+            this.ArrowScale.Name = "ArrowScale";
+            this.ArrowScale.Size = new System.Drawing.Size(100, 22);
+            this.ArrowScale.TabIndex = 11;
+            // 
+            // ArrowBlockingLineLengthLabel
+            // 
+            this.ArrowBlockingLineLengthLabel.AutoSize = true;
+            this.ArrowBlockingLineLengthLabel.Location = new System.Drawing.Point(423, 171);
+            this.ArrowBlockingLineLengthLabel.Name = "ArrowBlockingLineLengthLabel";
+            this.ArrowBlockingLineLengthLabel.Size = new System.Drawing.Size(167, 16);
+            this.ArrowBlockingLineLengthLabel.TabIndex = 12;
+            this.ArrowBlockingLineLengthLabel.Text = "Arrow Blocking Line Length";
+            // 
+            // ArrowBlockingLineLength
+            // 
+            this.ArrowBlockingLineLength.Location = new System.Drawing.Point(426, 199);
+            this.ArrowBlockingLineLength.Name = "ArrowBlockingLineLength";
+            this.ArrowBlockingLineLength.Size = new System.Drawing.Size(100, 22);
+            this.ArrowBlockingLineLength.TabIndex = 13;
+            // 
+            // FontSizeLabel
+            // 
+            this.FontSizeLabel.AutoSize = true;
+            this.FontSizeLabel.Location = new System.Drawing.Point(35, 87);
+            this.FontSizeLabel.Name = "FontSizeLabel";
+            this.FontSizeLabel.Size = new System.Drawing.Size(62, 16);
+            this.FontSizeLabel.TabIndex = 14;
+            this.FontSizeLabel.Text = "Font Size";
+            // 
+            // FontSize
+            // 
+            this.FontSize.Location = new System.Drawing.Point(35, 117);
+            this.FontSize.Name = "FontSize";
+            this.FontSize.Size = new System.Drawing.Size(100, 22);
+            this.FontSize.TabIndex = 15;
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(382, 453);
+            this.ClientSize = new System.Drawing.Size(602, 453);
+            this.Controls.Add(this.FontSize);
+            this.Controls.Add(this.FontSizeLabel);
+            this.Controls.Add(this.ArrowBlockingLineLength);
+            this.Controls.Add(this.ArrowBlockingLineLengthLabel);
+            this.Controls.Add(this.ArrowScale);
+            this.Controls.Add(this.arrowScalelabel);
             this.Controls.Add(this.EarLength);
             this.Controls.Add(this.earLabel);
             this.Controls.Add(this.withEar);
@@ -125,7 +185,7 @@
             this.Controls.Add(this.drawHorizontal);
             this.Controls.Add(this.drawVertical);
             this.Name = "MainWindow";
-            this.Text = "Configuration";
+            this.Text = "HamzaCAD Configuration";
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -143,5 +203,11 @@
         private System.Windows.Forms.CheckBox withEar;
         private System.Windows.Forms.Label earLabel;
         private System.Windows.Forms.MaskedTextBox EarLength;
+        private System.Windows.Forms.Label arrowScalelabel;
+        private System.Windows.Forms.MaskedTextBox ArrowScale;
+        private System.Windows.Forms.Label ArrowBlockingLineLengthLabel;
+        private System.Windows.Forms.MaskedTextBox ArrowBlockingLineLength;
+        private System.Windows.Forms.Label FontSizeLabel;
+        private System.Windows.Forms.MaskedTextBox FontSize;
     }
 }

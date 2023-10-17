@@ -73,9 +73,36 @@ namespace HamzaCad
                                 {
                                     acBlkTblRec.AppendEntity(bar.Polygon);
                                     trans.AddNewlyCreatedDBObject(bar.Polygon, true);
-                                    acBlkTblRec.AppendEntity(bar.Text);
-                                    trans.AddNewlyCreatedDBObject(bar.Text, true);
+                                    foreach (var text in bar.Texts)
+                                    {
+                                        acBlkTblRec.AppendEntity(text);
+                                        trans.AddNewlyCreatedDBObject(text, true);
+                                    }
+                                    foreach (var arrow in bar.Arrows)
+                                    {
+                                        acBlkTblRec.AppendEntity(arrow);
+                                        trans.AddNewlyCreatedDBObject(arrow, true);
+                                    }
+                                    foreach (var line in bar.ArrowsBlockingLines)
+                                    {
+                                        acBlkTblRec.AppendEntity(line);
+                                        trans.AddNewlyCreatedDBObject(line, true);
+                                    }
                                 }
+
+                                Leader acLdr = new Leader();
+                                acLdr.AppendVertex(new Point3d(800, 400, 0));
+                                acLdr.AppendVertex( new Point3d(400, 400,0));
+                                acLdr.HasArrowHead = true;
+                                acLdr.DimensionStyle = db.Dimstyle;
+                                acLdr.Dimscale = 10.0;
+                                acBlkTblRec.AppendEntity(acLdr);
+                                trans.AddNewlyCreatedDBObject(acLdr, true);
+                                Line plockingLine = new Line(new Point3d(800, 300, 0), new Point3d(800, 500, 0));
+
+                                // Add the plocking line to the block table record
+                                acBlkTblRec.AppendEntity(plockingLine);
+                                trans.AddNewlyCreatedDBObject(plockingLine, true);
                             }
                         }
                         else

@@ -13,34 +13,45 @@ namespace HamzaCad.BarsComputation
               double angle,
               Point2D orginPoint)
         {
-            angle = angle * Math.PI / 180;//convert degrees to radians
-
-            double cx = orginPoint.X;
-            double cy = orginPoint.Y;
-            double cos = Math.Cos(angle);
-            double sin = Math.Sin(angle);
-            double temp;
             for (int i = 0; i < bars.Count;i++)
             {
                 int pointsNum = 0;
                 if (BarsComputer.withEar)
                     pointsNum=3;
                 else pointsNum=2;
+
                 // rotate polyline
                 for (int j = 0; j < pointsNum; j++)
                 {
-                    Point2d vertex = bars[i].Polygon.GetPoint2dAt(j);
-                    temp = ((vertex.X - cx) * cos - (vertex.Y - cy) * sin) + cx;
-                    double Y = ((vertex.X - cx) * sin + (vertex.Y - cy) * cos) + cy;
-                    double X = temp;
+                    Point2d vertex = bars[i].Polygon.GetPoint2dAt(j);      
                     bars[i].Polygon.RemoveVertexAt(j);
-                    bars[i].Polygon.AddVertexAt(j, new Point2d(X, Y), 0, 0, 0);
+                    bars[i].Polygon.AddVertexAt(j, RotatePoint2d(vertex, angle, orginPoint), 0, 0, 0);
                 }
-                Point3d pos = bars[i].Text.Position;
-                temp = ((pos.X - cx) * cos - (pos.Y - cy) * sin) + cx;
-                double Y2 = ((pos.X - cx) * sin + (pos.Y - cy) * cos) + cy;
-                double X2 = temp;
-                bars[i].Text.Position = new Point3d(X2, Y2, 0);
+                // rotate texts
+                for (int j = 0; j < bars[i].Texts.Count; j++)
+                {
+                    Point3d pos = bars[i].Texts[j].Position;
+                    bars[i].Texts[j].Position = RotatePoint3d(pos, angle, orginPoint);
+                }
+                // rotate arrows
+                for (int j = 0; j < bars[i].Arrows.Count; j++)
+                {
+                        Leader arr = bars[i].Arrows[j];
+                        Leader newArr = new Leader();
+                        newArr.AppendVertex(RotatePoint3d(arr.VertexAt(0), angle, orginPoint));
+                        newArr.AppendVertex(RotatePoint3d(arr.VertexAt(1), angle, orginPoint));
+                        newArr.HasArrowHead = true;
+                        //newArr.DimensionStyle = db.Dimstyle;
+                        newArr.Dimscale = BarsComputer.arrowScale;
+                        bars[i].Arrows[j] = newArr;
+                }
+                // rotate blocking lines
+                for (int j = 0; j < bars[i].ArrowsBlockingLines.Count; j++)
+                {
+                    Line line = bars[i].ArrowsBlockingLines[j];
+                    bars[i].ArrowsBlockingLines[j] = new Line(RotatePoint3d(line.StartPoint,angle,orginPoint),
+                        RotatePoint3d(line.EndPoint, angle, orginPoint));
+                }
             }
             
         }
@@ -62,6 +73,36 @@ namespace HamzaCad.BarsComputation
                 points[n].Y = ((points[n].X - cx) * sin + (points[n].Y - cy) * cos) + cy;
                 points[n].X = temp;
             }
+        }
+        private static Point2d RotatePoint2d(
+             Point2d point,
+              double angle,
+               Point2D orginPoint)
+        {
+            angle = angle * Math.PI / 180;//convert degrees to radians
+
+            double cx = orginPoint.X;
+            double cy = orginPoint.Y;
+            double cos = Math.Cos(angle);
+            double sin = Math.Sin(angle);
+            double temp;
+            temp = ((point.X - cx) * cos - (point.Y - cy) * sin) + cx;
+            return new Point2d(temp, ((point.X - cx) * sin + (point.Y - cy) * cos) + cy);
+        }
+        private static Point3d RotatePoint3d(
+             Point3d point,
+              double angle,
+               Point2D orginPoint)
+        {
+            angle = angle * Math.PI / 180;//convert degrees to radians
+
+            double cx = orginPoint.X;
+            double cy = orginPoint.Y;
+            double cos = Math.Cos(angle);
+            double sin = Math.Sin(angle);
+            double temp;
+            temp = ((point.X - cx) * cos - (point.Y - cy) * sin) + cx;
+            return new Point3d(temp, ((point.X - cx) * sin + (point.Y - cy) * cos) + cy,0);
         }
 
         // check how many to rotate so the polgon lines are parallel to X and Y

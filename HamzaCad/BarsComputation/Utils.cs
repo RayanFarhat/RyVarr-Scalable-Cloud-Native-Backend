@@ -1,5 +1,6 @@
 ﻿using Autodesk.AutoCAD.DatabaseServices;
 using System;
+using System.Collections.Generic;
 
 namespace HamzaCad.BarsComputation
 {
@@ -28,12 +29,17 @@ namespace HamzaCad.BarsComputation
     public class DrawingBar
     {
         public Polyline Polygon { get; set; }
-        public DBText Text { get; set; }
+        public List<DBText> Texts { get; set; }
+        public List<Leader> Arrows { get; set; }
+        public List<Line> ArrowsBlockingLines { get; set; }
 
-        public DrawingBar(Polyline Polygon, DBText text)
+
+        public DrawingBar(Polyline Polygon, List<DBText> texts, List<Leader> arrows, List<Line> arrowsBlockingLines)
         {
             this.Polygon = Polygon;
-            this.Text = text;
+            this.Texts = texts;
+            Arrows = arrows;
+            ArrowsBlockingLines = arrowsBlockingLines;
         }
     }
 
