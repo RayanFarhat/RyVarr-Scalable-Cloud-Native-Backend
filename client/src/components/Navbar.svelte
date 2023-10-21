@@ -3,13 +3,13 @@
     import NavBarContentMobile from "./Navbar/NavBarContentMobile.svelte";
 
 </script>
-<div class="drawer fixed drawer-end">
+<div class="drawer fixed drawer-end z-[1]">
   <input id="my-drawer-3" type="checkbox" class="drawer-toggle" /> 
   <div class="drawer-content flex flex-col">
     <!-- Navbar -->
-    <div class="w-full navbar bg-base-200">
+    <div class="w-full navbar bg-base-200 shadow-md shadow-primary">
       <!-- Title -->
-      <div class="flex-1 px-2 mx-2">RyVarr</div>
+      <div class="flex-1 px-2 mx-2 font-extrabold">RyVarr</div>
       
       <!-- for desktop -->
       <NavBarContentDesktop/>
