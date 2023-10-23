@@ -9,7 +9,7 @@
     <!-- Navbar -->
     <div class="w-full navbar bg-base-200 shadow-md shadow-primary">
       <!-- Title -->
-      <div class="flex-1 px-2 mx-2 font-extrabold">RyVarr</div>
+      <div class="flex-1 px-2 mx-2 font-extrabold"><a href="/">RyVarr</a></div>
       
       <!-- for desktop -->
       <NavBarContentDesktop/>

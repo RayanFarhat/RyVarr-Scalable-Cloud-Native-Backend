@@ -12,7 +12,6 @@
     </div>
 </div>
 <div class="flex flex-col w-full lg:flex-row">
-
     <Service title="Revit/Autocad API Integration" 
     desc="We can integrate with your favorite software, AutoCAD or Revit, using the .NET API,
      Also create Windows GUI software that can seamlessly work with them."

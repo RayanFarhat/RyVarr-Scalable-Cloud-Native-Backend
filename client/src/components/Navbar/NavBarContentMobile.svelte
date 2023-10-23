@@ -12,7 +12,7 @@
       <button class="btn btn-outline border-0 hover:bg-transparent hover:text-primary">
         Hamzacad</button></a></li>
 
-    <li><a class="p-0 w-fit" href="/2">
+    <li><a class="p-0 w-fit" href="/login">
       <button class="btn btn-outline btn-primary">
         Login</button></a></li>
 
