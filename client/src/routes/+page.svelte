@@ -7,5 +7,5 @@
 </script>
 <Intro/>
 <Products/>
-<WhyUs/>
 <Services/>
+<WhyUs/>

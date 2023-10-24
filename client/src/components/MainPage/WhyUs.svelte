@@ -9,7 +9,7 @@
       </div>
     </div>
 </div>
-<div class="flex flex-col w-full lg:flex-row justify-center items-center">
+<div class="flex flex-col w-full lg:flex-row justify-center items-center  pb-6">
     <div class="card w-96 bg-base-200 border-2 border-primary">
         <div class="card-body">
           <h2 class="card-title">Build your software</h2>

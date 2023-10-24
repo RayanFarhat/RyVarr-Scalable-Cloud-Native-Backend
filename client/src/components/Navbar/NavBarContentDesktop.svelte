@@ -6,9 +6,9 @@
     <ul class="menu menu-horizontal">
       <!-- Navbar menu content here -->
 
-      <li><a class="p-0 hover:bg-transparent" href="/2">
+      <li><a class="p-0 hover:bg-transparent" href="/pricing">
         <button class="btn btn-outline border-0 hover:bg-transparent hover:text-primary">
-        Work</button></a></li>
+        Pricing</button></a></li>
 
       <li><a class=" mr-12 p-0 hover:bg-transparent" href="/product/hamzacad">
         <button class="btn btn-outline border-0 hover:bg-transparent hover:text-primary">

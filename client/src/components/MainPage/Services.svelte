@@ -7,7 +7,6 @@
       <div class="max-w-md">
         <h1 class="text-5xl font-bold">Services</h1>
         <p class="py-6">Most Important Services That We Provide</p>
-       
       </div>
     </div>
 </div>
