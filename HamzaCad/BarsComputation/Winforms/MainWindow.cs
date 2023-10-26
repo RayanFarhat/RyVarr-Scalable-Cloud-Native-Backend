@@ -16,6 +16,12 @@ namespace HamzaCad.BarsComputation
         public MainWindow()
         {
             InitializeComponent();
+
+            Eng.Checked = true;
+            Heb.Checked = false;
+            Eng.CheckedChanged += onCheckEng;
+            Heb.CheckedChanged += onCheckHeb;
+
             drawVertical.Checked = BarsComputer.drawVertical;
             drawHorizontal.Checked = BarsComputer.drawHorizantal;
             drawVertical.CheckedChanged += onCheck;
@@ -33,9 +39,9 @@ namespace HamzaCad.BarsComputation
             EarLength.ValidatingType = typeof(double);
             EarLength.TextChanged += onEar;
 
-            ArrowScale.Text = BarsComputer.arrowScale.ToString();
-            ArrowScale.ValidatingType = typeof(double);
-            ArrowScale.TextChanged += onArrowScale;
+            ArrowSize.Text = BarsComputer.arrowScale.ToString();
+            ArrowSize.ValidatingType = typeof(double);
+            ArrowSize.TextChanged += onArrowScale;
 
             ArrowBlockingLineLength.Text = BarsComputer.arrowBlockingLineLength.ToString();
             ArrowBlockingLineLength.ValidatingType = typeof(double);
@@ -93,7 +99,7 @@ namespace HamzaCad.BarsComputation
         {
             try
             {
-                BarsComputer.arrowScale = Double.Parse(ArrowScale.Text);
+                BarsComputer.arrowScale = Double.Parse(ArrowSize.Text);
             }
             catch
             {

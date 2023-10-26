@@ -11,8 +11,11 @@ namespace HamzaCad.BarsComputation
     {
         public static Editor ed;
         public static List<DrawingBar> bars;
+        public static bool isVertical = true;
 
         // for form
+        public static string lang = "Eng";
+
         public static double BarSpacing = 30.0;
         public static bool drawVertical { get; set; } = true ;
         public static bool drawHorizantal { get; set; } = true;
@@ -44,11 +47,13 @@ namespace HamzaCad.BarsComputation
             /* now we work with Rectilinear polygon that his lines always parallel to X or Y */
 
             bars = new List<DrawingBar>();
-            if (drawVertical) { 
+            if (drawVertical) {
+                isVertical = true;
                 bars =  VerticalBars.getVerticalBars(vertices);
             }
             if (drawHorizantal)
             {
+                isVertical = false;
                 List<Point2D> clonedvertices = new List<Point2D>(vertices);
                 Rotator.RotatePoints(clonedvertices, 90);
                 var Hbars = VerticalBars.getVerticalBars(clonedvertices);

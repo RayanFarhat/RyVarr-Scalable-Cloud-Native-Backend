@@ -115,10 +115,10 @@
   <ItemGroup>
     <Compile Include="BarsComputation\BarsComputer.cs" />
     <Compile Include="BarsComputation\DrawingBarGenerator.cs" />
-    <Compile Include="BarsComputation\MainWindow.cs">
+    <Compile Include="BarsComputation\Winforms\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BarsComputation\MainWindow.Designer.cs">
+    <Compile Include="BarsComputation\Winforms\MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="BarsComputation\MergeSortVerticalLine.cs" />
@@ -128,6 +128,9 @@
     <Compile Include="BarsComputation\Utils.cs" />
     <Compile Include="BarsComputation\VerticalBars.cs" />
     <Compile Include="BarsComputation\VerticalBars_FindIntersectVerticalLine.cs" />
+    <Compile Include="BarsComputation\Winforms\MainWindow_Language.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Main.cs" />
     <Compile Include="FirstBtn.cs" />
     <Compile Include="MenuManager.cs" />
@@ -137,7 +140,7 @@
     <None Include="load.scr" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="BarsComputation\MainWindow.resx">
+    <EmbeddedResource Include="BarsComputation\Winforms\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>

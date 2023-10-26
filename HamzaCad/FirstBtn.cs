@@ -29,7 +29,9 @@ namespace HamzaCad
             public event EventHandler CanExecuteChanged;
             public void Execute(object parameter)
             {
-
+                if (CanExecuteChanged == null)
+                {
+                }
                 Document doc = Application.DocumentManager.MdiActiveDocument;
                 Editor ed = doc.Editor;
                 BarsComputer.ed = ed;

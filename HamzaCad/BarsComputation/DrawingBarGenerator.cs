@@ -16,16 +16,11 @@ namespace HamzaCad.BarsComputation
             List<DrawingBar> verticalBars = new List<DrawingBar>();
             for (int i = 0; i < rectangles.Count; i++)
             {
-                var xMiddle = (rectangles[i].Xleft + rectangles[i].Xright) / 2;
+                var xPosition = (rectangles[i].Xleft + rectangles[i].Xright) / 2 - ((rectangles[i].Xright - rectangles[i].Xleft)/4);
                 var top = rectangles[i].Yupper - BarsComputer.BarSpacing;
                 var down = rectangles[i].Ylower + BarsComputer.BarSpacing;
-                var texts = new List<DBText>();
-                DBText counttext = new DBText();
-                counttext.TextString = ((rectangles[i].Xright - rectangles[i].Xleft) / BarsComputer.BarSpacing).ToString("0");
-                counttext.Position = new Point3d(xMiddle + (BarsComputer.BarSpacing / 4), (top + down) / 2, 0.0);
-                counttext.Height = BarsComputer.fontSize;
-                texts.Add(counttext);
-                verticalBars.Add(new DrawingBar(getBarpolyline(top, down, xMiddle), texts,
+   
+                verticalBars.Add(new DrawingBar(getBarpolyline(top, down, xPosition), getTexts(rectangles[i],top,down,xPosition),
                     getArrows(rectangles[i]), getBlockingLines(rectangles[i])));
             }
             return verticalBars;
@@ -53,7 +48,7 @@ namespace HamzaCad.BarsComputation
         private static List<Leader> getArrows(Rectangle rect)
         {
             var xMiddle = (rect.Xleft + rect.Xright) / 2;
-            var yMiddle = (rect.Ylower + rect.Yupper) / 2;
+            var yMiddle = (rect.Ylower + rect.Yupper) / 2 - ((rect.Xright - rect.Xleft) / 10);
 
             var arrows = new List<Leader>();
             var rightArrow = new Leader();
@@ -74,7 +69,7 @@ namespace HamzaCad.BarsComputation
         }
         private static List<Line> getBlockingLines(Rectangle rect)
         {
-            var yMiddle = (rect.Ylower + rect.Yupper) / 2;
+            var yMiddle = (rect.Ylower + rect.Yupper) / 2 - ((rect.Xright - rect.Xleft) / 10);
             var lines = new List<Line>();
             Line rightPlockingLine = new Line
                 (new Point3d(rect.Xright, yMiddle + BarsComputer.arrowBlockingLineLength/2, 0), 
@@ -87,6 +82,28 @@ namespace HamzaCad.BarsComputation
             lines.Add(rightPlockingLine);
             lines.Add(leftPlockingLine);
             return lines;
+        }
+
+        private static List<DBText> getTexts(Rectangle rect,double top, double down, double x)
+        {
+            var yMiddle = (top + down) / 2;
+            var texts = new List<DBText>();
+            DBText counttext = new DBText();
+            counttext.TextString = ((rect.Xright - rect.Xleft) / BarsComputer.BarSpacing).ToString("0");
+            counttext.Position = new Point3d(x + BarsComputer.fontSize*0.1, (top + down) / 2, 0.0);
+            counttext.Height = BarsComputer.fontSize;
+            if (BarsComputer.isVertical)
+                counttext.Rotation = 90 * Math.PI / 180;
+
+            double L = 578;
+            DBText counttext2 = new DBText();
+            counttext2.TextString = "L %%Cw= " + L.ToString("0");
+            counttext2.Position = new Point3d(x - BarsComputer.fontSize*1.1, (top + down) / 2, 0.0);
+            counttext2.Height = BarsComputer.fontSize;
+            texts.Add(counttext2);
+
+            texts.Add(counttext);
+            return texts;
         }
     }
 }
