@@ -50,6 +50,15 @@ namespace HamzaCad.BarsComputation
             FontSize.Text = BarsComputer.fontSize.ToString();
             FontSize.ValidatingType = typeof(double);
             FontSize.TextChanged += onFontSize;
+
+            Diameter.Text = BarsComputer.Diameter.ToString();
+            Diameter.ValidatingType = typeof(double);
+            Diameter.TextChanged += onDiameter;
+
+            TopBars.Checked = true;
+            BottomBars.Checked = false;
+            TopBars.CheckedChanged += onTopBottomBars;
+            BottomBars.CheckedChanged += onTopBottomBars;
         }
         public void onCheck(object sender, EventArgs e)
         {
@@ -127,6 +136,21 @@ namespace HamzaCad.BarsComputation
             {
                 MessageBox.Show("Input must be a number.");
             }
+        }
+        private void onDiameter(object sender, EventArgs e)
+        {
+            try
+            {
+                BarsComputer.Diameter = Double.Parse(Diameter.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Input must be a number.");
+            }
+        }
+        private void onTopBottomBars(object sender, EventArgs e)
+        {
+            BarsComputer.iSTopBars = TopBars.Checked;
         }
     }
 }

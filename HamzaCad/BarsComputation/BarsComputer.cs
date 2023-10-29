@@ -24,6 +24,8 @@ namespace HamzaCad.BarsComputation
         public static double arrowScale { get; set; } = 5.0;
         public static double arrowBlockingLineLength { get; set; } = 15.0;
         public static double fontSize { get; set; } = 15.0;
+        public static bool iSTopBars { get; set; } = true; 
+        public static double Diameter { get; set; } = 12.0;
 
 
 

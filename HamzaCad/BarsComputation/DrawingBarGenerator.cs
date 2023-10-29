@@ -86,23 +86,31 @@ namespace HamzaCad.BarsComputation
 
         private static List<DBText> getTexts(Rectangle rect,double top, double down, double x)
         {
+            var count = ((rect.Xright - rect.Xleft) / BarsComputer.BarSpacing).ToString("0");
+            var diameter = BarsComputer.Diameter.ToString("0.##");
+            var spacing = BarsComputer.BarSpacing.ToString("0");
+            var barType = BarsComputer.lang == "Eng" ? 
+                (BarsComputer.iSTopBars ? " T.B." : " B.B.")
+                : BarsComputer.iSTopBars ? " .ב.ע" : " .ב.ת";
+            BarsComputer.ed.WriteMessage("\n " + BarsComputer.lang);
             var yMiddle = (top + down) / 2;
+
             var texts = new List<DBText>();
-            DBText counttext = new DBText();
-            counttext.TextString = ((rect.Xright - rect.Xleft) / BarsComputer.BarSpacing).ToString("0");
-            counttext.Position = new Point3d(x + BarsComputer.fontSize*0.1, (top + down) / 2, 0.0);
-            counttext.Height = BarsComputer.fontSize;
+
+            DBText upperText = new DBText();
+            upperText.TextString = "<>"+count+ "%%C"+diameter+"@"+spacing+ barType;
+            upperText.Position = new Point3d(x + BarsComputer.fontSize*0.1, (top + down) / 2, 0.0);
+            upperText.Height = BarsComputer.fontSize;
             if (BarsComputer.isVertical)
-                counttext.Rotation = 90 * Math.PI / 180;
+                upperText.Rotation = 90 * Math.PI / 180;
 
-            double L = 578;
-            DBText counttext2 = new DBText();
-            counttext2.TextString = "L %%Cw= " + L.ToString("0");
-            counttext2.Position = new Point3d(x - BarsComputer.fontSize*1.1, (top + down) / 2, 0.0);
-            counttext2.Height = BarsComputer.fontSize;
-            texts.Add(counttext2);
+            DBText lowerText = new DBText();
+            lowerText.TextString = "L= " + (top-down).ToString("0.##");
+            lowerText.Position = new Point3d(x - BarsComputer.fontSize*1.1, (top + down) / 2, 0.0);
+            lowerText.Height = BarsComputer.fontSize;
 
-            texts.Add(counttext);
+            texts.Add(upperText);
+            texts.Add(lowerText);
             return texts;
         }
     }

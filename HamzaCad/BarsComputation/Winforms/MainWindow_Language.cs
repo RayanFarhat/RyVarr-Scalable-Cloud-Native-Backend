@@ -11,6 +11,8 @@ namespace HamzaCad.BarsComputation
     {
         public void onCheckEng(object sender, EventArgs e)
         {
+            BarsComputer.lang = "Eng";
+
             spacingLabel.Text = "Spacing";
             drawVertical.Text = "draw vertical";
             drawHorizontal.Text = "draw horizontal";
@@ -20,9 +22,15 @@ namespace HamzaCad.BarsComputation
             arrowSizelabel.Text = "Arrow Size";
             ArrowBlockingLineLengthLabel.Text = "Arrow Blocking Line Length";
             ExitBtn.Text = "Draw";
+            TopBars.Text = "T.B.";
+            BottomBars.Text = "B.B.";
+            DiameterLabel.Text = "Diameter";
+
         }
         public void onCheckHeb(object sender, EventArgs e)
         {
+            BarsComputer.lang = "Heb";
+
             spacingLabel.Text = "מרווחים";
             drawVertical.Text = "צייר אנכי";
             drawHorizontal.Text = "צייר אופקי";
@@ -32,6 +40,9 @@ namespace HamzaCad.BarsComputation
             arrowSizelabel.Text = "גודל החץ";
             ArrowBlockingLineLengthLabel.Text = "אורך שורה חוסם חץ";
             ExitBtn.Text = "צייר";
+            TopBars.Text = ".ב.ע";
+            BottomBars.Text = ".ב.ת";
+            DiameterLabel.Text = "קוטר";
         }
     }
 }

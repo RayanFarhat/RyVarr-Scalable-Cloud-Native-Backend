@@ -48,8 +48,14 @@
             this.Heb = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.LanguageLabel = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.TopBars = new System.Windows.Forms.RadioButton();
+            this.BottomBars = new System.Windows.Forms.RadioButton();
+            this.DiameterLabel = new System.Windows.Forms.Label();
+            this.Diameter = new System.Windows.Forms.MaskedTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // drawVertical
@@ -173,6 +179,7 @@
             // Eng
             // 
             this.Eng.AutoSize = true;
+            this.Eng.Checked = true;
             this.Eng.Location = new System.Drawing.Point(3, 3);
             this.Eng.Name = "Eng";
             this.Eng.Size = new System.Drawing.Size(52, 20);
@@ -188,7 +195,6 @@
             this.Heb.Name = "Heb";
             this.Heb.Size = new System.Drawing.Size(54, 20);
             this.Heb.TabIndex = 17;
-            this.Heb.TabStop = true;
             this.Heb.Text = "Heb";
             this.Heb.UseVisualStyleBackColor = true;
             // 
@@ -210,11 +216,61 @@
             this.LanguageLabel.TabIndex = 19;
             this.LanguageLabel.Text = "Language:";
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.TopBars);
+            this.panel2.Controls.Add(this.BottomBars);
+            this.panel2.Location = new System.Drawing.Point(222, 135);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(127, 38);
+            this.panel2.TabIndex = 19;
+            // 
+            // TopBars
+            // 
+            this.TopBars.AutoSize = true;
+            this.TopBars.Checked = true;
+            this.TopBars.Location = new System.Drawing.Point(3, 3);
+            this.TopBars.Name = "TopBars";
+            this.TopBars.Size = new System.Drawing.Size(52, 20);
+            this.TopBars.TabIndex = 16;
+            this.TopBars.TabStop = true;
+            this.TopBars.Text = "T.B.";
+            this.TopBars.UseVisualStyleBackColor = true;
+            // 
+            // BottomBars
+            // 
+            this.BottomBars.AutoSize = true;
+            this.BottomBars.Location = new System.Drawing.Point(61, 3);
+            this.BottomBars.Name = "BottomBars";
+            this.BottomBars.Size = new System.Drawing.Size(52, 20);
+            this.BottomBars.TabIndex = 17;
+            this.BottomBars.Text = "B.B.";
+            this.BottomBars.UseVisualStyleBackColor = true;
+            // 
+            // DiameterLabel
+            // 
+            this.DiameterLabel.AutoSize = true;
+            this.DiameterLabel.Location = new System.Drawing.Point(36, 204);
+            this.DiameterLabel.Name = "DiameterLabel";
+            this.DiameterLabel.Size = new System.Drawing.Size(62, 16);
+            this.DiameterLabel.TabIndex = 20;
+            this.DiameterLabel.Text = "Diameter";
+            // 
+            // Diameter
+            // 
+            this.Diameter.Location = new System.Drawing.Point(36, 233);
+            this.Diameter.Name = "Diameter";
+            this.Diameter.Size = new System.Drawing.Size(100, 22);
+            this.Diameter.TabIndex = 21;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(602, 453);
+            this.Controls.Add(this.Diameter);
+            this.Controls.Add(this.DiameterLabel);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.LanguageLabel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.FontSize);
@@ -236,6 +292,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -262,5 +320,10 @@
         private System.Windows.Forms.RadioButton Heb;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label LanguageLabel;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.RadioButton TopBars;
+        private System.Windows.Forms.RadioButton BottomBars;
+        private System.Windows.Forms.Label DiameterLabel;
+        private System.Windows.Forms.MaskedTextBox Diameter;
     }
 }
