@@ -53,6 +53,8 @@
             this.BottomBars = new System.Windows.Forms.RadioButton();
             this.DiameterLabel = new System.Windows.Forms.Label();
             this.Diameter = new System.Windows.Forms.MaskedTextBox();
+            this.BarPolySpace = new System.Windows.Forms.MaskedTextBox();
+            this.BarPolySpaceLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -263,11 +265,29 @@
             this.Diameter.Size = new System.Drawing.Size(100, 22);
             this.Diameter.TabIndex = 21;
             // 
+            // BarPolySpace
+            // 
+            this.BarPolySpace.Location = new System.Drawing.Point(189, 233);
+            this.BarPolySpace.Name = "BarPolySpace";
+            this.BarPolySpace.Size = new System.Drawing.Size(100, 22);
+            this.BarPolySpace.TabIndex = 23;
+            // 
+            // BarPolySpaceLabel
+            // 
+            this.BarPolySpaceLabel.AutoSize = true;
+            this.BarPolySpaceLabel.Location = new System.Drawing.Point(189, 204);
+            this.BarPolySpaceLabel.Name = "BarPolySpaceLabel";
+            this.BarPolySpaceLabel.Size = new System.Drawing.Size(200, 16);
+            this.BarPolySpaceLabel.TabIndex = 22;
+            this.BarPolySpaceLabel.Text = "Space between bar and polyline";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(602, 453);
+            this.Controls.Add(this.BarPolySpace);
+            this.Controls.Add(this.BarPolySpaceLabel);
             this.Controls.Add(this.Diameter);
             this.Controls.Add(this.DiameterLabel);
             this.Controls.Add(this.panel2);
@@ -325,5 +345,7 @@
         private System.Windows.Forms.RadioButton BottomBars;
         private System.Windows.Forms.Label DiameterLabel;
         private System.Windows.Forms.MaskedTextBox Diameter;
+        private System.Windows.Forms.MaskedTextBox BarPolySpace;
+        private System.Windows.Forms.Label BarPolySpaceLabel;
     }
 }

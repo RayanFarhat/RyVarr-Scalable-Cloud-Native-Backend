@@ -16,9 +16,9 @@ namespace HamzaCad.BarsComputation
         public MainWindow()
         {
             InitializeComponent();
-
-            Eng.Checked = true;
-            Heb.Checked = false;
+            setLang();
+            Eng.Checked = BarsComputer.lang == "Eng"? true:false;
+            Heb.Checked = BarsComputer.lang == "Heb"? true:false;
             Eng.CheckedChanged += onCheckEng;
             Heb.CheckedChanged += onCheckHeb;
 
@@ -55,10 +55,14 @@ namespace HamzaCad.BarsComputation
             Diameter.ValidatingType = typeof(double);
             Diameter.TextChanged += onDiameter;
 
-            TopBars.Checked = true;
-            BottomBars.Checked = false;
+            TopBars.Checked = BarsComputer.iSTopBars;
+            BottomBars.Checked = !BarsComputer.iSTopBars;
             TopBars.CheckedChanged += onTopBottomBars;
             BottomBars.CheckedChanged += onTopBottomBars;
+
+            BarPolySpace.Text = BarsComputer.BarPolySpace.ToString();
+            BarPolySpace.ValidatingType = typeof(double);
+            BarPolySpace.TextChanged += onBarPolySpace;
         }
         public void onCheck(object sender, EventArgs e)
         {
@@ -151,6 +155,17 @@ namespace HamzaCad.BarsComputation
         private void onTopBottomBars(object sender, EventArgs e)
         {
             BarsComputer.iSTopBars = TopBars.Checked;
+        }
+        private void onBarPolySpace(object sender, EventArgs e)
+        {
+            try
+            {
+                BarsComputer.BarPolySpace = Double.Parse(BarPolySpace.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Input must be a number.");
+            }
         }
     }
 }

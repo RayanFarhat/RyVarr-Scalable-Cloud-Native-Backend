@@ -4,15 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace HamzaCad.BarsComputation
 {
     public partial class MainWindow : Form
     {
-        public void onCheckEng(object sender, EventArgs e)
+        public void setLang()
         {
-            BarsComputer.lang = "Eng";
-
+            if(BarsComputer.lang == "Eng")
+            {
+                setEng();
+            }
+            else
+            {
+                setHeb();
+            }
+        }
+        private void setEng()
+        {
             spacingLabel.Text = "Spacing";
             drawVertical.Text = "draw vertical";
             drawHorizontal.Text = "draw horizontal";
@@ -25,12 +35,10 @@ namespace HamzaCad.BarsComputation
             TopBars.Text = "T.B.";
             BottomBars.Text = "B.B.";
             DiameterLabel.Text = "Diameter";
-
+            BarPolySpaceLabel.Text = "Space between bar and polyline";
         }
-        public void onCheckHeb(object sender, EventArgs e)
+        private void setHeb()
         {
-            BarsComputer.lang = "Heb";
-
             spacingLabel.Text = "מרווחים";
             drawVertical.Text = "צייר אנכי";
             drawHorizontal.Text = "צייר אופקי";
@@ -43,6 +51,17 @@ namespace HamzaCad.BarsComputation
             TopBars.Text = ".ב.ע";
             BottomBars.Text = ".ב.ת";
             DiameterLabel.Text = "קוטר";
+            BarPolySpaceLabel.Text = "רווח בין ברזל לפוליליין";
+        }
+        public void onCheckEng(object sender, EventArgs e)
+        {
+            BarsComputer.lang = "Eng";
+            setEng();
+        }
+        public void onCheckHeb(object sender, EventArgs e)
+        {
+            BarsComputer.lang = "Heb";
+            setHeb();
         }
     }
 }
