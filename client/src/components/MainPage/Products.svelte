@@ -1,7 +1,7 @@
 <div class="bg-base-200 p-4">
     <h1 class="text-5xl font-bold text-center mb-6">Products</h1>
     <div class="flex flex-col w-full lg:flex-row justify-center items-center">
-        <a class="button my-20" href="/product/hamzacad" style="--color: #dc2626;">
+        <a class="button my-20" href="/hamzacad" style="--color: #dc2626;">
             <span></span>
             <span></span>
             <span></span>

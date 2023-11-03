@@ -26,6 +26,7 @@ namespace HamzaCad.BarsComputation
             drawHorizontal.Checked = BarsComputer.drawHorizantal;
             drawVertical.CheckedChanged += onCheck;
             drawHorizontal.CheckedChanged += onCheck;
+
             ExitBtn.Click += onExitBtn;
 
             SpacingInput.Text = BarsComputer.BarSpacing.ToString();
@@ -63,6 +64,9 @@ namespace HamzaCad.BarsComputation
             BarPolySpace.Text = BarsComputer.BarPolySpace.ToString();
             BarPolySpace.ValidatingType = typeof(double);
             BarPolySpace.TextChanged += onBarPolySpace;
+
+            TextEditorBtn.Click += onTextEditorBtn;
+
         }
         public void onCheck(object sender, EventArgs e)
         {
@@ -166,6 +170,11 @@ namespace HamzaCad.BarsComputation
             {
                 MessageBox.Show("Input must be a number.");
             }
+        }
+        public void onTextEditorBtn(object sender, EventArgs e)
+        {
+            var m = new TextEditorWindow();
+            m.Show();// will continue the proccess of other window
         }
     }
 }

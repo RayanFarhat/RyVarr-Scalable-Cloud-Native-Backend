@@ -8,7 +8,7 @@
       <button class="btn btn-outline border-0 hover:bg-transparent hover:text-primary">
         Pricing</button></a></li>
         
-    <li><a class="mb-8 p-0 w-fit" href="/product/hamzacad">
+    <li><a class="mb-8 p-0 w-fit" href="/hamzacad">
       <button class="btn btn-outline border-0 hover:bg-transparent hover:text-primary">
         Hamzacad</button></a></li>
 
@@ -19,6 +19,6 @@
     <li><a class="p-0 w-fit" href="/2">
       <button class="btn btn-primary">
         {
-          $page.url.pathname.includes("/product/hamzacad")? "Download":"Let's Talk"
+          $page.url.pathname.includes("/hamzacad")? "Download":"Let's Talk"
           }</button></a></li>
   </ul>

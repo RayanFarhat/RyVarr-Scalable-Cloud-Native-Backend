@@ -36,6 +36,7 @@ namespace HamzaCad.BarsComputation
             BottomBars.Text = "B.B.";
             DiameterLabel.Text = "Diameter";
             BarPolySpaceLabel.Text = "Space between bar and polyline";
+            TextEditorBtn.Text = "Text Editor";
         }
         private void setHeb()
         {
@@ -52,6 +53,7 @@ namespace HamzaCad.BarsComputation
             BottomBars.Text = ".ב.ת";
             DiameterLabel.Text = "קוטר";
             BarPolySpaceLabel.Text = "רווח בין ברזל לפוליליין";
+            TextEditorBtn.Text = "עורך טקסט";
         }
         public void onCheckEng(object sender, EventArgs e)
         {

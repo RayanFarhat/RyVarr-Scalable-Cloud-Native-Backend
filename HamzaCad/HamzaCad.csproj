@@ -131,6 +131,15 @@
     <Compile Include="BarsComputation\Winforms\MainWindow_Language.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="BarsComputation\Winforms\TextEditorWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BarsComputation\Winforms\TextEditorWindow.Designer.cs">
+      <DependentUpon>TextEditorWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BarsComputation\Winforms\TextEditorWindow_Language.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Main.cs" />
     <Compile Include="FirstBtn.cs" />
     <Compile Include="MenuManager.cs" />
@@ -142,6 +151,9 @@
   <ItemGroup>
     <EmbeddedResource Include="BarsComputation\Winforms\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BarsComputation\Winforms\TextEditorWindow.resx">
+      <DependentUpon>TextEditorWindow.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

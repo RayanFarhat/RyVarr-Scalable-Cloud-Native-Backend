@@ -89,16 +89,14 @@ namespace HamzaCad.BarsComputation
             var count = ((rect.Xright - rect.Xleft) / BarsComputer.BarSpacing).ToString("0");
             var diameter = BarsComputer.Diameter.ToString("0.##");
             var spacing = BarsComputer.BarSpacing.ToString("0");
-            var barType = BarsComputer.lang == "Eng" ? 
-                (BarsComputer.iSTopBars ? " T.B." : " B.B.")
-                : BarsComputer.iSTopBars ? " .ב.ע" : " .ב.ת";
+            var barType = BarsComputer.iSTopBars ? BarsComputer.topBarSymbol : BarsComputer.lowerBarSymbol;
             BarsComputer.ed.WriteMessage("\n " + BarsComputer.lang);
             var yMiddle = (top + down) / 2;
 
             var texts = new List<DBText>();
 
             DBText upperText = new DBText();
-            upperText.TextString = "<>"+count+ "%%C"+diameter+"@"+spacing+ barType;
+            upperText.TextString = "<>"+count+ "%%C"+diameter+"@"+spacing+" "+ barType;
             upperText.Position = new Point3d(x + BarsComputer.fontSize*0.1, (top + down) / 2, 0.0);
             upperText.Height = BarsComputer.fontSize;
             if (BarsComputer.isVertical)

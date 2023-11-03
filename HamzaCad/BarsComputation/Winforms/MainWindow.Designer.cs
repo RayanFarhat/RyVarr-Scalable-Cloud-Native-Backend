@@ -55,6 +55,7 @@
             this.Diameter = new System.Windows.Forms.MaskedTextBox();
             this.BarPolySpace = new System.Windows.Forms.MaskedTextBox();
             this.BarPolySpaceLabel = new System.Windows.Forms.Label();
+            this.TextEditorBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -281,11 +282,21 @@
             this.BarPolySpaceLabel.TabIndex = 22;
             this.BarPolySpaceLabel.Text = "Space between bar and polyline";
             // 
+            // TextEditorBtn
+            // 
+            this.TextEditorBtn.Location = new System.Drawing.Point(231, 7);
+            this.TextEditorBtn.Name = "TextEditorBtn";
+            this.TextEditorBtn.Size = new System.Drawing.Size(104, 23);
+            this.TextEditorBtn.TabIndex = 24;
+            this.TextEditorBtn.Text = "Text Editor";
+            this.TextEditorBtn.UseVisualStyleBackColor = true;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(602, 453);
+            this.Controls.Add(this.TextEditorBtn);
             this.Controls.Add(this.BarPolySpace);
             this.Controls.Add(this.BarPolySpaceLabel);
             this.Controls.Add(this.Diameter);
@@ -347,5 +358,6 @@
         private System.Windows.Forms.MaskedTextBox Diameter;
         private System.Windows.Forms.MaskedTextBox BarPolySpace;
         private System.Windows.Forms.Label BarPolySpaceLabel;
+        private System.Windows.Forms.Button TextEditorBtn;
     }
 }
