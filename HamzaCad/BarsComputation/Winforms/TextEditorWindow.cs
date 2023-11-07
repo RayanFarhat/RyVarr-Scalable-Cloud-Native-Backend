@@ -26,7 +26,7 @@ namespace HamzaCad.BarsComputation
             TopBarSymbol.Text = BarsComputer.topBarSymbol;
             TopBarSymbol.ValidatingType = typeof(string);
             TopBarSymbol.TextChanged += onTopBarSymbol;
-            LowerBarSymbol.Text = BarsComputer.lowerBarSymbol; 
+            LowerBarSymbol.Text = BarsComputer.bottomrBarSymbol; 
             LowerBarSymbol.ValidatingType = typeof(string);
             LowerBarSymbol.TextChanged += onLowerBarSymbol;
         }
@@ -63,7 +63,7 @@ namespace HamzaCad.BarsComputation
         }
         public void onLowerBarSymbol(object sender, EventArgs e)
         {
-            BarsComputer.lowerBarSymbol = LowerBarSymbol.Text;
+            BarsComputer.bottomrBarSymbol = LowerBarSymbol.Text;
         }
     }
 }

@@ -26,12 +26,12 @@ namespace HamzaCad.BarsComputation
         public static double fontSize { get; set; } = 15.0;
         public static bool iSTopBars { get; set; } = true;
         public static string topBarSymbol = "T.B";
-        public static string lowerBarSymbol = "L.B";
+        public static string bottomrBarSymbol = "B.B";
 
         public static double Diameter { get; set; } = 12.0; 
         public static double BarPolySpace { get; set; } = 5.0;
 
-        public static string upperText = "<>{q}%%C{d}@{s} {t}";
+        public static string upperText = "<>{Q}%%C{D}@{S} {TB}";
         public static string lowerText = "L={L}";
 
 

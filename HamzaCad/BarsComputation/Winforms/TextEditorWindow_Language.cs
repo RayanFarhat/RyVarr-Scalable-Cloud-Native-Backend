@@ -28,7 +28,7 @@ namespace HamzaCad.BarsComputation
             LLabel.Text = "{L} = length";
             QLabel.Text = "{Q} = quantity";
             SLabel.Text = "{S} = spacing";
-            BRLabel.Text = "{BR} = bar type";
+            BRLabel.Text = "{TB} = Top/Bottom Bar Symbol";
             DLabel.Text = "{D} = diameter";
             TopBarSymbolLabel.Text = "Top Bar Symbol";
             LowerBarSymbolLabel.Text = "lower Bar Symbol";

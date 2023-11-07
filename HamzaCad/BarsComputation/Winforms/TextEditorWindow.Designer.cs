@@ -117,9 +117,9 @@
             this.BRLabel.AutoSize = true;
             this.BRLabel.Location = new System.Drawing.Point(22, 158);
             this.BRLabel.Name = "BRLabel";
-            this.BRLabel.Size = new System.Drawing.Size(98, 16);
+            this.BRLabel.Size = new System.Drawing.Size(192, 16);
             this.BRLabel.TabIndex = 8;
-            this.BRLabel.Text = "{BR} = bar type";
+            this.BRLabel.Text = "{TB} = Top/Bottom Bar Symbol";
             // 
             // DLabel
             // 

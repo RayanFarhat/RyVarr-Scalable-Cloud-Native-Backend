@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace HamzaCad.BarsComputation
@@ -86,30 +87,80 @@ namespace HamzaCad.BarsComputation
 
         private static List<DBText> getTexts(Rectangle rect,double top, double down, double x)
         {
-            var count = ((rect.Xright - rect.Xleft) / BarsComputer.BarSpacing).ToString("0");
-            var diameter = BarsComputer.Diameter.ToString("0.##");
-            var spacing = BarsComputer.BarSpacing.ToString("0");
-            var barType = BarsComputer.iSTopBars ? BarsComputer.topBarSymbol : BarsComputer.lowerBarSymbol;
-            BarsComputer.ed.WriteMessage("\n " + BarsComputer.lang);
-            var yMiddle = (top + down) / 2;
-
             var texts = new List<DBText>();
 
             DBText upperText = new DBText();
-            upperText.TextString = "<>"+count+ "%%C"+diameter+"@"+spacing+" "+ barType;
+            //upperText.TextString = "<>"+ quantity + "%%C"+diameter+"@"+spacing+" "+ barType;
+            upperText.TextString = getFinalUpperText(rect);
             upperText.Position = new Point3d(x + BarsComputer.fontSize*0.1, (top + down) / 2, 0.0);
             upperText.Height = BarsComputer.fontSize;
             if (BarsComputer.isVertical)
                 upperText.Rotation = 90 * Math.PI / 180;
 
             DBText lowerText = new DBText();
-            lowerText.TextString = "L= " + (top-down).ToString("0.##");
+            //lowerText.TextString = "L= " + (top-down).ToString("0.##");
+            lowerText.TextString = getFinalLowerText(rect);
             lowerText.Position = new Point3d(x - BarsComputer.fontSize*1.1, (top + down) / 2, 0.0);
             lowerText.Height = BarsComputer.fontSize;
+            if (BarsComputer.isVertical)
+                lowerText.Rotation = 90 * Math.PI / 180;
 
             texts.Add(upperText);
             texts.Add(lowerText);
             return texts;
+        }
+
+        private static string getFinalUpperText(Rectangle rect)
+        {
+            string result = BarsComputer.upperText;
+
+            var quantity = ((rect.Xright - rect.Xleft) / BarsComputer.BarSpacing).ToString("0");
+            string pattern = @"\{Q\}";
+            result = Regex.Replace(result, pattern, quantity);
+
+            var diameter = BarsComputer.Diameter.ToString("0.##");
+            pattern = @"\{D\}";
+            result = Regex.Replace(result, pattern, diameter);
+
+            var spacing = BarsComputer.BarSpacing.ToString("0");
+            pattern = @"\{S\}";
+            result = Regex.Replace(result, pattern, spacing);
+
+            var barType = BarsComputer.iSTopBars ? BarsComputer.topBarSymbol : BarsComputer.bottomrBarSymbol;
+            pattern = @"\{TB\}";
+            result = Regex.Replace(result, pattern, barType);
+
+            var len = rect.Yupper - rect.Ylower - (BarsComputer.BarPolySpace*2);
+            pattern = @"\{L\}";
+            result = Regex.Replace(result, pattern, len.ToString("0"));
+
+            return result;
+        }
+        private static string getFinalLowerText(Rectangle rect)
+        {
+            string result = BarsComputer.lowerText;
+
+            var quantity = ((rect.Xright - rect.Xleft) / BarsComputer.BarSpacing).ToString("0");
+            string pattern = @"\{Q\}";
+            result = Regex.Replace(result, pattern, quantity);
+
+            var diameter = BarsComputer.Diameter.ToString("0.##");
+            pattern = @"\{D\}";
+            result = Regex.Replace(result, pattern, diameter);
+
+            var spacing = BarsComputer.BarSpacing.ToString("0");
+            pattern = @"\{S\}";
+            result = Regex.Replace(result, pattern, spacing);
+
+            var barType = BarsComputer.iSTopBars ? BarsComputer.topBarSymbol : BarsComputer.bottomrBarSymbol;
+            pattern = @"\{TB\}";
+            result = Regex.Replace(result, pattern, barType);
+
+            var len = rect.Yupper - rect.Ylower - (BarsComputer.BarPolySpace * 2);
+            pattern = @"\{L\}";
+            result = Regex.Replace(result, pattern, len.ToString("0"));
+
+            return result;
         }
     }
 }
