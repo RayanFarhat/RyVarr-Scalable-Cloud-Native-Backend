@@ -52,6 +52,9 @@ namespace HamzaCad.BarsComputation
                     bars[i].ArrowsBlockingLines[j] = new Line(RotatePoint3d(line.StartPoint,angle,orginPoint),
                         RotatePoint3d(line.EndPoint, angle, orginPoint));
                 }
+                // rotate meeting circle
+                Point3d center = bars[i].MeetingCircle.Center;
+                bars[i].MeetingCircle.Center = RotatePoint3d(center, angle, orginPoint);
             }
             
         }

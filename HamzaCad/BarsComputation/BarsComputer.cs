@@ -14,9 +14,9 @@ namespace HamzaCad.BarsComputation
         public static bool isVertical = true;
 
         // for form
-        public static string lang = "Eng";
+        public static string lang { get; set; } = "Eng";
 
-        public static double BarSpacing = 30.0;
+        public static double BarSpacing { get; set; } = 30.0;
         public static bool drawVertical { get; set; } = true ;
         public static bool drawHorizantal { get; set; } = true;
         public static bool withEar { get; set; } = true;
@@ -25,14 +25,16 @@ namespace HamzaCad.BarsComputation
         public static double arrowBlockingLineLength { get; set; } = 15.0;
         public static double fontSize { get; set; } = 15.0;
         public static bool iSTopBars { get; set; } = true;
-        public static string topBarSymbol = "T.B";
-        public static string bottomrBarSymbol = "B.B";
+        public static string topBarSymbol { get; set; } = "T.B";
+        public static string bottomrBarSymbol { get; set; } = "B.B";
 
         public static double Diameter { get; set; } = 12.0; 
         public static double BarPolySpace { get; set; } = 5.0;
 
-        public static string upperText = "<>{Q}%%C{D}@{S} {TB}";
-        public static string lowerText = "L={L}";
+        public static string upperText { get; set; } = "<>{Q}%%C{D}@{S} {TB}";
+        public static string lowerText { get; set; } = "L={L}";
+        public static double MaxBarLength { get; set; } = 800;
+        public static double MeetingCircleRadius { get; set; } = 3.0;
 
 
         public static List<DrawingBar> getBars(Polyline shape)

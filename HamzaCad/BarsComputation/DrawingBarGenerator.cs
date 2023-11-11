@@ -22,7 +22,8 @@ namespace HamzaCad.BarsComputation
                 var down = rectangles[i].Ylower + BarsComputer.BarPolySpace;
    
                 verticalBars.Add(new DrawingBar(getBarpolyline(top, down, xPosition), getTexts(rectangles[i],top,down,xPosition),
-                    getArrows(rectangles[i]), getBlockingLines(rectangles[i])));
+                    getArrows(rectangles[i]), getBlockingLines(rectangles[i]),
+                    getMeetingCircle(rectangles[i])));
             }
             return verticalBars;
         }
@@ -83,6 +84,15 @@ namespace HamzaCad.BarsComputation
             lines.Add(rightPlockingLine);
             lines.Add(leftPlockingLine);
             return lines;
+        }
+        private static Circle getMeetingCircle(Rectangle rect)
+        {
+            var xpos = (rect.Xleft + rect.Xright) / 2 - ((rect.Xright - rect.Xleft) / 4);
+            var yMiddle = (rect.Ylower + rect.Yupper) / 2 - ((rect.Xright - rect.Xleft) / 10);
+            Circle Cir = new Circle();
+            Cir.Center = new Point3d(xpos, yMiddle, 0);
+            Cir.Radius = BarsComputer.MeetingCircleRadius;
+            return Cir;
         }
 
         private static List<DBText> getTexts(Rectangle rect,double top, double down, double x)

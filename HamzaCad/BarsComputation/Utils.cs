@@ -33,13 +33,16 @@ namespace HamzaCad.BarsComputation
         public List<Leader> Arrows { get; set; }
         public List<Line> ArrowsBlockingLines { get; set; }
 
+        public Circle MeetingCircle { get; set; }
 
-        public DrawingBar(Polyline Polygon, List<DBText> texts, List<Leader> arrows, List<Line> arrowsBlockingLines)
+        public DrawingBar(Polyline Polygon, List<DBText> texts, List<Leader> arrows, List<Line> arrowsBlockingLines
+            , Circle meetingCircle)
         {
             this.Polygon = Polygon;
             this.Texts = texts;
             Arrows = arrows;
             ArrowsBlockingLines = arrowsBlockingLines;
+            MeetingCircle = meetingCircle;
         }
     }
 

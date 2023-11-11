@@ -67,6 +67,13 @@ namespace HamzaCad.BarsComputation
 
             TextEditorBtn.Click += onTextEditorBtn;
 
+            MaxBarLength.Text = BarsComputer.MaxBarLength.ToString();
+            MaxBarLength.ValidatingType = typeof(double);
+            MaxBarLength.TextChanged += onMaxBarLength;
+
+            MeetingCircleRadius.Text = BarsComputer.MeetingCircleRadius.ToString();
+            MeetingCircleRadius.ValidatingType = typeof(double);
+            MeetingCircleRadius.TextChanged += onMeetingCircleRadius;
         }
         public void onCheck(object sender, EventArgs e)
         {
@@ -171,10 +178,34 @@ namespace HamzaCad.BarsComputation
                 MessageBox.Show("Input must be a number.");
             }
         }
+        
         public void onTextEditorBtn(object sender, EventArgs e)
         {
             var m = new TextEditorWindow();
             m.Show();// will continue the proccess of other window
+        }
+        
+        private void onMaxBarLength(object sender, EventArgs e)
+        {
+            try
+            {
+                BarsComputer.MaxBarLength = Double.Parse(MaxBarLength.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Input must be a number.");
+            }
+        }
+        private void onMeetingCircleRadius(object sender, EventArgs e)
+        {
+            try
+            {
+                BarsComputer.MeetingCircleRadius = Double.Parse(MeetingCircleRadius.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Input must be a number.");
+            }
         }
     }
 }

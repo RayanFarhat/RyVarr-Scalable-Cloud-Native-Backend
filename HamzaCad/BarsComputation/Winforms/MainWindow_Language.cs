@@ -37,6 +37,8 @@ namespace HamzaCad.BarsComputation
             DiameterLabel.Text = "Diameter";
             BarPolySpaceLabel.Text = "Space between bar and polyline";
             TextEditorBtn.Text = "Text Editor";
+            MaxBarLengthLabel.Text = "Max Bar Length";
+            MeetingCircleRadiusLabel.Text = "Meeting Circle Radius";
         }
         private void setHeb()
         {
@@ -54,6 +56,8 @@ namespace HamzaCad.BarsComputation
             DiameterLabel.Text = "קוטר";
             BarPolySpaceLabel.Text = "רווח בין ברזל לפוליליין";
             TextEditorBtn.Text = "עורך טקסט";
+            MaxBarLengthLabel.Text = "אורך ברזל המקסימלי";
+            MeetingCircleRadiusLabel.Text = "רַדִיוּס מעגל ההתנגשות";
         }
         public void onCheckEng(object sender, EventArgs e)
         {

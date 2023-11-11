@@ -56,6 +56,10 @@
             this.BarPolySpace = new System.Windows.Forms.MaskedTextBox();
             this.BarPolySpaceLabel = new System.Windows.Forms.Label();
             this.TextEditorBtn = new System.Windows.Forms.Button();
+            this.MaxBarLength = new System.Windows.Forms.MaskedTextBox();
+            this.MaxBarLengthLabel = new System.Windows.Forms.Label();
+            this.MeetingCircleRadius = new System.Windows.Forms.MaskedTextBox();
+            this.MeetingCircleRadiusLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -291,11 +295,47 @@
             this.TextEditorBtn.Text = "Text Editor";
             this.TextEditorBtn.UseVisualStyleBackColor = true;
             // 
+            // MaxBarLength
+            // 
+            this.MaxBarLength.Location = new System.Drawing.Point(36, 303);
+            this.MaxBarLength.Name = "MaxBarLength";
+            this.MaxBarLength.Size = new System.Drawing.Size(100, 22);
+            this.MaxBarLength.TabIndex = 26;
+            // 
+            // MaxBarLengthLabel
+            // 
+            this.MaxBarLengthLabel.AutoSize = true;
+            this.MaxBarLengthLabel.Location = new System.Drawing.Point(36, 274);
+            this.MaxBarLengthLabel.Name = "MaxBarLengthLabel";
+            this.MaxBarLengthLabel.Size = new System.Drawing.Size(94, 16);
+            this.MaxBarLengthLabel.TabIndex = 25;
+            this.MaxBarLengthLabel.Text = "Max bar length";
+            // 
+            // MeetingCircleRadius
+            // 
+            this.MeetingCircleRadius.Location = new System.Drawing.Point(186, 303);
+            this.MeetingCircleRadius.Name = "MeetingCircleRadius";
+            this.MeetingCircleRadius.Size = new System.Drawing.Size(100, 22);
+            this.MeetingCircleRadius.TabIndex = 28;
+            // 
+            // MeetingCircleRadiusLabel
+            // 
+            this.MeetingCircleRadiusLabel.AutoSize = true;
+            this.MeetingCircleRadiusLabel.Location = new System.Drawing.Point(186, 274);
+            this.MeetingCircleRadiusLabel.Name = "MeetingCircleRadiusLabel";
+            this.MeetingCircleRadiusLabel.Size = new System.Drawing.Size(138, 16);
+            this.MeetingCircleRadiusLabel.TabIndex = 27;
+            this.MeetingCircleRadiusLabel.Text = "Meeting Circle Radius";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(602, 453);
+            this.Controls.Add(this.MeetingCircleRadius);
+            this.Controls.Add(this.MeetingCircleRadiusLabel);
+            this.Controls.Add(this.MaxBarLength);
+            this.Controls.Add(this.MaxBarLengthLabel);
             this.Controls.Add(this.TextEditorBtn);
             this.Controls.Add(this.BarPolySpace);
             this.Controls.Add(this.BarPolySpaceLabel);
@@ -359,5 +399,9 @@
         private System.Windows.Forms.MaskedTextBox BarPolySpace;
         private System.Windows.Forms.Label BarPolySpaceLabel;
         private System.Windows.Forms.Button TextEditorBtn;
+        private System.Windows.Forms.MaskedTextBox MaxBarLength;
+        private System.Windows.Forms.Label MaxBarLengthLabel;
+        private System.Windows.Forms.MaskedTextBox MeetingCircleRadius;
+        private System.Windows.Forms.Label MeetingCircleRadiusLabel;
     }
 }
