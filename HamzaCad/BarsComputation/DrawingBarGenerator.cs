@@ -13,17 +13,25 @@ namespace HamzaCad.BarsComputation
     {
         public static List<DrawingBar> DrawingPolygons(List<Rectangle> rectangles)
         {
-
+            Random random = new Random();
+            int randomNumber = 0;
             List<DrawingBar> verticalBars = new List<DrawingBar>();
             for (int i = 0; i < rectangles.Count; i++)
             {
-                var xPosition = (rectangles[i].Xleft + rectangles[i].Xright) / 2 - ((rectangles[i].Xright - rectangles[i].Xleft)/4);
+                int prev = randomNumber;
+                while(prev == randomNumber)
+                    randomNumber = random.Next(3, 10);
+                var xPosition = 0.0;
+                if (i%2==0)
+                     xPosition = ((rectangles[i].Xleft + rectangles[i].Xright) / 2) - ((rectangles[i].Xright - rectangles[i].Xleft) / randomNumber);
+                else
+                     xPosition = ((rectangles[i].Xleft + rectangles[i].Xright) / 2) + ((rectangles[i].Xright - rectangles[i].Xleft) / randomNumber);
                 var top = rectangles[i].Yupper - BarsComputer.BarPolySpace;
                 var down = rectangles[i].Ylower + BarsComputer.BarPolySpace;
    
                 verticalBars.Add(new DrawingBar(getBarpolyline(top, down, xPosition), getTexts(rectangles[i],top,down,xPosition),
                     getArrows(rectangles[i]), getBlockingLines(rectangles[i]),
-                    getMeetingCircle(rectangles[i])));
+                    getMeetingCircle(rectangles[i], xPosition)));
             }
             return verticalBars;
         }
@@ -85,9 +93,8 @@ namespace HamzaCad.BarsComputation
             lines.Add(leftPlockingLine);
             return lines;
         }
-        private static Circle getMeetingCircle(Rectangle rect)
+        private static Circle getMeetingCircle(Rectangle rect,double xpos)
         {
-            var xpos = (rect.Xleft + rect.Xright) / 2 - ((rect.Xright - rect.Xleft) / 4);
             var yMiddle = (rect.Ylower + rect.Yupper) / 2 - ((rect.Xright - rect.Xleft) / 10);
             Circle Cir = new Circle();
             Cir.Center = new Point3d(xpos, yMiddle, 0);

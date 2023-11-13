@@ -118,6 +118,28 @@ namespace HamzaCad.BarsComputation
             //    BarsComputer.ed.WriteMessage("left x " + rectangles[i].Xleft + "\n");
             //    BarsComputer.ed.WriteMessage("right x " + rectangles[i].Xright + "\n");
             //}
+
+
+            // spllit long rectangles
+            for (int i = rectangles.Count - 1; i >= 0; i--)
+            {
+                var len = rectangles[i].Yupper - rectangles[i].Ylower;
+                if (len > BarsComputer.MaxBarLength)
+                {
+                    var connLen = BarsComputer.Diameter * 6;//law
+                    var rect1 = new Rectangle(rectangles[i].Yupper,
+                        rectangles[i].Ylower+(len/2)-(connLen/2),
+                        rectangles[i].Xleft, rectangles[i].Xright);
+                    var rect2 = new Rectangle(rectangles[i].Yupper - (len / 2) + (connLen / 2),
+                        rectangles[i].Ylower,
+                        rectangles[i].Xleft, rectangles[i].Xright);
+                    rectangles.RemoveAt(i);
+                    rectangles.Add(rect1);
+                    rectangles.Add(rect2);
+                }
+            }
+
+
             return rectangles;
         }
 
