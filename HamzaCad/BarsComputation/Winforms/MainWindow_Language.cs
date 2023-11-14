@@ -32,8 +32,8 @@ namespace HamzaCad.BarsComputation
             arrowSizelabel.Text = "Arrow Size";
             ArrowBlockingLineLengthLabel.Text = "Arrow Blocking Line Length";
             ExitBtn.Text = "Draw";
-            TopBars.Text = "T.B.";
-            BottomBars.Text = "B.B.";
+            TopBars.Text = "Upper Iron";
+            BottomBars.Text = "Lower Iron";
             DiameterLabel.Text = "Diameter";
             BarPolySpaceLabel.Text = "Space between bar and polyline";
             TextEditorBtn.Text = "Text Editor";
@@ -53,8 +53,8 @@ namespace HamzaCad.BarsComputation
             arrowSizelabel.Text = "גודל החץ";
             ArrowBlockingLineLengthLabel.Text = "אורך שורה חוסם חץ";
             ExitBtn.Text = "צייר";
-            TopBars.Text = ".ב.ע";
-            BottomBars.Text = ".ב.ת";
+            TopBars.Text = "ברזל עליון";
+            BottomBars.Text = "ברזל תחתון";
             DiameterLabel.Text = "קוטר";
             BarPolySpaceLabel.Text = "רווח בין ברזל לפוליליין";
             TextEditorBtn.Text = "עורך טקסט";

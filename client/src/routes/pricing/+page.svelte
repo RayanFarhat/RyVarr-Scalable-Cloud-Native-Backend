@@ -7,7 +7,7 @@
                     Pro Subscription per Month</h2>
                 <div class="stat">
                     <div class="stat-value text-primary flex items-center justify-center">
-                        $19   <span class="text-white text-base font-normal text-justify">&nbsp;&nbsp;USD</span>
+                        $19.99   <span class="text-white text-base font-normal text-justify">&nbsp;&nbsp;USD</span>
                     </div>
                 </div>
                 <svg  class="w-6 h-6 text-primary stroke-primary stroke-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -22,7 +22,7 @@
                     Pro Subscription per Year</h2>
                 <div class="stat">
                     <div class="stat-value text-primary flex items-center justify-center">
-                        $199   <span class="text-white text-base font-normal text-justify">&nbsp;&nbsp;USD</span>
+                        $199.99   <span class="text-white text-base font-normal text-justify">&nbsp;&nbsp;USD</span>
                     </div>
                     <div class="stat-desc">save around 17%</div>
                 </div>        

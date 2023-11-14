@@ -18,9 +18,9 @@ namespace HamzaCad
         public RibbonButton item { get; set; }
         public FirstBtn() {
             item = new RibbonButton();
-            item.Name = "FirstBtn";
+            item.Name = "Draw";
             item.ShowText = true;
-            item.Text = "FirstBtn";
+            item.Text = "Draw";
             item.CommandHandler = new FirstBtnCommandHandler();
         }
         public class FirstBtnCommandHandler : System.Windows.Input.ICommand

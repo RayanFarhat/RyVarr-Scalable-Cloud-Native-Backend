@@ -233,7 +233,7 @@
             this.panel2.Controls.Add(this.BottomBars);
             this.panel2.Location = new System.Drawing.Point(222, 135);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(127, 38);
+            this.panel2.Size = new System.Drawing.Size(214, 38);
             this.panel2.TabIndex = 19;
             // 
             // TopBars
@@ -242,20 +242,20 @@
             this.TopBars.Checked = true;
             this.TopBars.Location = new System.Drawing.Point(3, 3);
             this.TopBars.Name = "TopBars";
-            this.TopBars.Size = new System.Drawing.Size(52, 20);
+            this.TopBars.Size = new System.Drawing.Size(91, 20);
             this.TopBars.TabIndex = 16;
             this.TopBars.TabStop = true;
-            this.TopBars.Text = "T.B.";
+            this.TopBars.Text = "Upper Iron";
             this.TopBars.UseVisualStyleBackColor = true;
             // 
             // BottomBars
             // 
             this.BottomBars.AutoSize = true;
-            this.BottomBars.Location = new System.Drawing.Point(61, 3);
+            this.BottomBars.Location = new System.Drawing.Point(100, 3);
             this.BottomBars.Name = "BottomBars";
-            this.BottomBars.Size = new System.Drawing.Size(52, 20);
+            this.BottomBars.Size = new System.Drawing.Size(89, 20);
             this.BottomBars.TabIndex = 17;
-            this.BottomBars.Text = "B.B.";
+            this.BottomBars.Text = "Lower Iron";
             this.BottomBars.UseVisualStyleBackColor = true;
             // 
             // DiameterLabel

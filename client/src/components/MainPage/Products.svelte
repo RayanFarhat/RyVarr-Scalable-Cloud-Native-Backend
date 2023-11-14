@@ -1,4 +1,4 @@
-<div class="bg-base-200 p-4">
+<div class="bg-base-200 p-4 border m-6 border-primary">
     <h1 class="text-5xl font-bold text-center mb-6">Products</h1>
     <div class="flex flex-col w-full lg:flex-row justify-center items-center">
         <a class="button my-20" href="/hamzacad" style="--color: #dc2626;">
@@ -16,7 +16,7 @@
   padding: 16px 30px;
   font-size: 1.5rem;
   color: var(--color);
-  border: 2px solid rgba(0, 0, 0, 0.5);
+  border: 0px solid rgba(0, 0, 0, 0.5);
   border-radius: 4px;
   text-shadow: 0 0 15px var(--color);
   text-decoration: none;
@@ -28,7 +28,7 @@
 
 .button:hover {
   color: #fff;
-  border: 2px solid rgba(0, 0, 0, 0);
+  border: 0px solid rgba(0, 0, 0, 0);
   box-shadow: 0 0 0px var(--color);
 }
 
