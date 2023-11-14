@@ -34,6 +34,8 @@ namespace HamzaCad.BarsComputation
         public static double MaxBarLength { get; set; } = 800;
         public static double MeetingCircleRadius { get; set; } = 3.0;
 
+        public static int ironColor { get; set; } = 4; 
+        public static int IronLineWeight { get; set; } = 35;
 
         public static List<DrawingBar> getBars(Polyline shape)
         {

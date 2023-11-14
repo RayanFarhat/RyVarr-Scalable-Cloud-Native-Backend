@@ -39,6 +39,8 @@ namespace HamzaCad.BarsComputation
             TextEditorBtn.Text = "Text Editor";
             MaxBarLengthLabel.Text = "Max Bar Length";
             MeetingCircleRadiusLabel.Text = "Meeting Circle Radius";
+            IronColorLabel.Text = "Iron Color";
+            IronLineWeightLabel.Text = "Iron LineWeight";
         }
         private void setHeb()
         {
@@ -58,6 +60,8 @@ namespace HamzaCad.BarsComputation
             TextEditorBtn.Text = "עורך טקסט";
             MaxBarLengthLabel.Text = "אורך ברזל המקסימלי";
             MeetingCircleRadiusLabel.Text = "רַדִיוּס מעגל ההתנגשות";
+            IronColorLabel.Text = "צבע הברזל";
+            IronLineWeightLabel.Text = "משקל קו הברזל";
         }
         public void onCheckEng(object sender, EventArgs e)
         {

@@ -60,6 +60,10 @@
             this.MaxBarLengthLabel = new System.Windows.Forms.Label();
             this.MeetingCircleRadius = new System.Windows.Forms.MaskedTextBox();
             this.MeetingCircleRadiusLabel = new System.Windows.Forms.Label();
+            this.IronColor = new System.Windows.Forms.ComboBox();
+            this.IronColorLabel = new System.Windows.Forms.Label();
+            this.IronLineWeight = new System.Windows.Forms.ComboBox();
+            this.IronLineWeightLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -327,11 +331,51 @@
             this.MeetingCircleRadiusLabel.TabIndex = 27;
             this.MeetingCircleRadiusLabel.Text = "Meeting Circle Radius";
             // 
+            // IronColor
+            // 
+            this.IronColor.FormattingEnabled = true;
+            this.IronColor.Location = new System.Drawing.Point(372, 301);
+            this.IronColor.Name = "IronColor";
+            this.IronColor.Size = new System.Drawing.Size(121, 24);
+            this.IronColor.TabIndex = 29;
+            // 
+            // IronColorLabel
+            // 
+            this.IronColorLabel.AutoSize = true;
+            this.IronColorLabel.Location = new System.Drawing.Point(372, 279);
+            this.IronColorLabel.Name = "IronColorLabel";
+            this.IronColorLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.IronColorLabel.Size = new System.Drawing.Size(64, 16);
+            this.IronColorLabel.TabIndex = 30;
+            this.IronColorLabel.Text = "Iron Color";
+            // 
+            // IronLineWeight
+            // 
+            this.IronLineWeight.FormattingEnabled = true;
+            this.IronLineWeight.Location = new System.Drawing.Point(525, 303);
+            this.IronLineWeight.Name = "IronLineWeight";
+            this.IronLineWeight.Size = new System.Drawing.Size(121, 24);
+            this.IronLineWeight.TabIndex = 31;
+            // 
+            // IronLineWeightLabel
+            // 
+            this.IronLineWeightLabel.AutoSize = true;
+            this.IronLineWeightLabel.Location = new System.Drawing.Point(527, 279);
+            this.IronLineWeightLabel.Name = "IronLineWeightLabel";
+            this.IronLineWeightLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.IronLineWeightLabel.Size = new System.Drawing.Size(99, 16);
+            this.IronLineWeightLabel.TabIndex = 32;
+            this.IronLineWeightLabel.Text = "Iron LineWeight";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(602, 453);
+            this.ClientSize = new System.Drawing.Size(682, 453);
+            this.Controls.Add(this.IronLineWeightLabel);
+            this.Controls.Add(this.IronLineWeight);
+            this.Controls.Add(this.IronColorLabel);
+            this.Controls.Add(this.IronColor);
             this.Controls.Add(this.MeetingCircleRadius);
             this.Controls.Add(this.MeetingCircleRadiusLabel);
             this.Controls.Add(this.MaxBarLength);
@@ -403,5 +447,9 @@
         private System.Windows.Forms.Label MaxBarLengthLabel;
         private System.Windows.Forms.MaskedTextBox MeetingCircleRadius;
         private System.Windows.Forms.Label MeetingCircleRadiusLabel;
+        private System.Windows.Forms.ComboBox IronColor;
+        private System.Windows.Forms.Label IronColorLabel;
+        private System.Windows.Forms.ComboBox IronLineWeight;
+        private System.Windows.Forms.Label IronLineWeightLabel;
     }
 }

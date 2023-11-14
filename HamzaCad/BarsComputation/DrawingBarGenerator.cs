@@ -53,6 +53,8 @@ namespace HamzaCad.BarsComputation
             {
                 polyline.AddVertexAt(2, new Point2d(x - BarsComputer.earLength, top), 0, 0, 0);
             }
+            polyline.ColorIndex = BarsComputer.ironColor;
+            polyline.LineWeight = (LineWeight)BarsComputer.IronLineWeight;
             return polyline;
         }
         private static List<Leader> getArrows(Rectangle rect)

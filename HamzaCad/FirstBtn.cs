@@ -40,6 +40,7 @@ namespace HamzaCad
                 doc.LockDocument();
 
                 Database db = doc.Database;
+                db.LineWeightDisplay = true;
                 using (Transaction trans = db.TransactionManager.StartTransaction())
                 {
 
