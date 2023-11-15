@@ -11,8 +11,10 @@ namespace HamzaCad.BarsComputation
 {
     public class DrawingBarGenerator
     {
+        private static List<double> arrowsY = new List<double>();
         public static List<DrawingBar> DrawingPolygons(List<Rectangle> rectangles)
         {
+            arrowsY.Clear();
             Random random = new Random();
             int randomNumber = 0;
             List<DrawingBar> verticalBars = new List<DrawingBar>();
@@ -59,20 +61,37 @@ namespace HamzaCad.BarsComputation
         }
         private static List<Leader> getArrows(Rectangle rect)
         {
+            double y=(rect.Ylower +rect.Yupper) / 2 - ((rect.Xright - rect.Xleft) / 10);
+            bool Yfount = false;
+            for (int i = 0; i < arrowsY.Count; i++)
+            {
+                if (arrowsY[i] < rect.Yupper && arrowsY[i] > rect.Ylower)
+                {
+                    y = arrowsY[i];
+                    Yfount = true;
+                    break;
+                }
+            }
+            if (!Yfount)
+            {
+                y = (rect.Ylower + rect.Yupper) / 2 - ((rect.Xright - rect.Xleft) / 10);
+                arrowsY.Add(y);
+            }
+
+
             var xMiddle = (rect.Xleft + rect.Xright) / 2;
-            var yMiddle = (rect.Ylower + rect.Yupper) / 2 - ((rect.Xright - rect.Xleft) / 10);
 
             var arrows = new List<Leader>();
             var rightArrow = new Leader();
-            rightArrow.AppendVertex(new Point3d(rect.Xright - BarsComputer.BarPolySpace, yMiddle, 0));
-            rightArrow.AppendVertex(new Point3d(xMiddle, yMiddle, 0));
+            rightArrow.AppendVertex(new Point3d(rect.Xright - BarsComputer.BarPolySpace, y, 0));
+            rightArrow.AppendVertex(new Point3d(xMiddle, y, 0));
             rightArrow.HasArrowHead = true;
             //rightArrow.DimensionStyle = db.Dimstyle;
             rightArrow.Dimscale = 10.0;
             arrows.Add(rightArrow);
             var leftArrow = new Leader();
-            leftArrow.AppendVertex(new Point3d(rect.Xleft + BarsComputer.BarPolySpace, yMiddle, 0));
-            leftArrow.AppendVertex(new Point3d(xMiddle, yMiddle, 0));
+            leftArrow.AppendVertex(new Point3d(rect.Xleft + BarsComputer.BarPolySpace, y, 0));
+            leftArrow.AppendVertex(new Point3d(xMiddle, y, 0));
             leftArrow.HasArrowHead = true;
             //rightArrow.DimensionStyle = db.Dimstyle;
             leftArrow.Dimscale = BarsComputer.arrowScale;
@@ -81,15 +100,30 @@ namespace HamzaCad.BarsComputation
         }
         private static List<Line> getBlockingLines(Rectangle rect)
         {
-            var yMiddle = (rect.Ylower + rect.Yupper) / 2 - ((rect.Xright - rect.Xleft) / 10);
+            double y = (rect.Ylower + rect.Yupper) / 2 - ((rect.Xright - rect.Xleft) / 10);
+            bool Yfount = false;
+            for (int i = 0; i < arrowsY.Count; i++)
+            {
+                if (arrowsY[i] < rect.Yupper && arrowsY[i] > rect.Ylower)
+                {
+                    y = arrowsY[i];
+                    Yfount = true;
+                    break;
+                }
+            }
+            if (!Yfount)
+            {
+                y = (rect.Ylower + rect.Yupper) / 2 - ((rect.Xright - rect.Xleft) / 10);
+                arrowsY.Add(y);
+            }
             var lines = new List<Line>();
             Line rightPlockingLine = new Line
-                (new Point3d(rect.Xright - BarsComputer.BarPolySpace, yMiddle + BarsComputer.arrowBlockingLineLength/2, 0), 
-                new Point3d(rect.Xright - BarsComputer.BarPolySpace, yMiddle - BarsComputer.arrowBlockingLineLength/2, 0)
+                (new Point3d(rect.Xright - BarsComputer.BarPolySpace, y + BarsComputer.arrowBlockingLineLength/2, 0), 
+                new Point3d(rect.Xright - BarsComputer.BarPolySpace, y - BarsComputer.arrowBlockingLineLength/2, 0)
                 );
             Line leftPlockingLine = new Line(
-                new Point3d(rect.Xleft + BarsComputer.BarPolySpace, yMiddle + BarsComputer.arrowBlockingLineLength / 2, 0),
-                new Point3d(rect.Xleft + BarsComputer.BarPolySpace, yMiddle - BarsComputer.arrowBlockingLineLength / 2, 0)
+                new Point3d(rect.Xleft + BarsComputer.BarPolySpace, y + BarsComputer.arrowBlockingLineLength / 2, 0),
+                new Point3d(rect.Xleft + BarsComputer.BarPolySpace, y - BarsComputer.arrowBlockingLineLength / 2, 0)
                 );
             lines.Add(rightPlockingLine);
             lines.Add(leftPlockingLine);
