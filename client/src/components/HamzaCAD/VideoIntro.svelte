@@ -32,7 +32,7 @@
         <li><button
             on:click={() => source ="/hamzacad/hamzacad_lang.mp4"}
             >
-            Supporting multiple languages</button></li>
+            Supporting ENG/HEB languages </button></li>
     </ul>
     {#key source}
         <!-- muted to work more correctly -->

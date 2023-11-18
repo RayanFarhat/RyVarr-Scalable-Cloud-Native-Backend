@@ -13,7 +13,7 @@
                 Structure Engineers</span></h1>
         <p class="py-6">Automate your engineering workflow by utilizing custom software designed by you and built by us.</p>
         <div>
-        <button class="btn btn-outline btn-primary">Login</button>
+          <a class="p-0 hover:bg-transparentt" href="/login"><button class="btn btn-outline btn-primary">Login</button></a>
         <button class="btn btn-primary">Get Started</button>
         </div>
       </div>
