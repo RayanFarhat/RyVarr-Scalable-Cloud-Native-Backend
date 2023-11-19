@@ -1,6 +1,13 @@
 <script lang="ts">
-  
+    let emailErrors:string[]=[];
+    let passErrors:string[]=[];
+    let error401:string[]=[];
+
+
   async function onSubmit(e:any) {
+    emailErrors=[];
+    passErrors =[];
+    error401=[];
     e.preventDefault(); // Prevent the default form submission behavior
 
     const formData =  new FormData(e.target); // Get the form element
@@ -14,11 +21,24 @@
         'Content-Type': 'application/json'
         },
 			body: JSON.stringify(json)
-		})
-		const data = await res.json();
+      })
+      const data = await res.json();
         console.log(data);
-
+        if (data.status == 401) {
+          error401=["email or password are worng!"];
+        }
+        if (data.status == 400) 
+      {
+        if (data.errors.Email != undefined)
+        {
+          emailErrors=data.errors.Email as string[];
+        }
+        if (data.errors.Password != undefined)
+        {
+          passErrors=data.errors.Password as string[];
+        }
       }
+  }
 </script>
 
 <div class="hero min-h-screen pt-9 bg-base-200">
@@ -39,17 +59,26 @@
             <label for="loginemail" class="label">
               <span class="label-text">Email</span>
             </label>
-            <input name="email" id="loginemail" type="email" placeholder="email" class="input input-bordered" required />
+            <input name="email" id="loginemail" placeholder="email" class="input input-bordered" />
+            {#each emailErrors as error}
+              <li class="text-error">{error}</li><br/>
+            {/each}
           </div>
           <div class="form-control">
             <label for="loginpassword" class="label">
               <span class="label-text">Password</span>
             </label>
-            <input name="password" id="loginpassword" type="password" placeholder="password" class="input input-bordered" required />
+            <input name="password" id="loginpassword" type="password" placeholder="password" class="input input-bordered" />
+            {#each passErrors as error}
+              <li class="text-error">{error}</li><br/>
+            {/each}
             <!-- svelte-ignore a11y-label-has-associated-control -->
             <label class="label">
               <a href="/forgotpassword" class="label-text-alt link link-hover">Forgot password?</a>
             </label>
+            {#each error401 as error}
+            <br/><li class="text-error">{error}</li>
+            {/each}
           </div>
           <div class="form-control mt-6">
             <button class="btn btn-primary" type="submit">Login</button>

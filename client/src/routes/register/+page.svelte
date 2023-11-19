@@ -1,12 +1,47 @@
 <script lang="ts">
-  function onSubmit(e:any) {
+  let usernameErrors:string[]=[];
+  let emailErrors:string[]=[];
+  let passErrors:string[]=[];
+
+  async function onSubmit(e:any) {
+    usernameErrors=[];
+    emailErrors=[];
+    passErrors =[];
     e.preventDefault(); // Prevent the default form submission behavior
 
     const formData =  new FormData(e.target); // Get the form element
     let json = Object.fromEntries(formData.entries());
+    const endpoint = "http://localhost/api/Account/register";
     console.log(JSON.stringify(json));
-    
-      }
+
+    const res = await fetch(endpoint, {
+			method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+        },
+			body: JSON.stringify(json)
+      })
+      const data = await res.json();
+        console.log(data);
+        if (data.status == 400) {
+
+          if (data.errors.Username != undefined)
+           {
+            usernameErrors = data.errors.Username as string[];
+          }
+          if (data.errors.Email != undefined)
+           {
+            emailErrors=data.errors.Email as string[];
+
+          }
+          if (data.errors.Password != undefined)
+           {
+            passErrors=data.errors.Password as string[];
+            }
+        }
+        }
+
+
 </script>\
 
 <div class="hero min-h-screen pt-12 bg-base-200">
@@ -27,19 +62,28 @@
           <label for="loginusername" class="label">
             <span class="label-text">Username</span>
           </label>
-          <input name="username" id="loginusername" placeholder="Username" class="input input-bordered" required />
+          <input name="username" id="loginusername" placeholder="Username" class="input input-bordered" />
+          {#each usernameErrors as error}
+            <li class="text-error">{error}</li><br/>
+          {/each}
         </div>
           <div class="form-control">
             <label for="loginemail" class="label">
               <span class="label-text">Email</span>
             </label>
-            <input name="email" id="loginemail" type="email" placeholder="email" class="input input-bordered" required />
+            <input name="email" id="loginemail" placeholder="email" class="input input-bordered" />
+            {#each emailErrors as error}
+              <li class="text-error">{error}</li><br/>
+            {/each}
           </div>
           <div class="form-control">
             <label for="loginpassword" class="label">
               <span class="label-text">Password</span>
             </label>
-            <input name="password" id="loginpassword" type="password" placeholder="password" class="input input-bordered" required />
+            <input name="password" id="loginpassword" type="password" placeholder="password" class="input input-bordered" />
+              {#each passErrors as error}
+                <li class="text-error">{error}</li><br/>
+              {/each}
           </div>
           <div class="form-control mt-6">
             <button class="btn btn-primary" type="submit">Login</button>
