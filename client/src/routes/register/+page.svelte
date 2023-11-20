@@ -2,6 +2,10 @@
   let usernameErrors:string[]=[];
   let emailErrors:string[]=[];
   let passErrors:string[]=[];
+  let SuccessMsgVisable = false;
+  let FailMsgVisable = false;
+  let FailMsg = "";
+
 
   async function onSubmit(e:any) {
     usernameErrors=[];
@@ -39,9 +43,14 @@
             passErrors=data.errors.Password as string[];
             }
         }
+        else if(data.status == "Success"){
+          SuccessMsgVisable = true;
         }
-
-
+        else if(data.status == "Error"){
+          FailMsgVisable = true;
+          FailMsg = data.message;
+        }
+      }
 </script>\
 
 <div class="hero min-h-screen pt-12 bg-base-200">
@@ -86,9 +95,23 @@
               {/each}
           </div>
           <div class="form-control mt-6">
-            <button class="btn btn-primary" type="submit">Login</button>
+            <button class="btn btn-primary" type="submit">Register</button>
           </div>
         </form>
       </div>
     </div>
   </div>
+  {#if SuccessMsgVisable == true}
+  <div class="toast toast-center">
+    <div class="alert alert-success">
+      <span>User created successfully!</span>
+    </div>
+  </div>
+  {/if}
+  {#if FailMsgVisable == true}
+  <div class="toast toast-center">
+    <div class="alert alert-error">
+      <span>{FailMsg}</span>
+    </div>
+  </div>
+  {/if}

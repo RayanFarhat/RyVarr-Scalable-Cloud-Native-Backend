@@ -63,6 +63,7 @@ public class AccountController : ControllerBase
 
             return Ok(new
             {
+                status = 200,
                 token = new JwtSecurityTokenHandler().WriteToken(token),
                 expiration = token.ValidTo
             });

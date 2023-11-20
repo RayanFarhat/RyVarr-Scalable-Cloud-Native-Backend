@@ -1,14 +1,45 @@
-<br/>
+<script lang="ts">
+  import { getAccountData } from "../../core/accountData";
+  import { browser } from "$app/environment";
+
+  let username: string = "username";
+  let isPro: boolean = true;
+
+  let accountdata = { username: username, isPro: isPro };
+  if (browser) {
+    accountdata = getAccountData();
+  }
+  console.log(accountdata);
+
+  if (accountdata.username != "") {
+    username = accountdata.username;
+    isPro = accountdata.isPro;
+  }
+</script>
+
+<br />
 <div class="flex justify-center mt-10">
-<div class="card bg-base-100 shadow-xl">
+  <div class="card bg-base-100 shadow-xl">
     <div class="card-body">
       <h2 class="card-title">
-        Hey Username
-        <div class="badge badge-secondary">PRO</div>
+        Hey {username}
+        {#if isPro == true}
+          <div class="badge badge-secondary">PRO</div>
+        {/if}
       </h2>
-      <p>You are a professional user and has the freedom to utilize the company's products without any restrictions.</p>
+      {#if isPro == true}
+        <p>
+          You are a professional user and has the freedom to utilize the
+          company's products without any restrictions.
+        </p>
+      {:else}
+        <p>
+          You are a not professional user and can't use the company's products.
+        </p>
+      {/if}
+
       <div class="card-actions justify-end">
-        <div class="badge badge-outline">HamzaCAD</div> 
+        <div class="badge badge-outline">HamzaCAD</div>
       </div>
     </div>
   </div>

@@ -1,3 +1,7 @@
-export function gotoURL(url:string){
-    window.location.href = url;
+import { browser } from "$app/environment";
+
+export function gotoURL(url: string) {
+    if (browser) {
+        window.location.href = url;
+    }
 }
