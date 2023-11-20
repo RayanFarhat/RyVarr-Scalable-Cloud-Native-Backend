@@ -131,9 +131,24 @@ namespace HamzaCad.BarsComputation
         }
         private static Circle getMeetingCircle(Rectangle rect,double xpos)
         {
-            var yMiddle = (rect.Ylower + rect.Yupper) / 2 - ((rect.Xright - rect.Xleft) / 10);
+            double y = (rect.Ylower + rect.Yupper) / 2 - ((rect.Xright - rect.Xleft) / 10);
+            bool Yfount = false;
+            for (int i = 0; i < arrowsY.Count; i++)
+            {
+                if (arrowsY[i] < rect.Yupper && arrowsY[i] > rect.Ylower)
+                {
+                    y = arrowsY[i];
+                    Yfount = true;
+                    break;
+                }
+            }
+            if (!Yfount)
+            {
+                y = (rect.Ylower + rect.Yupper) / 2 - ((rect.Xright - rect.Xleft) / 10);
+                arrowsY.Add(y);
+            }
             Circle Cir = new Circle();
-            Cir.Center = new Point3d(xpos, yMiddle, 0);
+            Cir.Center = new Point3d(xpos, y, 0);
             Cir.Radius = BarsComputer.MeetingCircleRadius;
             return Cir;
         }

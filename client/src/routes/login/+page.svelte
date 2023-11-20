@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { gotoURL } from "../../core/gotoURL";
+
     let emailErrors:string[]=[];
     let passErrors:string[]=[];
     let error401:string[]=[];
@@ -38,6 +40,10 @@
           passErrors=data.errors.Password as string[];
         }
       }
+
+
+        gotoURL('/profile');
+
   }
 </script>
 
