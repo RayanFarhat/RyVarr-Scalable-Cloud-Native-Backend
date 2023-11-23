@@ -1,5 +1,19 @@
 <script>
   import { page } from "$app/stores";
+  import { onMount } from "svelte";
+  import { getAccountData } from "../../core/accountData";
+  let btnUrl = "/login";
+  let btnTitle = "Login";
+
+  onMount(() => {
+    if (getAccountData().token != "") {
+      btnUrl = "/profile";
+      btnTitle = "Profile";
+    } else {
+      btnUrl = "login";
+      btnTitle = "Login";
+    }
+  });
 </script>
 
 <ul class="menu p-4 w-60 min-h-full bg-base-200 flex items-center">
@@ -25,8 +39,8 @@
   </li>
 
   <li>
-    <a class="p-0 w-fit" href="/login">
-      <button class="btn btn-outline btn-primary"> Login</button></a
+    <a class="p-0 w-fit" href={btnUrl}>
+      <button class="btn btn-outline btn-primary">{btnTitle}</button></a
     >
   </li>
 
