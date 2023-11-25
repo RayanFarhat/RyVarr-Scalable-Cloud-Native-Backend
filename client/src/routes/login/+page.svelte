@@ -1,10 +1,6 @@
 <script lang="ts">
   import { browser } from "$app/environment";
-  import {
-    setAccountData,
-    type AccountData,
-    getAccountData,
-  } from "../../core/accountData";
+  import { setAccountData } from "../../core/accountData";
   import { gotoURL } from "../../core/gotoURL";
 
   let emailErrors: string[] = [];
@@ -40,6 +36,8 @@
         passErrors = data.errors.Password as string[];
       }
     } else if (data.status == 200) {
+      console.log(data);
+
       const res = await fetch("http://localhost/api/Account", {
         method: "GET",
         headers: {
@@ -47,7 +45,6 @@
         },
       });
       const accountdata = await res.json();
-
       try {
         if (browser) {
           setAccountData({
@@ -55,7 +52,7 @@
             isPro: accountdata.isPro,
             proEndingDate: accountdata.proEndingDate,
             token: data.token,
-            expiration: accountdata.proEndingDate,
+            expiration: data.expiration,
           });
           gotoURL("/profile");
         }

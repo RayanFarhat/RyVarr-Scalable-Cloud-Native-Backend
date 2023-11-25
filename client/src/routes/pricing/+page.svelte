@@ -1,17 +1,41 @@
 <script lang="ts">
-    import { getAccountData } from "../../core/accountData";
+    import { browser } from "$app/environment";
+    import { getAccountData, type AccountData } from "../../core/accountData";
     import { gotoURL } from "../../core/gotoURL";
 
-    function onSubmitMonth() {
-        if (getAccountData().token != "") {
+    let userData: AccountData;
+    if (browser) {
+        userData = getAccountData();
+    }
+    async function onSubmitMonth() {
+        if (userData.token != "") {
             // todo make call with token and server give him redirect to paypal paying page
+            const endpoint = "http://localhost/api/Payment/Month";
+
+            const res = await fetch(endpoint, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${userData.token}`,
+                },
+            });
+            console.log(await res);
+
+            //let resJson = await res.json();
         } else {
             gotoURL("/login");
         }
     }
-    function onSubmitYear() {
-        if (getAccountData().token != "") {
+    async function onSubmitYear() {
+        if (userData.token != "") {
             // todo make call with token and server give him redirect to paypal paying page
+            const endpoint = "http://localhost/api/Payment/Year";
+            const res = await fetch(endpoint, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${userData.token}`,
+                },
+            });
+            //let resJson = await res.json();
         } else {
             gotoURL("/login");
         }

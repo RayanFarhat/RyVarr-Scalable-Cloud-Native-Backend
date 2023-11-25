@@ -16,7 +16,6 @@ if (browser) {
     accountDataStore.subscribe(v => window.localStorage.setItem('AccountData', JSON.stringify(v)));
 }
 
-
 export type AccountData = {
     username: string;
     isPro: boolean;
@@ -24,12 +23,15 @@ export type AccountData = {
     token: string;
     expiration: string;
 };
+
 export function setAccountData(state: AccountData) {
     accountDataStore.update((s) => state);
 }
+
 export function getAccountData(): AccountData {
     return JSON.parse(window.localStorage.getItem('AccountData') as string) as AccountData;
 }
+
 export function clearAccountData() {
     let state = {
         username: "",

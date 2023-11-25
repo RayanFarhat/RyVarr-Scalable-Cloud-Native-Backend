@@ -10,7 +10,7 @@
       btnUrl = "/profile";
       btnTitle = "Profile";
     } else {
-      btnUrl = "login";
+      btnUrl = "/login";
       btnTitle = "Login";
     }
   });

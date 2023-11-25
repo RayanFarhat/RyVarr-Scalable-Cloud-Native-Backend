@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { getAccountData } from "../../core/accountData";
+  import { clearAccountData, getAccountData } from "../../core/accountData";
   import { browser } from "$app/environment";
 
   let username: string = "username";
@@ -14,6 +14,11 @@
   if (accountdata.username != "") {
     username = accountdata.username;
     isPro = accountdata.isPro;
+  }
+  function onSignout() {
+    if (browser) {
+      clearAccountData();
+    }
   }
 </script>
 
@@ -41,6 +46,9 @@
       <div class="card-actions justify-end">
         <div class="badge badge-outline">HamzaCAD</div>
       </div>
+      <button on:click={onSignout} class="btn btn-outline btn-primary"
+        >Sign out</button
+      >
     </div>
   </div>
 </div>
