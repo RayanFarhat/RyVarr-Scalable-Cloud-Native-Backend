@@ -4,11 +4,15 @@
   import { getAccountData } from "../../core/accountData";
   let btnUrl = "/login";
   let btnTitle = "Login";
+  let btnPricingTitle = "Pricing";
 
   onMount(() => {
     if (getAccountData().token != "") {
       btnUrl = "/profile";
       btnTitle = "Profile";
+      if (getAccountData().isPro == true) {
+        btnPricingTitle = "Pro Status";
+      }
     } else {
       btnUrl = "/login";
       btnTitle = "Login";
@@ -22,8 +26,7 @@
     <a class="p-0 w-fit" href="/pricing">
       <button
         class="btn btn-outline border-0 hover:bg-transparent hover:text-primary"
-      >
-        Pricing</button
+        >{btnPricingTitle}</button
       ></a
     >
   </li>

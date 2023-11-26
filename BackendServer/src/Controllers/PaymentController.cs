@@ -121,7 +121,7 @@ public class PaymentController : ControllerBase
         // Create payment and get approval URL
         var createdPayment = payment.Create(_apiContext);
         var approvalUrl = createdPayment.links.FirstOrDefault(l => l.rel.Equals("approval_url", StringComparison.OrdinalIgnoreCase))?.href;
-        return Ok(approvalUrl);
+        return Ok(new Response { Status = "Success", Message = approvalUrl });
     }
 
     private async Task<string> PayPalReturnShared(string userId, string paymentId, string PayerID, int months)

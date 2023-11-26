@@ -3,13 +3,14 @@
     import { getAccountData, type AccountData } from "../../core/accountData";
     import { gotoURL } from "../../core/gotoURL";
 
+    //todo: if pro change btn title and apply countdown
+
     let userData: AccountData;
     if (browser) {
         userData = getAccountData();
     }
     async function onSubmitMonth() {
         if (userData.token != "") {
-            // todo make call with token and server give him redirect to paypal paying page
             const endpoint = "http://localhost/api/Payment/Month";
 
             const res = await fetch(endpoint, {
@@ -18,16 +19,23 @@
                     Authorization: `Bearer ${userData.token}`,
                 },
             });
-            console.log(await res);
 
-            //let resJson = await res.json();
+            let resJson = await res.json();
+
+            if (resJson.status == 404) {
+                console.log("not found");
+            } else if (resJson.status == "Success") {
+                if (browser) {
+                    window.open(resJson.message, "_blank")?.focus();
+                    console.log("aaaaaaaaaaa");
+                }
+            }
         } else {
             gotoURL("/login");
         }
     }
     async function onSubmitYear() {
         if (userData.token != "") {
-            // todo make call with token and server give him redirect to paypal paying page
             const endpoint = "http://localhost/api/Payment/Year";
             const res = await fetch(endpoint, {
                 method: "GET",
@@ -35,7 +43,15 @@
                     Authorization: `Bearer ${userData.token}`,
                 },
             });
-            //let resJson = await res.json();
+            let resJson = await res.json();
+
+            if (resJson.status == 404) {
+                console.log("not found");
+            } else if (resJson.status == "Success") {
+                if (browser) {
+                    window.open(resJson.message, "_blank")?.focus();
+                }
+            }
         } else {
             gotoURL("/login");
         }
@@ -44,6 +60,38 @@
 
 <div class="hero min-h-screen bg-base-100">
     <div class="hero-content flex-col lg:flex-row">
+        {#if getAccountData().isPro == true}
+            <div class=" pt-16">
+                <h1 class="text-5xl font-bold">Subscription end in:</h1>
+                <div class="grid grid-flow-col gap-5 text-center auto-cols-max">
+                    <div class="flex flex-col">
+                        <span class="countdown font-mono text-5xl">
+                            <span style="--value:15;"></span>
+                        </span>
+                        days
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="countdown font-mono text-5xl">
+                            <span style="--value:10;"></span>
+                        </span>
+                        hours
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="countdown font-mono text-5xl">
+                            <span style="--value:24;"></span>
+                        </span>
+                        min
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="countdown font-mono text-5xl">
+                            <span style="--value:5;"></span>
+                        </span>
+                        sec
+                    </div>
+                </div>
+            </div>
+        {/if}
+
         <!-- first col -->
         <div class="card shadow-xl bg-base-200 m-4">
             <div class="card-body items-center text-center">

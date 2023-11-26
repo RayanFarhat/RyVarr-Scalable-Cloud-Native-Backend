@@ -1,6 +1,7 @@
 <script lang="ts">
   import { clearAccountData, getAccountData } from "../../core/accountData";
   import { browser } from "$app/environment";
+  import { gotoURL } from "../../core/gotoURL";
 
   let username: string = "username";
   let isPro: boolean = true;
@@ -18,6 +19,7 @@
   function onSignout() {
     if (browser) {
       clearAccountData();
+      gotoURL("/login");
     }
   }
 </script>
