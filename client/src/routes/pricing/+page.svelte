@@ -3,9 +3,13 @@
     import { getAccountData, type AccountData } from "../../core/accountData";
     import { gotoURL } from "../../core/gotoURL";
 
-    //todo: if pro change btn title and apply countdown
-
-    let userData: AccountData;
+    let userData: AccountData = {
+        username: "",
+        isPro: false,
+        proEndingDate: "",
+        token: "",
+        expiration: "",
+    };
     if (browser) {
         userData = getAccountData();
     }
@@ -60,35 +64,10 @@
 
 <div class="hero min-h-screen bg-base-100">
     <div class="hero-content flex-col lg:flex-row">
-        {#if getAccountData().isPro == true}
+        {#if userData.isPro == true}
             <div class=" pt-16">
-                <h1 class="text-5xl font-bold">Subscription end in:</h1>
-                <div class="grid grid-flow-col gap-5 text-center auto-cols-max">
-                    <div class="flex flex-col">
-                        <span class="countdown font-mono text-5xl">
-                            <span style="--value:15;"></span>
-                        </span>
-                        days
-                    </div>
-                    <div class="flex flex-col">
-                        <span class="countdown font-mono text-5xl">
-                            <span style="--value:10;"></span>
-                        </span>
-                        hours
-                    </div>
-                    <div class="flex flex-col">
-                        <span class="countdown font-mono text-5xl">
-                            <span style="--value:24;"></span>
-                        </span>
-                        min
-                    </div>
-                    <div class="flex flex-col">
-                        <span class="countdown font-mono text-5xl">
-                            <span style="--value:5;"></span>
-                        </span>
-                        sec
-                    </div>
-                </div>
+                <h1 class="text-4xl">Subscription end in:</h1>
+                <h1 class="text-4xl font-bold">{userData.proEndingDate}</h1>
             </div>
         {/if}
 
@@ -121,7 +100,9 @@
                     />
                 </svg>
                 <button on:click={onSubmitMonth} class="btn btn-primary"
-                    >Subscribe Now</button
+                    >{userData.isPro
+                        ? "Extend by a month"
+                        : "Subscribe Now"}</button
                 >
             </div>
         </div>
@@ -140,7 +121,9 @@
                     </div>
                     <div class="stat-desc">save around 17%</div>
                     <button on:click={onSubmitYear} class="btn btn-primary mt-8"
-                        >Subscribe Now</button
+                        >{userData.isPro
+                            ? "Extend by a year"
+                            : "Subscribe Now"}</button
                     >
                 </div>
             </div>

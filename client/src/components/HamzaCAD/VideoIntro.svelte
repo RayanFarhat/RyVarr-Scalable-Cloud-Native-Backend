@@ -1,4 +1,17 @@
-<script>
+<script lang="ts">
+  import { browser } from "$app/environment";
+  import { getAccountData, type AccountData } from "../../core/accountData";
+  let userData: AccountData = {
+    username: "",
+    isPro: false,
+    proEndingDate: "",
+    token: "",
+    expiration: "",
+  };
+  if (browser) {
+    userData = getAccountData();
+  }
+
   let source = "/hamzacad/hamzacad_text.mp4";
 </script>
 
@@ -18,8 +31,13 @@
 </div>
 
 <div class="flex items-center flex-col">
-  <a class="p-0 my-20 hover:bg-transparentt" href="/pricing">
-    <button class="btn btn-primary">{"Subscribe and Download"}</button></a
+  <a
+    class="p-0 my-20 hover:bg-transparentt"
+    href={userData.isPro ? "/hamzacad/download" : "/pricing"}
+  >
+    <button class="btn btn-primary"
+      >{userData.isPro ? "Download Page" : "Subscribe and Download"}</button
+    ></a
   >
   <ul class="menu menu-horizontal bg-base-200 rounded-box">
     <li>

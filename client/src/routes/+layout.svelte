@@ -2,7 +2,11 @@
   import "../app.css";
   import Navbar from "../components/Navbar.svelte";
   import Footer from "../components/Footer.svelte";
-  import { setAccountData, getAccountData } from "../core/accountData";
+  import {
+    setAccountData,
+    getAccountData,
+    clearAccountData,
+  } from "../core/accountData";
   import { browser } from "$app/environment";
 
   async function updateAccountData() {
@@ -25,18 +29,22 @@
         },
       });
       const accountdata = await res.json();
-      try {
-        if (browser) {
-          setAccountData({
-            username: accountdata.username,
-            isPro: accountdata.isPro,
-            proEndingDate: accountdata.proEndingDate,
-            token: userData.token,
-            expiration: userData.expiration,
-          });
+      if (res.status == 401) {
+        clearAccountData();
+      } else {
+        try {
+          if (browser) {
+            setAccountData({
+              username: accountdata.username,
+              isPro: accountdata.isPro,
+              proEndingDate: accountdata.proEndingDate,
+              token: userData.token,
+              expiration: userData.expiration,
+            });
+          }
+        } catch (error) {
+          console.log("somthing bad happen, maybe the token date has expired");
         }
-      } catch (error) {
-        console.log("somthing bad happen, maybe the token date has expired");
       }
     }
   }
