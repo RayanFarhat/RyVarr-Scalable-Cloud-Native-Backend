@@ -2,7 +2,6 @@ using BackendServer.Hubs;
 using BackendServer.Startups;
 using BackendServer.Services;
 
-
 var webApplicationOptions = new WebApplicationOptions
 {
     ContentRootPath = AppContext.BaseDirectory,
@@ -31,4 +30,3 @@ app.MapHub<HamzaCADHub>("api/hamzacadhub");
 //zeros so he does not have ip and docker assign him one
 app.Run("http://0.0.0.0:9090");
 //app.Run("http://localhost:9090");
-

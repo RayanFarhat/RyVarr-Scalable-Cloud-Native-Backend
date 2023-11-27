@@ -21,8 +21,10 @@ public class DB_Auth_Startup
         builder.Services.AddDbContext<RyvarrDb>(options =>
             options.UseNpgsql(postgreConnectionstring), ServiceLifetime.Singleton);
         // For Identity  
-        builder.Services.AddIdentity<IdentityUser, IdentityRole>()
-            .AddEntityFrameworkStores<RyvarrDb>().AddDefaultTokenProviders();
+        builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+        {
+            options.SignIn.RequireConfirmedEmail = true;
+        }).AddEntityFrameworkStores<RyvarrDb>().AddDefaultTokenProviders();
 
         // Adding Authentication  
         builder.Services.AddAuthentication(options =>

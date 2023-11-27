@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net.Mail;
+using System.Net;
 using System.Security.Claims;
 using System.Text;
 
@@ -100,7 +102,25 @@ public class AccountController : ControllerBase
 
         // when all ok add to Acountdata with isPro == false
         await accountDataCache.AddOrUpdate(new DTOs.AccountData(user.Id, user.UserName, false, DateTime.Now.AddDays(-1).ToString("dd-MM-yyyy hh:mm:ss")));
-        return Ok(new Response { Status = "Success", Message = "User created successfully!" });
+
+        //add token to verify the email
+        var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
+        var conformedLink = Url.Action(nameof(ConformEmail), "Account", new { token, email = user.Email });
+        // var client = new SmtpClient("smtp.gmail.com", 587)
+        // {
+        //     //todo must make ryvarr gmail and configure app password
+        //     Credentials = new NetworkCredential("..@gmail.com", "app password"),
+        //     EnableSsl = true,
+        //     UseDefaultCredentials = false
+        // };
+        // client.Send("from@gmail.com", "to@gmail.com", "testtitle", "testbody");
+        ////////////////////////////////////////////
+        System.Console.WriteLine();
+        System.Console.WriteLine();
+        System.Console.WriteLine();
+        System.Console.WriteLine("Email sent for verification:");
+        System.Console.WriteLine(conformedLink);
+        return Ok(new Response { Status = "Success", Message = "User created successfully and Email sent for verification!" });
     }
 
     [Authorize]
@@ -118,6 +138,30 @@ public class AccountController : ControllerBase
             // the date is in the future
             // then get the data
             return Ok(await accountDataCache.Get(userId));
+    }
+
+    [HttpGet]
+    [Route("ConformEmail")]
+    public async Task<IActionResult> ConformEmail(string token, string email)
+    {
+        var user = await userManager.FindByEmailAsync(email);
+        if (user != null)
+        {
+            var result = await userManager.ConfirmEmailAsync(user, token);
+            System.Console.WriteLine(result.ToString());
+            if (result.Succeeded)
+            {
+                return StatusCode(StatusCodes.Status200OK,
+                new Response { Status = "Success", Message = "Email verified successfully" });
+            }
+            else
+            {
+                return StatusCode(StatusCodes.Status404NotFound,
+                new Response { Status = "Error", Message = "Failed to Confirm email!" });
+            }
+        }
+        return StatusCode(StatusCodes.Status404NotFound,
+                new Response { Status = "Error", Message = "This user does not exist" });
     }
 
     private async Task CreateRoles()
