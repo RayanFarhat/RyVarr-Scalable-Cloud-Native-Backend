@@ -1,5 +1,7 @@
 using BackendServer.Hubs;
 using BackendServer.Startups;
+using BackendServer.Services;
+
 
 var webApplicationOptions = new WebApplicationOptions
 {
@@ -14,6 +16,8 @@ builder.Services.AddSignalR();
 await OrleansStartup.Init(builder);
 DB_Auth_Startup.Init(builder);
 SwaggerStartup.Init(builder);
+
+builder.Services.AddTransient<IFileManager, FileManager>();
 
 var app = builder.Build();
 

@@ -3,11 +3,9 @@ using System.Security.Claims;
 using BackendServer.Authentication;
 using BackendServer.DB;
 using BackendServer.DistributedGrains;
-using BackendServer.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using PayPal.Api;
 
 
@@ -105,8 +103,7 @@ public class PaymentController : ControllerBase
             payer = new Payer { payment_method = "paypal" },
             transactions = new List<Transaction>
              {
-            new Transaction
-            {
+            new() {
                 amount = new Amount { currency = "USD", total = Price },
                 description = "RyVarr Pro Subscribtion"
             }
@@ -121,7 +118,14 @@ public class PaymentController : ControllerBase
         // Create payment and get approval URL
         var createdPayment = payment.Create(_apiContext);
         var approvalUrl = createdPayment.links.FirstOrDefault(l => l.rel.Equals("approval_url", StringComparison.OrdinalIgnoreCase))?.href;
-        return Ok(new Response { Status = "Success", Message = approvalUrl });
+        if (approvalUrl != null)
+        {
+            return Ok(new Response { Status = "Success", Message = approvalUrl });
+        }
+        else
+        {
+            return Ok(new Response { Status = "Failed", Message = "error while getting the link" });
+        }
     }
 
     private async Task<string> PayPalReturnShared(string userId, string paymentId, string PayerID, int months)

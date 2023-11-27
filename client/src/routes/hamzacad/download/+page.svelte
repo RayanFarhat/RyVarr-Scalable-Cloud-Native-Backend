@@ -18,8 +18,7 @@
     }
 
     async function onDownload() {
-        gotoURL("/pricing");
-        const endpoint = "http://localhost/api/HamzaCAD/0.0.1";
+        const endpoint = "http://localhost/api/HamzaCAD/downloadfile";
 
         const res = await fetch(endpoint, {
             method: "GET",
@@ -28,8 +27,24 @@
             },
         });
 
-        let resJson = await res.json();
-        // todo this fetch must download installer only if user is pro
+        if (res.status == 200) {
+            const data = await res.blob();
+            const filename = res.headers
+                .get("Content-Disposition")!
+                .split(";")[1]
+                .split("=")[1];
+            var url = window.URL.createObjectURL(data),
+                anchor = document.createElement("a");
+            anchor.href = url;
+            anchor.download = filename ? filename : "error_with_name.txt";
+            document.body.appendChild(anchor);
+            anchor.click();
+            // CLEAN UP
+            anchor.remove();
+            window.URL.revokeObjectURL(url);
+        } else {
+            gotoURL("/pricing");
+        }
     }
 </script>
 

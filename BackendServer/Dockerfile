@@ -22,5 +22,9 @@ RUN dotnet publish -c Release -o /app/publish
 # Set the final image
 FROM base AS final
 WORKDIR /app
+
+# must for server to send files
+COPY ./static ./static
+
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "BackendServer.dll"]
