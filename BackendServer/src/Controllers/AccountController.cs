@@ -108,7 +108,7 @@ public class AccountController : ControllerBase
         var conformedLink = Url.Action(nameof(ConformEmail), "Account", new { token, email = user.Email });
         // var client = new SmtpClient("smtp.gmail.com", 587)
         // {
-        //     //todo must make ryvarr gmail and configure app password
+        //     //todo must make ryvarr gmail and configure app password (do when go private)
         //     Credentials = new NetworkCredential("..@gmail.com", "app password"),
         //     EnableSsl = true,
         //     UseDefaultCredentials = false
