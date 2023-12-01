@@ -50,7 +50,12 @@
     </li>
 
     <li>
-      <a class="p-0 hover:bg-transparentt" href="/">
+      <a
+        class="p-0 hover:bg-transparentt"
+        href={$page.url.pathname.includes("/hamzacad")
+          ? "/pricing"
+          : "/contact"}
+      >
         <button class="btn btn-primary"
           >{$page.url.pathname.includes("/hamzacad")
             ? "Download"

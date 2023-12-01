@@ -48,7 +48,10 @@
   </li>
 
   <li>
-    <a class="p-0 w-fit" href="/">
+    <a
+      class="p-0 w-fit"
+      href={$page.url.pathname.includes("/hamzacad") ? "/pricing" : "/contact"}
+    >
       <button class="btn btn-primary">
         {$page.url.pathname.includes("/hamzacad")
           ? "Download"

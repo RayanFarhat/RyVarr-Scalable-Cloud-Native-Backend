@@ -11,6 +11,6 @@
   <nav>
     <header class="footer-title">Legal</header>
     <a href="/terms" class="link link-hover">Terms of use</a>
-    <a href="/" class="link link-hover">Privacy policy</a>
+    <a href="/privacy" class="link link-hover">Privacy policy</a>
   </nav>
 </footer>
