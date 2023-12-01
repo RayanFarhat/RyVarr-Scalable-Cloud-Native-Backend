@@ -2,14 +2,18 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using BackendServer.DTOs;
 using Microsoft.AspNetCore.Identity;
+using BackendServer.Authentication;
 
 namespace BackendServer.DB;
 public class RyvarrDb : IdentityDbContext
 {
     public DbSet<AccountData> AccountData { get; set; }
+    public DbSet<ContactData> ContactData { get; set; }
+
     public RyvarrDb(DbContextOptions<RyvarrDb> options) : base(options)
     {
         AccountData = Set<AccountData>();
+        ContactData = Set<ContactData>();
     }
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -21,14 +25,17 @@ public class RyvarrDb : IdentityDbContext
         builder.Entity<AccountData>().ToTable("AcountData")
             .HasIndex(p => p.Id)
             .IsUnique();
+
+        builder.Entity<ContactData>().ToTable("ContactData").HasIndex(p => p.Id).IsUnique(); ;
     }
 
-    // public async Task Add(AccountData user)
-    // {
-    //     AccountData u = new User(id: 0, username: user.username, email: user.email, password: user.password);
-    //     await this.users.AddAsync(u);
-    //     await this.SaveChangesAsync();
-    // }
+    public async Task AddContactData(ContactModel data)
+    {
+        Guid id = Guid.NewGuid();
+        ContactData u = new(Id: id.ToString(), Name: data.Name, Email: data.Email, Company: data.Company, Message: data.Message);
+        await this.ContactData.AddAsync(u);
+        await this.SaveChangesAsync();
+    }
     // public async Task<AccountData> Get(string id)
     // {
     //     return await this.accountData.FindAsync(id);
@@ -55,6 +62,4 @@ public class RyvarrDb : IdentityDbContext
         this.AccountData.Remove(user);
         await this.SaveChangesAsync();
     }
-
-
 }
