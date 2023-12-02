@@ -55,7 +55,7 @@
 <div class="grid grid-flow-row lg:grid-cols-3">
     <div class="card shadow-xl bg-base-200 m-4 border border-primary">
         <div class="card-body items-center text-center">
-            <h2 class="card-title text-white">HamzaCAD Demo 0.0.1</h2>
+            <h2 class="card-title text-white">HamzaCAD Beta 0.0.1</h2>
             <div class="stat">
                 <div
                     class="stat-value text-primary flex items-center justify-center"

@@ -81,7 +81,7 @@
                     <div
                         class="stat-value text-primary flex items-center justify-center"
                     >
-                        $19.99 <span
+                        $9.99 <span
                             class="text-white text-base font-normal text-justify"
                             >&nbsp;&nbsp;USD</span
                         >
@@ -114,7 +114,7 @@
                     <div
                         class="stat-value text-primary flex items-center justify-center"
                     >
-                        $199.99 <span
+                        $99.99 <span
                             class="text-white text-base font-normal text-justify"
                             >&nbsp;&nbsp;USD</span
                         >
