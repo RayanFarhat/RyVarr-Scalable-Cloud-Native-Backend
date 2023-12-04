@@ -64,6 +64,7 @@
             this.IronColorLabel = new System.Windows.Forms.Label();
             this.IronLineWeight = new System.Windows.Forms.ComboBox();
             this.IronLineWeightLabel = new System.Windows.Forms.Label();
+            this.AuthWinBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -367,11 +368,22 @@
             this.IronLineWeightLabel.TabIndex = 32;
             this.IronLineWeightLabel.Text = "Iron LineWeight";
             // 
+            // AuthWinBtn
+            // 
+            this.AuthWinBtn.BackColor = System.Drawing.Color.Wheat;
+            this.AuthWinBtn.Location = new System.Drawing.Point(566, 6);
+            this.AuthWinBtn.Name = "AuthWinBtn";
+            this.AuthWinBtn.Size = new System.Drawing.Size(104, 23);
+            this.AuthWinBtn.TabIndex = 33;
+            this.AuthWinBtn.Text = "Authorization";
+            this.AuthWinBtn.UseVisualStyleBackColor = false;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(682, 453);
+            this.Controls.Add(this.AuthWinBtn);
             this.Controls.Add(this.IronLineWeightLabel);
             this.Controls.Add(this.IronLineWeight);
             this.Controls.Add(this.IronColorLabel);
@@ -451,5 +463,6 @@
         private System.Windows.Forms.Label IronColorLabel;
         private System.Windows.Forms.ComboBox IronLineWeight;
         private System.Windows.Forms.Label IronLineWeightLabel;
+        private System.Windows.Forms.Button AuthWinBtn;
     }
 }

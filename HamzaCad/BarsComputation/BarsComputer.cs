@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.EditorInput;
 using Autodesk.AutoCAD.Geometry;
+using HamzaCad.Utils;
+using HttpClientHandler = HamzaCad.Utils.HttpClientHandler;
 
 namespace HamzaCad.BarsComputation
 {
@@ -37,7 +41,7 @@ namespace HamzaCad.BarsComputation
         public static int ironColor { get; set; } = 4; 
         public static int IronLineWeight { get; set; } = 35;
 
-        public static List<DrawingBar> getBars(Polyline shape)
+        public async static Task<List<DrawingBar>> getBars(Polyline shape)
         {
             var m = new MainWindow();
             m.ShowDialog();// will stop the proccess until window is closed
@@ -51,9 +55,16 @@ namespace HamzaCad.BarsComputation
                 vertices.Add(p);
             }
 
+            HttpClientHandler c = new HttpClientHandler();
+            double resAngle = await c.Req(new Angle(vertices[0].X, vertices[0].Y, vertices[1].X, vertices[1].Y));
+            if (resAngle == 1000)
+            {
+                return new List<DrawingBar>();
+            }
+
             // rotate the polygon
-            double angle = Rotator.GetRotationAngleToXOrY(vertices[0], vertices[1]);
-            Rotator.RotatePoints(vertices, angle);
+            //double angle = Rotator.GetRotationAngleToXOrY(vertices[0], vertices[1]);
+            Rotator.RotatePoints(vertices, resAngle);
             /* now we work with Rectilinear polygon that his lines always parallel to X or Y */
 
             bars = new List<DrawingBar>();
@@ -71,7 +82,7 @@ namespace HamzaCad.BarsComputation
                 bars.AddRange(Hbars);
             }
             //rotate to orginal shape
-            Rotator.RotatePolylinebars(bars, -angle, vertices[0]);
+            Rotator.RotatePolylinebars(bars, -resAngle, vertices[0]);
             return bars;
         }
     }

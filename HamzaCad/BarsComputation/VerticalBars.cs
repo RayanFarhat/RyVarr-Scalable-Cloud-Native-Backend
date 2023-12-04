@@ -51,14 +51,14 @@ namespace HamzaCad.BarsComputation
                 }
             }
 
-            for (int i = 0; i < AllVerticalLines.Count; i++)
-            {
-                BarsComputer.ed.WriteMessage("_________________\n");
-                BarsComputer.ed.WriteMessage("x "+ AllVerticalLines[i].StartPoint.X + "\n");
-                BarsComputer.ed.WriteMessage("y top " + AllVerticalLines[i].StartPoint.X + "\n");
+            //for (int i = 0; i < AllVerticalLines.Count; i++)
+            //{
+            //    BarsComputer.ed.WriteMessage("_________________\n");
+            //    BarsComputer.ed.WriteMessage("x "+ AllVerticalLines[i].StartPoint.X + "\n");
+            //    BarsComputer.ed.WriteMessage("y top " + AllVerticalLines[i].StartPoint.X + "\n");
 
 
-            }
+            //}
 
             while (MergeVerticalLinesWithSameX(AllVerticalLines, vertices))
             {

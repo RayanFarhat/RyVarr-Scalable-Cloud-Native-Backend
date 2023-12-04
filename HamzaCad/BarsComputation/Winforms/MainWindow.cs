@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HamzaCad.BarsComputation.Winforms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -67,6 +68,8 @@ namespace HamzaCad.BarsComputation
             BarPolySpace.TextChanged += onBarPolySpace;
 
             TextEditorBtn.Click += onTextEditorBtn;
+
+            AuthWinBtn.Click += onAuthWinBtn;
 
             MaxBarLength.Text = BarsComputer.MaxBarLength.ToString();
             MaxBarLength.ValidatingType = typeof(double);
@@ -256,7 +259,12 @@ namespace HamzaCad.BarsComputation
             var m = new TextEditorWindow();
             m.Show();// will continue the proccess of other window
         }
-        
+        public void onAuthWinBtn(object sender, EventArgs e)
+        {
+            var m = new AuthWindow();
+            m.Show();// will continue the proccess of other window
+        }
+
         private void onMaxBarLength(object sender, EventArgs e)
         {
             try

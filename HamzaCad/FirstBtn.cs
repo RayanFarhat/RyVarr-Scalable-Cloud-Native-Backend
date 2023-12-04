@@ -27,7 +27,7 @@ namespace HamzaCad
         {
             public bool CanExecute(object parameter) => true;
             public event EventHandler CanExecuteChanged;
-            public void Execute(object parameter)
+            public async void Execute(object parameter)
             {
                 if (CanExecuteChanged == null)
                 {
@@ -71,7 +71,7 @@ namespace HamzaCad
                                 // now every time we parse selected polyline here to read its data
                                 Polyline p = trans.GetObject(sObj.ObjectId, OpenMode.ForRead) as Polyline;
 
-                                List<DrawingBar> bars = BarsComputer.getBars(p);
+                                List<DrawingBar> bars = await BarsComputer.getBars(p);
                                 foreach (DrawingBar bar in bars)
                                 {
                                     acBlkTblRec.AppendEntity(bar.Polygon);
