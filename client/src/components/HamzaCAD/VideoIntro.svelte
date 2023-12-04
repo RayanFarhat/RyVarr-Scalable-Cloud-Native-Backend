@@ -37,6 +37,12 @@
         >{userData.isPro ? "Download Page" : "Subscribe and Download"}</button
       ></a
     >
+    <a
+      class="p-0 my-20 hover:bg-transparentt"
+      href="/hamzacad/installInstruction"
+    >
+      <button class="btn btn-outline btn-primary">How To Install</button></a
+    >
   </div>
 </div>
 <div class="hero bg-base-200">

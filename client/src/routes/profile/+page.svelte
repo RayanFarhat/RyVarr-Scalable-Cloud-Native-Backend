@@ -1,26 +1,41 @@
 <script lang="ts">
-  import { clearAccountData, getAccountData } from "../../core/accountData";
+  import {
+    clearAccountData,
+    getAccountData,
+    type AccountData,
+  } from "../../core/accountData";
   import { browser } from "$app/environment";
   import { gotoURL } from "../../core/gotoURL";
 
   let username: string = "username";
   let isPro: boolean = true;
 
-  let accountdata = { username: username, isPro: isPro };
+  let accountdata: AccountData = {
+    username: username,
+    isPro: isPro,
+    proEndingDate: "",
+    token: "",
+    expiration: "",
+  };
   if (browser) {
     accountdata = getAccountData();
   }
-  console.log(accountdata);
+  //console.log(accountdata);
 
   if (accountdata.username != "") {
     username = accountdata.username;
     isPro = accountdata.isPro;
   }
+
   function onSignout() {
     if (browser) {
       clearAccountData();
       gotoURL("/login");
     }
+  }
+
+  function onCopy() {
+    navigator.clipboard.writeText(accountdata.token);
   }
 </script>
 
@@ -48,6 +63,11 @@
       <div class="card-actions justify-end">
         <div class="badge badge-outline">HamzaCAD</div>
       </div>
+      {#if isPro == true}
+        <button on:click={onCopy} class="btn btn-primary text-lg"
+          >Copy authorization token</button
+        >
+      {/if}
       <button on:click={onSignout} class="btn btn-outline btn-primary"
         >Sign out</button
       >

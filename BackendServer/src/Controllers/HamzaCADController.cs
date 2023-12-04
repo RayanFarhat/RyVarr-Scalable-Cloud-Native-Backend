@@ -27,7 +27,7 @@ public class HamzaCADController : ControllerBase
     [Authorize]
     [HttpPost]
     [Route("angle")]
-    public IActionResult GetAngle([FromBody] AngleModel model)
+    public async Task<IActionResult> GetAngle([FromBody] AngleModel model)
     {
         string expireDateString = User.FindFirst(ClaimTypes.DateOfBirth)?.Value!;
         DateTime expireDate = DateTime.ParseExact(expireDateString, "dd-MM-yyyy hh:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
@@ -36,9 +36,26 @@ public class HamzaCADController : ControllerBase
             // date has passed.
             return Unauthorized("Your token has been expired !!!");
         else
-            // the date is in the future
-            // then get the data
-            return Ok(GetRotationAngleToXOrY(model.p1x, model.p1y, model.p2x, model.p2y));
+        {
+            //get user and check if he is pro
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value!;
+            var row = await accountDataCache.Get(userId);
+            if (row == null)
+                return NotFound("Cannot find your user data");
+
+            if (row.IsPro == false)
+            {
+                return Unauthorized("you are not pro");
+            }
+            //if user is pro
+            else
+            {
+                // the date is in the future
+                // then get the data
+                return Ok(GetRotationAngleToXOrY(model.p1x, model.p1y, model.p2x, model.p2y));
+            }
+        }
+
     }
 
     [Authorize]
