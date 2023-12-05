@@ -20,22 +20,22 @@ The frontend client is build with AvaloniaUI(WPF like framework) that make my fr
 - [X] Adding subscription with payment using Paypal API and make the user as Pro User.
 - [X] Make subscription option for month or year, And enables the extension of the subscription period in cases where the user is already a pro member.
 - [X] Terminate the Pro subscription once the subscription period has elapsed, Including reset the role of the user.
-- [ ] Working with HamzaCAD service to allow only Pro users to use it.
+- [X] Working with HamzaCAD service to allow only Pro users to use it.
 - [ ] Prevent sharing accounts with SignalR.
 - [ ] Allow Users to read/change/delete there account.(rename email,username, or delete there entire account).
 - [ ] Setup continuous deployment to VPS.
 ### Frontend
 - [X] Make the frontend work on Windows, Mac, Linux, Android, IOS and Web.
-- [X] Adding main page as my portfolio .
+- [X] Adding main page.
 - [X] Handling user authentication and authorization API.
 - [X] Handling Payment API.
-- [ ] Adding HamzaCAD service page.
-- [ ] Adding profile page to allow user edit there account info.
+- [X] Adding HamzaCAD service page.
+- [X] Adding profile page to allow user edit there account info.
 ### HamzaCAD
-- [ ] Making HamzaCAD addon work in UI instead of CLI inside AutoCAD.
-- [ ] Analyzing user architecture as an input and sending it to the server.
-- [ ] Allowing access only by pro users by providing there token id.
-- [ ] Making the server handle calculations logic and sending the final drawing to the client.
+- [X] Making HamzaCAD addon work in UI instead of CLI inside AutoCAD.
+- [X] Analyzing user architecture as an input and sending it to the server.
+- [X] Allowing access only by pro users by providing there token id.
+- [X] Making the server handle calculations logic and sending the final drawing to the client.
 
 ## Frontend photos
 ![image](https://github.com/RayanFarhat/RyVarr/assets/100049997/f19d29ff-7770-4d4b-912f-2ecaa27b60d1)
