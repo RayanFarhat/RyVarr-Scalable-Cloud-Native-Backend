@@ -2,7 +2,7 @@
 <br />
 <br />
 <br />
-<div class="flex justify-center flex-col text-center p-6">
+<div class="flex justify-center items-center flex-col text-center p-6">
     <h1 class="text-primary text-2xl">How to Install HamzaCAD</h1>
 
     <div class="collapse collapse-arrow bg-base-200 mt-4">
@@ -44,9 +44,34 @@
                 <span></span>
             </p>
             <div class="mockup-code">
-                <code>-b C:\Program Files\RyVarr\HamzaCAD2024\load.scr</code>
+                <code>-b C:\RyVarr\HamzaCAD2024\load.scr</code>
             </div>
             <p>Click "Apply" and then close the window.</p>
         </div>
     </div>
+    <div class="collapse collapse-arrow bg-base-200 mt-4">
+        <input type="radio" name="my-accordion-2" />
+        <div class="collapse-title text-xl font-medium">Step 5</div>
+        <div class="collapse-content">
+            <p>
+                To access HamzaCAD in AutoCAD, navigate to the "HamzaCAD" tab.
+                Click on the "Draw" button, followed by the "Authorization"
+                button. Next, visit "http://ryvarr/profile" to copy your
+                authorization token. Paste this token into the authorization
+                window. You are now successfully authorized and can utilize
+                HamzaCAD's features.
+            </p>
+        </div>
+    </div>
+
+    <h3 class="text-xl my-5 font-bold">Video of how to install:</h3>
+    <video width="640" height="360" controls>
+        <source src="/hamzacad/HamzaCAD_install.mp4" type="video/mp4" />
+        <track
+            src="captions_en.vtt"
+            kind="captions"
+            srclang="en"
+            label="english_captions"
+        />
+    </video>
 </div>
