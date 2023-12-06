@@ -17,6 +17,7 @@ namespace HamzaCad.BarsComputation
     {
         public MainWindow()
         {
+
             InitializeComponent();
             setLang();
             Eng.Checked = BarsComputer.lang == "Eng"? true:false;
@@ -308,6 +309,11 @@ namespace HamzaCad.BarsComputation
             {
                 MessageBox.Show("Error happen when applying the line weight");
             }
+        }
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+            FileHandler.writeFile();
         }
     }
     public class ComboboxItem

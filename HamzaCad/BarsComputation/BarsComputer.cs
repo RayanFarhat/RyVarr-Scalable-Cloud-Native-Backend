@@ -43,6 +43,8 @@ namespace HamzaCad.BarsComputation
 
         public async static Task<List<DrawingBar>> getBars(Polyline shape)
         {
+            FileHandler.readFileAndApplyChanges();
+
             var m = new MainWindow();
             m.ShowDialog();// will stop the proccess until window is closed
             

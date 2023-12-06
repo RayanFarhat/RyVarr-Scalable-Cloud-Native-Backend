@@ -146,6 +146,7 @@
   <ItemGroup>
     <Compile Include="BarsComputation\BarsComputer.cs" />
     <Compile Include="BarsComputation\DrawingBarGenerator.cs" />
+    <Compile Include="BarsComputation\FileHandler.cs" />
     <Compile Include="BarsComputation\Winforms\AuthWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -186,6 +187,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="load.scr" />
+    <None Include="loadDev.scr" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
