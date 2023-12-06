@@ -18,7 +18,11 @@
     }
 
     async function onDownload() {
-        const endpoint = "http://localhost/api/HamzaCAD/downloadfile";
+        let baseUrl;
+        if (browser) {
+            baseUrl = window.location.origin;
+        }
+        const endpoint = baseUrl + "/api/HamzaCAD/downloadfile";
 
         const res = await fetch(endpoint, {
             method: "GET",

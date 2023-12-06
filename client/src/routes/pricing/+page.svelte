@@ -15,7 +15,11 @@
     }
     async function onSubmitMonth() {
         if (userData.token != "") {
-            const endpoint = "http://localhost/api/Payment/Month";
+            let baseUrl;
+            if (browser) {
+                baseUrl = window.location.origin;
+            }
+            const endpoint = baseUrl + "/api/Payment/Month";
 
             const res = await fetch(endpoint, {
                 method: "GET",
@@ -40,7 +44,11 @@
     }
     async function onSubmitYear() {
         if (userData.token != "") {
-            const endpoint = "http://localhost/api/Payment/Year";
+            let baseUrl;
+            if (browser) {
+                baseUrl = window.location.origin;
+            }
+            const endpoint = baseUrl + "/api/Payment/Year";
             const res = await fetch(endpoint, {
                 method: "GET",
                 headers: {

@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { browser } from "$app/environment";
+
   let usernameErrors: string[] = [];
   let emailErrors: string[] = [];
   let passErrors: string[] = [];
@@ -7,6 +9,11 @@
   let FailMsg = "";
 
   async function onSubmit(e: any) {
+    let baseUrl;
+    if (browser) {
+      baseUrl = window.location.origin;
+    }
+
     usernameErrors = [];
     emailErrors = [];
     passErrors = [];
@@ -14,7 +21,7 @@
 
     const formData = new FormData(e.target); // Get the form element
     let json = Object.fromEntries(formData.entries());
-    const endpoint = "http://localhost/api/Account/register";
+    const endpoint = baseUrl + "/api/Account/register";
     console.log(JSON.stringify(json));
 
     const res = await fetch(endpoint, {

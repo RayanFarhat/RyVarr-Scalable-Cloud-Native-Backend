@@ -67,11 +67,5 @@
     <h3 class="text-xl my-5 font-bold">Video of how to install:</h3>
     <video width="640" height="360" controls>
         <source src="/hamzacad/HamzaCAD_install.mp4" type="video/mp4" />
-        <track
-            src="captions_en.vtt"
-            kind="captions"
-            srclang="en"
-            label="english_captions"
-        />
     </video>
 </div>

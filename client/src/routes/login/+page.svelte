@@ -15,7 +15,11 @@
 
     const formData = new FormData(e.target); // Get the form element
     let json = Object.fromEntries(formData.entries());
-    const endpoint = "http://localhost/api/Account/login";
+    let baseUrl;
+    if (browser) {
+      baseUrl = window.location.origin;
+    }
+    const endpoint = baseUrl + "/api/Account/login";
     console.log(JSON.stringify(json));
 
     const res = await fetch(endpoint, {
@@ -38,7 +42,7 @@
     } else if (data.status == 200) {
       console.log(data);
 
-      const res = await fetch("http://localhost/api/Account", {
+      const res = await fetch(baseUrl + "/api/Account", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${data.token}`,

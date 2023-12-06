@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { browser } from "$app/environment";
+
     let SuccessMsgVisable = false;
     let FailMsgVisable = false;
     let FailMsg = "";
@@ -8,7 +10,11 @@
         e.preventDefault(); // Prevent the default form submission behavior
         const formData = new FormData(e.target); // Get the form element
         let json = Object.fromEntries(formData.entries());
-        const endpoint = "http://localhost/api/Contact";
+        let baseUrl;
+        if (browser) {
+            baseUrl = window.location.origin;
+        }
+        const endpoint = baseUrl + "/api/Contact";
         console.log(JSON.stringify(json));
         const res = await fetch(endpoint, {
             method: "POST",

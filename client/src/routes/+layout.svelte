@@ -17,12 +17,14 @@
       token: "",
       expiration: "",
     };
+    let baseUrl;
     if (browser) {
       userData = getAccountData();
+      baseUrl = window.location.origin;
     }
 
     if (userData?.token != "") {
-      const res = await fetch("http://localhost/api/Account", {
+      const res = await fetch(baseUrl + "/api/Account", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${userData.token}`,
