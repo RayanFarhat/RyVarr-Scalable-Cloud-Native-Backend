@@ -14,7 +14,11 @@ namespace HamzaCad.Utils
 {
     public class HttpClientHandler
     {
+#if DEBUG
         private string _apiBaseUrl { get; set; } = "http://localhost";
+#else
+        private string _apiBaseUrl { get; set; } = "https://ryvarr";
+#endif
         public static string AuthToken { get; set; } = "";
         private HttpClient _client { get; set; } = new HttpClient();
         public HttpClientHandler()

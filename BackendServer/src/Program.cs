@@ -21,7 +21,6 @@ builder.Services.AddTransient<IFileManager, FileManager>();
 var app = builder.Build();
 
 SwaggerStartup.InitApp(app);
-
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();

@@ -15,17 +15,17 @@ public class HttpClientHandler
     private string _apiBaseUrl { get; set; } = "http://localhost";
     public static string AuthToken { get; set; } = "";
     private HttpClient _client { get; set; } = new HttpClient();
-    public HttpClientHandler() {
+    public HttpClientHandler()
+    {
         // Set the base address for the HttpClient
         _client.BaseAddress = new Uri(_apiBaseUrl);
-
     }
 
     public async Task<HttpResponseMessage?> Req<ReqType>(string uri, string method, ReqType? Req = default(ReqType)) where ReqType : IReq
     {
         string jsonData = "";
         if (Req != null)
-             jsonData = JsonSerializer.Serialize(Req);
+            jsonData = JsonSerializer.Serialize(Req);
 
 
         // Convert the JSON data to a StringContent object
@@ -49,7 +49,7 @@ public class HttpClientHandler
                 default:
                     return null;
             }
-     
+
         }
         catch (HttpRequestException e)
         {
@@ -65,19 +65,19 @@ public class HttpClientHandler
 }
 
 public record RegisterErrorsList(IReadOnlyList<string> Username, IReadOnlyList<string> Email, IReadOnlyList<string> Password);
-public record LoginErrorsList( IReadOnlyList<string> Email, IReadOnlyList<string> Password);
+public record LoginErrorsList(IReadOnlyList<string> Email, IReadOnlyList<string> Password);
 
 
 public interface IReq { }
-public record RegisterReq(string username, string email, string password):IReq;
+public record RegisterReq(string username, string email, string password) : IReq;
 public record LoginReq(string email, string password) : IReq;
 
 public interface IRes { }
-public record RegisterRes400(string type, string title, int status, string traceId, RegisterErrorsList errors): IRes;
-public record RegisterRes200(string status,string message): IRes;
+public record RegisterRes400(string type, string title, int status, string traceId, RegisterErrorsList errors) : IRes;
+public record RegisterRes200(string status, string message) : IRes;
 
-public record LoginRes200(string token, DateTime expiration): IRes;
+public record LoginRes200(string token, DateTime expiration) : IRes;
 public record LoginRes400(string type, string title, int status, string traceId, LoginErrorsList errors) : IRes;
-public record LoginRes401(string type,string title, int status,string traceId): IRes;
+public record LoginRes401(string type, string title, int status, string traceId) : IRes;
 
-public record AccountRes200(string id, string username,bool isPro) : IRes;
+public record AccountRes200(string id, string username, bool isPro) : IRes;

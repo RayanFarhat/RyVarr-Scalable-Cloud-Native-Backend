@@ -110,8 +110,8 @@ public class PaymentController : ControllerBase
              },
             redirect_urls = new RedirectUrls
             {
-                return_url = $"http://localhost/api/Payment/{ReturnUrl}/{userId}",
-                cancel_url = "http://localhost/api/Payment/cancel"
+                return_url = Environment.GetEnvironmentVariable("BASE_URL") + $"/api/Payment/{ReturnUrl}/{userId}",
+                cancel_url = Environment.GetEnvironmentVariable("BASE_URL") + "/api/Payment/cancel"
             }
         };
 

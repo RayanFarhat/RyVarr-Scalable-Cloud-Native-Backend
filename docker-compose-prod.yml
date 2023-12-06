@@ -1,0 +1,65 @@
+version: '3.8'
+networks:
+  server-network:
+    driver: bridge
+# docker compose -f docker-compose-prod.yml up -d
+# docker compose -f docker-compose-prod.yml build
+# docker compose -f docker-compose-prod.yml down
+
+
+services:
+  # client:
+  #     build: ./ClientAvalonia
+  #     networks:
+  #       - server-network
+  # # important: not exposing ports so the server only listen to docker containers in his network
+  nginx:
+    build: ./nginx
+    ports:
+      - '80:80'
+      - '443:443'
+    networks:
+      - server-network
+
+  db:
+    image: postgres:15.2
+    ports:
+      - '5432:5432' # used with pgadmin
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    networks:
+      - server-network
+    volumes:
+      - ./database/postgresql:/var/lib/postgresql/data
+      
+    ######################################
+  backendserver:
+    build: ./BackendServer
+    # only apply in dev mode and test with http://localhost/swagger
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      BASE_URL: https://ryvarr.com
+      RUNNING_IN_DOCKER: true
+    ######################################
+    #scale: 5
+    depends_on:
+      - db
+    networks:
+      - server-network
+
+  # for orleans clustering
+  redis:
+    image: redis:7.2.3
+    ports:
+      - '6379:6379'
+    networks:
+      - server-network
+
+  client:
+    build: ./client
+    networks:
+      - server-network

@@ -38,7 +38,7 @@ public class SwaggerStartup
 
     public static void InitApp(WebApplication app)
     {
-        if (app.Environment.IsDevelopment())
+        if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
         {
             app.UseSwagger();
             app.UseSwaggerUI();
