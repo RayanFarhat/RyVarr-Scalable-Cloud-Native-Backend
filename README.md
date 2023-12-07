@@ -1,10 +1,12 @@
 # RyVarr
 This is the main repo for RyVarr project.
-This project is fullstack (backend oriented) that handle user identity and payment with Paypal. And once the user has paid the subscribtion, He can use Autocad Plugin library called hamzacad that only allow paid users use it. while the main page of the frontend is also a portfolio for the developer of this project.
+
+This is a comprehensive SaaS website that includes a well-designed front-end, a securely scalable server-side infrastructure, and the software that this SaaS website sells.
+
+Including  handle user identity and payment with Paypal. And once the user has paid the subscribtion, He can use Autocad Plugin library called hamzacad that only allow paid users use it.
 
 The backend is cloud native so it can scale easly with caching using Orleans.
 
-The frontend client is build with AvaloniaUI(WPF like framework) that make my frontend work on Web, Windows, Mac, Linux, Android, IOS.
 ## Backend Architecture:
 ![image](https://github.com/RayanFarhat/RyVarr/assets/100049997/149dc50c-c4a0-4b81-b085-b06537c1e873)
 ![image](https://github.com/RayanFarhat/RyVarr/assets/100049997/adfc0eaf-50c1-455d-b28d-d3343f73e20a)
@@ -38,11 +40,13 @@ The frontend client is build with AvaloniaUI(WPF like framework) that make my fr
 - [X] Making the server handle calculations logic and sending the final drawing to the client.
 
 ## Frontend photos
-![image](https://github.com/RayanFarhat/RyVarr/assets/100049997/f19d29ff-7770-4d4b-912f-2ecaa27b60d1)
-![image](https://github.com/RayanFarhat/RyVarr/assets/100049997/4e46a156-ffa0-46a9-a9c6-966ee08236bb)
-![image](https://github.com/RayanFarhat/RyVarr/assets/100049997/c5592ecc-17f8-4b97-a5fc-329c0f21fa30)
-![image](https://github.com/RayanFarhat/RyVarr/assets/100049997/2bedb91e-2ded-4f4b-b999-933dceb4e8fa)
-copy subscription link and pay with paypal
+![image](https://github.com/RayanFarhat/RyVarr/assets/100049997/f67e0a2e-bbb9-4a45-a49e-09966f747c37)
+![image](https://github.com/RayanFarhat/RyVarr/assets/100049997/26f4b9cb-e085-4122-a4f5-20015ff8f1cd)
+![image](https://github.com/RayanFarhat/RyVarr/assets/100049997/17e405ad-7a9d-4bd9-b92a-9ad002451613)
+![image](https://github.com/RayanFarhat/RyVarr/assets/100049997/86f26ca0-66c4-419f-b735-53859389d8dd)
+![image](https://github.com/RayanFarhat/RyVarr/assets/100049997/5df8c545-c00d-4157-9768-1b0ac7f0fddd)
+
+press subscription button while sign in and pay with paypal
 ![image](https://github.com/RayanFarhat/RyVarr/assets/100049997/def0b81b-8505-4ca3-a208-3e1429d7197d)
 
 
