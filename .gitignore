@@ -78,3 +78,4 @@ _[Ss]cripts
 /database/postgresql/
 
 #/sessionCache/redis_data/
+.env

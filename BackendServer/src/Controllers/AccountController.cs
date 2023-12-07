@@ -43,9 +43,9 @@ public class AccountController : ControllerBase
 
             var authClaims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.NameIdentifier, user.Id),
-                    new Claim(ClaimTypes.DateOfBirth, DateTime.Now.AddDays(7).ToString("dd-MM-yyyy hh:mm:ss")),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    new(ClaimTypes.NameIdentifier, user.Id),
+                    new(ClaimTypes.DateOfBirth, DateTime.Now.AddDays(7).ToString("dd-MM-yyyy hh:mm:ss")),
+                    new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 };
 
             foreach (var userRole in userRoles)
