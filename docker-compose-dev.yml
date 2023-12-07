@@ -40,10 +40,13 @@ services:
   backendserver:
     build: ./BackendServer
     # only apply in dev mode and test with http://localhost/swagger
+    env_file:
+      - .env
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       BASE_URL: http://localhost
       RUNNING_IN_DOCKER: true
+      APP_PASSWORD: ${APP_PASSWORD}
     ######################################
     #scale: 5
     depends_on:

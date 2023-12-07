@@ -44,6 +44,7 @@ services:
       ASPNETCORE_ENVIRONMENT: Production
       BASE_URL: https://ryvarr.com
       RUNNING_IN_DOCKER: true
+      APP_PASSWORD: ${APP_PASSWORD}
     ######################################
     #scale: 5
     depends_on:

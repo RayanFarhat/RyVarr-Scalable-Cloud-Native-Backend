@@ -106,14 +106,15 @@ public class AccountController : ControllerBase
         //add token to verify the email
         var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
         var conformedLink = Url.Action(nameof(ConformEmail), "Account", new { token, email = user.Email });
-        // var client = new SmtpClient("smtp.gmail.com", 587)
-        // {
-        //     //todo must make ryvarr gmail and configure app password (do when go private)
-        //     Credentials = new NetworkCredential("..@gmail.com", "app password"),
-        //     EnableSsl = true,
-        //     UseDefaultCredentials = false
-        // };
-        // client.Send("from@gmail.com", "to@gmail.com", "testtitle", "testbody");
+        var appPassword = Environment.GetEnvironmentVariable("APP_PASSWORD");
+        var client = new SmtpClient("smtp.gmail.com", 587)
+        {
+            Credentials = new NetworkCredential("ryvarrofficial@gmail.com", appPassword),
+            EnableSsl = true,
+            UseDefaultCredentials = false
+        };
+        client.Send("ryvarrofficial@gmail.com", model.Email, "Conform your email",
+         $"Conform your email address by clicking the link below:\n\n{Environment.GetEnvironmentVariable("BASE_URL")}{conformedLink}");
         ////////////////////////////////////////////
         System.Console.WriteLine();
         System.Console.WriteLine();
