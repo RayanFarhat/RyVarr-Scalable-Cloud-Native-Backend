@@ -23,6 +23,7 @@ The backend is cloud native so it can scale easly with caching using Orleans.
 - [X] Make subscription option for month or year, And enables the extension of the subscription period in cases where the user is already a pro member.
 - [X] Terminate the Pro subscription once the subscription period has elapsed, Including reset the role of the user.
 - [X] Working with HamzaCAD service to allow only Pro users to use it.
+- [X] Sending email for user to conform there email using Smtp protocol.
 - [ ] Prevent sharing accounts with SignalR.
 - [ ] Allow Users to read/change/delete there account.(rename email,username, or delete there entire account).
 - [ ] Setup continuous deployment to VPS.
@@ -45,6 +46,9 @@ The backend is cloud native so it can scale easly with caching using Orleans.
 ![image](https://github.com/RayanFarhat/RyVarr/assets/100049997/17e405ad-7a9d-4bd9-b92a-9ad002451613)
 ![image](https://github.com/RayanFarhat/RyVarr/assets/100049997/86f26ca0-66c4-419f-b735-53859389d8dd)
 ![image](https://github.com/RayanFarhat/RyVarr/assets/100049997/5df8c545-c00d-4157-9768-1b0ac7f0fddd)
+
+email sent to user that is registered
+![image](https://github.com/RayanFarhat/RyVarr/assets/100049997/8471dd17-184a-4330-b604-351b6d67acc3)
 
 press subscription button while sign in and pay with paypal
 ![image](https://github.com/RayanFarhat/RyVarr/assets/100049997/def0b81b-8505-4ca3-a208-3e1429d7197d)
