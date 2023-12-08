@@ -132,7 +132,10 @@
 {#if SuccessMsgVisable == true}
   <div class="toast toast-center">
     <div class="alert alert-success">
-      <span>User created successfully!</span>
+      <span
+        >User created successfully! Conform your email address by clicking the
+        link in the email we sent to you.</span
+      >
     </div>
   </div>
 {/if}

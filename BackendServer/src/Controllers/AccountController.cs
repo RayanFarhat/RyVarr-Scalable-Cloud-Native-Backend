@@ -114,7 +114,7 @@ public class AccountController : ControllerBase
             UseDefaultCredentials = false
         };
         client.Send("ryvarrofficial@gmail.com", model.Email, "Conform your email",
-         $"Conform your email address by clicking the link below:\n\n{Environment.GetEnvironmentVariable("BASE_URL")}{conformedLink}");
+         $"Conform your email address by clicking the link below:\n\n{Environment.GetEnvironmentVariable("BASE_URL")}{conformedLink} \n\n If this is not you then don't click this link");
         ////////////////////////////////////////////
         System.Console.WriteLine();
         System.Console.WriteLine();
@@ -152,13 +152,15 @@ public class AccountController : ControllerBase
             System.Console.WriteLine(result.ToString());
             if (result.Succeeded)
             {
-                return StatusCode(StatusCodes.Status200OK,
-                new Response { Status = "Success", Message = "Email verified successfully" });
+                // return StatusCode(StatusCodes.Status200OK,
+                // new Response { Status = "Success", Message = "Email verified successfully" });
+                return Redirect(Environment.GetEnvironmentVariable("BASE_URL") + "/conformEmail/success");
             }
             else
             {
-                return StatusCode(StatusCodes.Status404NotFound,
-                new Response { Status = "Error", Message = "Failed to Confirm email!" });
+                // return StatusCode(StatusCodes.Status404NotFound,
+                // new Response { Status = "Error", Message = "Failed to Confirm email!" });
+                return Redirect(Environment.GetEnvironmentVariable("BASE_URL") + "/conformEmail/fail");
             }
         }
         return StatusCode(StatusCodes.Status404NotFound,
