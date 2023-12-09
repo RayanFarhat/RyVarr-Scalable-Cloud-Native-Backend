@@ -42,7 +42,6 @@ The backend is cloud native so it can scale easly with caching using Orleans.
 
 ## Frontend photos
 ![image](https://github.com/RayanFarhat/RyVarr/assets/100049997/f67e0a2e-bbb9-4a45-a49e-09966f747c37)
-![image](https://github.com/RayanFarhat/RyVarr/assets/100049997/26f4b9cb-e085-4122-a4f5-20015ff8f1cd)
 ![image](https://github.com/RayanFarhat/RyVarr/assets/100049997/17e405ad-7a9d-4bd9-b92a-9ad002451613)
 ![image](https://github.com/RayanFarhat/RyVarr/assets/100049997/86f26ca0-66c4-419f-b735-53859389d8dd)
 ![image](https://github.com/RayanFarhat/RyVarr/assets/100049997/5df8c545-c00d-4157-9768-1b0ac7f0fddd)
