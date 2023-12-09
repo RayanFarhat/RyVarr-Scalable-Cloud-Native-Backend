@@ -29,13 +29,17 @@
     bars!
   </p>
   <div>
-    <a
+    <!-- <a
       class="p-0 my-20 hover:bg-transparentt"
       href={userData.isPro ? "/hamzacad/download" : "/pricing"}
     >
       <button class="btn btn-primary"
         >{userData.isPro ? "Download Page" : "Subscribe and Download"}</button
       ></a
+    > -->
+    <!-- * only for beta -->
+    <a class="p-0 my-20 hover:bg-transparentt" href="/hamzacad/download">
+      <button class="btn btn-primary">Download</button></a
     >
     <a
       class="p-0 my-20 hover:bg-transparentt"

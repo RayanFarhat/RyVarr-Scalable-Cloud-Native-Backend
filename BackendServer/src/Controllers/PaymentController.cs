@@ -25,12 +25,12 @@ public class PaymentController : ControllerBase
         accountDataCache = new AccountDataCache(clusterClient, db, userManager);
         this.userManager = userManager;
         // Set up API context with sandbox credentials
-        var clientId = "AQVwEIKS5RtVs9KT8CzUZTyPr9SEmOptrqetrJidhXxWeuY5h2UJNw5gR1QdV1VaPxvzYtTIOdMPRc1T";
-        var clientSecret = "EG-X_Ri5AyuI3GEt7Qu3-ZvD7IvUECODBxOZVOzMOWqGkD8MUC7AtXjrKzPPqwS-XfNGQwG6ztURJ5I7";
+        var clientId = Environment.GetEnvironmentVariable("PAYPAL_CLIENT_ID");
+        var clientSecret = Environment.GetEnvironmentVariable("PAYPAL_CLIENT_SECRET");
 
         var payPalConfig = new Dictionary<string, string>
         {
-            { "mode", "sandbox" }
+            { "mode", Environment.GetEnvironmentVariable("PAYPAL_MODE")! }
         };
         OAuthTokenCredential tokenCredential = new(clientId, clientSecret, payPalConfig);
         string accessToken = tokenCredential.GetAccessToken();
@@ -42,7 +42,7 @@ public class PaymentController : ControllerBase
     [Route("Month")]
     public async Task<IActionResult> PayPalLinkMonth()
     {
-        return await PayPalLinkShared("returnMonth", "5.00");
+        return await PayPalLinkShared("returnMonth", "9.99");
     }
 
     [Authorize]
@@ -50,7 +50,7 @@ public class PaymentController : ControllerBase
     [Route("Year")]
     public async Task<IActionResult> PayPalLinkYear()
     {
-        return await PayPalLinkShared("returnYear", "50.00");
+        return await PayPalLinkShared("returnYear", "99.99");
     }
 
     [AllowAnonymous]

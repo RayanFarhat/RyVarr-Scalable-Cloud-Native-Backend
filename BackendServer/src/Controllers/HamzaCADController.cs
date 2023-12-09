@@ -43,10 +43,11 @@ public class HamzaCADController : ControllerBase
             if (row == null)
                 return NotFound("Cannot find your user data");
 
-            if (row.IsPro == false)
-            {
-                return Unauthorized("you are not pro");
-            }
+            // * as we still in beta, users don't have to be pro to use the product
+            // if (row.IsPro == false)
+            // {
+            //     return Unauthorized("you are not pro");
+            // }
             //if user is pro
             else
             {
@@ -69,10 +70,12 @@ public class HamzaCADController : ControllerBase
         if (row == null)
             return NotFound("Cannot find your user data");
 
-        if (row.IsPro == false)
-        {
-            return Unauthorized("you are not pro");
-        }
+        // * as we still in beta, users don't have to be pro to use the product
+        // if (row.IsPro == false)
+        // {
+        //     return Unauthorized("you are not pro");
+        // }
+
         //if user is pro
         else
         {

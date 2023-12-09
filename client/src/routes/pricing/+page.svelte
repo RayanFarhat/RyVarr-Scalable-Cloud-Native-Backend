@@ -70,8 +70,17 @@
     }
 </script>
 
+<br />
+<br />
+<br />
+<br />
 <div class="hero min-h-screen bg-base-100">
     <div class="hero-content flex-col lg:flex-row">
+        <div class="text-center text-3xl border border-primary p-1">
+            There's no need to subscribe at the moment as the product is still
+            in beta, and you can use it for free.
+        </div>
+
         {#if userData.isPro == true}
             <div class=" pt-16">
                 <h1 class="text-4xl">Subscription end in:</h1>

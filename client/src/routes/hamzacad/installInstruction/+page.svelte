@@ -11,7 +11,8 @@
         <div class="collapse-content">
             <p>
                 Initially, you need to be a pro user to install HamzaCAD. If you
-                aren't one already, kindly subscribe now.
+                aren't one already, kindly subscribe now. but for now there is
+                no need because we still in BETA.
             </p>
         </div>
     </div>
