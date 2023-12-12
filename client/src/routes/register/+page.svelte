@@ -9,6 +9,14 @@
   let FailMsg = "";
 
   async function onSubmit(e: any) {
+    if (
+      (<HTMLInputElement>document.getElementById("loginpassword")).value !==
+      (<HTMLInputElement>document.getElementById("passwordConfirm")).value
+    ) {
+      FailMsgVisable = true;
+      FailMsg = "two passwords are not the same!";
+      return;
+    }
     let baseUrl;
     if (browser) {
       baseUrl = window.location.origin;
@@ -22,7 +30,6 @@
     const formData = new FormData(e.target); // Get the form element
     let json = Object.fromEntries(formData.entries());
     const endpoint = baseUrl + "/api/Account/register";
-    console.log(JSON.stringify(json));
 
     const res = await fetch(endpoint, {
       method: "POST",
@@ -32,7 +39,6 @@
       body: JSON.stringify(json),
     });
     const data = await res.json();
-    console.log(data);
     if (data.status == 400) {
       if (data.errors.Username != undefined) {
         usernameErrors = data.errors.Username as string[];
@@ -111,20 +117,31 @@
             placeholder="password"
             class="input input-bordered"
           />
-          {#each passErrors as error}
-            <li class="text-error">{error}</li>
-            <br />
-          {/each}
+          <div class="form-control">
+            <label for="loginpassword" class="label">
+              <span class="label-text">Confirm Password</span>
+            </label>
+            <input
+              id="passwordConfirm"
+              type="password"
+              placeholder="password"
+              class="input input-bordered"
+            />
+            {#each passErrors as error}
+              <li class="text-error">{error}</li>
+              <br />
+            {/each}
+          </div>
+          <div class="form-control mt-6">
+            <button class="btn btn-primary" type="submit">Register</button>
+          </div>
+          <p>
+            By clicking the “Register” button, you are creating an account, and
+            agree to RyVarr'
+            <a class="link link-primary" href="/terms">Terms of Service</a> and
+            <a class="link link-primary" href="/privacy">Privacy Policy</a>
+          </p>
         </div>
-        <div class="form-control mt-6">
-          <button class="btn btn-primary" type="submit">Register</button>
-        </div>
-        <p>
-          By clicking the “Register” button, you are creating an account, and
-          agree to RyVarr'
-          <a class="link link-primary" href="/terms">Terms of Service</a> and
-          <a class="link link-primary" href="/privacy">Privacy Policy</a>
-        </p>
       </form>
     </div>
   </div>

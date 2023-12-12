@@ -115,12 +115,7 @@ public class AccountController : ControllerBase
         };
         client.Send("ryvarrofficial@gmail.com", model.Email, "Conform your email",
          $"Conform your email address by clicking the link below:\n\n{Environment.GetEnvironmentVariable("BASE_URL")}{conformedLink} \n\n If this is not you then don't click this link");
-        ////////////////////////////////////////////
-        System.Console.WriteLine();
-        System.Console.WriteLine();
-        System.Console.WriteLine();
-        System.Console.WriteLine("Email sent for verification:");
-        System.Console.WriteLine(conformedLink);
+
         return Ok(new Response { Status = "Success", Message = "User created successfully and Email sent for verification!" });
     }
 
@@ -149,7 +144,7 @@ public class AccountController : ControllerBase
         if (user != null)
         {
             var result = await userManager.ConfirmEmailAsync(user, token);
-            System.Console.WriteLine(result.ToString());
+
             if (result.Succeeded)
             {
                 // return StatusCode(StatusCodes.Status200OK,
@@ -165,6 +160,30 @@ public class AccountController : ControllerBase
         }
         return StatusCode(StatusCodes.Status404NotFound,
                 new Response { Status = "Error", Message = "This user does not exist" });
+    }
+
+    [Authorize]
+    [HttpGet]
+    [Route("IsEmailConfirmed")]
+    public async Task<IActionResult> IsEmailConfirmed()
+    {
+        string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value!;
+        var user = await userManager.FindByIdAsync(userId);
+        if (user == null)
+        {
+            return StatusCode(StatusCodes.Status404NotFound, new Response { Status = "Error", Message = "Can't find the user" });
+        }
+        else
+        {
+            if (await userManager.IsEmailConfirmedAsync(user))
+            {
+                return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Message = "true" });
+            }
+            else
+            {
+                return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Message = "false" });
+            }
+        }
     }
 
     private async Task CreateRoles()

@@ -6,9 +6,10 @@
   } from "../../core/accountData";
   import { browser } from "$app/environment";
   import { gotoURL } from "../../core/gotoURL";
+  import EmailConfirmBtn from "../../components/profile/EmailConfirmBtn.svelte";
 
   let username: string = "username";
-  let isPro: boolean = true;
+  let isPro: boolean = false;
 
   let accountdata: AccountData = {
     username: username,
@@ -63,12 +64,14 @@
       <div class="card-actions justify-end">
         <div class="badge badge-outline">HamzaCAD</div>
       </div>
-      {#if isPro == true}
-        <button on:click={onCopy} class="btn btn-primary text-lg"
-          >Copy authorization token</button
-        >
-      {/if}
-      <button on:click={onSignout} class="btn btn-outline btn-primary"
+
+      <EmailConfirmBtn token={accountdata.token} />
+
+      <button on:click={onCopy} class="btn btn-primary text-lg"
+        >Copy authorization token</button
+      >
+
+      <button on:click={onSignout} class="btn btn-outline btn-primary mt-4"
         >Sign out</button
       >
     </div>
