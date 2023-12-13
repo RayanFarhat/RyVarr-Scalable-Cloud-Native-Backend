@@ -26,6 +26,7 @@ The backend is cloud native so it can scale easly with caching using Orleans.
 - [X] Sending email for user to conform there email using Smtp protocol.
 - [ ] Prevent sharing accounts with SignalR.
 - [X] Allow Users to reset there password when they forgot it by sending email to the user.
+- [X] Create two separate Docker Compose files, each with different configurations, to distinguish between the production and development environments.
 - [ ] Setup continuous deployment to VPS.
 ### Frontend
 - [X] Adding main page.
