@@ -116,7 +116,7 @@
           <!-- svelte-ignore a11y-label-has-associated-control -->
           <label class="label">
             <!-- must be /forgotpassword -->
-            <a href="/" class="label-text-alt link link-hover"
+            <a href="/forgotPassword" class="label-text-alt link link-hover"
               >Forgot password?</a
             >
           </label>

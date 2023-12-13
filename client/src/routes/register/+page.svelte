@@ -17,6 +17,8 @@
       FailMsg = "two passwords are not the same!";
       return;
     }
+    FailMsgVisable = false;
+
     let baseUrl;
     if (browser) {
       baseUrl = window.location.origin;

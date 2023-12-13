@@ -23,6 +23,7 @@ public class DB_Auth_Startup
         // For Identity  
         builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
         {
+            options.User.RequireUniqueEmail = true;
             options.SignIn.RequireConfirmedEmail = true;
         }).AddEntityFrameworkStores<RyvarrDb>().AddDefaultTokenProviders();
 
@@ -48,5 +49,8 @@ public class DB_Auth_Startup
             };
         });
 
+        // we want for our password reset token is to be valid for a limited time
+        builder.Services.Configure<DataProtectionTokenProviderOptions>(opt =>
+           opt.TokenLifespan = TimeSpan.FromHours(2));
     }
 }

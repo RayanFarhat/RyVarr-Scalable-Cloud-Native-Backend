@@ -73,5 +73,51 @@ public class AccountEditController : ControllerBase
             }
         }
     }
+
+    [HttpPost]
+    [Route("ForgotPassword")]
+    public async Task<IActionResult> ForgotPassword(ForgotPasswordModel forgotPasswordModel)
+    {
+        var user = await userManager.FindByEmailAsync(forgotPasswordModel.Email);
+        if (user == null)
+            return StatusCode(StatusCodes.Status404NotFound, new Response { Status = "Error", Message = "Can't find the user" });
+        var token = await userManager.GeneratePasswordResetTokenAsync(user);
+        var callback = Url.Action(nameof(ResetPassword), "AccountEdit", new { token, email = user.Email });
+
+        var appPassword = Environment.GetEnvironmentVariable("APP_PASSWORD");
+        var client = new SmtpClient("smtp.gmail.com", 587)
+        {
+            Credentials = new NetworkCredential("ryvarrofficial@gmail.com", appPassword),
+            EnableSsl = true,
+            UseDefaultCredentials = false
+        };
+        client.Send("ryvarrofficial@gmail.com", user.Email!, "Reset your password",
+         $"Reset your password by clicking the link below:\n\n{Environment.GetEnvironmentVariable("BASE_URL")}/forgotPassword/reset?email={user.Email!}&token={token} \n\n If this is not you then don't click this link");
+
+        return Ok(new Response { Status = "Success", Message = "Email sent for password reset" });
+    }
+
+    [HttpPost]
+    [Route("ResetPassword")]
+    public async Task<IActionResult> ResetPassword(ResetPasswordModel resetPasswordModel)
+    {
+        var user = await userManager.FindByEmailAsync(resetPasswordModel.Email);
+        if (user == null)
+            return StatusCode(StatusCodes.Status404NotFound, new Response { Status = "Error", Message = "Can't find the user" });
+        else
+        {
+            var resetPassResult = await userManager.ResetPasswordAsync(user, resetPasswordModel.Token, resetPasswordModel.Password);
+            if (resetPassResult.Succeeded)
+            {
+                return Ok(new Response { Status = "Success", Message = "The password reset has been completed successfully" });
+            }
+            else
+            {
+                return StatusCode(StatusCodes.Status404NotFound, new Response { Status = "Error", Message = "The password reset has been failed" });
+
+            }
+        }
+    }
+
 }
 
