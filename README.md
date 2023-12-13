@@ -25,15 +25,14 @@ The backend is cloud native so it can scale easly with caching using Orleans.
 - [X] Working with HamzaCAD service to allow only Pro users to use it.
 - [X] Sending email for user to conform there email using Smtp protocol.
 - [ ] Prevent sharing accounts with SignalR.
-- [ ] Allow Users to read/change/delete there account.(rename email,username, or delete there entire account).
+- [X] Allow Users to reset there password when they forgot it by sending email to the user.
 - [ ] Setup continuous deployment to VPS.
 ### Frontend
-- [X] Make the frontend work on Windows, Mac, Linux, Android, IOS and Web.
 - [X] Adding main page.
 - [X] Handling user authentication and authorization API.
 - [X] Handling Payment API.
 - [X] Adding HamzaCAD service page.
-- [X] Adding profile page to allow user edit there account info.
+- [X] Adding profile page.
 ### HamzaCAD
 - [X] Making HamzaCAD addon work in UI instead of CLI inside AutoCAD.
 - [X] Analyzing user architecture as an input and sending it to the server.
