@@ -1,4 +1,3 @@
-using System.Drawing.Text;
 using System.Security.Claims;
 using BackendServer.Authentication;
 using BackendServer.DB;
@@ -56,7 +55,7 @@ public class PaymentController : ControllerBase
     [AllowAnonymous]
     [HttpGet]
     [Route("returnMonth/{userId}")]
-    public async Task<string> PayPalReturnMonth([FromRoute] string userId, [FromQuery] string paymentId,
+    public async Task<IActionResult> PayPalReturnMonth([FromRoute] string userId, [FromQuery] string paymentId,
         [FromQuery] string token, [FromQuery] string PayerID)
     {
         return await PayPalReturnShared(userId, paymentId, PayerID, 1);
@@ -66,7 +65,7 @@ public class PaymentController : ControllerBase
     [AllowAnonymous]
     [HttpGet]
     [Route("returnYear/{userId}")]
-    public async Task<string> PayPalReturnYear([FromRoute] string userId, [FromQuery] string paymentId,
+    public async Task<IActionResult> PayPalReturnYear([FromRoute] string userId, [FromQuery] string paymentId,
         [FromQuery] string token, [FromQuery] string PayerID)
     {
         return await PayPalReturnShared(userId, paymentId, PayerID, 12);
@@ -93,7 +92,7 @@ public class PaymentController : ControllerBase
         string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value!;
         var row = await accountDataCache.Get(userId);
         if (row == null)
-            return NotFound("Cannot find your user data");
+            return StatusCode(StatusCodes.Status404NotFound, new Response { Status = "Error", Message = "Can't find the user" });
         // if (row.IsPro == true)
         //     return BadRequest("you are already a pro user");
         // Create payment details
@@ -128,7 +127,7 @@ public class PaymentController : ControllerBase
         }
     }
 
-    private async Task<string> PayPalReturnShared(string userId, string paymentId, string PayerID, int months)
+    private async Task<IActionResult> PayPalReturnShared(string userId, string paymentId, string PayerID, int months)
     {
         // Use paymentId, token, and payerId to execute payment
         var paymentExecution = new PaymentExecution { payer_id = PayerID };
@@ -145,7 +144,7 @@ public class PaymentController : ControllerBase
         {
             var row = await accountDataCache.Get(userId);
             if (row == null)
-                return "Cannot find your user data";
+                return StatusCode(StatusCodes.Status404NotFound, new Response { Status = "Error", Message = "Can't find the user" });
             // make the user pro and date until sub expired
             if (row.IsPro == false)
             {
@@ -163,13 +162,15 @@ public class PaymentController : ControllerBase
             //make his role as userPro
             await AddRoleUserPro(userId);
 
-            return "Your payment has succeeded! please return to RyVarr app";
+            return Redirect(Environment.GetEnvironmentVariable("BASE_URL") + "/payment/success");
+
         }
         // Payment was not successful
         else
         {
             // Handle accordingly
-            return "Your payment has failed! please return to RyVarr app";
+            return Redirect(Environment.GetEnvironmentVariable("BASE_URL") + "/payment/fail");
+
         }
     }
 }

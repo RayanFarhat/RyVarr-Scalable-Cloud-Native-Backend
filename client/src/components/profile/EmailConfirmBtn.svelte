@@ -89,3 +89,9 @@
         </div>
     </div>
 {/if}
+{#if isConfirmed !== "true"}
+    <p class="py-6 font-bold text-success">
+        Confirming your email is essential because without it, if you forget
+        your password and need to reset it, confirmation of your email is
+        necessary.
+    </p>{/if}
