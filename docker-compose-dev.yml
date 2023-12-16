@@ -20,6 +20,9 @@ services:
       - '443:443'
     networks:
       - server-network
+    depends_on:
+      - backendserver
+      - client
 
   db:
     image: postgres:15.2
