@@ -12,6 +12,8 @@
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -111,9 +113,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="bin\x64\Debug\HamzaCAD2023.dll.config" />
+    <None Include="bin\x64\Debug\localStorage.json" />
+    <None Include="bin\x64\Release\HamzaCAD2023.dll.config" />
     <None Include="load.scr" />
     <None Include="loadDev.scr" />
     <None Include="packages.config" />
+    <None Include="packages\System.Runtime.CompilerServices.Unsafe.4.5.3\.signature.p7s" />
+    <None Include="packages\System.Runtime.CompilerServices.Unsafe.4.5.3\System.Runtime.CompilerServices.Unsafe.4.5.3.nupkg" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="BarsComputation\Winforms\AuthWindow.resx">
@@ -129,11 +136,108 @@
   <ItemGroup>
     <Folder Include="bin\Debug\" />
     <Folder Include="bin\Release\" />
-    <Folder Include="bin\x64\Debug\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\x64\Debug\accoremgd.dll" />
+    <Content Include="bin\x64\Debug\AcCui.dll" />
+    <Content Include="bin\x64\Debug\AcCustomize.dll" />
+    <Content Include="bin\x64\Debug\acdbmgd.dll" />
+    <Content Include="bin\x64\Debug\AcDx.dll" />
+    <Content Include="bin\x64\Debug\AcDxPublishUi.dll" />
+    <Content Include="bin\x64\Debug\acmgd.dll" />
+    <Content Include="bin\x64\Debug\AcMNUParser.dll" />
+    <Content Include="bin\x64\Debug\AcMr.dll" />
+    <Content Include="bin\x64\Debug\AcTcMgd.dll" />
+    <Content Include="bin\x64\Debug\AcWindows.dll" />
+    <Content Include="bin\x64\Debug\AdUIMgd.dll" />
+    <Content Include="bin\x64\Debug\AdUiPalettes.dll" />
+    <Content Include="bin\x64\Debug\AdWindows.dll" />
+    <Content Include="bin\x64\Debug\AppHomeInterop.dll" />
+    <Content Include="bin\x64\Debug\Autodesk.AutoCAD.Interop.Common.dll" />
+    <Content Include="bin\x64\Debug\Autodesk.AutoCAD.Interop.dll" />
+    <Content Include="bin\x64\Debug\Autodesk.DesktopConnector.API.dll" />
+    <Content Include="bin\x64\Debug\en-US\AcCustomize.resources.dll" />
+    <Content Include="bin\x64\Debug\en-US\acdbmgd.resources.dll" />
+    <Content Include="bin\x64\Debug\en-US\AcDx.resources.dll" />
+    <Content Include="bin\x64\Debug\en-US\AcDxPublishUi.resources.dll" />
+    <Content Include="bin\x64\Debug\en-US\AcMr.resources.dll" />
+    <Content Include="bin\x64\Debug\en-US\AcWindows.resources.dll" />
+    <Content Include="bin\x64\Debug\en-US\AdWindows.resources.dll" />
+    <Content Include="bin\x64\Debug\en-US\AppHomeInterop.resources.dll" />
+    <Content Include="bin\x64\Debug\HamzaCAD2023.dll" />
+    <Content Include="bin\x64\Debug\HamzaCAD2023.pdb" />
+    <Content Include="bin\x64\Debug\Microsoft.Bcl.AsyncInterfaces.dll" />
+    <Content Include="bin\x64\Debug\Newtonsoft.Json.dll" />
+    <Content Include="bin\x64\Debug\Serilog.dll" />
+    <Content Include="bin\x64\Debug\Serilog.Sinks.File.dll" />
+    <Content Include="bin\x64\Debug\System.Buffers.dll" />
+    <Content Include="bin\x64\Debug\System.Memory.dll" />
+    <Content Include="bin\x64\Debug\System.Numerics.Vectors.dll" />
+    <Content Include="bin\x64\Debug\System.Text.Encodings.Web.dll" />
+    <Content Include="bin\x64\Debug\System.Text.Json.dll" />
+    <Content Include="bin\x64\Debug\System.Threading.Tasks.Extensions.dll" />
+    <Content Include="bin\x64\Debug\System.ValueTuple.dll" />
+    <Content Include="bin\x64\Release\accoremgd.dll" />
+    <Content Include="bin\x64\Release\AcCui.dll" />
+    <Content Include="bin\x64\Release\AcCustomize.dll" />
+    <Content Include="bin\x64\Release\acdbmgd.dll" />
+    <Content Include="bin\x64\Release\AcDx.dll" />
+    <Content Include="bin\x64\Release\AcDxPublishUi.dll" />
+    <Content Include="bin\x64\Release\acmgd.dll" />
+    <Content Include="bin\x64\Release\AcMNUParser.dll" />
+    <Content Include="bin\x64\Release\AcMr.dll" />
+    <Content Include="bin\x64\Release\AcTcMgd.dll" />
+    <Content Include="bin\x64\Release\AcWindows.dll" />
+    <Content Include="bin\x64\Release\AdUIMgd.dll" />
+    <Content Include="bin\x64\Release\AdUiPalettes.dll" />
+    <Content Include="bin\x64\Release\AdWindows.dll" />
+    <Content Include="bin\x64\Release\AppHomeInterop.dll" />
+    <Content Include="bin\x64\Release\Autodesk.AutoCAD.Interop.Common.dll" />
+    <Content Include="bin\x64\Release\Autodesk.AutoCAD.Interop.dll" />
+    <Content Include="bin\x64\Release\Autodesk.DesktopConnector.API.dll" />
+    <Content Include="bin\x64\Release\en-US\AcCustomize.resources.dll" />
+    <Content Include="bin\x64\Release\en-US\acdbmgd.resources.dll" />
+    <Content Include="bin\x64\Release\en-US\AcDx.resources.dll" />
+    <Content Include="bin\x64\Release\en-US\AcDxPublishUi.resources.dll" />
+    <Content Include="bin\x64\Release\en-US\AcMr.resources.dll" />
+    <Content Include="bin\x64\Release\en-US\AcWindows.resources.dll" />
+    <Content Include="bin\x64\Release\en-US\AdWindows.resources.dll" />
+    <Content Include="bin\x64\Release\en-US\AppHomeInterop.resources.dll" />
+    <Content Include="bin\x64\Release\HamzaCAD2023.dll" />
+    <Content Include="bin\x64\Release\HamzaCAD2023.pdb" />
+    <Content Include="bin\x64\Release\Microsoft.Bcl.AsyncInterfaces.dll" />
+    <Content Include="bin\x64\Release\Newtonsoft.Json.dll" />
+    <Content Include="bin\x64\Release\Serilog.dll" />
+    <Content Include="bin\x64\Release\Serilog.Sinks.File.dll" />
+    <Content Include="bin\x64\Release\System.Buffers.dll" />
+    <Content Include="bin\x64\Release\System.Memory.dll" />
+    <Content Include="bin\x64\Release\System.Numerics.Vectors.dll" />
+    <Content Include="bin\x64\Release\System.Text.Encodings.Web.dll" />
+    <Content Include="bin\x64\Release\System.Text.Json.dll" />
+    <Content Include="bin\x64\Release\System.Threading.Tasks.Extensions.dll" />
+    <Content Include="bin\x64\Release\System.ValueTuple.dll" />
+    <Content Include="packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll" />
+    <Content Include="packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.xml" />
+    <Content Include="packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\netcoreapp2.0\System.Runtime.CompilerServices.Unsafe.dll" />
+    <Content Include="packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\netcoreapp2.0\System.Runtime.CompilerServices.Unsafe.xml" />
+    <Content Include="packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll" />
+    <Content Include="packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.xml" />
+    <Content Include="packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll" />
+    <Content Include="packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.xml" />
+    <Content Include="packages\System.Runtime.CompilerServices.Unsafe.4.5.3\LICENSE.TXT" />
+    <Content Include="packages\System.Runtime.CompilerServices.Unsafe.4.5.3\ref\net461\System.Runtime.CompilerServices.Unsafe.dll" />
+    <Content Include="packages\System.Runtime.CompilerServices.Unsafe.4.5.3\ref\net461\System.Runtime.CompilerServices.Unsafe.xml" />
+    <Content Include="packages\System.Runtime.CompilerServices.Unsafe.4.5.3\ref\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll" />
+    <Content Include="packages\System.Runtime.CompilerServices.Unsafe.4.5.3\ref\netstandard1.0\System.Runtime.CompilerServices.Unsafe.xml" />
+    <Content Include="packages\System.Runtime.CompilerServices.Unsafe.4.5.3\ref\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll" />
+    <Content Include="packages\System.Runtime.CompilerServices.Unsafe.4.5.3\ref\netstandard2.0\System.Runtime.CompilerServices.Unsafe.xml" />
+    <Content Include="packages\System.Runtime.CompilerServices.Unsafe.4.5.3\THIRD-PARTY-NOTICES.TXT" />
+    <Content Include="packages\System.Runtime.CompilerServices.Unsafe.4.5.3\useSharedDesignerContext.txt" />
+    <Content Include="packages\System.Runtime.CompilerServices.Unsafe.4.5.3\version.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

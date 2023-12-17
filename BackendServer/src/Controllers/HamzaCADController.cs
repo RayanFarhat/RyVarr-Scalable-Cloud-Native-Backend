@@ -62,7 +62,7 @@ public class HamzaCADController : ControllerBase
     [Authorize]
     [HttpGet]
     [Route("downloadfile")]
-    public async Task<IActionResult> DownloadFile()
+    public async Task<IActionResult> DownloadFile([FromQuery(Name = "fileName")] string fileName)
     {
         //get user and check if he is pro
         string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value!;
@@ -79,7 +79,9 @@ public class HamzaCADController : ControllerBase
         //if user is pro
         else
         {
-            var result = await _iFileManager.DownloadFile("HamzaCAD2024Setup.msi");
+            //var result = await _iFileManager.DownloadFile("HamzaCAD2024Setup.msi");
+            var result = await _iFileManager.DownloadFile(fileName);
+
             return File(result.Item1, result.Item2, result.Item3);
         }
     }

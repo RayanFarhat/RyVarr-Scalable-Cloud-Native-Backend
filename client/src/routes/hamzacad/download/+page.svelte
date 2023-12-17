@@ -17,12 +17,13 @@
         userData = getAccountData();
     }
 
-    async function onDownload() {
+    async function onDownload(filename: string) {
         let baseUrl;
         if (browser) {
             baseUrl = window.location.origin;
         }
-        const endpoint = baseUrl + "/api/HamzaCAD/downloadfile";
+        const endpoint =
+            baseUrl + "/api/HamzaCAD/downloadfile?fileName=" + filename;
 
         const res = await fetch(endpoint, {
             method: "GET",
@@ -66,8 +67,25 @@
                 >
                     Autocad 2024
                 </div>
-                <button on:click={onDownload} class="btn btn-primary mt-8"
-                    >Download</button
+                <button
+                    on:click={() => onDownload("HamzaCAD2024Setup.msi")}
+                    class="btn btn-primary mt-8">Download</button
+                >
+            </div>
+        </div>
+    </div>
+    <div class="card shadow-xl bg-base-200 m-4 border border-primary">
+        <div class="card-body items-center text-center">
+            <h2 class="card-title text-white">HamzaCAD Beta 0.0.1</h2>
+            <div class="stat">
+                <div
+                    class="stat-value text-primary flex items-center justify-center"
+                >
+                    Autocad 2023
+                </div>
+                <button
+                    on:click={() => onDownload("HamzaCAD2023Setup.msi")}
+                    class="btn btn-primary mt-8">Download</button
                 >
             </div>
         </div>
