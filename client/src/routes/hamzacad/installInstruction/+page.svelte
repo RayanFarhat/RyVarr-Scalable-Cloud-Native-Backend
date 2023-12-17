@@ -42,8 +42,11 @@
                 Right-click on the Autocad program icon, then choose
                 "Properties" followed by "Shortcut". In the "Target" field, add
                 to the existing text:
-                <span></span>
             </p>
+            <div class="mockup-code">
+                <code>-b C:\RyVarr\HamzaCAD2023\load.scr</code>
+            </div>
+            <p>or</p>
             <div class="mockup-code">
                 <code>-b C:\RyVarr\HamzaCAD2024\load.scr</code>
             </div>
