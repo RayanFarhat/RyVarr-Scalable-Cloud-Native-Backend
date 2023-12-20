@@ -53,5 +53,23 @@ press subscription button while sign in and pay with paypal
 ![image](https://github.com/RayanFarhat/RyVarr/assets/100049997/def0b81b-8505-4ca3-a208-3e1429d7197d)
 
 
+## Database Maintenance
+- connect to https://ryvarr.com:5432 with pgadmin
+- use `dump` to download the .sql file of the database and save it as a backup
+- now i can update database version and use `restore` to add the data.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
