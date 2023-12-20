@@ -58,6 +58,11 @@ press subscription button while sign in and pay with paypal
 - use `dump` to download the .sql file of the database and save it as a backup
 - now i can update database version and use `restore` to add the data.
 
+#### EFcore migrations commands i need to create the database and tables
+* `dotnet tool install --global dotnet-ef` for installing
+* `dotnet ef migrations add [name]`
+* `dotnet ef database drop --force` if i want to reset the database
+* `dotnet ef database update`
 
 
 
