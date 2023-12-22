@@ -79,3 +79,5 @@ _[Ss]cripts
 
 #/sessionCache/redis_data/
 .env
+
+/certbot

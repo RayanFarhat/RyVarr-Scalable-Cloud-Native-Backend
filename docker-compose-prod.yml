@@ -32,6 +32,10 @@ services:
     volumes:
       - ./certbot/www/:/var/www/certbot/:rw
       - ./certbot/conf/:/etc/letsencrypt/:rw
+# for first time to create keys hide https in nginx conf and run the containers
+# then run
+# docker compose -f docker-compose-prod.yml run --rm certbot certonly --webroot -w /var/www/certbot/ --force-renewal --email {email} -d ryvarr.com --agree-tos
+# after that we created teh keys, then re-show the https server in nginx and run the containers
 
   db:
     image: postgres:16.1
