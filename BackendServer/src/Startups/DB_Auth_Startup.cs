@@ -10,7 +10,10 @@ public class DB_Auth_Startup
 {
     public static void Init(WebApplicationBuilder builder)
     {
-        string postgreConnectionstring = "Host=localhost;Port=5432;Database=ryvarrdb;Username=ryan;Password=ryan";
+        var dbName = Environment.GetEnvironmentVariable("DB_NAME");
+        var dbUser = Environment.GetEnvironmentVariable("DB_USER");
+        var dbPass = Environment.GetEnvironmentVariable("DB_PASSWORD");
+        string postgreConnectionstring = $"Host=localhost;Port=5432;Database={dbName};Username={dbUser};Password={dbPass}";
         string? environmentVariableValue = Environment.GetEnvironmentVariable("RUNNING_IN_DOCKER");
         if (environmentVariableValue == "true")
         {
