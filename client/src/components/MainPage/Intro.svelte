@@ -24,7 +24,7 @@
       <div class="flex justify-center">
         <img
           class="w-1/3 h-1/3"
-          src="/icons/house_plan.png"
+          src="/editedIcons/house_plan.png"
           alt="house plan icon"
         />
       </div>
