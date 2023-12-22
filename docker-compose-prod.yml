@@ -71,6 +71,7 @@ services:
     #scale: 5
     depends_on:
       - db
+      - redis
     networks:
       - server-network
 

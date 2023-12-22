@@ -17,7 +17,7 @@ public class DB_Auth_Startup
         string? environmentVariableValue = Environment.GetEnvironmentVariable("RUNNING_IN_DOCKER");
         if (environmentVariableValue == "true")
         {
-            postgreConnectionstring = "Host=db;Port=5432;Database=ryvarrdb;Username=ryan;Password=ryan";
+            postgreConnectionstring = $"Host=db;Port=5432;Database={dbName};Username={dbUser};Password={dbPass}";
         }
 
         // For Entity Framework  
