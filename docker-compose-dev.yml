@@ -53,6 +53,9 @@ services:
       PAYPAL_CLIENT_ID: ${PAYPAL_CLIENT_ID_SANDBOX}
       PAYPAL_CLIENT_SECRET: ${PAYPAL_CLIENT_SECRET_SANDBOX}
       PAYPAL_MODE: sandbox
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
     ######################################
     #scale: 5
     depends_on:
