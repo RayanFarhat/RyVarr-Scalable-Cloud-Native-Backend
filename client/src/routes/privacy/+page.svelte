@@ -6,11 +6,6 @@
     };
     terms = [
         {
-            title: "Who we are",
-            paragraph:
-                "Our company is RyVarr. Our website address is: https://ryvarr.com.",
-        },
-        {
             title: "What personal data we collect and why we collect it",
             paragraph:
                 "JWT tokens\nWhen you sign in to your account, we generate a JWT token containing your username, ID, and additional details. This token is stored in your browser, enabling seamless authorized access to our website without requiring you to sign in repeatedly. The token remains valid for one week; after this period, you will need to sign in again for continued access.\n\nYour email, username\nWe store your email and username to recognize you during sign-in and to ascertain your subscription and payment status for our products. We don't retain your password directly; instead, we store a hashed copy of it, ensuring that not even the company itself can view your password.",
@@ -23,12 +18,12 @@
         {
             title: "How we protect your data",
             paragraph:
-                "Your personal information is contained behind secured networks and is only accessible by a limited number of persons who have special access rights to such systems, and are required to keep the information confidential. In addition, all sensitive/credit information you supply is encrypted via Secure Socket Layer (SSL) technology.\n\nWe implement a variety of security measures when a user places an order enters, submits, or accesses their information to maintain the safety of your personal information.\n\nAll transactions are processed through a gateway provider and are not stored or processed on our servers.",
+                "Your personal information is contained behind secured networks and is only accessible by a limited number of persons who have special access rights to such systems, and are required to keep the information confidential. In addition, all sensitive/credit information you supply is encrypted via Secure Socket Layer (SSL) technology.\n\nWe implement a variety of security measures when a user places an order enters, submits, or accesses their information to maintain the safety of your personal information with HTTPS.\n\nAll transactions are processed through a gateway provider and are not stored or processed on our servers.\n\nIf you are not comfortable with this security, don't register to our website and services.",
         },
         {
             title: "How long we retain your data",
             paragraph:
-                "For users that register on our website (if any), we also store the personal information they provide in their user profile. All users can see, edit, or delete their personal information at any time (except they cannot change their username). Website administrators can also see and edit that information.",
+                "For users that register on our website (if any), we also store the personal information they provide in their user profile. All users can see, edit, or delete their personal information at any time (except they cannot change their username, email). Website administrators can also see and edit that information.",
         },
         {
             title: "What rights you have over your data",
