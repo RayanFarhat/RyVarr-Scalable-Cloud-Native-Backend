@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BackendServer.Migrations
 {
     [DbContext(typeof(RyvarrDb))]
-    [Migration("20231201155108_init")]
+    [Migration("20231223193014_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -75,7 +75,7 @@ namespace BackendServer.Migrations
                     b.HasIndex("Id")
                         .IsUnique();
 
-                    b.ToTable("contactdata", (string)null);
+                    b.ToTable("ContactData", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

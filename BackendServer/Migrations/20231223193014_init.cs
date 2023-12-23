@@ -27,7 +27,7 @@ namespace BackendServer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "contactdata",
+                name: "ContactData",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
@@ -38,7 +38,7 @@ namespace BackendServer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_contactdata", x => x.Id);
+                    table.PrimaryKey("PK_ContactData", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -208,8 +208,8 @@ namespace BackendServer.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_contactdata_Id",
-                table: "contactdata",
+                name: "IX_ContactData_Id",
+                table: "ContactData",
                 column: "Id",
                 unique: true);
 
@@ -255,7 +255,7 @@ namespace BackendServer.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "contactdata");
+                name: "ContactData");
 
             migrationBuilder.DropTable(
                 name: "UserRoles");

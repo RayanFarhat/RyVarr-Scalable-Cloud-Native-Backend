@@ -64,8 +64,9 @@ press subscription button while sign in and pay with paypal
 #### EFcore migrations commands i need to create the database and tables
 * `dotnet tool install --global dotnet-ef` for installing
 * `dotnet ef migrations add [name]`
-* `dotnet ef database drop --force` if i want to reset the database
-* `dotnet ef database update`
+* `docker compose -f docker-compose.yml exec backendserver dotnet ef database drop --force` if i want to reset the database
+* `docker compose -f docker-compose-dev.yml exec backendserver dotnet ef database update`
+* if I have faced that there is not tables created only __efmigrationshistory table then i delete files in Migrations after backup
 
 
 

@@ -63,11 +63,24 @@ public class AccountDataCache
         }
         return value;
     }
-    public async Task<bool> Remove(string UserId)
+    public async Task<bool> RemoveIncludeUserManager(string UserId)
     {
         AccountData? row = _db.AccountData.Where(row => row.Id == UserId).FirstOrDefault();
         if (row == null)
             return false;
+
+        // delete from my userManager Tables
+        var user = await _userManager.FindByIdAsync(UserId);
+        if (user == null)
+        {
+            return false;
+        }
+        var result = await _userManager.DeleteAsync(user);
+        if (result.Succeeded == false)
+        {
+            return false;
+        }
+        // delete from my accountData Table
         var grain = _clusterClient.GetGrain<IAccountDataGrain>(UserId);
         await grain.Clear();
         _db.AccountData.Remove(row);

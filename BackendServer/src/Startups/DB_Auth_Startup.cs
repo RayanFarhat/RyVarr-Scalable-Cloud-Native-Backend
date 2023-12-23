@@ -10,13 +10,13 @@ public class DB_Auth_Startup
 {
     public static void Init(WebApplicationBuilder builder)
     {
-        var dbName = Environment.GetEnvironmentVariable("DB_NAME");
-        var dbUser = Environment.GetEnvironmentVariable("DB_USER");
-        var dbPass = Environment.GetEnvironmentVariable("DB_PASSWORD");
-        string postgreConnectionstring = $"Host=localhost;Port=5432;Database={dbName};Username={dbUser};Password={dbPass}";
+        string postgreConnectionstring = "";
         string? environmentVariableValue = Environment.GetEnvironmentVariable("RUNNING_IN_DOCKER");
         if (environmentVariableValue == "true")
         {
+            var dbName = Environment.GetEnvironmentVariable("DB_NAME");
+            var dbUser = Environment.GetEnvironmentVariable("DB_USER");
+            var dbPass = Environment.GetEnvironmentVariable("DB_PASSWORD");
             postgreConnectionstring = $"Host=db;Port=5432;Database={dbName};Username={dbUser};Password={dbPass}";
         }
 

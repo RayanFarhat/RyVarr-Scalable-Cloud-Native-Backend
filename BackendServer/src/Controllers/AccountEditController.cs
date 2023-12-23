@@ -17,6 +17,9 @@ namespace BackendServer.Controllers;
 [ApiController]
 public class AccountEditController : ControllerBase
 {
+
+    private readonly AccountDataCache accountDataCache;
+
     private readonly UserManager<IdentityUser> userManager;
     private readonly IConfiguration _configuration;
     public AccountEditController(UserManager<IdentityUser> userManager, IConfiguration configuration,
@@ -24,6 +27,7 @@ public class AccountEditController : ControllerBase
     {
         this.userManager = userManager;
         _configuration = configuration;
+        accountDataCache = new AccountDataCache(clusterClient, db, userManager);
     }
 
     [Authorize]
@@ -119,5 +123,19 @@ public class AccountEditController : ControllerBase
         }
     }
 
+    [Authorize]
+    [HttpPost]
+    [Route("DeleteAccount")]
+    public async Task<IActionResult> DeleteAccount()
+    {
+        string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value!;
+        var resultAccountData = await accountDataCache.RemoveIncludeUserManager(userId);
+        if (resultAccountData == true)
+        {
+            return StatusCode(StatusCodes.Status200OK, new Response { Status = "Succeed", Message = "Account have deleted" });
+        }
+
+        return StatusCode(StatusCodes.Status404NotFound, new Response { Status = "Error", Message = "error while deleting the account" });
+    }
 }
 
