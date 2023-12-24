@@ -29,6 +29,7 @@ The backend is cloud native so it can scale easly with caching using Orleans.
 - [X] Create two separate Docker Compose files, each with different configurations, to distinguish between the production and development environments.
 - [ ] Setup continuous deployment to VPS.
 - [X] Adding basic DDOS attack protection using NGINX.
+- [X] Adding SSL connection to the database
 
 ### Frontend
 - [X] Adding main page.
