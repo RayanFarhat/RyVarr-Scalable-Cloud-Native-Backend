@@ -53,8 +53,7 @@ services:
       - ./database/postgresql:/var/lib/postgresql/data
       - ./certbot/conf/live/ryvarr.com/fullchain.pem:/var/lib/postgresql/server.crt:ro
       - ./certbot/conf/live/ryvarr.com/privkey.pem:/var/lib/postgresql/server.key:ro
-    command: postgres -c ssl=on -c ssl_cert_file=/var/lib/postgresql/server.crt -c ssl_key_file=/var/lib/postgresql/server.key
-    
+      # open postgresql.conf and make ssl=on and path for crt and key and restart the db  
       
     ######################################
   backendserver:
