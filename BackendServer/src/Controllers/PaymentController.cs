@@ -14,7 +14,7 @@ namespace BackendServer.Controllers;
 [ApiController]
 public class PaymentController : ControllerBase
 {
-    private readonly APIContext _apiContext;
+    private APIContext _apiContext;
     private readonly UserManager<IdentityUser> userManager;
     private readonly AccountDataCache accountDataCache;
 
@@ -23,7 +23,7 @@ public class PaymentController : ControllerBase
     {
         accountDataCache = new AccountDataCache(clusterClient, db, userManager);
         this.userManager = userManager;
-        // Set up API context with sandbox credentials
+        // Set up API context with credentials
         var clientId = Environment.GetEnvironmentVariable("PAYPAL_CLIENT_ID");
         var clientSecret = Environment.GetEnvironmentVariable("PAYPAL_CLIENT_SECRET");
 
@@ -113,6 +113,18 @@ public class PaymentController : ControllerBase
                 cancel_url = Environment.GetEnvironmentVariable("BASE_URL") + "/api/Payment/cancel"
             }
         };
+
+        // Set up API context with credentials
+        var clientId = Environment.GetEnvironmentVariable("PAYPAL_CLIENT_ID");
+        var clientSecret = Environment.GetEnvironmentVariable("PAYPAL_CLIENT_SECRET");
+
+        var payPalConfig = new Dictionary<string, string>
+        {
+            { "mode", Environment.GetEnvironmentVariable("PAYPAL_MODE")! }
+        };
+        OAuthTokenCredential tokenCredential = new(clientId, clientSecret, payPalConfig);
+        string accessToken = tokenCredential.GetAccessToken();
+        _apiContext = new APIContext(accessToken);
 
         // Create payment and get approval URL
         var createdPayment = payment.Create(_apiContext);
