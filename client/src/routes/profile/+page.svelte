@@ -7,6 +7,7 @@
   import { browser } from "$app/environment";
   import { gotoURL } from "../../core/gotoURL";
   import EmailConfirmBtn from "../../components/profile/EmailConfirmBtn.svelte";
+  import DeleteAccount from "../../components/profile/DeleteAccount.svelte";
 
   let username: string = "username";
   let isPro: boolean = false;
@@ -77,6 +78,7 @@
     </div>
   </div>
 </div>
+<DeleteAccount token={accountdata.token} />
 <br />
 <br />
 <br />
