@@ -33,7 +33,10 @@ public class PaymentController : ControllerBase
         };
         OAuthTokenCredential tokenCredential = new(clientId, clientSecret, payPalConfig);
         string accessToken = tokenCredential.GetAccessToken();
-        _apiContext = new APIContext(accessToken);
+        _apiContext = new APIContext(accessToken)
+        {
+            Config = payPalConfig
+        };
     }
 
     [Authorize]
@@ -124,7 +127,10 @@ public class PaymentController : ControllerBase
         };
         OAuthTokenCredential tokenCredential = new(clientId, clientSecret, payPalConfig);
         string accessToken = tokenCredential.GetAccessToken();
-        _apiContext = new APIContext(accessToken);
+        _apiContext = new APIContext(accessToken)
+        {
+            Config = payPalConfig
+        };
 
         // Create payment and get approval URL
         var createdPayment = payment.Create(_apiContext);
