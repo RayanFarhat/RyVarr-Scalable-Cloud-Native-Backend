@@ -37,7 +37,7 @@ The backend is cloud native so it can scale easly with caching using Orleans.
 - [X] Handling Payment API.
 - [X] Adding HamzaCAD service page.
 - [X] Adding profile page.
-- [X] Adding Terms of use and Privacy policy pages.
+- [ ] Adding Terms of use and Privacy policy pages.
 ### HamzaCAD
 - [X] Making HamzaCAD addon work in UI instead of CLI inside AutoCAD.
 - [X] Analyzing user architecture as an input and sending it to the server.
