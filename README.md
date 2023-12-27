@@ -43,6 +43,7 @@ The backend is cloud native so it can scale easly with caching using Orleans.
 - [X] Analyzing user architecture as an input and sending it to the server.
 - [X] Allowing access only by pro users by providing there token id.
 - [X] Making the server handle calculations logic and sending the final drawing to the client.
+- [X] seperate the drawing into labels(linework) 
 
 ## Frontend photos
 ![image](https://github.com/RayanFarhat/RyVarr/assets/100049997/f67e0a2e-bbb9-4a45-a49e-09966f747c37)
