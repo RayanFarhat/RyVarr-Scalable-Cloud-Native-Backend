@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.IO;
-using HamzaCad.Utils;
+using HamzaCad.SlabDrawing;
 
-namespace HamzaCad.BarsComputation
+namespace HamzaCad.Utils
 {
     public class FileHandler
     {

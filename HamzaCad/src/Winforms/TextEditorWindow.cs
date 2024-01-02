@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using HamzaCad.SlabDrawing;
 
-namespace HamzaCad.BarsComputation
+namespace HamzaCad.Winforms
 {
     public partial class TextEditorWindow : Form
     {

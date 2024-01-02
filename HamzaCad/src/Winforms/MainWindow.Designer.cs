@@ -1,4 +1,4 @@
-﻿namespace HamzaCad.BarsComputation
+﻿namespace HamzaCad.Winforms
 {
     partial class MainWindow
     {

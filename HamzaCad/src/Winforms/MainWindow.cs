@@ -1,4 +1,4 @@
-﻿using HamzaCad.BarsComputation.Winforms;
+﻿using HamzaCad.SlabDrawing;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,9 +9,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using HamzaCad.Utils;
 
-namespace HamzaCad.BarsComputation
+namespace HamzaCad.Winforms
 {
     public partial class MainWindow : Form
     {

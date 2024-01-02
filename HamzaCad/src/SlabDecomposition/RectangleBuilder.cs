@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Media.Animation;
+using HamzaCad.Utils;
+using HamzaCad.SlabDrawing;
 
-namespace HamzaCad.BarsComputation
+namespace HamzaCad.SlabDecomposition
 {
     public class RectangleBuilder
     {

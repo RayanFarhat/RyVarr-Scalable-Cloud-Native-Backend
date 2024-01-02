@@ -5,8 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using HamzaCad.SlabDrawing;
 
-namespace HamzaCad.BarsComputation
+namespace HamzaCad.Winforms
 {
     public partial class MainWindow : Form
     {

@@ -7,8 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using HamzaCad.SlabDrawing;
+using HamzaCad.SlabDecomposition;
+using HamzaCad.Utils;
 
-namespace HamzaCad.BarsComputation.Winforms
+
+namespace HamzaCad.Winforms
 {
     public partial class AuthWindow : Form
     {

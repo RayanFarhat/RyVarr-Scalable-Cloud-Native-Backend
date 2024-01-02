@@ -1,4 +1,4 @@
-﻿namespace HamzaCad.BarsComputation.Winforms
+﻿namespace HamzaCad.Winforms
 {
     partial class AuthWindow
     {

@@ -6,8 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using HamzaCad.Utils;
+using HamzaCad.SlabDecomposition;
 
-namespace HamzaCad.BarsComputation
+
+namespace HamzaCad.SlabDrawing
 {
     public class DrawingBarGenerator
     {
