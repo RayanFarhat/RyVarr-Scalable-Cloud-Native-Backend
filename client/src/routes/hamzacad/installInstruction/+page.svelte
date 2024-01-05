@@ -69,7 +69,14 @@
     </div>
 
     <h3 class="text-xl my-5 font-bold">Video of how to install:</h3>
-    <video width="640" height="360" controls>
-        <source src="/hamzacad/HamzaCAD_install.mp4" type="video/mp4" />
-    </video>
+
+    <iframe
+        width="640"
+        height="360"
+        src="https://www.youtube.com/embed/qFk1_TQik-g?si=a8JPSwiLeha333zJ"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+    ></iframe>
 </div>

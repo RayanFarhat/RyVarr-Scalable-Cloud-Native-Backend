@@ -15,7 +15,7 @@ namespace HamzaCad.Utils
     public class HttpClientHandler
     {
 #if DEBUG
-        private string _apiBaseUrl { get; set; } = "http://localhost";
+        private string _apiBaseUrl { get; set; } = "https://ryvarr.com";
 #else
         private string _apiBaseUrl { get; set; } = "https://ryvarr.com";
 #endif
