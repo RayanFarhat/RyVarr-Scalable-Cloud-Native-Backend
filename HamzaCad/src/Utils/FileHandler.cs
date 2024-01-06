@@ -7,6 +7,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.IO;
 using HamzaCad.SlabDrawing;
+using HamzaCad.src.AutoCADAdapter;
 
 namespace HamzaCad.Utils
 {
@@ -69,7 +70,7 @@ namespace HamzaCad.Utils
             } 
             catch (Exception e) {
                 File.Delete(@"localStorage.json");
-                BarsComputer.ed.WriteMessage("\nError reading the saved changed!\n");
+                AutoCADAdapter.ed.WriteMessage("\nError reading the saved changed!\n");
             }
         }
     }

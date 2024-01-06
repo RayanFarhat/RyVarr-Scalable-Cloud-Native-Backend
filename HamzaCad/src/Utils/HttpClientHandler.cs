@@ -9,13 +9,14 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using HamzaCad.SlabDrawing;
+using HamzaCad.src.AutoCADAdapter;
 
 namespace HamzaCad.Utils
 {
     public class HttpClientHandler
     {
 #if DEBUG
-        private string _apiBaseUrl { get; set; } = "https://ryvarr.com";
+        private string _apiBaseUrl { get; set; } = "http://localhost";
 #else
         private string _apiBaseUrl { get; set; } = "https://ryvarr.com";
 #endif
@@ -57,13 +58,13 @@ namespace HamzaCad.Utils
                 }
                 else
                 {
-                    BarsComputer.ed.WriteMessage("UnAuthorized\n");
+                    AutoCADAdapter.ed.WriteMessage("UnAuthorized\n");
                     return 1000;
                 }
             }
             catch (HttpRequestException e)
             {
-                BarsComputer.ed.WriteMessage("Error in the request or the response: " + e.Message);
+                AutoCADAdapter.ed.WriteMessage("Error in the request or the response: " + e.Message);
                 return 1000;
             }
         }

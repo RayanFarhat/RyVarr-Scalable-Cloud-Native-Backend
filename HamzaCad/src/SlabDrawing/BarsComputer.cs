@@ -8,7 +8,6 @@ using Autodesk.AutoCAD.EditorInput;
 using Autodesk.AutoCAD.Geometry;
 using HamzaCad.Utils;
 using HttpClientHandler = HamzaCad.Utils.HttpClientHandler;
-using HamzaCad.Utils;
 using HamzaCad.SlabDecomposition;
 using HamzaCad.Winforms;
 
@@ -17,7 +16,6 @@ namespace HamzaCad.SlabDrawing
 {
     public class BarsComputer
     {
-        public static Editor ed;
         public static List<DrawingBar> bars;
         public static bool isVertical = true;
 

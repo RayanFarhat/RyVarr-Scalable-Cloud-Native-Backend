@@ -9,6 +9,7 @@ using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.DatabaseServices;
 using HamzaCad.SlabDrawing;
 using HamzaCad.SlabDecomposition;
+using HamzaCad.src.AutoCADAdapter;
 
 namespace HamzaCad
 {
@@ -31,27 +32,7 @@ namespace HamzaCad
                 if (CanExecuteChanged == null)
                 {
                 }
-                Document doc = Application.DocumentManager.MdiActiveDocument;
-                Editor ed = doc.Editor;
-                BarsComputer.ed = ed;
-                Database acCurDb = doc.Database;
-
-                doc.LockDocument();
-
-                Database db = doc.Database;
-                db.LineWeightDisplay = true;
-                using (Transaction trans = db.TransactionManager.StartTransaction())
-                {
-
-                    // Open the Block table for read
-                    BlockTable acBlkTbl;
-                    acBlkTbl = trans.GetObject(acCurDb.BlockTableId,
-                                                    OpenMode.ForRead) as BlockTable;
-
-                    // Open the Block table record Model space for write
-                    BlockTableRecord acBlkTblRec;
-                    acBlkTblRec = trans.GetObject(acBlkTbl[BlockTableRecord.ModelSpace],
-                                                    OpenMode.ForWrite) as BlockTableRecord;
+                    AutoCADAdapter.Init();
 
                     try {
                         // filter selections to only polylines
@@ -60,7 +41,7 @@ namespace HamzaCad
                             new TypedValue((int)DxfCode.Start, "LWPOLYLINE")   ,0);
                         SelectionFilter filter = new SelectionFilter(tv);
                         //wait for user selection or multible selections
-                        PromptSelectionResult ssPrompt = ed.GetSelection(filter);
+                        PromptSelectionResult ssPrompt = AutoCADAdapter.ed.GetSelection(filter);
                         // check if there is object selected
                         if(ssPrompt.Status == PromptStatus.OK)
                         {
@@ -68,46 +49,41 @@ namespace HamzaCad
                             foreach (SelectedObject sObj in ss)
                             {
                                 // now every time we parse selected polyline here to read its data
-                                Polyline p = trans.GetObject(sObj.ObjectId, OpenMode.ForRead) as Polyline;
+                                Polyline p = AutoCADAdapter.trans.GetObject(sObj.ObjectId, OpenMode.ForRead) as Polyline;
 
                                 List<DrawingBar> bars = await BarsComputer.getBars(p);
                                 foreach (DrawingBar bar in bars)
                                 {
-                                    acBlkTblRec.AppendEntity(bar.Polygon);
-                                    trans.AddNewlyCreatedDBObject(bar.Polygon, true);
-                                    acBlkTblRec.AppendEntity(bar.MeetingCircle);
-                                    trans.AddNewlyCreatedDBObject(bar.MeetingCircle, true);
+                                    AutoCADAdapter.Add(bar.Polygon);
+                                    AutoCADAdapter.Add(bar.MeetingCircle);
+
                                     foreach (var text in bar.Texts)
                                     {
-                                        acBlkTblRec.AppendEntity(text);
-                                        trans.AddNewlyCreatedDBObject(text, true);
+                                        AutoCADAdapter.Add(text);
                                     }
                                     foreach (var arrow in bar.Arrows)
                                     {
-                                        acBlkTblRec.AppendEntity(arrow);
-                                        trans.AddNewlyCreatedDBObject(arrow, true);
+                                        AutoCADAdapter.Add(arrow);
                                     }
                                     foreach (var line in bar.ArrowsBlockingLines)
                                     {
-                                        acBlkTblRec.AppendEntity(line);
-                                        trans.AddNewlyCreatedDBObject(line, true);
+                                        AutoCADAdapter.Add(line);
                                     }
                                 }
                             }
                         }
                         else
                         {
-                            ed.WriteMessage("No Object selected!");
+                        AutoCADAdapter.ed.WriteMessage("No Object selected!");
                         }
                     }
                     catch (System.Exception ex) {
-                       ed.WriteMessage("Erorrr:  " + ex.Message + " from "+ex.StackTrace+"\n");
+                    AutoCADAdapter.ed.WriteMessage("Erorrr:  " + ex.Message + " from "+ex.StackTrace+"\n");
                     }
-                    trans.Commit();
-                    trans.Dispose();
+                    AutoCADAdapter.Dispose();
                 }
 
             }
         }
     }
-}
+
