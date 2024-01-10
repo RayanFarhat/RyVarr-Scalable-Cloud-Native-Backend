@@ -45,5 +45,9 @@ namespace HamzaCad
         {
             panelSrc.Items.Add(item);
         }
+        public void RemoveItem(RibbonItem item)
+        {
+            panelSrc.Items.Remove(item);
+        }
     }
 }

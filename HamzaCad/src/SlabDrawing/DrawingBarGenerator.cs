@@ -90,7 +90,7 @@ namespace HamzaCad.SlabDrawing
             rightArrow.AppendVertex(new Point3d(xMiddle, y, 0));
             rightArrow.HasArrowHead = true;
             //rightArrow.DimensionStyle = db.Dimstyle;
-            rightArrow.Dimscale = 10.0;
+            rightArrow.Dimscale = BarsComputer.arrowScale;
             arrows.Add(rightArrow);
             var leftArrow = new Leader();
             leftArrow.AppendVertex(new Point3d(rect.Xleft + BarsComputer.BarPolySpace, y, 0));
@@ -171,7 +171,7 @@ namespace HamzaCad.SlabDrawing
             DBText lowerText = new DBText();
             //lowerText.TextString = "L= " + (top-down).ToString("0.##");
             lowerText.TextString = getFinalLowerText(rect);
-            lowerText.Position = new Point3d(x - BarsComputer.fontSize*1.1, (top + down) / 2, 0.0);
+            lowerText.Position = new Point3d(x - BarsComputer.fontSize*1.2, (top + down) / 2, 0.0);
             lowerText.Height = BarsComputer.fontSize;
             if (BarsComputer.isVertical)
                 lowerText.Rotation = 90 * Math.PI / 180;

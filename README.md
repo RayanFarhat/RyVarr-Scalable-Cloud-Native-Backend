@@ -42,7 +42,8 @@ The backend is cloud native so it can scale easly with caching using Orleans.
 - [X] convert Rectilinear Polygons to Rectangles.
 - [X] make the text structure editor.
 - [ ] detect Trapezoidal or Triangle and make the text editor special for them.
-- [ ] seperate the drawing into layers(linework).
+- [ ] seperate the drawing into layers, make the user name the layers(while define default layer names).
+- [ ] make other btn for edit individual or multie bars, show the same window when draw slab, but for that we need to create local data that link the bar polyline to his text and arrows. 
 
 ## Frontend photos
 ![image](https://github.com/RayanFarhat/RyVarr/assets/100049997/f67e0a2e-bbb9-4a45-a49e-09966f747c37)

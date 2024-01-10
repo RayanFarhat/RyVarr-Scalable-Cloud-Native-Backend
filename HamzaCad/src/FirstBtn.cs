@@ -38,7 +38,7 @@ namespace HamzaCad
                         // filter selections to only polylines
                         TypedValue[] tv = new TypedValue[1];
                         tv.SetValue(
-                            new TypedValue((int)DxfCode.Start, "LWPOLYLINE")   ,0);
+                            new TypedValue((int)DxfCode.Start, "LWPOLYLINE") ,0);
                         SelectionFilter filter = new SelectionFilter(tv);
                         //wait for user selection or multible selections
                         PromptSelectionResult ssPrompt = AutoCADAdapter.ed.GetSelection(filter);
@@ -48,8 +48,10 @@ namespace HamzaCad
                             SelectionSet ss = ssPrompt.Value;
                             foreach (SelectedObject sObj in ss)
                             {
-                                // now every time we parse selected polyline here to read its data
-                                Polyline p = AutoCADAdapter.trans.GetObject(sObj.ObjectId, OpenMode.ForRead) as Polyline;
+                            AutoCADAdapter.ed.WriteMessage("\nid "+ sObj.ObjectId);
+
+                            // now every time we parse selected polyline here to read its data
+                            Polyline p = AutoCADAdapter.trans.GetObject(sObj.ObjectId, OpenMode.ForRead) as Polyline;
 
                                 List<DrawingBar> bars = await BarsComputer.getBars(p);
                                 foreach (DrawingBar bar in bars)
@@ -57,20 +59,28 @@ namespace HamzaCad
                                     AutoCADAdapter.Add(bar.Polygon);
                                     AutoCADAdapter.Add(bar.MeetingCircle);
 
+                                    ObjectIdCollection arrowList = new ObjectIdCollection();
+                                    ObjectIdCollection textList = new ObjectIdCollection();
+
                                     foreach (var text in bar.Texts)
                                     {
                                         AutoCADAdapter.Add(text);
+                                        textList.Add(text.ObjectId);
                                     }
                                     foreach (var arrow in bar.Arrows)
                                     {
                                         AutoCADAdapter.Add(arrow);
+                                        arrowList.Add(arrow.ObjectId);
                                     }
                                     foreach (var line in bar.ArrowsBlockingLines)
                                     {
                                         AutoCADAdapter.Add(line);
+                                        arrowList.Add(line.ObjectId);
                                     }
-                                }
+                                    AutoCADAdapter.AddGroup(arrowList);
+                                    AutoCADAdapter.AddGroup(textList);
                             }
+                        }
                         }
                         else
                         {

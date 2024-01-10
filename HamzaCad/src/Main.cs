@@ -18,6 +18,7 @@ namespace HamzaCAD
            MenuManager menuManager = new MenuManager();
             FirstBtn firstBtn = new FirstBtn();
             menuManager.AddItem(firstBtn.item);
+            //menuManager.RemoveItem(firstBtn.item);
         }
     }
 }

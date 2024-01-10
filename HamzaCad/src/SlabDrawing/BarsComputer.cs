@@ -59,12 +59,14 @@ namespace HamzaCad.SlabDrawing
                 vertices.Add(p);
             }
 
-            HttpClientHandler c = new HttpClientHandler();
-            double resAngle = await c.Req(new Angle(vertices[0].X, vertices[0].Y, vertices[1].X, vertices[1].Y));
-            if (resAngle == 1000)
-            {
-                return new List<DrawingBar>();
-            }
+            //HttpClientHandler c = new HttpClientHandler();
+            //double resAngle = await c.Req(new Angle(vertices[0].X, vertices[0].Y, vertices[1].X, vertices[1].Y));
+            //if (resAngle == 1000)
+            //{
+            //    return new List<DrawingBar>();
+            //}
+            double resAngle = Rotator.GetRotationAngleToXOrY(vertices[0], vertices[1]);
+
 
             // rotate the polygon
             //double angle = Rotator.GetRotationAngleToXOrY(vertices[0], vertices[1]);

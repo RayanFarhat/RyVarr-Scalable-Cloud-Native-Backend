@@ -12,6 +12,8 @@ namespace HamzaCad.src.AutoCADAdapter
         public static Editor ed;
         public static Transaction trans;
         public static BlockTableRecord blockTableRecord;
+        public static DBDictionary gd;
+
 
         // must call first in btn
         public static void Init()
@@ -31,6 +33,9 @@ namespace HamzaCad.src.AutoCADAdapter
             // Open the Block table record Model space for write
             blockTableRecord = trans.GetObject(acBlkTbl[BlockTableRecord.ModelSpace],
                                             OpenMode.ForWrite) as BlockTableRecord;
+
+            gd =(DBDictionary)trans.GetObject(db.GroupDictionaryId,OpenMode.ForRead);
+            gd.UpgradeOpen();
         }
         // must call last in btn
         public static void Dispose()
@@ -45,6 +50,13 @@ namespace HamzaCad.src.AutoCADAdapter
         {
             blockTableRecord.AppendEntity(obj);
             trans.AddNewlyCreatedDBObject(obj, true);
+        }
+        public static void AddGroup(ObjectIdCollection objects)
+        {
+            Group grp = new Group(objects[0].ToString(), true);
+            grp.Append(objects);
+            ObjectId grpId = gd.SetAt(objects[0].ToString(), grp);
+            trans.AddNewlyCreatedDBObject(grp, true);
         }
         public static void selectObj(Entity obj)
         {

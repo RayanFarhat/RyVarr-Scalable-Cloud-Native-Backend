@@ -111,19 +111,19 @@ namespace HamzaCad.SlabDecomposition
         }
 
         // check how many to rotate so the polgon lines are parallel to X and Y
-        //public static double GetRotationAngleToXOrY(Point2D p1, Point2D p2)
-        //{
-        //    // Calculate the vector from p1 to p2
-        //    double deltaX = p2.X - p1.X;
-        //    double deltaY = p2.Y - p1.Y;
+        public static double GetRotationAngleToXOrY(Point2D p1, Point2D p2)
+        {
+            // Calculate the vector from p1 to p2
+            double deltaX = p2.X - p1.X;
+            double deltaY = p2.Y - p1.Y;
 
-        //    // Calculate the angle degree between the vector and the X-axis
-        //    double angleToXAxis = Math.Atan2(deltaY, deltaX) * (180.0 / Math.PI);
+            // Calculate the angle degree between the vector and the X-axis
+            double angleToXAxis = Math.Atan2(deltaY, deltaX) * (180.0 / Math.PI);
 
-        //    // Calculate the rotation angle to make the line parallel to the X-axis (or Y-axis)
-        //    double rotationAngle = 90.0 - angleToXAxis;
+            // Calculate the rotation angle to make the line parallel to the X-axis (or Y-axis)
+            double rotationAngle = 90.0 - angleToXAxis;
 
-        //    return rotationAngle;
-        //}
+            return rotationAngle;
+        }
     }
 }
