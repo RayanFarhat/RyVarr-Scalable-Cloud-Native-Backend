@@ -24,7 +24,7 @@ namespace HamzaCad.SlabDrawing
 
         public static double BarSpacing { get; set; } = 30.0;
         public static bool drawVertical { get; set; } = true ;
-        public static bool drawHorizantal { get; set; } = true;
+        public static bool drawHorizontal { get; set; } = true;
         public static bool withEar { get; set; } = true;
         public static double earLength { get; set; } = 15.0;
         public static double arrowScale { get; set; } = 5.0;
@@ -34,7 +34,8 @@ namespace HamzaCad.SlabDrawing
         public static string topBarSymbol { get; set; } = "T.B";
         public static string bottomrBarSymbol { get; set; } = "B.B";
         public static double Diameter { get; set; } = 12.0; 
-        public static double BarPolySpace { get; set; } = 5.0;
+        public static double SideCoverX { get; set; } = 2.5;
+        public static double SideCoverY { get; set; } = 2.5;
         public static string upperText { get; set; } = "<>{Q}%%C{D}@{S} {TB}";
         public static string lowerText { get; set; } = "L={L}";
         public static double MaxBarLength { get; set; } = 800;
@@ -78,7 +79,7 @@ namespace HamzaCad.SlabDrawing
                 isVertical = true;
                 bars =  VerticalBars.getVerticalBars(vertices);
             }
-            if (drawHorizantal)
+            if (drawHorizontal)
             {
                 isVertical = false;
                 List<Point2D> clonedvertices = new List<Point2D>(vertices);

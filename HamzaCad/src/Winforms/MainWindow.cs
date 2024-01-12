@@ -26,7 +26,7 @@ namespace HamzaCad.Winforms
             Heb.CheckedChanged += onCheckHeb;
 
             drawVertical.Checked = BarsComputer.drawVertical;
-            drawHorizontal.Checked = BarsComputer.drawHorizantal;
+            drawHorizontal.Checked = BarsComputer.drawHorizontal;
             drawVertical.CheckedChanged += onCheck;
             drawHorizontal.CheckedChanged += onCheck;
 
@@ -64,7 +64,7 @@ namespace HamzaCad.Winforms
             TopBars.CheckedChanged += onTopBottomBars;
             BottomBars.CheckedChanged += onTopBottomBars;
 
-            BarPolySpace.Text = BarsComputer.BarPolySpace.ToString();
+            BarPolySpace.Text = BarsComputer.SideCoverY.ToString();
             BarPolySpace.ValidatingType = typeof(double);
             BarPolySpace.TextChanged += onBarPolySpace;
 
@@ -154,7 +154,7 @@ namespace HamzaCad.Winforms
         public void onCheck(object sender, EventArgs e)
         {
             BarsComputer.drawVertical = drawVertical.Checked;
-            BarsComputer.drawHorizantal=drawHorizontal.Checked;
+            BarsComputer.drawHorizontal = drawHorizontal.Checked;
             BarsComputer.withEar = withEar.Checked;
         }
         public void onExitBtn(object sender, EventArgs e)
@@ -247,7 +247,7 @@ namespace HamzaCad.Winforms
         {
             try
             {
-                BarsComputer.BarPolySpace = Double.Parse(BarPolySpace.Text);
+                BarsComputer.SideCoverY = Double.Parse(BarPolySpace.Text);
             }
             catch
             {

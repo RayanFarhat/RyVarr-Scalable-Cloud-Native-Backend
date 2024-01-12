@@ -6,6 +6,7 @@ using Autodesk.AutoCAD.Runtime;
 using Autodesk.AutoCAD.Geometry;
 using Autodesk.Windows;
 using HamzaCad;
+using HamzaCad.src.Winforms;
 
 namespace HamzaCAD
 {
@@ -19,6 +20,12 @@ namespace HamzaCAD
             FirstBtn firstBtn = new FirstBtn();
             menuManager.AddItem(firstBtn.item);
             //menuManager.RemoveItem(firstBtn.item);
+        }
+        [CommandMethod("ryy", CommandFlags.Transparent)]
+        public void StartLoading2()
+        {
+            SlabDrawWindow slabDrawWindow = new SlabDrawWindow();
+            slabDrawWindow.Show();
         }
     }
 }

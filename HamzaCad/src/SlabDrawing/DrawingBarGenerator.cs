@@ -31,8 +31,8 @@ namespace HamzaCad.SlabDrawing
                      xPosition = ((rectangles[i].Xleft + rectangles[i].Xright) / 2) - ((rectangles[i].Xright - rectangles[i].Xleft) / randomNumber);
                 else
                      xPosition = ((rectangles[i].Xleft + rectangles[i].Xright) / 2) + ((rectangles[i].Xright - rectangles[i].Xleft) / randomNumber);
-                var top = rectangles[i].Yupper - BarsComputer.BarPolySpace;
-                var down = rectangles[i].Ylower + BarsComputer.BarPolySpace;
+                var top = rectangles[i].Yupper - BarsComputer.SideCoverY;
+                var down = rectangles[i].Ylower + BarsComputer.SideCoverY;
    
                 verticalBars.Add(new DrawingBar(getBarpolyline(top, down, xPosition), getTexts(rectangles[i],top,down,xPosition),
                     getArrows(rectangles[i]), getBlockingLines(rectangles[i]),
@@ -86,14 +86,14 @@ namespace HamzaCad.SlabDrawing
 
             var arrows = new List<Leader>();
             var rightArrow = new Leader();
-            rightArrow.AppendVertex(new Point3d(rect.Xright - BarsComputer.BarPolySpace, y, 0));
+            rightArrow.AppendVertex(new Point3d(rect.Xright - BarsComputer.SideCoverY, y, 0));
             rightArrow.AppendVertex(new Point3d(xMiddle, y, 0));
             rightArrow.HasArrowHead = true;
             //rightArrow.DimensionStyle = db.Dimstyle;
             rightArrow.Dimscale = BarsComputer.arrowScale;
             arrows.Add(rightArrow);
             var leftArrow = new Leader();
-            leftArrow.AppendVertex(new Point3d(rect.Xleft + BarsComputer.BarPolySpace, y, 0));
+            leftArrow.AppendVertex(new Point3d(rect.Xleft + BarsComputer.SideCoverY, y, 0));
             leftArrow.AppendVertex(new Point3d(xMiddle, y, 0));
             leftArrow.HasArrowHead = true;
             //rightArrow.DimensionStyle = db.Dimstyle;
@@ -121,12 +121,12 @@ namespace HamzaCad.SlabDrawing
             }
             var lines = new List<Line>();
             Line rightPlockingLine = new Line
-                (new Point3d(rect.Xright - BarsComputer.BarPolySpace, y + BarsComputer.arrowBlockingLineLength/2, 0), 
-                new Point3d(rect.Xright - BarsComputer.BarPolySpace, y - BarsComputer.arrowBlockingLineLength/2, 0)
+                (new Point3d(rect.Xright - BarsComputer.SideCoverY, y + BarsComputer.arrowBlockingLineLength/2, 0), 
+                new Point3d(rect.Xright - BarsComputer.SideCoverY, y - BarsComputer.arrowBlockingLineLength/2, 0)
                 );
             Line leftPlockingLine = new Line(
-                new Point3d(rect.Xleft + BarsComputer.BarPolySpace, y + BarsComputer.arrowBlockingLineLength / 2, 0),
-                new Point3d(rect.Xleft + BarsComputer.BarPolySpace, y - BarsComputer.arrowBlockingLineLength / 2, 0)
+                new Point3d(rect.Xleft + BarsComputer.SideCoverY, y + BarsComputer.arrowBlockingLineLength / 2, 0),
+                new Point3d(rect.Xleft + BarsComputer.SideCoverY, y - BarsComputer.arrowBlockingLineLength / 2, 0)
                 );
             lines.Add(rightPlockingLine);
             lines.Add(leftPlockingLine);
@@ -201,7 +201,7 @@ namespace HamzaCad.SlabDrawing
             pattern = @"\{TB\}";
             result = Regex.Replace(result, pattern, barType);
 
-            var len = rect.Yupper - rect.Ylower - (BarsComputer.BarPolySpace*2);
+            var len = rect.Yupper - rect.Ylower - (BarsComputer.SideCoverY * 2);
             pattern = @"\{L\}";
             result = Regex.Replace(result, pattern, len.ToString("0"));
 
@@ -227,7 +227,7 @@ namespace HamzaCad.SlabDrawing
             pattern = @"\{TB\}";
             result = Regex.Replace(result, pattern, barType);
 
-            var len = rect.Yupper - rect.Ylower - (BarsComputer.BarPolySpace * 2);
+            var len = rect.Yupper - rect.Ylower - (BarsComputer.SideCoverY * 2);
             pattern = @"\{L\}";
             result = Regex.Replace(result, pattern, len.ToString("0"));
 

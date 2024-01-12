@@ -18,7 +18,7 @@ namespace HamzaCad.Utils
             LocalData localData = new LocalData();
             localData.lang = BarsComputer.lang;
             localData.BarSpacing = BarsComputer.BarSpacing;
-            localData.drawHorizantal = BarsComputer.drawHorizantal;
+            localData.drawHorizantal = BarsComputer.drawHorizontal;
             localData.drawVertical = BarsComputer.drawVertical;
             localData.withEar = BarsComputer.withEar;
             localData.earLength = BarsComputer.earLength;
@@ -29,7 +29,7 @@ namespace HamzaCad.Utils
             localData.topBarSymbol = BarsComputer.topBarSymbol;
             localData.bottomrBarSymbol = BarsComputer.bottomrBarSymbol;
             localData.Diameter = BarsComputer.Diameter;
-            localData.BarPolySpace = BarsComputer.BarPolySpace;
+            localData.BarPolySpace = BarsComputer.SideCoverY;
             localData.upperText = BarsComputer.upperText;
             localData.lowerText = BarsComputer.lowerText;
             localData.MaxBarLength = BarsComputer.MaxBarLength;
@@ -48,7 +48,7 @@ namespace HamzaCad.Utils
                 localData = JsonSerializer.Deserialize<LocalData>(jsonString);
                 BarsComputer.lang = localData.lang;
                 BarsComputer.BarSpacing = localData.BarSpacing;
-                BarsComputer.drawHorizantal = localData.drawHorizantal;
+                BarsComputer.drawHorizontal = localData.drawHorizantal;
                 BarsComputer.drawVertical = localData.drawVertical;
                 BarsComputer.withEar = localData.withEar;
                 BarsComputer.earLength = localData.earLength;
@@ -59,7 +59,7 @@ namespace HamzaCad.Utils
                 BarsComputer.topBarSymbol = localData.topBarSymbol;
                 BarsComputer.bottomrBarSymbol = localData.bottomrBarSymbol;
                 BarsComputer.Diameter = localData.Diameter;
-                BarsComputer.BarPolySpace = localData.BarPolySpace;
+                BarsComputer.SideCoverY = localData.BarPolySpace;
                 BarsComputer.upperText = localData.upperText;
                 BarsComputer.lowerText = localData.lowerText;
                 BarsComputer.MaxBarLength = localData.MaxBarLength;

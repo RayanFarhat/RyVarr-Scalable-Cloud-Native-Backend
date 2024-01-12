@@ -154,6 +154,9 @@
     <Compile Include="src\Winforms\AuthWindow.Designer.cs">
       <DependentUpon>AuthWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\Winforms\BarShapeRadioPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="src\Winforms\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -162,6 +165,12 @@
     </Compile>
     <Compile Include="src\Winforms\MainWindow_Language.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\Winforms\SlabDrawWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\Winforms\SlabDrawWindow.Designer.cs">
+      <DependentUpon>SlabDrawWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="src\Winforms\TextEditorWindow.cs">
       <SubType>Form</SubType>
@@ -184,6 +193,30 @@
     <Compile Include="src\SlabDecomposition\VerticalBars.cs" />
     <Compile Include="src\SlabDecomposition\VerticalBars_FindIntersectVerticalLine.cs" />
     <Compile Include="src\Utils\HttpClientHandler.cs" />
+    <Compile Include="src\Winforms\UC_bars.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\Winforms\UC_bars.Designer.cs">
+      <DependentUpon>UC_bars.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\Winforms\UC_barShapes.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\Winforms\UC_barShapes.Designer.cs">
+      <DependentUpon>UC_barShapes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\Winforms\UC_Drawing.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\Winforms\UC_Drawing.Designer.cs">
+      <DependentUpon>UC_Drawing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="src\Winforms\UC_textEditor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\Winforms\UC_textEditor.Designer.cs">
+      <DependentUpon>UC_textEditor.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -198,8 +231,23 @@
     <EmbeddedResource Include="src\Winforms\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="src\Winforms\SlabDrawWindow.resx">
+      <DependentUpon>SlabDrawWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="src\Winforms\TextEditorWindow.resx">
       <DependentUpon>TextEditorWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\Winforms\UC_bars.resx">
+      <DependentUpon>UC_bars.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\Winforms\UC_barShapes.resx">
+      <DependentUpon>UC_barShapes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\Winforms\UC_Drawing.resx">
+      <DependentUpon>UC_Drawing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\Winforms\UC_textEditor.resx">
+      <DependentUpon>UC_textEditor.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
