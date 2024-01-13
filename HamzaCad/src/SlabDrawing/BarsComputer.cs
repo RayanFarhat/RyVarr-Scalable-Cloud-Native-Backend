@@ -9,7 +9,8 @@ using Autodesk.AutoCAD.Geometry;
 using HamzaCad.Utils;
 using HttpClientHandler = HamzaCad.Utils.HttpClientHandler;
 using HamzaCad.SlabDecomposition;
-using HamzaCad.Winforms;
+using HamzaCad.src.Winforms;
+using HamzaCad.DrawingParameters;
 
 
 namespace HamzaCad.SlabDrawing
@@ -22,33 +23,33 @@ namespace HamzaCad.SlabDrawing
         // for form
         public static string lang { get; set; } = "Eng";
 
-        public static double BarSpacing { get; set; } = 30.0;
-        public static bool drawVertical { get; set; } = true ;
-        public static bool drawHorizontal { get; set; } = true;
-        public static bool withEar { get; set; } = true;
-        public static double earLength { get; set; } = 15.0;
-        public static double arrowScale { get; set; } = 5.0;
-        public static double arrowBlockingLineLength { get; set; } = 15.0;
-        public static double fontSize { get; set; } = 15.0;
-        public static bool iSTopBars { get; set; } = true;
-        public static string topBarSymbol { get; set; } = "T.B";
-        public static string bottomrBarSymbol { get; set; } = "B.B";
-        public static double Diameter { get; set; } = 12.0; 
-        public static double SideCoverX { get; set; } = 2.5;
-        public static double SideCoverY { get; set; } = 2.5;
-        public static string upperText { get; set; } = "<>{Q}%%C{D}@{S} {TB}";
-        public static string lowerText { get; set; } = "L={L}";
-        public static double MaxBarLength { get; set; } = 800;
-        public static double MeetingCircleRadius { get; set; } = 3.0;
+        //public static double BarSpacing { get; set; } = 30.0;
+        //public static bool drawVertical { get; set; } = true ;
+        //public static bool drawHorizontal { get; set; } = true;
+        //public static bool withEar { get; set; } = true;
+        //public static double earLength { get; set; } = 15.0;
+        //public static double arrowScale { get; set; } = 5.0;
+        //public static double arrowBlockingLineLength { get; set; } = 15.0;
+        //public static double fontSize { get; set; } = 15.0;
+        //public static bool iSTopBars { get; set; } = true;
+        //public static string topBarSymbol { get; set; } = "T.B";
+        //public static string bottomrBarSymbol { get; set; } = "B.B";
+        //public static double Diameter { get; set; } = 12.0; 
+        //public static double SideCoverX { get; set; } = 2.5;
+        //public static double SideCoverY { get; set; } = 2.5;
+        //public static string upperText { get; set; } = "<>{Q}%%C{D}@{S} {TB}";
+        //public static string lowerText { get; set; } = "L={L}";
+        //public static double MaxBarLength { get; set; } = 600;
+        //public static double MeetingCircleRadius { get; set; } = 3.0;
 
-        public static int ironColor { get; set; } = 4; 
-        public static int IronLineWeight { get; set; } = 35;
+        //public static int ironColor { get; set; } = 4; 
+        //public static int IronLineWeight { get; set; } = 35;
 
-        public async static Task<List<DrawingBar>> getBars(Polyline shape)
+        public static List<DrawingBar> getBars(Polyline shape)
         {
             FileHandler.readFileAndApplyChanges();
 
-            var m = new MainWindow();
+            var m = new SlabDrawWindow();
             m.ShowDialog();// will stop the proccess until window is closed
             
             List<Point2D> vertices = new List<Point2D>();
@@ -75,11 +76,11 @@ namespace HamzaCad.SlabDrawing
             /* now we work with Rectilinear polygon that his lines always parallel to X or Y */
 
             bars = new List<DrawingBar>();
-            if (drawVertical) {
+            if (BarsParam.DrawVertical) {
                 isVertical = true;
                 bars =  VerticalBars.getVerticalBars(vertices);
             }
-            if (drawHorizontal)
+            if (BarsParam.DrawVertical)
             {
                 isVertical = false;
                 List<Point2D> clonedvertices = new List<Point2D>(vertices);

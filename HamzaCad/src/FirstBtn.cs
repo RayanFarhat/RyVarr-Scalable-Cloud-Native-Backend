@@ -9,7 +9,7 @@ using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.DatabaseServices;
 using HamzaCad.SlabDrawing;
 using HamzaCad.SlabDecomposition;
-using HamzaCad.src.AutoCADAdapter;
+using HamzaCad.AutoCADAdapter;
 
 namespace HamzaCad
 {
@@ -32,7 +32,7 @@ namespace HamzaCad
                 if (CanExecuteChanged == null)
                 {
                 }
-                    AutoCADAdapter.Init();
+                    Adapter.Init();
 
                     try {
                         // filter selections to only polylines
@@ -41,56 +41,56 @@ namespace HamzaCad
                             new TypedValue((int)DxfCode.Start, "LWPOLYLINE") ,0);
                         SelectionFilter filter = new SelectionFilter(tv);
                         //wait for user selection or multible selections
-                        PromptSelectionResult ssPrompt = AutoCADAdapter.ed.GetSelection(filter);
+                        PromptSelectionResult ssPrompt = Adapter.ed.GetSelection(filter);
                         // check if there is object selected
                         if(ssPrompt.Status == PromptStatus.OK)
                         {
                             SelectionSet ss = ssPrompt.Value;
                             foreach (SelectedObject sObj in ss)
                             {
-                            AutoCADAdapter.ed.WriteMessage("\nid "+ sObj.ObjectId);
+                            Adapter.ed.WriteMessage("\nid "+ sObj.ObjectId);
 
                             // now every time we parse selected polyline here to read its data
-                            Polyline p = AutoCADAdapter.trans.GetObject(sObj.ObjectId, OpenMode.ForRead) as Polyline;
+                            Polyline p = Adapter.trans.GetObject(sObj.ObjectId, OpenMode.ForRead) as Polyline;
 
-                                List<DrawingBar> bars = await BarsComputer.getBars(p);
+                                List<DrawingBar> bars =  BarsComputer.getBars(p);
                                 foreach (DrawingBar bar in bars)
                                 {
-                                    AutoCADAdapter.Add(bar.Polygon);
-                                    AutoCADAdapter.Add(bar.MeetingCircle);
+                                    Adapter.Add(bar.Polygon);
+                                    Adapter.Add(bar.MeetingCircle);
 
                                     ObjectIdCollection arrowList = new ObjectIdCollection();
                                     ObjectIdCollection textList = new ObjectIdCollection();
 
                                     foreach (var text in bar.Texts)
                                     {
-                                        AutoCADAdapter.Add(text);
+                                        Adapter.Add(text);
                                         textList.Add(text.ObjectId);
                                     }
                                     foreach (var arrow in bar.Arrows)
                                     {
-                                        AutoCADAdapter.Add(arrow);
+                                        Adapter.Add(arrow);
                                         arrowList.Add(arrow.ObjectId);
                                     }
                                     foreach (var line in bar.ArrowsBlockingLines)
                                     {
-                                        AutoCADAdapter.Add(line);
+                                        Adapter.Add(line);
                                         arrowList.Add(line.ObjectId);
                                     }
-                                    AutoCADAdapter.AddGroup(arrowList);
-                                    AutoCADAdapter.AddGroup(textList);
+                                    Adapter.AddGroup(arrowList);
+                                    Adapter.AddGroup(textList);
                             }
                         }
                         }
                         else
                         {
-                        AutoCADAdapter.ed.WriteMessage("No Object selected!");
+                        Adapter.ed.WriteMessage("No Object selected!");
                         }
                     }
                     catch (System.Exception ex) {
-                    AutoCADAdapter.ed.WriteMessage("Erorrr:  " + ex.Message + " from "+ex.StackTrace+"\n");
+                    Adapter.ed.WriteMessage("Erorrr:  " + ex.Message + " from "+ex.StackTrace+"\n");
                     }
-                    AutoCADAdapter.Dispose();
+                    Adapter.Dispose();
                 }
 
             }

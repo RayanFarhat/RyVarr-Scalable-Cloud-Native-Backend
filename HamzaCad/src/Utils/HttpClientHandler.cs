@@ -9,7 +9,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using HamzaCad.SlabDrawing;
-using HamzaCad.src.AutoCADAdapter;
+using HamzaCad.AutoCADAdapter;
 
 namespace HamzaCad.Utils
 {
@@ -58,13 +58,13 @@ namespace HamzaCad.Utils
                 }
                 else
                 {
-                    AutoCADAdapter.ed.WriteMessage("UnAuthorized\n");
+                    Adapter.ed.WriteMessage("UnAuthorized\n");
                     return 1000;
                 }
             }
             catch (HttpRequestException e)
             {
-                AutoCADAdapter.ed.WriteMessage("Error in the request or the response: " + e.Message);
+                Adapter.ed.WriteMessage("Error in the request or the response: " + e.Message);
                 return 1000;
             }
         }

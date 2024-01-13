@@ -145,41 +145,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\AutoCADAdapter\AutoCADAdapter.cs" />
+    <Compile Include="src\DrawingParameters\BarsParam.cs" />
+    <Compile Include="src\DrawingParameters\DrawingParam.cs" />
+    <Compile Include="src\DrawingParameters\TextEditorParameters.cs" />
     <Compile Include="src\SlabDrawing\BarsComputer.cs" />
     <Compile Include="src\SlabDrawing\DrawingBarGenerator.cs" />
     <Compile Include="src\Utils\FileHandler.cs" />
-    <Compile Include="src\Winforms\AuthWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Winforms\AuthWindow.Designer.cs">
-      <DependentUpon>AuthWindow.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Winforms\BarShapeRadioPanel.cs">
+    <Compile Include="src\Winforms\BarShapeBtn.cs">
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="src\Winforms\MainWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Winforms\MainWindow.Designer.cs">
-      <DependentUpon>MainWindow.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Winforms\MainWindow_Language.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="src\Winforms\SlabDrawWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="src\Winforms\SlabDrawWindow.Designer.cs">
       <DependentUpon>SlabDrawWindow.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Winforms\TextEditorWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Winforms\TextEditorWindow.Designer.cs">
-      <DependentUpon>TextEditorWindow.cs</DependentUpon>
-    </Compile>
-    <Compile Include="src\Winforms\TextEditorWindow_Language.cs">
-      <SubType>Form</SubType>
     </Compile>
     <Compile Include="src\Main.cs" />
     <Compile Include="src\FirstBtn.cs" />
@@ -225,17 +204,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="src\Winforms\AuthWindow.resx">
-      <DependentUpon>AuthWindow.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Winforms\MainWindow.resx">
-      <DependentUpon>MainWindow.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="src\Winforms\SlabDrawWindow.resx">
       <DependentUpon>SlabDrawWindow.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="src\Winforms\TextEditorWindow.resx">
-      <DependentUpon>TextEditorWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="src\Winforms\UC_bars.resx">
       <DependentUpon>UC_bars.cs</DependentUpon>

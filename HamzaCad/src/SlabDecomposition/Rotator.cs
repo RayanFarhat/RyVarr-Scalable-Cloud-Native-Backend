@@ -5,6 +5,7 @@ using Autodesk.AutoCAD.Geometry;
 using Autodesk.AutoCAD.Internal;
 using HamzaCad.Utils;
 using HamzaCad.SlabDrawing;
+using HamzaCad.DrawingParameters;
 
 namespace HamzaCad.SlabDecomposition
 {
@@ -18,9 +19,10 @@ namespace HamzaCad.SlabDecomposition
             for (int i = 0; i < bars.Count;i++)
             {
                 int pointsNum = 0;
-                if (BarsComputer.withEar)
-                    pointsNum=3;
-                else pointsNum=2;
+                //if (BarsComputer.withEar)
+                //pointsNum=3;
+                //else 
+                    pointsNum=2;
 
                 // rotate polyline
                 for (int j = 0; j < pointsNum; j++)
@@ -44,7 +46,7 @@ namespace HamzaCad.SlabDecomposition
                         newArr.AppendVertex(RotatePoint3d(arr.VertexAt(1), angle, orginPoint));
                         newArr.HasArrowHead = true;
                         //newArr.DimensionStyle = db.Dimstyle;
-                        newArr.Dimscale = BarsComputer.arrowScale;
+                        newArr.Dimscale = DrawingParam.ArrowSize;
                         bars[i].Arrows[j] = newArr;
                 }
                 // rotate blocking lines

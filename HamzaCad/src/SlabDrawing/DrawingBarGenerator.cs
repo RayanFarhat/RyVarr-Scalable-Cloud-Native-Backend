@@ -8,6 +8,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using HamzaCad.Utils;
 using HamzaCad.SlabDecomposition;
+using HamzaCad.DrawingParameters;
 
 
 namespace HamzaCad.SlabDrawing
@@ -31,8 +32,8 @@ namespace HamzaCad.SlabDrawing
                      xPosition = ((rectangles[i].Xleft + rectangles[i].Xright) / 2) - ((rectangles[i].Xright - rectangles[i].Xleft) / randomNumber);
                 else
                      xPosition = ((rectangles[i].Xleft + rectangles[i].Xright) / 2) + ((rectangles[i].Xright - rectangles[i].Xleft) / randomNumber);
-                var top = rectangles[i].Yupper - BarsComputer.SideCoverY;
-                var down = rectangles[i].Ylower + BarsComputer.SideCoverY;
+                var top = rectangles[i].Yupper - BarsParam.SideCoverY;
+                var down = rectangles[i].Ylower + BarsParam.SideCoverY;
    
                 verticalBars.Add(new DrawingBar(getBarpolyline(top, down, xPosition), getTexts(rectangles[i],top,down,xPosition),
                     getArrows(rectangles[i]), getBlockingLines(rectangles[i]),
@@ -54,12 +55,8 @@ namespace HamzaCad.SlabDrawing
             Polyline polyline = new Polyline();
             polyline.AddVertexAt(0, new Point2d(x, down), 0, 0, 0);
             polyline.AddVertexAt(1, new Point2d(x, top), 0, 0, 0);
-            if (BarsComputer.withEar)
-            {
-                polyline.AddVertexAt(2, new Point2d(x - BarsComputer.earLength, top), 0, 0, 0);
-            }
-            polyline.ColorIndex = BarsComputer.ironColor;
-            polyline.LineWeight = (LineWeight)BarsComputer.IronLineWeight;
+            polyline.ColorIndex = BarsParam.IronColor;
+            polyline.LineWeight = (LineWeight)BarsParam.IronLineWeight;
             return polyline;
         }
         private static List<Leader> getArrows(Rectangle rect)
@@ -86,18 +83,18 @@ namespace HamzaCad.SlabDrawing
 
             var arrows = new List<Leader>();
             var rightArrow = new Leader();
-            rightArrow.AppendVertex(new Point3d(rect.Xright - BarsComputer.SideCoverY, y, 0));
+            rightArrow.AppendVertex(new Point3d(rect.Xright - BarsParam.SideCoverY, y, 0));
             rightArrow.AppendVertex(new Point3d(xMiddle, y, 0));
             rightArrow.HasArrowHead = true;
             //rightArrow.DimensionStyle = db.Dimstyle;
-            rightArrow.Dimscale = BarsComputer.arrowScale;
+            rightArrow.Dimscale = DrawingParam.ArrowSize;
             arrows.Add(rightArrow);
             var leftArrow = new Leader();
-            leftArrow.AppendVertex(new Point3d(rect.Xleft + BarsComputer.SideCoverY, y, 0));
+            leftArrow.AppendVertex(new Point3d(rect.Xleft + BarsParam.SideCoverY, y, 0));
             leftArrow.AppendVertex(new Point3d(xMiddle, y, 0));
             leftArrow.HasArrowHead = true;
             //rightArrow.DimensionStyle = db.Dimstyle;
-            leftArrow.Dimscale = BarsComputer.arrowScale;
+            leftArrow.Dimscale = DrawingParam.ArrowSize;
             arrows.Add(leftArrow);
             return arrows;
         }
@@ -121,12 +118,12 @@ namespace HamzaCad.SlabDrawing
             }
             var lines = new List<Line>();
             Line rightPlockingLine = new Line
-                (new Point3d(rect.Xright - BarsComputer.SideCoverY, y + BarsComputer.arrowBlockingLineLength/2, 0), 
-                new Point3d(rect.Xright - BarsComputer.SideCoverY, y - BarsComputer.arrowBlockingLineLength/2, 0)
+                (new Point3d(rect.Xright - BarsParam.SideCoverY, y + DrawingParam.ArrowBlockingLineLength/2, 0), 
+                new Point3d(rect.Xright - BarsParam.SideCoverY, y - DrawingParam.ArrowBlockingLineLength / 2, 0)
                 );
             Line leftPlockingLine = new Line(
-                new Point3d(rect.Xleft + BarsComputer.SideCoverY, y + BarsComputer.arrowBlockingLineLength / 2, 0),
-                new Point3d(rect.Xleft + BarsComputer.SideCoverY, y - BarsComputer.arrowBlockingLineLength / 2, 0)
+                new Point3d(rect.Xleft + BarsParam.SideCoverY, y + DrawingParam.ArrowBlockingLineLength / 2, 0),
+                new Point3d(rect.Xleft + BarsParam.SideCoverY, y - DrawingParam.ArrowBlockingLineLength / 2, 0)
                 );
             lines.Add(rightPlockingLine);
             lines.Add(leftPlockingLine);
@@ -152,7 +149,7 @@ namespace HamzaCad.SlabDrawing
             }
             Circle Cir = new Circle();
             Cir.Center = new Point3d(xpos, y, 0);
-            Cir.Radius = BarsComputer.MeetingCircleRadius;
+            Cir.Radius = DrawingParam.IntersectCircleRadius;
             return Cir;
         }
 
@@ -163,16 +160,16 @@ namespace HamzaCad.SlabDrawing
             DBText upperText = new DBText();
             //upperText.TextString = "<>"+ quantity + "%%C"+diameter+"@"+spacing+" "+ barType;
             upperText.TextString = getFinalUpperText(rect);
-            upperText.Position = new Point3d(x + BarsComputer.fontSize*0.1, (top + down) / 2, 0.0);
-            upperText.Height = BarsComputer.fontSize;
+            upperText.Position = new Point3d(x + DrawingParam.TextSize*0.1, (top + down) / 2, 0.0);
+            upperText.Height = DrawingParam.TextSize;
             if (BarsComputer.isVertical)
                 upperText.Rotation = 90 * Math.PI / 180;
 
             DBText lowerText = new DBText();
             //lowerText.TextString = "L= " + (top-down).ToString("0.##");
             lowerText.TextString = getFinalLowerText(rect);
-            lowerText.Position = new Point3d(x - BarsComputer.fontSize*1.2, (top + down) / 2, 0.0);
-            lowerText.Height = BarsComputer.fontSize;
+            lowerText.Position = new Point3d(x - DrawingParam.TextSize * 1.2, (top + down) / 2, 0.0);
+            lowerText.Height = DrawingParam.TextSize;
             if (BarsComputer.isVertical)
                 lowerText.Rotation = 90 * Math.PI / 180;
 
@@ -183,25 +180,25 @@ namespace HamzaCad.SlabDrawing
 
         private static string getFinalUpperText(Rectangle rect)
         {
-            string result = BarsComputer.upperText;
+            string result = TextEdirotParam.TopText;
 
-            var quantity = ((rect.Xright - rect.Xleft) / BarsComputer.BarSpacing).ToString("0");
+            var quantity = ((rect.Xright - rect.Xleft) / BarsParam.BarSpacing).ToString("0");
             string pattern = @"\{Q\}";
             result = Regex.Replace(result, pattern, quantity);
 
-            var diameter = BarsComputer.Diameter.ToString("0.##");
+            var diameter = BarsParam.Diameter.ToString("0.##");
             pattern = @"\{D\}";
             result = Regex.Replace(result, pattern, diameter);
 
-            var spacing = BarsComputer.BarSpacing.ToString("0");
+            var spacing = BarsParam.BarSpacing.ToString("0");
             pattern = @"\{S\}";
             result = Regex.Replace(result, pattern, spacing);
 
-            var barType = BarsComputer.iSTopBars ? BarsComputer.topBarSymbol : BarsComputer.bottomrBarSymbol;
+            var barType = BarsParam.iSTopBars ? TextEdirotParam.TopBarSymbol : TextEdirotParam.BottomBarSymbol;
             pattern = @"\{TB\}";
             result = Regex.Replace(result, pattern, barType);
 
-            var len = rect.Yupper - rect.Ylower - (BarsComputer.SideCoverY * 2);
+            var len = rect.Yupper - rect.Ylower - (BarsParam.SideCoverY * 2);
             pattern = @"\{L\}";
             result = Regex.Replace(result, pattern, len.ToString("0"));
 
@@ -209,25 +206,25 @@ namespace HamzaCad.SlabDrawing
         }
         private static string getFinalLowerText(Rectangle rect)
         {
-            string result = BarsComputer.lowerText;
+            string result = TextEdirotParam.BottomText;
 
-            var quantity = ((rect.Xright - rect.Xleft) / BarsComputer.BarSpacing).ToString("0");
+            var quantity = ((rect.Xright - rect.Xleft) / BarsParam.BarSpacing).ToString("0");
             string pattern = @"\{Q\}";
             result = Regex.Replace(result, pattern, quantity);
 
-            var diameter = BarsComputer.Diameter.ToString("0.##");
+            var diameter = BarsParam.Diameter.ToString("0.##");
             pattern = @"\{D\}";
             result = Regex.Replace(result, pattern, diameter);
 
-            var spacing = BarsComputer.BarSpacing.ToString("0");
+            var spacing = BarsParam.BarSpacing.ToString("0");
             pattern = @"\{S\}";
             result = Regex.Replace(result, pattern, spacing);
 
-            var barType = BarsComputer.iSTopBars ? BarsComputer.topBarSymbol : BarsComputer.bottomrBarSymbol;
+            var barType = BarsParam.iSTopBars ? TextEdirotParam.TopBarSymbol : TextEdirotParam.BottomBarSymbol;
             pattern = @"\{TB\}";
             result = Regex.Replace(result, pattern, barType);
 
-            var len = rect.Yupper - rect.Ylower - (BarsComputer.SideCoverY * 2);
+            var len = rect.Yupper - rect.Ylower - (BarsParam.SideCoverY * 2);
             pattern = @"\{L\}";
             result = Regex.Replace(result, pattern, len.ToString("0"));
 

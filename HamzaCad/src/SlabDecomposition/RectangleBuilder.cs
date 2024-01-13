@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Media.Animation;
 using HamzaCad.Utils;
 using HamzaCad.SlabDrawing;
+using HamzaCad.DrawingParameters;
 
 namespace HamzaCad.SlabDecomposition
 {
@@ -126,9 +127,9 @@ namespace HamzaCad.SlabDecomposition
             for (int i = rectangles.Count - 1; i >= 0; i--)
             {
                 var len = rectangles[i].Yupper - rectangles[i].Ylower;
-                if (len > BarsComputer.MaxBarLength)
+                if (len > BarsParam.MaxBarLength)
                 {
-                    var connLen = BarsComputer.Diameter * 6;//law
+                    var connLen = BarsParam.Diameter * 6;//law
                     var rect1 = new Rectangle(rectangles[i].Yupper,
                         rectangles[i].Ylower+(len/2)-(connLen/2),
                         rectangles[i].Xleft, rectangles[i].Xright);

@@ -1,13 +1,7 @@
-﻿using HamzaCad.SlabDrawing;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
+using HamzaCad.DrawingParameters;
+
 
 namespace HamzaCad.src.Winforms
 {
@@ -17,28 +11,34 @@ namespace HamzaCad.src.Winforms
         {
             InitializeComponent();
 
-            drawVertical.Checked = BarsComputer.drawVertical;
-            drawHorizontal.Checked = BarsComputer.drawHorizontal;
+            drawVertical.Checked = BarsParam.DrawVertical;
+            drawHorizontal.Checked = BarsParam.DrawHorizontal;
 
-            MaxLen.Text = BarsComputer.MaxBarLength.ToString();
+            MaxLen.Text = BarsParam.MaxBarLength.ToString();
             MaxLen.ValidatingType = typeof(double);
             MaxLen.TextChanged += onMaxBarLength;
 
-            Diameter.Text = BarsComputer.Diameter.ToString();
+            Diameter.Text = BarsParam.Diameter.ToString();
             Diameter.ValidatingType = typeof(double);
             Diameter.TextChanged += onDiameter;
 
-            Spacing.Text = BarsComputer.BarSpacing.ToString();
+            Spacing.Text = BarsParam.BarSpacing.ToString();
             Spacing.ValidatingType = typeof(double);
             Spacing.TextChanged += onSpacing;
 
-            SideCoverX.Text = BarsComputer.SideCoverX.ToString();
+            SideCoverX.Text = BarsParam.SideCoverX.ToString();
             SideCoverX.ValidatingType = typeof(double);
             SideCoverX.TextChanged += onSideCoverX;
 
-            SideCoverY.Text = BarsComputer.SideCoverY.ToString();
+            SideCoverY.Text = BarsParam.SideCoverY.ToString();
             SideCoverY.ValidatingType = typeof(double);
             SideCoverY.TextChanged += onSideCoverY;
+
+
+            TopBars.Checked = BarsParam.iSTopBars;
+            BottomBars.Checked = !BarsParam.iSTopBars;
+            TopBars.CheckedChanged += onTopBottomBars;
+            BottomBars.CheckedChanged += onTopBottomBars;
 
             ComboboxItem black = new ComboboxItem();
             black.Text = "black";
@@ -75,7 +75,7 @@ namespace HamzaCad.src.Winforms
             IronColor.Items.Add(white);
             for (int i = 0; i < IronColor.Items.Count; i++)
             {
-                if (int.Parse((IronColor.Items[i] as ComboboxItem).Value.ToString()) == BarsComputer.ironColor)
+                if (int.Parse((IronColor.Items[i] as ComboboxItem).Value.ToString()) == BarsParam.IronColor)
                 {
                     IronColor.SelectedIndex = i;
                 }
@@ -105,7 +105,7 @@ namespace HamzaCad.src.Winforms
             for (int i = 0; i < IronLineWeight.Items.Count; i++)
             {
                 if (int.Parse((IronLineWeight.Items[i] as ComboboxItem).Value.ToString())
-                    == BarsComputer.IronLineWeight)
+                    == BarsParam.IronLineWeight)
                 {
                     IronLineWeight.SelectedIndex = i;
                 }
@@ -117,19 +117,23 @@ namespace HamzaCad.src.Winforms
         {
             try
             {
-                BarsComputer.MaxBarLength = Double.Parse(MaxLen.Text);
+                BarsParam.MaxBarLength = Double.Parse(MaxLen.Text);
             }
             catch
             {
                 MessageBox.Show("Input must be a number.");
             }
         }
+        private void onTopBottomBars(object sender, EventArgs e)
+        {
+            BarsParam.iSTopBars = TopBars.Checked;
+        }
 
         private void onDiameter(object sender, EventArgs e)
         {
             try
             {
-                BarsComputer.Diameter = Double.Parse(Diameter.Text);
+                BarsParam.Diameter = Double.Parse(Diameter.Text);
             }
             catch
             {
@@ -141,7 +145,7 @@ namespace HamzaCad.src.Winforms
         {
             try
             {
-                BarsComputer.BarSpacing = Double.Parse(Spacing.Text);
+                BarsParam.BarSpacing = Double.Parse(Spacing.Text);
             }
             catch
             {
@@ -153,7 +157,7 @@ namespace HamzaCad.src.Winforms
         {
             try
             {
-                BarsComputer.SideCoverX = Double.Parse(SideCoverX.Text);
+                BarsParam.SideCoverX = Double.Parse(SideCoverX.Text);
             }
             catch
             {
@@ -165,7 +169,7 @@ namespace HamzaCad.src.Winforms
         {
             try
             {
-                BarsComputer.SideCoverY = Double.Parse(SideCoverY.Text);
+                BarsParam.SideCoverY = Double.Parse(SideCoverY.Text);
             }
             catch
             {
@@ -175,18 +179,18 @@ namespace HamzaCad.src.Winforms
 
         private void drawVertical_CheckedChanged(object sender, EventArgs e)
         {
-            BarsComputer.drawVertical = drawVertical.Checked;
+            BarsParam.DrawVertical = drawVertical.Checked;
         }
 
         private void drawHorizontal_CheckedChanged(object sender, EventArgs e)
         {
-            BarsComputer.drawHorizontal = drawHorizontal.Checked;
+            BarsParam.DrawHorizontal = drawHorizontal.Checked;
         }
         private void onIronColor(object sender, EventArgs e)
         {
             try
             {
-                BarsComputer.ironColor = int.Parse((IronColor.SelectedItem as ComboboxItem).Value.ToString());
+                BarsParam.IronColor = int.Parse((IronColor.SelectedItem as ComboboxItem).Value.ToString());
             }
             catch
             {
@@ -197,34 +201,12 @@ namespace HamzaCad.src.Winforms
         {
             try
             {
-                BarsComputer.IronLineWeight = int.Parse((IronLineWeight.SelectedItem as ComboboxItem).Value.ToString());
+                BarsParam.IronLineWeight = int.Parse((IronLineWeight.SelectedItem as ComboboxItem).Value.ToString());
             }
             catch
             {
                 MessageBox.Show("Error happen when applying the line weight");
             }
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
-            Pen pen1 = new Pen(Color.Black, 2);
-            Point point1 = new Point(50, 50);
-            Point point2 = new Point(300, 50);
-            Point point3 = new Point(300, 20);
-            Point point4 = new Point(250, 50);
-            Point point5 = new Point(300, 100);
-            Point point6 = new Point(350, 200);
-            Point[] curvePoints =
-                     {
-                 point1,
-                 point2,
-                 point3,
-            
-             };
-
-            // Draw polygon to screen.
-            e.Graphics.DrawLines(pen1, curvePoints);
-
         }
     }
     public class ComboboxItem

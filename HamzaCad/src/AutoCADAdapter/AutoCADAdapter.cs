@@ -5,9 +5,9 @@ using HamzaCad.SlabDrawing;
 using System;
 using System.Collections.Generic;
 
-namespace HamzaCad.src.AutoCADAdapter
+namespace HamzaCad.AutoCADAdapter
 {
-    public class AutoCADAdapter
+    public class Adapter
     {
         public static Editor ed;
         public static Transaction trans;

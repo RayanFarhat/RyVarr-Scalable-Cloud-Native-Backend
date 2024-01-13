@@ -46,12 +46,17 @@
             this.IronLineWeight = new System.Windows.Forms.ComboBox();
             this.IronColorLabel = new System.Windows.Forms.Label();
             this.IronColor = new System.Windows.Forms.ComboBox();
+            this.TBPanel = new System.Windows.Forms.Panel();
+            this.TopBars = new System.Windows.Forms.RadioButton();
+            this.BottomBars = new System.Windows.Forms.RadioButton();
             this.SideCoverPanel.SuspendLayout();
+            this.TBPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // MaxLenLabel
             // 
             this.MaxLenLabel.AutoSize = true;
+            this.MaxLenLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.MaxLenLabel.Location = new System.Drawing.Point(41, 41);
             this.MaxLenLabel.Name = "MaxLenLabel";
             this.MaxLenLabel.Size = new System.Drawing.Size(111, 16);
@@ -218,10 +223,45 @@
             this.IronColor.Size = new System.Drawing.Size(121, 24);
             this.IronColor.TabIndex = 36;
             // 
+            // TBPanel
+            // 
+            this.TBPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TBPanel.Controls.Add(this.BottomBars);
+            this.TBPanel.Controls.Add(this.TopBars);
+            this.TBPanel.Location = new System.Drawing.Point(79, 218);
+            this.TBPanel.Name = "TBPanel";
+            this.TBPanel.Size = new System.Drawing.Size(157, 100);
+            this.TBPanel.TabIndex = 40;
+            // 
+            // TopBars
+            // 
+            this.TopBars.AutoSize = true;
+            this.TopBars.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.TopBars.Location = new System.Drawing.Point(26, 19);
+            this.TopBars.Name = "TopBars";
+            this.TopBars.Size = new System.Drawing.Size(83, 20);
+            this.TopBars.TabIndex = 0;
+            this.TopBars.Text = "Top Bars";
+            this.TopBars.UseVisualStyleBackColor = true;
+            // 
+            // BottomBars
+            // 
+            this.BottomBars.AutoSize = true;
+            this.BottomBars.Checked = true;
+            this.BottomBars.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BottomBars.Location = new System.Drawing.Point(26, 62);
+            this.BottomBars.Name = "BottomBars";
+            this.BottomBars.Size = new System.Drawing.Size(100, 20);
+            this.BottomBars.TabIndex = 1;
+            this.BottomBars.TabStop = true;
+            this.BottomBars.Text = "Bottom Bars";
+            this.BottomBars.UseVisualStyleBackColor = true;
+            // 
             // UC_bars
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.TBPanel);
             this.Controls.Add(this.IronLineWeightLabel);
             this.Controls.Add(this.IronLineWeight);
             this.Controls.Add(this.IronColorLabel);
@@ -240,6 +280,8 @@
             this.Size = new System.Drawing.Size(1200, 445);
             this.SideCoverPanel.ResumeLayout(false);
             this.SideCoverPanel.PerformLayout();
+            this.TBPanel.ResumeLayout(false);
+            this.TBPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -265,5 +307,8 @@
         private System.Windows.Forms.ComboBox IronLineWeight;
         private System.Windows.Forms.Label IronColorLabel;
         private System.Windows.Forms.ComboBox IronColor;
+        private System.Windows.Forms.Panel TBPanel;
+        private System.Windows.Forms.RadioButton TopBars;
+        private System.Windows.Forms.RadioButton BottomBars;
     }
 }
