@@ -184,6 +184,12 @@
     <Compile Include="src\Winforms\UC_barShapes.Designer.cs">
       <DependentUpon>UC_barShapes.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\Winforms\UC_carefulNotes.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="src\Winforms\UC_carefulNotes.Designer.cs">
+      <DependentUpon>UC_carefulNotes.cs</DependentUpon>
+    </Compile>
     <Compile Include="src\Winforms\UC_Drawing.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -212,6 +218,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="src\Winforms\UC_barShapes.resx">
       <DependentUpon>UC_barShapes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\Winforms\UC_carefulNotes.resx">
+      <DependentUpon>UC_carefulNotes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="src\Winforms\UC_Drawing.resx">
       <DependentUpon>UC_Drawing.cs</DependentUpon>

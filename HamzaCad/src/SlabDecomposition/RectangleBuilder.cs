@@ -4,6 +4,7 @@ using System.Windows.Media.Animation;
 using HamzaCad.Utils;
 using HamzaCad.SlabDrawing;
 using HamzaCad.DrawingParameters;
+using HamzaCad.AutoCADAdapter;
 
 namespace HamzaCad.SlabDecomposition
 {
@@ -114,12 +115,12 @@ namespace HamzaCad.SlabDecomposition
 
             //for (int i = 0; i < rectangles.Count; i++)
             //{
-            //    BarsComputer.ed.WriteMessage("____________________________\n");
+            //    Adapter.ed.WriteMessage("____________________________\n");
 
-            //    BarsComputer.ed.WriteMessage("top y " + rectangles[i].Yupper + "\n");
-            //    BarsComputer.ed.WriteMessage("down y " + rectangles[i].Ylower + "\n");
-            //    BarsComputer.ed.WriteMessage("left x " + rectangles[i].Xleft + "\n");
-            //    BarsComputer.ed.WriteMessage("right x " + rectangles[i].Xright + "\n");
+            //    Adapter.ed.WriteMessage("top y " + rectangles[i].Yupper + "\n");
+            //    Adapter.ed.WriteMessage("down y " + rectangles[i].Ylower + "\n");
+            //    Adapter.ed.WriteMessage("left x " + rectangles[i].Xleft + "\n");
+            //    Adapter.ed.WriteMessage("right x " + rectangles[i].Xright + "\n");
             //}
 
 

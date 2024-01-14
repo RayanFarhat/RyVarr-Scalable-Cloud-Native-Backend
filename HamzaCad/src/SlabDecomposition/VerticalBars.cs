@@ -4,6 +4,7 @@ using System.Windows.Media;
 using Autodesk.AutoCAD.DatabaseServices;
 using HamzaCad.Utils;
 using HamzaCad.SlabDrawing;
+using HamzaCad.AutoCADAdapter;
 
 
 namespace HamzaCad.SlabDecomposition
@@ -13,23 +14,24 @@ namespace HamzaCad.SlabDecomposition
         public static List<DrawingBar> getVerticalBars(List<Point2D> vertices) {
 
             List<Line2D> lines = new List<Line2D>();
+            List<Line2D> Hlines = new List<Line2D>();
+
+            for (int i = 0; i < vertices.Count-1; i++)
+            {
+               
+            }
+
             // get all Vertical lines
             for (int i = 0; i < vertices.Count -1; i++)
-            {                
+            {
                 // compare if equal to last 4 digits
                 if (Math.Abs(vertices[i].X - vertices[i + 1].X) < 0.0001)
                 {
                     Line2D l = new Line2D(vertices[i], vertices[i + 1]);
                     lines.Add(l);
                 }
-            }
-
-            // get the horizontal lines
-            List<Line2D> Hlines = new List<Line2D>();
-            for (int i = 0; i < vertices.Count -1; i++)
-            {
-                // compare if equal to last 4 digits
-                if (Math.Abs(vertices[i].Y - vertices[i + 1].Y) < 0.0001)
+                // if not then triangle or horizontol
+                else if (Math.Abs(vertices[i].Y - vertices[i + 1].Y) < 0.0001)
                 {
                     Line2D l = new Line2D(vertices[i], vertices[i + 1]);
                     // startpoint is always left
@@ -38,6 +40,21 @@ namespace HamzaCad.SlabDecomposition
                         l = new Line2D(vertices[i + 1], vertices[i]);
                     }
                     Hlines.Add(l);
+                }
+                // then triangle
+                else
+                {
+                    Line2D vl = getVerticalFromTriangle(vertices, i);
+                    if (vl != null)
+                    {
+                        lines.Add(vl);
+                    }
+                    
+                    Line2D hl = getHorizontolFromTriangle(vertices, i);
+                    if (hl != null)
+                    {
+                        Hlines.Add(hl);
+                    }
                 }
             }
 
@@ -148,6 +165,57 @@ namespace HamzaCad.SlabDecomposition
             if (sameXDic.Count > 0) return true;
             else return false;
         }
+
+        private static Line2D getVerticalFromTriangle(List<Point2D> vertices,int i)
+        {
+            Line2D line = null;
+
+            if (DoubleUtils.IsEqual(vertices[i-1].Y, vertices[i].Y))
+            {
+                    Point2D p = new Point2D(vertices[i].X, (vertices[i].Y+ vertices[i+1].Y)/2);
+                    bool isInside = PointInsidePolygon.checkInside(vertices,vertices.Count,p);
+                    if (isInside == true)
+                    {
+                        return new Line2D(vertices[i],
+                            new Point2D(vertices[i].X, vertices[i+1].Y));
+                    }
+                    else
+                    {
+                        p.X = vertices[i + 1].X;
+                        isInside = PointInsidePolygon.checkInside(vertices, vertices.Count, p);
+                        if (isInside == true)
+                        {
+                            return new Line2D(new Point2D(vertices[i + 1].X, vertices[i].Y), vertices[i+1]);
+                        }
+                    }
+            }
+            return line;
+        }
+        private static Line2D getHorizontolFromTriangle(List<Point2D> vertices, int i)
+        {
+            Line2D Hline = null;
+
+            if (DoubleUtils.IsEqual(vertices[i - 1].X, vertices[i].X))
+            {
+                Point2D p = new Point2D((vertices[i].X + vertices[i + 1].X) / 2, vertices[i].Y);
+                bool isInside = PointInsidePolygon.checkInside(vertices, vertices.Count, p);
+                if (isInside == true)
+                {
+                    return new Line2D(vertices[i],
+                        new Point2D(vertices[i+1].X, vertices[i].Y));
+                }
+                else
+                {
+                    p.Y = vertices[i + 1].Y;
+                    isInside = PointInsidePolygon.checkInside(vertices, vertices.Count, p);
+                    if (isInside == true)
+                    {
+                        return new Line2D(new Point2D(vertices[i].X, vertices[i + 1].Y), vertices[i+1]);
+                    }
+                }
+            }
+            return Hline;
+        }
         private static bool existOnLines(List<Line2D> lines, Line2D l)
         {
             for (int i = 0; i < lines.Count; i++)
@@ -183,8 +251,5 @@ namespace HamzaCad.SlabDecomposition
             }
             return highestY;
         }
-
-        
-
     }
 }

@@ -59,5 +59,11 @@ namespace HamzaCad.src.Winforms
             UC_barShapes uc = new UC_barShapes();
             addUserControl(uc);
         }
+
+        private void carefulNotesNav_CheckedChanged(object sender, EventArgs e)
+        {
+            UC_carefulNotes uc = new UC_carefulNotes();
+            addUserControl(uc);
+        }
     }
 }

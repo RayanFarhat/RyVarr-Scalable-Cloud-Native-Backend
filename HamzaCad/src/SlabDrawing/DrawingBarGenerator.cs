@@ -34,10 +34,13 @@ namespace HamzaCad.SlabDrawing
                      xPosition = ((rectangles[i].Xleft + rectangles[i].Xright) / 2) + ((rectangles[i].Xright - rectangles[i].Xleft) / randomNumber);
                 var top = rectangles[i].Yupper - BarsParam.SideCoverY;
                 var down = rectangles[i].Ylower + BarsParam.SideCoverY;
-   
-                verticalBars.Add(new DrawingBar(getBarpolyline(top, down, xPosition), getTexts(rectangles[i],top,down,xPosition),
-                    getArrows(rectangles[i]), getBlockingLines(rectangles[i]),
-                    getMeetingCircle(rectangles[i], xPosition)));
+                // if quantity is 0 then no need to draw bar
+                if (((rectangles[i].Xright - rectangles[i].Xleft) / BarsParam.BarSpacing) != 0)
+                {
+                    verticalBars.Add(new DrawingBar(getBarpolyline(top, down, xPosition), getTexts(rectangles[i], top, down, xPosition),
+                        getArrows(rectangles[i]), getBlockingLines(rectangles[i]),
+                        getMeetingCircle(rectangles[i], xPosition)));
+                }
             }
             return verticalBars;
         }
