@@ -7,7 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Autodesk.AutoCAD.Windows.Data;
 using HamzaCad.AutoCADAdapter;
+using HamzaCad.DrawingParameters;
 
 namespace HamzaCad.src.Winforms
 {
@@ -29,15 +31,15 @@ namespace HamzaCad.src.Winforms
             BarShapeBtn s7 = new BarShapeBtn("dhBoth");
             BarShapeBtn s8 = new BarShapeBtn("sh1dh2");
             BarShapeBtn s9 = new BarShapeBtn("dh1sh2");
-
-
-            //BarShapeRadioPanel s4 = new BarShapeRadioPanel();
-            //BarShapeRadioPanel s5 = new BarShapeRadioPanel();
-            s1.CheckedChanged += RadioPanel_CheckedChanged;
-            s2.CheckedChanged += RadioPanel_CheckedChanged;
-            //s3.CheckedChanged += RadioPanel_CheckedChanged;
-            //s4.CheckedChanged += RadioPanel_CheckedChanged;
-            //s5.CheckedChanged += RadioPanel_CheckedChanged;
+            s1.CheckedChanged += s1.RadioPanel_CheckedChanged;
+            s2.CheckedChanged += s2.RadioPanel_CheckedChanged;
+            s3.CheckedChanged += s3.RadioPanel_CheckedChanged;
+            s4.CheckedChanged += s4.RadioPanel_CheckedChanged;
+            s5.CheckedChanged += s5.RadioPanel_CheckedChanged;
+            s6.CheckedChanged += s6.RadioPanel_CheckedChanged;
+            s7.CheckedChanged += s7.RadioPanel_CheckedChanged;
+            s8.CheckedChanged += s8.RadioPanel_CheckedChanged;
+            s9.CheckedChanged += s9.RadioPanel_CheckedChanged;
             BarShapesPanelContainer.Controls.Add(s1);
             BarShapesPanelContainer.Controls.Add(s2);
             BarShapesPanelContainer.Controls.Add(s3);
@@ -47,11 +49,19 @@ namespace HamzaCad.src.Winforms
             BarShapesPanelContainer.Controls.Add(s7);
             BarShapesPanelContainer.Controls.Add(s8);
             BarShapesPanelContainer.Controls.Add(s9);
+
+
+            A.Text = BarsParam.ALength.ToString();
+            A.ValidatingType = typeof(double);
+            A.TextChanged += onA;
+            B.Text = BarsParam.BLength.ToString();
+            B.ValidatingType = typeof(double);
+            B.TextChanged += onB;
         }
         private void shapeWithLetters_Paint(object sender, PaintEventArgs e)
         {
             Pen pen1 = new Pen(Color.Black, 2);
-            Point point1 = new Point(shapeWithLetters.Width - 20 - shapeWithLetters.Width / 2, shapeWithLetters.Height / 4);
+            Point point1 = new Point(shapeWithLetters.Width - 20 - shapeWithLetters.Width / 4, shapeWithLetters.Height / 4);
             Point point2 = new Point(shapeWithLetters.Width - 20, shapeWithLetters.Height / 4);
             Point p3 = new Point(shapeWithLetters.Width - 20, shapeWithLetters.Height - shapeWithLetters.Height / 4);
             Point p4 = new Point(20, shapeWithLetters.Height - shapeWithLetters.Height / 4);
@@ -60,8 +70,27 @@ namespace HamzaCad.src.Winforms
             // Draw polygon to screen.
             e.Graphics.DrawLines(pen1, curvePoints);
         }
-        private void RadioPanel_CheckedChanged(object sender, EventArgs e)
+        private void onA(object sender, EventArgs e)
         {
+            try
+            {
+                BarsParam.ALength = Double.Parse(A.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Input must be a number.");
+            }
+        }
+        private void onB(object sender, EventArgs e)
+        {
+            try
+            {
+                BarsParam.BLength = Double.Parse(B.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Input must be a number.");
+            }
         }
     }
 }

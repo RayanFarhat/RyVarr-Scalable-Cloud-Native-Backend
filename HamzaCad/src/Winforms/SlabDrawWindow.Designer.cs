@@ -29,14 +29,13 @@
         private void InitializeComponent()
         {
             this.panelNav = new System.Windows.Forms.Panel();
-            this.barShapesNav = new System.Windows.Forms.RadioButton();
+            this.carefulNotesNav = new System.Windows.Forms.RadioButton();
             this.CancelBtn = new System.Windows.Forms.Button();
             this.DrawBtn = new System.Windows.Forms.Button();
             this.DrawingNav = new System.Windows.Forms.RadioButton();
             this.TextEditorNav = new System.Windows.Forms.RadioButton();
             this.BarsNav = new System.Windows.Forms.RadioButton();
             this.panelContainer = new System.Windows.Forms.Panel();
-            this.carefulNotesNav = new System.Windows.Forms.RadioButton();
             this.panelNav.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,7 +43,6 @@
             // 
             this.panelNav.BackColor = System.Drawing.Color.White;
             this.panelNav.Controls.Add(this.carefulNotesNav);
-            this.panelNav.Controls.Add(this.barShapesNav);
             this.panelNav.Controls.Add(this.CancelBtn);
             this.panelNav.Controls.Add(this.DrawBtn);
             this.panelNav.Controls.Add(this.DrawingNav);
@@ -56,19 +54,20 @@
             this.panelNav.Size = new System.Drawing.Size(1200, 49);
             this.panelNav.TabIndex = 0;
             // 
-            // barShapesNav
+            // carefulNotesNav
             // 
-            this.barShapesNav.Appearance = System.Windows.Forms.Appearance.Button;
-            this.barShapesNav.AutoSize = true;
-            this.barShapesNav.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGray;
-            this.barShapesNav.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.barShapesNav.Location = new System.Drawing.Point(263, 12);
-            this.barShapesNav.Name = "barShapesNav";
-            this.barShapesNav.Size = new System.Drawing.Size(83, 28);
-            this.barShapesNav.TabIndex = 7;
-            this.barShapesNav.Text = "Bar Shape";
-            this.barShapesNav.UseVisualStyleBackColor = true;
-            this.barShapesNav.CheckedChanged += new System.EventHandler(this.barShapesNav_CheckedChanged);
+            this.carefulNotesNav.Appearance = System.Windows.Forms.Appearance.Button;
+            this.carefulNotesNav.AutoSize = true;
+            this.carefulNotesNav.BackColor = System.Drawing.Color.Orange;
+            this.carefulNotesNav.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGray;
+            this.carefulNotesNav.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.carefulNotesNav.Location = new System.Drawing.Point(842, 9);
+            this.carefulNotesNav.Name = "carefulNotesNav";
+            this.carefulNotesNav.Size = new System.Drawing.Size(165, 28);
+            this.carefulNotesNav.TabIndex = 8;
+            this.carefulNotesNav.Text = "Things to be careful from";
+            this.carefulNotesNav.UseVisualStyleBackColor = false;
+            this.carefulNotesNav.CheckedChanged += new System.EventHandler(this.carefulNotesNav_CheckedChanged);
             // 
             // CancelBtn
             // 
@@ -146,21 +145,6 @@
             this.panelContainer.Size = new System.Drawing.Size(1200, 445);
             this.panelContainer.TabIndex = 1;
             // 
-            // carefulNotesNav
-            // 
-            this.carefulNotesNav.Appearance = System.Windows.Forms.Appearance.Button;
-            this.carefulNotesNav.AutoSize = true;
-            this.carefulNotesNav.BackColor = System.Drawing.Color.Orange;
-            this.carefulNotesNav.FlatAppearance.CheckedBackColor = System.Drawing.Color.LightGray;
-            this.carefulNotesNav.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.carefulNotesNav.Location = new System.Drawing.Point(842, 9);
-            this.carefulNotesNav.Name = "carefulNotesNav";
-            this.carefulNotesNav.Size = new System.Drawing.Size(165, 28);
-            this.carefulNotesNav.TabIndex = 8;
-            this.carefulNotesNav.Text = "Things to be careful from";
-            this.carefulNotesNav.UseVisualStyleBackColor = false;
-            this.carefulNotesNav.CheckedChanged += new System.EventHandler(this.carefulNotesNav_CheckedChanged);
-            // 
             // SlabDrawWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -187,7 +171,6 @@
         private System.Windows.Forms.Panel panelContainer;
         private System.Windows.Forms.Button DrawBtn;
         private System.Windows.Forms.Button CancelBtn;
-        private System.Windows.Forms.RadioButton barShapesNav;
         private System.Windows.Forms.RadioButton carefulNotesNav;
     }
 }

@@ -15,5 +15,9 @@ namespace HamzaCad.DrawingParameters
         public static double MaxBarLength { get; set; } = 600;
         public static int IronColor { get; set; } = 4;
         public static int IronLineWeight { get; set; } = 35;
+        public static string BarShapeCode { get; set; } = "l";
+        public static double ALength { get; set; } = 15;
+        public static double BLength { get; set; } = 15;
+
     }
 }

@@ -145,14 +145,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\AutoCADAdapter\AutoCADAdapter.cs" />
+    <Compile Include="src\BarsModification\BarsEditor.cs" />
     <Compile Include="src\DrawingParameters\BarsParam.cs" />
     <Compile Include="src\DrawingParameters\DrawingParam.cs" />
     <Compile Include="src\DrawingParameters\TextEditorParameters.cs" />
+    <Compile Include="src\SecondBtn.cs" />
     <Compile Include="src\SlabDrawing\BarsComputer.cs" />
     <Compile Include="src\SlabDrawing\DrawingBarGenerator.cs" />
     <Compile Include="src\Utils\FileHandler.cs" />
     <Compile Include="src\Winforms\BarShapeBtn.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="src\Winforms\ModifyBarsWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="src\Winforms\ModifyBarsWindow.Designer.cs">
+      <DependentUpon>ModifyBarsWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="src\Winforms\SlabDrawWindow.cs">
       <SubType>Form</SubType>
@@ -210,6 +218,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="src\Winforms\ModifyBarsWindow.resx">
+      <DependentUpon>ModifyBarsWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="src\Winforms\SlabDrawWindow.resx">
       <DependentUpon>SlabDrawWindow.cs</DependentUpon>
     </EmbeddedResource>

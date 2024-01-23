@@ -18,9 +18,9 @@ namespace HamzaCad
         public RibbonButton item { get; set; }
         public FirstBtn() {
             item = new RibbonButton();
-            item.Name = "Draw";
+            item.Name = "Draw Slab";
             item.ShowText = true;
-            item.Text = "Draw";
+            item.Text = "Draw Slab";
             item.CommandHandler = new FirstBtnCommandHandler();
         }
         public class FirstBtnCommandHandler : System.Windows.Input.ICommand
@@ -48,7 +48,6 @@ namespace HamzaCad
                             SelectionSet ss = ssPrompt.Value;
                             foreach (SelectedObject sObj in ss)
                             {
-                            Adapter.ed.WriteMessage("\nid "+ sObj.ObjectId);
 
                             // now every time we parse selected polyline here to read its data
                             Polyline p = Adapter.trans.GetObject(sObj.ObjectId, OpenMode.ForRead) as Polyline;
@@ -60,12 +59,10 @@ namespace HamzaCad
                                     Adapter.Add(bar.MeetingCircle);
 
                                     ObjectIdCollection arrowList = new ObjectIdCollection();
-                                    ObjectIdCollection textList = new ObjectIdCollection();
 
                                     foreach (var text in bar.Texts)
                                     {
                                         Adapter.Add(text);
-                                        textList.Add(text.ObjectId);
                                     }
                                     foreach (var arrow in bar.Arrows)
                                     {
@@ -78,7 +75,6 @@ namespace HamzaCad
                                         arrowList.Add(line.ObjectId);
                                     }
                                     Adapter.AddGroup(arrowList);
-                                    Adapter.AddGroup(textList);
                             }
                         }
                         }

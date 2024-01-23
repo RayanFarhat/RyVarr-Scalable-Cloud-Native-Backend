@@ -18,8 +18,9 @@ namespace HamzaCAD
         {
            MenuManager menuManager = new MenuManager();
             FirstBtn firstBtn = new FirstBtn();
+            SecondBtn secondBtn = new SecondBtn();
             menuManager.AddItem(firstBtn.item);
-            //menuManager.RemoveItem(firstBtn.item);
+            menuManager.AddItem(secondBtn.item);
         }
         [CommandMethod("ryy", CommandFlags.Transparent)]
         public void StartLoading2()

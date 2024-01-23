@@ -5,17 +5,19 @@ using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
 using Autodesk.AutoCAD.DatabaseServices;
+using HamzaCad.DrawingParameters;
 
 namespace HamzaCad.src.Winforms
 {
     public class BarShapeBtn : RadioButton
     {
-        public string ShapeType {  get; set; }
-        public BarShapeBtn(string shapeType) { 
+        public string ShapeType { get; set; }
+        public BarShapeBtn(string shapeType)
+        {
             this.Appearance = Appearance.Button;
             this.Text = "";
             this.Paint += panel1_Paint;
-            this.Size = new System.Drawing.Size(280,150);
+            this.Size = new System.Drawing.Size(280, 150);
             this.FlatStyle = FlatStyle.Flat;
             this.BackColor = Color.LightGray;
             this.FlatAppearance.CheckedBackColor = Color.White;
@@ -24,14 +26,14 @@ namespace HamzaCad.src.Winforms
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
             Pen pen1 = new Pen(Color.Black, 2);
-            Point[] curvePoints = new Point[] {};
+            Point[] curvePoints = new Point[] { };
             switch (ShapeType)
             {
                 case "l":
                     {
-                    Point point1 = new Point(this.Width - 20, this.Height / 2);
-                    Point point2 = new Point(20, this.Height / 2);
-                    curvePoints =new Point[] { point1, point2 };
+                        Point point1 = new Point(this.Width - 20, this.Height / 2);
+                        Point point2 = new Point(20, this.Height / 2);
+                        curvePoints = new Point[] { point1, point2 };
                     }
                     break;
 
@@ -60,7 +62,7 @@ namespace HamzaCad.src.Winforms
                         Point point2 = new Point(this.Width - 20, this.Height / 2);
                         Point p3 = new Point(20, this.Height / 2);
                         Point p4 = new Point(20, this.Height / 4);
-                        curvePoints = new Point[] { point1, point2, p3,p4 };
+                        curvePoints = new Point[] { point1, point2, p3, p4 };
                     }
                     break;
 
@@ -69,7 +71,7 @@ namespace HamzaCad.src.Winforms
                         Point point1 = new Point(this.Width - 20, this.Height / 2);
                         Point point2 = new Point(20, this.Height / 2);
                         Point p3 = new Point(20, this.Height / 4);
-                        Point p4 = new Point(this.Width/4 + 20, this.Height / 4);
+                        Point p4 = new Point(this.Width / 4 + 20, this.Height / 4);
                         curvePoints = new Point[] { point1, point2, p3, p4 };
                     }
                     break;
@@ -77,11 +79,11 @@ namespace HamzaCad.src.Winforms
 
                 case "dh2":
                     {
-                        Point point1 = new Point(this.Width - 20 - this.Width/4, this.Height / 4);
+                        Point point1 = new Point(this.Width - 20 - this.Width / 4, this.Height / 4);
                         Point point2 = new Point(this.Width - 20, this.Height / 4);
                         Point p3 = new Point(this.Width - 20, this.Height / 2);
                         Point p4 = new Point(20, this.Height / 2);
-                        curvePoints = new Point[] { point1, point2, p3,p4 };
+                        curvePoints = new Point[] { point1, point2, p3, p4 };
                     }
                     break;
 
@@ -94,7 +96,7 @@ namespace HamzaCad.src.Winforms
                         Point p4 = new Point(20, this.Height / 2);
                         Point p5 = new Point(20, this.Height / 4);
                         Point p6 = new Point(this.Width / 4 + 20, this.Height / 4);
-                        curvePoints = new Point[] { point1, point2, p3, p4,p5,p6 };
+                        curvePoints = new Point[] { point1, point2, p3, p4, p5, p6 };
                     }
                     break;
                 case "sh1dh2":
@@ -127,6 +129,13 @@ namespace HamzaCad.src.Winforms
 
             // Draw polygon to screen.
             e.Graphics.DrawLines(pen1, curvePoints);
+        }
+        public void RadioPanel_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.Checked == true)
+            {
+                BarsParam.BarShapeCode = ShapeType;
+            }
         }
     }
 }
