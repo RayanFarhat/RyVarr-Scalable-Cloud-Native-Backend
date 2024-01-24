@@ -18,6 +18,7 @@ namespace HamzaCad.DrawingParameters
         public static string BarShapeCode { get; set; } = "l";
         public static double ALength { get; set; } = 15;
         public static double BLength { get; set; } = 15;
+        public static int RoundLen { get; set; } = 1;
 
     }
 }

@@ -172,6 +172,11 @@ namespace HamzaCad.SlabDrawing
             //lowerText.TextString = "L= " + (top-down).ToString("0.##");
             lowerText.TextString = getFinalLowerText(rect);
             lowerText.Position = new Point3d(x - DrawingParam.TextSize * 1.2, (top + down) / 2, 0.0);
+            // fix when lower text is on top of upper text
+            if (lowerText.Position.X < upperText.Position.X)
+            {
+                lowerText.Position = new Point3d(x + DrawingParam.TextSize * 1.3, (top + down) / 2, 0.0);
+            }
             lowerText.Height = DrawingParam.TextSize;
             if (BarsComputer.isVertical)
                 lowerText.Rotation = 90 * Math.PI / 180;
@@ -202,8 +207,9 @@ namespace HamzaCad.SlabDrawing
             result = Regex.Replace(result, pattern, barType);
 
             var len = rect.Yupper - rect.Ylower - (BarsParam.SideCoverY * 2);
+            int len2 = BarsParam.RoundLen * (int)Math.Round(len / BarsParam.RoundLen);
             pattern = @"\{L\}";
-            result = Regex.Replace(result, pattern, len.ToString("0"));
+            result = Regex.Replace(result, pattern, len2.ToString());
 
             return result;
         }
@@ -228,8 +234,9 @@ namespace HamzaCad.SlabDrawing
             result = Regex.Replace(result, pattern, barType);
 
             var len = rect.Yupper - rect.Ylower - (BarsParam.SideCoverY * 2);
+            int len2 = BarsParam.RoundLen * (int)Math.Round(len / BarsParam.RoundLen);
             pattern = @"\{L\}";
-            result = Regex.Replace(result, pattern, len.ToString("0"));
+            result = Regex.Replace(result, pattern, len2.ToString());
 
             return result;
         }

@@ -47,8 +47,10 @@
             this.IronColorLabel = new System.Windows.Forms.Label();
             this.IronColor = new System.Windows.Forms.ComboBox();
             this.TBPanel = new System.Windows.Forms.Panel();
-            this.TopBars = new System.Windows.Forms.RadioButton();
             this.BottomBars = new System.Windows.Forms.RadioButton();
+            this.TopBars = new System.Windows.Forms.RadioButton();
+            this.RoundLen = new System.Windows.Forms.MaskedTextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SideCoverPanel.SuspendLayout();
             this.TBPanel.SuspendLayout();
             this.SuspendLayout();
@@ -82,7 +84,7 @@
             // SpacingLabel
             // 
             this.SpacingLabel.AutoSize = true;
-            this.SpacingLabel.Location = new System.Drawing.Point(76, 99);
+            this.SpacingLabel.Location = new System.Drawing.Point(81, 99);
             this.SpacingLabel.Name = "SpacingLabel";
             this.SpacingLabel.Size = new System.Drawing.Size(64, 16);
             this.SpacingLabel.TabIndex = 28;
@@ -228,21 +230,10 @@
             this.TBPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TBPanel.Controls.Add(this.BottomBars);
             this.TBPanel.Controls.Add(this.TopBars);
-            this.TBPanel.Location = new System.Drawing.Point(79, 218);
+            this.TBPanel.Location = new System.Drawing.Point(79, 273);
             this.TBPanel.Name = "TBPanel";
             this.TBPanel.Size = new System.Drawing.Size(157, 100);
             this.TBPanel.TabIndex = 40;
-            // 
-            // TopBars
-            // 
-            this.TopBars.AutoSize = true;
-            this.TopBars.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.TopBars.Location = new System.Drawing.Point(26, 19);
-            this.TopBars.Name = "TopBars";
-            this.TopBars.Size = new System.Drawing.Size(83, 20);
-            this.TopBars.TabIndex = 0;
-            this.TopBars.Text = "Top Bars";
-            this.TopBars.UseVisualStyleBackColor = true;
             // 
             // BottomBars
             // 
@@ -257,10 +248,40 @@
             this.BottomBars.Text = "Bottom Bars";
             this.BottomBars.UseVisualStyleBackColor = true;
             // 
+            // TopBars
+            // 
+            this.TopBars.AutoSize = true;
+            this.TopBars.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.TopBars.Location = new System.Drawing.Point(26, 19);
+            this.TopBars.Name = "TopBars";
+            this.TopBars.Size = new System.Drawing.Size(83, 20);
+            this.TopBars.TabIndex = 0;
+            this.TopBars.Text = "Top Bars";
+            this.TopBars.UseVisualStyleBackColor = true;
+            // 
+            // RoundLen
+            // 
+            this.RoundLen.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.RoundLen.Location = new System.Drawing.Point(158, 210);
+            this.RoundLen.Name = "RoundLen";
+            this.RoundLen.Size = new System.Drawing.Size(100, 22);
+            this.RoundLen.TabIndex = 42;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(86, 212);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(54, 16);
+            this.label1.TabIndex = 41;
+            this.label1.Text = "Round=";
+            // 
             // UC_bars
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.RoundLen);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.TBPanel);
             this.Controls.Add(this.IronLineWeightLabel);
             this.Controls.Add(this.IronLineWeight);
@@ -310,5 +331,7 @@
         private System.Windows.Forms.Panel TBPanel;
         private System.Windows.Forms.RadioButton TopBars;
         private System.Windows.Forms.RadioButton BottomBars;
+        private System.Windows.Forms.MaskedTextBox RoundLen;
+        private System.Windows.Forms.Label label1;
     }
 }

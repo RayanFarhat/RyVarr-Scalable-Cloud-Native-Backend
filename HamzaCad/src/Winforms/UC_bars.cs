@@ -34,6 +34,10 @@ namespace HamzaCad.src.Winforms
             SideCoverY.ValidatingType = typeof(double);
             SideCoverY.TextChanged += onSideCoverY;
 
+            RoundLen.Text = BarsParam.RoundLen.ToString();
+            RoundLen.ValidatingType = typeof(int);
+            RoundLen.TextChanged += onRoundLen;
+
 
             TopBars.Checked = BarsParam.iSTopBars;
             BottomBars.Checked = !BarsParam.iSTopBars;
@@ -208,15 +212,26 @@ namespace HamzaCad.src.Winforms
                 MessageBox.Show("Error happen when applying the line weight");
             }
         }
-    }
-    public class ComboboxItem
-    {
-        public string Text { get; set; }
-        public object Value { get; set; }
-
-        public override string ToString()
+        private void onRoundLen(object sender, EventArgs e)
         {
-            return Text.ToString();
+            try
+            {
+                BarsParam.RoundLen = int.Parse(RoundLen.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Input must be a number.");
+            }
+        }
+        public class ComboboxItem
+        {
+            public string Text { get; set; }
+            public object Value { get; set; }
+
+            public override string ToString()
+            {
+                return Text.ToString();
+            }
         }
     }
 }

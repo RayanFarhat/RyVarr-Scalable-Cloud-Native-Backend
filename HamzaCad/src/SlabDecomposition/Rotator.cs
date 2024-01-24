@@ -81,7 +81,7 @@ namespace HamzaCad.SlabDecomposition
                 points[n].X = temp;
             }
         }
-        private static Point2d RotatePoint2d(
+        public static Point2d RotatePoint2d(
              Point2d point,
               double angle,
                Point2D orginPoint)

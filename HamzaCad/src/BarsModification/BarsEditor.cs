@@ -1,5 +1,6 @@
 ﻿using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.Geometry;
+using HamzaCad.AutoCADAdapter;
 using HamzaCad.DrawingParameters;
 using HamzaCad.SlabDecomposition;
 using System;
@@ -13,7 +14,6 @@ namespace HamzaCad.BarsModification
     public class BarsEditor
     {
         public static void modifyBar(Polyline p) {
-            List<Point2D> vertices = new List<Point2D>();
             double maxLen = 0;
             Point2d p1 = new Point2d();
             Point2d p2 = new Point2d();
@@ -26,41 +26,103 @@ namespace HamzaCad.BarsModification
                     p1 = p.GetPoint2dAt(i);
                     p2 = p.GetPoint2dAt(i+1);
                 }
-                Point2D p2d = new Point2D(p.GetPoint2dAt(i).X, p.GetPoint2dAt(i).Y);
-                vertices.Add(p2d);
             }
-            Point2D p2dLast = new Point2D(p.GetPoint2dAt(p.NumberOfVertices - 1).X, p.GetPoint2dAt(p.NumberOfVertices - 1).Y);
-            vertices.Add(p2dLast);
 
-            //double resAngle = Rotator.GetRotationAngleToXOrY(new Point2D(p1.X,p1.Y),new Point2D(p2.X, p2.Y));
+            double resAngle = Rotator.GetRotationAngleToXOrY(new Point2D(p1.X,p1.Y),new Point2D(p2.X, p2.Y));
+            // now p1 and rotatedP2 are on top of each other
+            Point2d rotatedP2 = Rotator.RotatePoint2d(p2, resAngle, new Point2D(p1.X, p1.Y));
+            p2 = rotatedP2;
+            Adapter.ed.WriteMessage("p1 "+p1.X + " "+p1.Y+"\n");
+            Adapter.ed.WriteMessage("p2 "+ rotatedP2.X + " "+ rotatedP2.Y+"\n");
             //Rotator.RotatePoints(vertices, resAngle);
 
-            for (int i = p.NumberOfVertices-1; i >= 2; i--)
-            {
-                p.RemoveVertexAt(i);
-            }
+            List<Point2D> rotatedVertices = new List<Point2D>();
+
             switch (BarsParam.BarShapeCode)
             {
                 case "l":
                     {
-                        p.AddVertexAt(0, p1, 0, 0, 0);
-                        p.AddVertexAt(1, p2, 0, 0, 0);
+                        rotatedVertices.Add(new Point2D(p1.X, p1.Y));
+                        rotatedVertices.Add(new Point2D(p2.X, p2.Y));
+                        updatePolyline(p, rotatedVertices, -resAngle);
                     }
                     break;
 
                 case "sh1":
                     {
-                        p.AddVertexAt(0, p1, 0, 0, 0);
-                        p.AddVertexAt(1, p2, 0, 0, 0);
-                        p.AddVertexAt(2, new Point2d(p2.X + BarsParam.ALength,p2.Y), 0, 0, 0);
+                        rotatedVertices.Add(new Point2D(p1.X, p1.Y));
+                        rotatedVertices.Add(new Point2D(p2.X, p2.Y));
+                        rotatedVertices.Add(new Point2D(p2.X + BarsParam.ALength, p2.Y));
+                        updatePolyline(p, rotatedVertices, -resAngle);
+
                     }
                     break;
 
                 case "sh2":
                     {
-                        p.AddVertexAt(0, new Point2d(p1.X + BarsParam.ALength, p1.Y), 0, 0, 0);
-                        p.AddVertexAt(1, p1, 0, 0, 0);
-                        p.AddVertexAt(2, p2, 0, 0, 0);
+                        rotatedVertices.Add(new Point2D(p1.X + BarsParam.ALength, p1.Y));
+                        rotatedVertices.Add(new Point2D(p1.X, p1.Y));
+                        rotatedVertices.Add(new Point2D(p2.X, p2.Y));
+                        updatePolyline(p, rotatedVertices, -resAngle);
+
+                    }
+                    break;
+                case "shBoth":
+                    {
+                        rotatedVertices.Add(new Point2D(p1.X + BarsParam.ALength, p1.Y));
+                        rotatedVertices.Add(new Point2D(p1.X, p1.Y));
+                        rotatedVertices.Add(new Point2D(p2.X, p2.Y));
+                        rotatedVertices.Add(new Point2D(p2.X + BarsParam.ALength, p2.Y));
+                        updatePolyline(p, rotatedVertices, -resAngle);
+                    }
+                    break;
+                case "dh1":
+                    {
+                        rotatedVertices.Add(new Point2D(p1.X, p1.Y));
+                        rotatedVertices.Add(new Point2D(p2.X, p2.Y));
+                        rotatedVertices.Add(new Point2D(p2.X + BarsParam.ALength, p2.Y));
+                        rotatedVertices.Add(new Point2D(p2.X + BarsParam.ALength, p2.Y - BarsParam.BLength));
+                        updatePolyline(p, rotatedVertices, -resAngle);
+                    }
+                    break;
+                case "dh2":
+                    {
+                        rotatedVertices.Add(new Point2D(p1.X + BarsParam.ALength, p1.Y + BarsParam.BLength));
+                        rotatedVertices.Add(new Point2D(p1.X + BarsParam.ALength, p1.Y));
+                        rotatedVertices.Add(new Point2D(p1.X, p1.Y));
+                        rotatedVertices.Add(new Point2D(p2.X, p2.Y));
+                        updatePolyline(p, rotatedVertices, -resAngle);
+                    }
+                    break;
+                case "dhBoth":
+                    {
+                        rotatedVertices.Add(new Point2D(p1.X + BarsParam.ALength, p1.Y + BarsParam.BLength));
+                        rotatedVertices.Add(new Point2D(p1.X + BarsParam.ALength, p1.Y));
+                        rotatedVertices.Add(new Point2D(p1.X, p1.Y));
+                        rotatedVertices.Add(new Point2D(p2.X, p2.Y));
+                        rotatedVertices.Add(new Point2D(p2.X + BarsParam.ALength, p2.Y));
+                        rotatedVertices.Add(new Point2D(p2.X + BarsParam.ALength, p2.Y - BarsParam.BLength));
+                        updatePolyline(p, rotatedVertices, -resAngle);
+                    }
+                    break;
+                case "sh1dh2":
+                    {
+                        rotatedVertices.Add(new Point2D(p1.X + BarsParam.ALength, p1.Y + BarsParam.BLength));
+                        rotatedVertices.Add(new Point2D(p1.X + BarsParam.ALength, p1.Y));
+                        rotatedVertices.Add(new Point2D(p1.X, p1.Y));
+                        rotatedVertices.Add(new Point2D(p2.X, p2.Y));
+                        rotatedVertices.Add(new Point2D(p2.X + BarsParam.ALength, p2.Y));
+                        updatePolyline(p, rotatedVertices, -resAngle);
+                    }
+                    break;
+                case "dh1sh2":
+                    {
+                        rotatedVertices.Add(new Point2D(p1.X + BarsParam.ALength, p1.Y));
+                        rotatedVertices.Add(new Point2D(p1.X, p1.Y));
+                        rotatedVertices.Add(new Point2D(p2.X, p2.Y));
+                        rotatedVertices.Add(new Point2D(p2.X + BarsParam.ALength, p2.Y));
+                        rotatedVertices.Add(new Point2D(p2.X + BarsParam.ALength, p2.Y - BarsParam.BLength));
+                        updatePolyline(p, rotatedVertices, -resAngle);
                     }
                     break;
                 default:
@@ -70,6 +132,20 @@ namespace HamzaCad.BarsModification
         private static double GetDistance(Point2d p1, Point2d p2)
         {
             return Math.Sqrt(Math.Pow((p2.X - p1.X), 2) + Math.Pow((p2.Y - p1.Y), 2));
+        }
+        private static void updatePolyline(Polyline p, List<Point2D> rotatedVertices, double angle)
+        {
+            Rotator.RotatePoints(rotatedVertices, angle);
+            p.AddVertexAt(0, new Point2d(rotatedVertices[0].X, rotatedVertices[0].Y), 0, 0, 0);
+            p.AddVertexAt(1, new Point2d(rotatedVertices[1].X, rotatedVertices[1].Y), 0, 0, 0);
+            for (int i = p.NumberOfVertices - 1; i >= 2; i--)
+            {
+                p.RemoveVertexAt(i);
+            }
+            for (int i = 2; i < rotatedVertices.Count; i++)
+            {
+                p.AddVertexAt(i, new Point2d(rotatedVertices[i].X, rotatedVertices[i].Y), 0, 0, 0);
+            }
         }
     }
 }
