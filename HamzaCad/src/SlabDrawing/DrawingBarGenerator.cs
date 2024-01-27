@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using HamzaCad.Utils;
 using HamzaCad.SlabDecomposition;
 using HamzaCad.DrawingParameters;
+using HamzaCad.AutoCADAdapter;
 
 
 namespace HamzaCad.SlabDrawing
@@ -166,8 +167,11 @@ namespace HamzaCad.SlabDrawing
             upperText.Position = new Point3d(x + DrawingParam.TextSize*0.1, (top + down) / 2, 0.0);
             upperText.Height = DrawingParam.TextSize;
             if (BarsComputer.isVertical)
-                upperText.Rotation = 90 * Math.PI / 180;
-
+                upperText.Rotation = (90-BarsComputer.resAngle) * Math.PI / 180;
+            else
+            {
+                upperText.Rotation = (-BarsComputer.resAngle) * Math.PI / 180;
+            }
             DBText lowerText = new DBText();
             //lowerText.TextString = "L= " + (top-down).ToString("0.##");
             lowerText.TextString = getFinalLowerText(rect);
@@ -179,7 +183,9 @@ namespace HamzaCad.SlabDrawing
             }
             lowerText.Height = DrawingParam.TextSize;
             if (BarsComputer.isVertical)
-                lowerText.Rotation = 90 * Math.PI / 180;
+                lowerText.Rotation = (90 - BarsComputer.resAngle) * Math.PI / 180;
+            else
+                lowerText.Rotation = (- BarsComputer.resAngle) * Math.PI / 180;
 
             texts.Add(upperText);
             texts.Add(lowerText);

@@ -11,6 +11,7 @@ using HttpClientHandler = HamzaCad.Utils.HttpClientHandler;
 using HamzaCad.SlabDecomposition;
 using HamzaCad.src.Winforms;
 using HamzaCad.DrawingParameters;
+using HamzaCad.AutoCADAdapter;
 
 
 namespace HamzaCad.SlabDrawing
@@ -19,6 +20,8 @@ namespace HamzaCad.SlabDrawing
     {
         public static List<DrawingBar> bars;
         public static bool isVertical = true;
+        public static double resAngle = 0;
+        
 
         // for form
         public static string lang { get; set; } = "Eng";
@@ -67,8 +70,11 @@ namespace HamzaCad.SlabDrawing
             //{
             //    return new List<DrawingBar>();
             //}
-            double resAngle = Rotator.GetRotationAngleToXOrY(vertices[0], vertices[1]);
-
+            resAngle = Rotator.GetRotationAngleToXOrY(vertices[0], vertices[1]);
+            if (DoubleUtils.IsFirstBiggerOrEqualThanSecond(resAngle, 180))
+            {
+                resAngle = resAngle - 180;
+            }
 
             // rotate the polygon
             //double angle = Rotator.GetRotationAngleToXOrY(vertices[0], vertices[1]);
@@ -80,7 +86,7 @@ namespace HamzaCad.SlabDrawing
                 isVertical = true;
                 bars =  VerticalBars.getVerticalBars(vertices);
             }
-            if (BarsParam.DrawVertical)
+            if (BarsParam.DrawHorizontal)
             {
                 isVertical = false;
                 List<Point2D> clonedvertices = new List<Point2D>(vertices);

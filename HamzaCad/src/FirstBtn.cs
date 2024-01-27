@@ -41,6 +41,9 @@ namespace HamzaCad
                             new TypedValue((int)DxfCode.Start, "LWPOLYLINE") ,0);
                         SelectionFilter filter = new SelectionFilter(tv);
                         //wait for user selection or multible selections
+
+                        Adapter.ed.WriteMessage("\nSelect Slab Polyline:\n");
+
                         PromptSelectionResult ssPrompt = Adapter.ed.GetSelection(filter);
                         // check if there is object selected
                         if(ssPrompt.Status == PromptStatus.OK)
@@ -75,8 +78,8 @@ namespace HamzaCad
                                         arrowList.Add(line.ObjectId);
                                     }
                                     Adapter.AddGroup(arrowList);
+                                }
                             }
-                        }
                         }
                         else
                         {
