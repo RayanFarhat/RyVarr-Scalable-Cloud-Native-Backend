@@ -8,8 +8,10 @@ using System.Text;
 using System.Windows.Media.Imaging;
 using System.Threading.Tasks;
 using Autodesk.Revit.Creation;
-using RYBIM.Adapter;
+using RYBIM.RevitAdapter;
 using System.Runtime.Remoting.Messaging;
+using System.Windows.Media.Media3D;
+using System.Security.Cryptography;
 
 namespace RYBIM
 {
@@ -24,7 +26,7 @@ namespace RYBIM
             UIAdapter.Init(application);
             UIAdapter.CreateTab("RYBIM");
             UIAdapter.AddPanel("textPanel");
-            UIAdapter.AddPushBtn(0, "btn", "RYBIM.HelloWorld", "press this btn");
+            UIAdapter.AddPushBtn(0, "btn", "RYBIM.Test", "press this btn");
             UIAdapter.AddTextBox(0, "textbox", "enter text", "text tooltib", "long text here");
             UIAdapter.TextBoxes[0].EnterPressed += ProcessText;
             void ProcessText(object sender, Autodesk.Revit.UI.Events.TextBoxEnterPressedEventArgs args)
@@ -41,8 +43,8 @@ namespace RYBIM
             return Result.Succeeded;
         }
     }
-    [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.ReadOnly)]
-    public class HelloWorld : IExternalCommand
+    [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
+    public class Test : IExternalCommand
     {
         public Autodesk.Revit.UI.Result Execute(ExternalCommandData commandData,
             ref string message, ElementSet elements)
@@ -50,19 +52,14 @@ namespace RYBIM
             try
             {
                 UIDocument uidoc = commandData.Application.ActiveUIDocument;
+                Adapter.Init(commandData.Application);
 
-                ElementCategoryFilter filter = new ElementCategoryFilter(BuiltInCategory.OST_StructuralColumns);
 
-                // Apply the filter to the elements in the active document
-                // Use shortcut WhereElementIsNotElementType() to find wall instances only
-                FilteredElementCollector collector = new FilteredElementCollector(uidoc.Document);
-                IList<Element> Columns = collector.WherePasses(filter).WhereElementIsNotElementType().ToElements();
-                String prompt = "The Columns in the current document are:\n";
+                IList<Element> Columns = Adapter.getAllColomns();
                 foreach (Element e in Columns)
                 {
-                    prompt += e.Name + "\n";
+                    Adapter.ShowXYZs(e);
                 }
-                TaskDialog.Show("Revit", prompt);
             }
             catch (Exception e)
             {

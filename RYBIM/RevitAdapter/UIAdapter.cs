@@ -8,9 +8,7 @@ using Autodesk.Revit.UI;
 using System.Windows.Media.Imaging;
 using Autodesk.Revit.UI.Events;
 
-
-
-namespace RYBIM.Adapter
+namespace RYBIM.RevitAdapter
 {
     // used in OnStartup funx inside IExternalApplication class
     public class UIAdapter

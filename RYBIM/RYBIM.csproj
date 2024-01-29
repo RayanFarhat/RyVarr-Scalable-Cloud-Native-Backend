@@ -48,8 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Adapter\Adapter.cs" />
-    <Compile Include="Adapter\UIAdapter.cs" />
+    <Compile Include="RevitAdapter\Adapter.cs" />
+    <Compile Include="RevitAdapter\Adapter_Debug.cs" />
+    <Compile Include="RevitAdapter\Adapter_Filter.cs" />
+    <Compile Include="RevitAdapter\Adapter_Geometry.cs" />
+    <Compile Include="RevitAdapter\UIAdapter.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

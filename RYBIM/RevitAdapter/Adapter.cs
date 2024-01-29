@@ -7,20 +7,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RYBIM.Adapter
+namespace RYBIM.RevitAdapter
 {
     public partial class Adapter
     {
         public static UIApplication uiapp;
-        public static UIDocument uiddoc;
+        public static UIDocument uidoc;
         public static Application app;
         public static Document doc;
         public static void Init(UIApplication uiApplication)
         {
             uiapp = uiApplication;
-            uiddoc = uiapp.ActiveUIDocument;
+            uidoc = uiapp.ActiveUIDocument;
             app = uiapp.Application;
-            doc = uiddoc.Document;
+            doc = uidoc.Document;
         }
+        public static double ConvertToCM(double value) { return UnitUtils.ConvertFromInternalUnits(value, UnitTypeId.Centimeters); }
+
     }
 }
