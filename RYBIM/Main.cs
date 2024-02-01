@@ -53,12 +53,63 @@ namespace RYBIM
             {
                 UIDocument uidoc = commandData.Application.ActiveUIDocument;
                 Adapter.Init(commandData.Application);
-
+                
 
                 IList<Element> Columns = Adapter.getAllColomns();
+                string str = "";
+
                 foreach (Element e in Columns)
                 {
-                    Adapter.ShowXYZs(e);
+                    str += "Vertices for " + e.Name + "\n";
+                    List<XYZ> vertices = Adapter.GetXYZsFromElemnt(e);
+                    foreach (XYZ v in vertices)
+                    {
+                        str += $"X: {v.X}, Y: {v.Y}\n";
+                    }
+                    str += "\n";
+                }
+                UIAdapter.TextBoxes[0].Value = str;
+                using (Transaction transaction = new Transaction(Adapter.doc, "Create Slab"))
+                {
+                    transaction.Start();
+
+                    // Create a level for the slab
+                    Level level = Level.Create(Adapter.doc, 0.0);
+
+                    // Create a sketch plane for the slab
+                    SketchPlane sketchPlane = SketchPlane.Create(Adapter.doc, Plane.CreateByNormalAndOrigin(XYZ.BasisZ, XYZ.Zero));
+
+                    // Define the geometry for the slab (here we use a simple rectangle)
+                    XYZ[] points = new XYZ[]
+                    {
+                        new XYZ(-23.8173050301309, 10.2714167952434, 0),
+                        new XYZ(-13.1076238767901, 10.2714167952434, 0),
+                        new XYZ(-13.1076238767901, 5.35015695272375, 0),
+                        new XYZ(-5.11674833183194, 5.35015695272372, 0),
+                        new XYZ(-5.11674833183194, 10.2714167952434, 0),
+                        new XYZ(-5.11674833183193, 21.7543564277893, 0),
+                        new XYZ(-13.1076238767901, 21.7543564277893, 0),
+  
+                    };
+                    FloorType floorType
+                      = new FilteredElementCollector(Adapter.doc)
+                        .OfClass(typeof(FloorType))
+                        .First<Element>(
+                          e => e.Name.Equals("Concrete-Commercial 362mm"))
+                          as FloorType;
+                    // Create a closed loop to define the boundary
+                    CurveLoop curveLoop = new CurveLoop();
+                    for (int i = 0; i < points.Length; i++)
+                    {
+                        Line line = Line.CreateBound(points[i], points[(i + 1) % points.Length]);
+                        curveLoop.Append(line);
+                    }
+                    Line slopeArrow = Line.CreateBound(new XYZ(0, 0, 0), new XYZ(0, 1, 0));
+                    var x = new List<CurveLoop>();
+                    x.Add(curveLoop);
+                    // Create the slab using the sketch plane and the closed loop
+                    Floor.Create(Adapter.doc, x, floorType.Id, level.Id, true, slopeArrow,0);
+                    transaction.Commit();
                 }
             }
             catch (Exception e)

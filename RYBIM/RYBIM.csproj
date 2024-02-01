@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="RevitAdapter\Adapter.cs" />
+    <Compile Include="RevitAdapter\Adapter_Create.cs" />
     <Compile Include="RevitAdapter\Adapter_Debug.cs" />
     <Compile Include="RevitAdapter\Adapter_Filter.cs" />
     <Compile Include="RevitAdapter\Adapter_Geometry.cs" />

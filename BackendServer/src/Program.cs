@@ -2,6 +2,13 @@ using BackendServer.Hubs;
 using BackendServer.Startups;
 using BackendServer.Services;
 
+//text if python is running, if not exit
+if (Python.Execute("print(1)") != "1\n")
+{
+    Console.WriteLine("Error: Python is not running");
+    Environment.Exit(0);
+}
+System.Console.WriteLine();
 var webApplicationOptions = new WebApplicationOptions
 {
     ContentRootPath = AppContext.BaseDirectory,

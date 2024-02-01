@@ -9,11 +9,30 @@ namespace RYBIM.RevitAdapter
 {
     public partial class Adapter
     {
-        public static IList<Element> getAllColomns()
+        public static List<Element> getAllColomns()
         {
             ElementCategoryFilter filter = new ElementCategoryFilter(BuiltInCategory.OST_StructuralColumns);
             FilteredElementCollector collector = new FilteredElementCollector(doc);
-            return collector.WherePasses(filter).WhereElementIsNotElementType().ToElements();
+            return collector.WherePasses(filter).WhereElementIsNotElementType().ToElements().ToList();
+        }
+        public static List<Element> getConcreteRectangularColumnsSymbols()
+        {
+            return new FilteredElementCollector(doc)
+                    .OfClass(typeof(FamilySymbol))
+                    .OfCategory(BuiltInCategory.OST_StructuralColumns)
+                    .Where(e =>
+                    {
+                        bool isConcreteRect = false;
+                        foreach (Parameter para in e.Parameters)
+                        {
+                            if (para.Definition.Name == "Family Name" && para.AsValueString() == "Concrete-Rectangular-Column")
+                            {
+                                isConcreteRect = true;
+                                break;
+                            }
+                        }
+                        return isConcreteRect;
+                    }).ToList();
         }
         public static IList<Element> getAllBeams()
         {
@@ -41,8 +60,15 @@ namespace RYBIM.RevitAdapter
                     }
                 }
 
-             }
-                return structuralSlabs;
+            }
+            return structuralSlabs;
+        }
+        public static FilteredElementCollector GetLevels()
+        {
+            return new FilteredElementCollector(Adapter.doc)
+                    .WhereElementIsNotElementType()
+                    .OfCategory(BuiltInCategory.INVALID)
+                    .OfClass(typeof(Level));
         }
     }
 }
