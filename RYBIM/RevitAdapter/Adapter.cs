@@ -23,6 +23,7 @@ namespace RYBIM.RevitAdapter
             doc = uidoc.Document;
         }
         public static double ConvertToCM(double value) { return UnitUtils.ConvertFromInternalUnits(value, UnitTypeId.Centimeters); }
+        public static double ConvertToXYZ(double value) { return UnitUtils.ConvertToInternalUnits(value, UnitTypeId.Centimeters); }
 
     }
 }

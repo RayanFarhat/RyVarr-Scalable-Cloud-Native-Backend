@@ -13,11 +13,15 @@ namespace RYBIM.RevitAdapter
         public static void ShowParameters(Element e)
         {
             string str = "Parameters for " + e.Name + "\n";
-            if (e.Location is LocationPoint locationPoint)
+            if (e is FamilyInstance)
             {
-                XYZ point = locationPoint.Point;
-                str += $"at: X: {point.X}, Y: {point.Y}, Z: {point.Z}\n";
+                var location = getLocationAsMin(e);
+                str += $"at : X: {location.X}, Y: {location.Y}, Z: {location.Z}\n";
+                var box = getWidthDepthHeight(e);
+                str += $"Width: {box.X}\nDepth: {box.Y}\nHeight: {box.Z}\n";
+
             }
+
             foreach (Parameter para in e.Parameters)
             {
                 str += para.Definition.Name + " : " + para.AsValueString() + "\n";

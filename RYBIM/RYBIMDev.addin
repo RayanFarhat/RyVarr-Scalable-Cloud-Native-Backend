@@ -2,7 +2,7 @@
 <RevitAddIns>
 	<!--add to C:\ProgramData\Autodesk\Revit\Addins\year in dev pc-->
 	<AddIn Type="Application">
-		<Assembly>C:\Users\ryanf\Desktop\RyVarr\RYBIM\bin\Debug\RYBIM.dll</Assembly>
+		<Assembly>C:\Users\ryanf\Desktop\RyVarr\RYBIM\bin\x64\Debug\RYBIM.dll</Assembly>
 		<AddInId>604b1052-f742-4951-8576-c261d1993108</AddInId>
 		<FullClassName>RYBIM.Main</FullClassName>
 		<Name>RYBIM</Name>

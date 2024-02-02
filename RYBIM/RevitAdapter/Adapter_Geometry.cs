@@ -61,5 +61,35 @@ namespace RYBIM.RevitAdapter
             }
             return null;
         }
+        public static XYZ getWidthDepthHeight(Element e)
+        {
+            var p = GetSolid(e.get_Geometry(new Options())).GetBoundingBox().Max;
+            //width x depth y height z
+            return new XYZ(p.X*2,p.Y*2,p.Z*2);
+        }
+        public static XYZ getLocationAsMin(Element e)
+        {
+            var points = GetXYZsFromElemnt(e);
+            double minX = points[0].X;
+            double minY = points[0].Y;
+            double minZ = points[0].Z;
+            foreach (var p in points)
+            {
+                if (minX > p.X)
+                {
+                    minX = p.X;
+                }
+                if (minY > p.Y)
+                {
+                    minY = p.Y;
+                }
+                if (minZ > p.Z)
+                {
+                    minZ = p.Z;
+                }
+            }
+            return new XYZ(minX, minY, minZ);
+        }
+
     }
 }

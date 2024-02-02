@@ -1,4 +1,5 @@
 ﻿using Autodesk.Revit.DB;
+using Autodesk.Revit.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,25 +16,6 @@ namespace RYBIM.RevitAdapter
             FilteredElementCollector collector = new FilteredElementCollector(doc);
             return collector.WherePasses(filter).WhereElementIsNotElementType().ToElements().ToList();
         }
-        public static List<Element> getConcreteRectangularColumnsSymbols()
-        {
-            return new FilteredElementCollector(doc)
-                    .OfClass(typeof(FamilySymbol))
-                    .OfCategory(BuiltInCategory.OST_StructuralColumns)
-                    .Where(e =>
-                    {
-                        bool isConcreteRect = false;
-                        foreach (Parameter para in e.Parameters)
-                        {
-                            if (para.Definition.Name == "Family Name" && para.AsValueString() == "Concrete-Rectangular-Column")
-                            {
-                                isConcreteRect = true;
-                                break;
-                            }
-                        }
-                        return isConcreteRect;
-                    }).ToList();
-        }
         public static IList<Element> getAllBeams()
         {
             ElementCategoryFilter filter = new ElementCategoryFilter(BuiltInCategory.OST_StructuralFraming);
@@ -49,17 +31,10 @@ namespace RYBIM.RevitAdapter
             // filter only strutural slabs
             foreach (Element e in slabs)
             {
-                foreach (Parameter item in e.Parameters)
+                if (e.get_Parameter(BuiltInParameter.FLOOR_PARAM_IS_STRUCTURAL).AsValueString() == "Yes")
                 {
-                    if (item.Definition.Name == "Structural")
-                    {
-                        if (item.AsValueString()=="Yes")
-                        {
-                            structuralSlabs.Add(e as Floor);
-                        }
-                    }
+                    structuralSlabs.Add(e as Floor);
                 }
-
             }
             return structuralSlabs;
         }
@@ -69,6 +44,27 @@ namespace RYBIM.RevitAdapter
                     .WhereElementIsNotElementType()
                     .OfCategory(BuiltInCategory.INVALID)
                     .OfClass(typeof(Level));
+        }
+        public static List<Element> getConcreteRectangularColumnsSymbols()
+        {
+            return new FilteredElementCollector(doc)
+                    .OfClass(typeof(FamilySymbol))
+                    .OfCategory(BuiltInCategory.OST_StructuralColumns)
+                    .Where(e => e.get_Parameter(BuiltInParameter.ALL_MODEL_FAMILY_NAME).AsValueString() == "Concrete-Rectangular-Column").ToList();
+        }
+        public static List<Element> getConcreteRectangularBeamsSymbols()
+        {
+            return new FilteredElementCollector(doc)
+                    .OfClass(typeof(FamilySymbol))
+                    .OfCategory(BuiltInCategory.OST_StructuralFraming)
+                    .Where(e => e.get_Parameter(BuiltInParameter.ALL_MODEL_FAMILY_NAME).AsValueString() == "Concrete-Rectangular Beam").ToList();
+        }
+        public static List<Element> getConcreteFloorsSymbols()
+        {
+            return new FilteredElementCollector(doc)
+                    .OfClass(typeof(FamilySymbol))
+                    .OfCategory(BuiltInCategory.OST_Floors)
+                    .ToList();
         }
     }
 }
