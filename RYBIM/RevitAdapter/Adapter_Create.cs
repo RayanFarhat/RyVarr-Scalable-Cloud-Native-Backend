@@ -4,6 +4,7 @@ using Autodesk.Revit.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,7 +38,9 @@ namespace RYBIM.RevitAdapter
             {
                 if (Width == symbol.LookupParameter("b").AsDouble() && Depth == symbol.LookupParameter("h").AsDouble())
                 {
-                    return CreateColumn(locationinMin, symbol as FamilySymbol, GetLevels().ElementAt(0) as Level,Height);
+                    var level = GetLevelClosestToZ(locationinMin.Z);
+
+                    return CreateColumn(locationinMin, symbol as FamilySymbol, level, Height);
                 }
             }
             return null;
@@ -54,23 +57,25 @@ namespace RYBIM.RevitAdapter
         public static FamilyInstance CreateBeamAs3D(XYZ locationinMin, double Width, double Depth, double Height)
         {
             var symbols = getConcreteRectangularBeamsSymbols();
-            foreach (var symbol  in symbols )
+            foreach (var symbol  in symbols)
             {
                 var b = symbol.LookupParameter("b").AsDouble();
                 var h = symbol.LookupParameter("h").AsDouble();
                 if (h == Height)
                 {
+                    var level = GetLevelClosestToZ(locationinMin.Z);
+
                     if (b == Width)
                     {
                         XYZ p1 = new XYZ(locationinMin.X+(Width/2), locationinMin.Y, locationinMin.Z+Height);
                         XYZ p2 = new XYZ(locationinMin.X+(Width/2), locationinMin.Y+Depth, locationinMin.Z+Height);
-                        return CreateBeam(p1,p2,symbol as FamilySymbol, GetLevels().ElementAt(0) as Level);
+                        return CreateBeam(p1,p2,symbol as FamilySymbol, level);
                     }
                     else if(b == Depth)
                     {
                         XYZ p1 = new XYZ(locationinMin.X, locationinMin.Y + (Depth/2), locationinMin.Z + Height);
                         XYZ p2 = new XYZ(locationinMin.X + Width , locationinMin.Y + (Depth / 2), locationinMin.Z + Height);
-                        return CreateBeam(p1, p2, symbol as FamilySymbol, GetLevels().ElementAt(0) as Level);
+                        return CreateBeam(p1, p2, symbol as FamilySymbol, level);
                     }
                 }
             }
@@ -97,13 +102,67 @@ namespace RYBIM.RevitAdapter
             Line slopeArrow = Line.CreateBound(new XYZ(0, 0, vertices[0].Z), new XYZ(0, 1, vertices[0].Z));
             return Floor.Create(doc, curveLoopList, floorType.Id, level.Id, true, slopeArrow, 0);
         }
+        public static Floor CreateFloorAs3DBox(XYZ locationinMin, double Width, double Depth, double Height)
+        {
+            var slabTypes = getConcreteFloorsSymbols();
+            foreach (var floorType in slabTypes)
+            {
+                if (floorType.get_Parameter(BuiltInParameter.FLOOR_ATTR_DEFAULT_THICKNESS_PARAM).AsDouble() == Height)
+                {
+                    CurveLoop curveLoop = new CurveLoop();
+                    //z is not important, it is on the level
+                    XYZ p1 = new XYZ(locationinMin.X, locationinMin.Y, 0);
+                    XYZ p2 = new XYZ(locationinMin.X+Width, locationinMin.Y, 0);
+                    XYZ p3 = new XYZ(locationinMin.X + Width, locationinMin.Y + Depth, 0);
+                    XYZ p4 = new XYZ(locationinMin.X, locationinMin.Y + Depth, 0);
+
+                    Line line1 = Line.CreateBound(p1,p2);
+                    curveLoop.Append(line1);
+                    Line line2 = Line.CreateBound(p2, p3);
+                    curveLoop.Append(line2);
+                    Line line3 = Line.CreateBound(p3, p4);
+                    curveLoop.Append(line3);
+                    Line line4 = Line.CreateBound(p4, p1);
+                    curveLoop.Append(line4);
+                    var curveLoopList = new List<CurveLoop>();
+                    curveLoopList.Add(curveLoop);
+
+                    var level = GetLevelClosestToZ(locationinMin.Z);
+                    Line slopeArrow = Line.CreateBound(new XYZ(0, 0, locationinMin.Z + Height), new XYZ(0, 1, locationinMin.Z + Height));
+                    var floor =  Floor.Create(doc, curveLoopList, floorType.Id,
+                       level.Id, true, slopeArrow, 0);
+                    double baseDiff = level.Elevation - locationinMin.Z;
+                    floor.get_Parameter(BuiltInParameter.FLOOR_HEIGHTABOVELEVEL_PARAM).Set(baseDiff + Height);
+                    return floor;
+                }
+            }
+            return null;
+        }
         public static TextNote CreateText(string text, XYZ location, View view,double width,double rotation)
         {
-            ElementId defaultTextTypeId = Adapter.doc.GetDefaultElementTypeId(ElementTypeGroup.TextNoteType);
+            ElementId defaultTextTypeId = doc.GetDefaultElementTypeId(ElementTypeGroup.TextNoteType);
             TextNoteOptions opts = new TextNoteOptions(defaultTextTypeId);
             opts.HorizontalAlignment = HorizontalTextAlignment.Left;
             opts.Rotation = rotation;
             return TextNote.Create(doc, view.Id, location, width, text, opts);
+        }
+        private static Level GetLevelClosestToZ(double Z)
+        {
+            //get level based on Z
+            Level level;
+            var levels = GetLevels();
+            double closestElevation = Math.Abs((levels.ElementAt(0) as Level).Elevation - Z);
+            level = levels.ElementAt(0) as Level;
+            for (int i = 1; i < levels.Count(); i++)
+            {
+                var diff = Math.Abs((levels.ElementAt(i) as Level).Elevation - Z);
+                if (diff < closestElevation)
+                {
+                    closestElevation = diff;
+                    level = levels.ElementAt(i) as Level;
+                }
+            }
+            return level;
         }
     }
 }

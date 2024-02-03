@@ -62,8 +62,7 @@ namespace RYBIM.RevitAdapter
         public static List<Element> getConcreteFloorsSymbols()
         {
             return new FilteredElementCollector(doc)
-                    .OfClass(typeof(FamilySymbol))
-                    .OfCategory(BuiltInCategory.OST_Floors)
+                    .OfClass(typeof(FloorType))//same as FamilySymbol for other elements
                     .ToList();
         }
     }

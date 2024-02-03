@@ -17,58 +17,11 @@ using System.Collections.ObjectModel;
 using System.Xml.Linq;
 using System.Net;
 using static Autodesk.Revit.DB.SpecTypeId;
+using System.Reflection.Emit;
+using System.Windows.Media;
 
 namespace RYBIM
 {
-    /// <remarks>
-    /// This application's main class. The class must be Public.
-    /// </remarks>
-    public class Main : IExternalApplication
-    {
-        // Both OnStartup and OnShutdown must be implemented as public method
-        public Result OnStartup(UIControlledApplication application)
-        {
-            UIAdapter.Init(application);
-            UIAdapter.CreateTab("RYBIM");
-            UIAdapter.AddPanel("textPanel");
-            UIAdapter.AddPushBtn(0, "btn", "RYBIM.Test", "press this btn");
-            UIAdapter.AddTextBox(0, "textbox", "enter text", "text tooltib", "long text here");
-            UIAdapter.TextBoxes[0].EnterPressed += ProcessText;
-            void ProcessText(object sender, Autodesk.Revit.UI.Events.TextBoxEnterPressedEventArgs args)
-            {
-                string strText = (sender as TextBox).Value as string;
-                TaskDialog.Show("Revit", strText);
-            }
-            AddSlideOut(UIAdapter.panels[0]);
-            void AddSlideOut(RibbonPanel panel)
-            {
-                string assembly =  Assembly.GetExecutingAssembly().Location;
-
-                panel.AddSlideOut();
-                // add radio button group
-                RadioButtonGroupData radioData = new RadioButtonGroupData("radioGroup");
-                RadioButtonGroup radioButtonGroup = panel.AddItem(radioData) as RadioButtonGroup;
-
-                // create toggle buttons and add to radio button group
-                ToggleButtonData tb1 = new ToggleButtonData("toggleButton1", "Red");
-                tb1.ToolTip = "Red Option";
-                ToggleButtonData tb2 = new ToggleButtonData("toggleButton2", "Green");
-                tb2.ToolTip = "Green Option";
-                ToggleButtonData tb3 = new ToggleButtonData("toggleButton3", "Blue");
-                tb3.ToolTip = "Blue Option";
-                radioButtonGroup.AddItem(tb1);
-                radioButtonGroup.AddItem(tb2);
-                radioButtonGroup.AddItem(tb3);
-            }
-            return Result.Succeeded;
-        }
-
-        public Result OnShutdown(UIControlledApplication application)
-        {
-            // nothing to clean up in this simple case
-            return Result.Succeeded;
-        }
-    }
     [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
     public class Test : IExternalCommand
     {
@@ -79,11 +32,14 @@ namespace RYBIM
             {
                 UIDocument uidoc = commandData.Application.ActiveUIDocument;
                 Adapter.Init(commandData.Application);
-
-                var slabs = Adapter.getConcreteRectangularBeamsSymbols();
-                foreach (var item in slabs)
+                using (Transaction transaction = new Transaction(Adapter.doc, "TransactionName"))
                 {
-                    Adapter.ShowParameters(item);
+                    // Start the transaction
+                    transaction.Start();
+                    var f =Adapter.CreateFloorAs3DBox(new XYZ(0, 0, Adapter.ConvertToXYZ(4500)), 9, 9, Adapter.ConvertToXYZ(362));
+                    var c =Adapter.CreateColumnAs3D(new XYZ(0, 0, Adapter.ConvertToXYZ(6000)), Adapter.ConvertToXYZ(300), Adapter.ConvertToXYZ(450), 12);
+                    var b =Adapter.CreateBeamAs3D(new XYZ(0, 0, Adapter.ConvertToXYZ(9000)), Adapter.ConvertToXYZ(400), 12, Adapter.ConvertToXYZ(800));
+                    transaction.Commit();
                 }
             }
             catch (Exception e)
@@ -95,5 +51,62 @@ namespace RYBIM
             return Autodesk.Revit.UI.Result.Succeeded;
         }
         /// </ExampleMethod>
+    }
+    /// <remarks>
+    /// This application's main class. The class must be Public.
+    /// </remarks>
+    public class Main : IExternalApplication
+    {
+        // Both OnStartup and OnShutdown must be implemented as public method
+        public Result OnStartup(UIControlledApplication application)
+        {
+            string assembly =  Assembly.GetExecutingAssembly().Location;
+            UIAdapter.Init(application);
+            UIAdapter.CreateTab("RYBIM");
+
+            // RectangularConcrete panel
+            UIAdapter.AddPanel("Rectangular Concrete");
+            UIAdapter.AddTextBox(0, "RectangularConcreteTextBox", "Ask RYBIM", "Responsible for copying, editing, and creating rectangular concrete elements.",
+                "For now, to make sure that the plugin work with no issues,\n" +
+                "make sure that the family name for rectangular concrete columns is 'Concrete-Rectangular-Column'\n" +
+                "and the family name for rectangular concrete beams is 'Concrete-Rectangular Beam'\n" +
+                "and Paramaters for them for width and height is 'b' and 'h'\n" +
+                "and Thickness Parameter for Floors is 'Default Thickness'\n");
+            UIAdapter.AddPushBtn(0, "Run", "RYBIM.Commands.RectangularConcrete", "press to generate RYBIM results");
+            UIAdapter.TextBoxes[0].EnterPressed += ProcessText;
+            void ProcessText(object sender, Autodesk.Revit.UI.Events.TextBoxEnterPressedEventArgs args)
+            {
+                string strText = (sender as TextBox).Value as string;
+                TaskDialog.Show("Revit", strText);
+            }
+            UIAdapter.panels[0].AddSlideOut();
+            // add radio button group
+            RadioButtonGroupData radioData = new RadioButtonGroupData("RectangularConcreteRadioGroup");
+            RadioButtonGroup radioButtonGroup = UIAdapter.panels[0].AddItem(radioData) as RadioButtonGroup;
+
+            // create toggle buttons and add to radio button group
+            ToggleButtonData tb1 = new ToggleButtonData("toggleButtonPoint", "Point");
+            tb1.ToolTip = "RYBIM will perform your command based on origin point, press run and then select point";
+            ToggleButtonData tb2 = new ToggleButtonData("toggleButtonTwoPoint", "TwoPoint");
+            tb2.ToolTip = "RYBIM will perform your command based on origin point, press run and then select two point";
+            ToggleButtonData tb3 = new ToggleButtonData("toggleButtonElements", "Elements");
+            tb3.ToolTip = "RYBIM will perform your command based on selected elements, select element adn then press run";
+            radioButtonGroup.AddItem(tb1);
+            radioButtonGroup.AddItem(tb2);
+            radioButtonGroup.AddItem(tb3);
+            UIAdapter.AddRadioButtonGroup(radioButtonGroup);
+
+            //text panel
+            UIAdapter.AddPanel("textPanel");
+            UIAdapter.AddPushBtn(1, "btn", "RYBIM.Test", "press this btn");
+
+            return Result.Succeeded;
+        }
+
+        public Result OnShutdown(UIControlledApplication application)
+        {
+            // nothing to clean up in this simple case
+            return Result.Succeeded;
+        }
     }
 }

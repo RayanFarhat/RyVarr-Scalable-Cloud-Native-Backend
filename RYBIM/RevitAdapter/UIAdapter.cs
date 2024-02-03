@@ -18,6 +18,7 @@ namespace RYBIM.RevitAdapter
         public static List<RibbonPanel> panels = new List<RibbonPanel>();
         public static List<PushButton> PushButtons = new List<PushButton>();
         public static List<TextBox> TextBoxes = new List<TextBox>();
+        public static List<RadioButtonGroup> RadioButtonGroups = new List<RadioButtonGroup>(); 
         public static void Init(UIControlledApplication uiControlledApplication)
         {
             app = uiControlledApplication;
@@ -75,6 +76,10 @@ namespace RYBIM.RevitAdapter
             TextBox tBox = panels[panelIndex].AddItem(textData) as TextBox;
             tBox.PromptText = PromptText;
             TextBoxes.Add(tBox);
+        }
+        public static void AddRadioButtonGroup( RadioButtonGroup g)
+        {
+            RadioButtonGroups.Add(g);
         }
     }
 }
