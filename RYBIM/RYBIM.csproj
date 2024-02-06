@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -38,6 +40,7 @@
     <PlatformTarget>x64</PlatformTarget>
     <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
@@ -47,6 +50,7 @@
     <PlatformTarget>x64</PlatformTarget>
     <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
@@ -78,6 +82,65 @@
     <Compile Include="RevitAdapter\UIAdapter.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\Mathematics\AngleUnit.cs" />
+    <Compile Include="src\Mathematics\Converters.cs" />
+    <Compile Include="src\Mathematics\MatrixFunctions\MatrixFunctions.AdditionSubtraction.cs" />
+    <Compile Include="src\Mathematics\MatrixFunctions\MatrixFunctions.Concatenation.cs" />
+    <Compile Include="src\Mathematics\MatrixFunctions\MatrixFunctions.cs" />
+    <Compile Include="src\Mathematics\MatrixFunctions\MatrixFunctions.Determinant.cs" />
+    <Compile Include="src\Mathematics\MatrixFunctions\MatrixFunctions.Elimination.cs" />
+    <Compile Include="src\Mathematics\MatrixFunctions\MatrixFunctions.Extraction.cs" />
+    <Compile Include="src\Mathematics\MatrixFunctions\MatrixFunctions.Helpers.cs" />
+    <Compile Include="src\Mathematics\MatrixFunctions\MatrixFunctions.Inverse.cs" />
+    <Compile Include="src\Mathematics\MatrixFunctions\MatrixFunctions.Mirror.cs" />
+    <Compile Include="src\Mathematics\MatrixFunctions\MatrixFunctions.Multiplication.cs" />
+    <Compile Include="src\Mathematics\MatrixFunctions\MatrixFunctions.Other.cs" />
+    <Compile Include="src\Mathematics\MatrixFunctions\MatrixFunctions.Projection.cs" />
+    <Compile Include="src\Mathematics\MatrixFunctions\MatrixFunctions.Reflection.cs" />
+    <Compile Include="src\Mathematics\MatrixFunctions\MatrixFunctions.Rotation.cs" />
+    <Compile Include="src\Mathematics\MatrixFunctions\MatrixFunctions.Shearing.cs" />
+    <Compile Include="src\Mathematics\MatrixHelpers\Matrix3DReflectionPlane.cs" />
+    <Compile Include="src\Mathematics\MatrixHelpers\MatrixAxis.cs" />
+    <Compile Include="src\Mathematics\MatrixHelpers\MatrixDirection.cs" />
+    <Compile Include="src\Mathematics\MatrixHelpers\MatrixEliminationResult.cs" />
+    <Compile Include="src\Mathematics\MatrixHelpers\MatrixPosition.cs" />
+    <Compile Include="src\Mathematics\MatrixHelpers\MatrixReductionForm.cs" />
+    <Compile Include="src\Mathematics\MatrixHelpers\MatrixRotationDirection.cs" />
+    <Compile Include="src\Mathematics\MatrixHelpers\MatrixSolutionState.cs" />
+    <Compile Include="src\Mathematics\Matrix\Matrix.AdditionSubtraction.cs" />
+    <Compile Include="src\Mathematics\Matrix\Matrix.Cloning.cs" />
+    <Compile Include="src\Mathematics\Matrix\Matrix.Concatenation.cs" />
+    <Compile Include="src\Mathematics\Matrix\Matrix.cs" />
+    <Compile Include="src\Mathematics\Matrix\Matrix.Elimination.cs" />
+    <Compile Include="src\Mathematics\Matrix\Matrix.Equality.cs" />
+    <Compile Include="src\Mathematics\Matrix\Matrix.Extraction.cs" />
+    <Compile Include="src\Mathematics\Matrix\Matrix.Initializers.cs" />
+    <Compile Include="src\Mathematics\Matrix\Matrix.Inverses.cs" />
+    <Compile Include="src\Mathematics\Matrix\Matrix.Multiplication.cs" />
+    <Compile Include="src\Mathematics\Matrix\Matrix.Operators.cs" />
+    <Compile Include="src\Mathematics\Matrix\Matrix.Other.cs" />
+    <Compile Include="src\Mathematics\Matrix\Matrix.Projection.cs" />
+    <Compile Include="src\Mathematics\Matrix\Matrix.Rotation.cs" />
+    <Compile Include="src\Mathematics\VectorFunctions\VectorFunctions.AdditionSubtraction.cs" />
+    <Compile Include="src\Mathematics\VectorFunctions\VectorFunctions.Angels.cs" />
+    <Compile Include="src\Mathematics\VectorFunctions\VectorFunctions.Cloning.cs" />
+    <Compile Include="src\Mathematics\VectorFunctions\VectorFunctions.cs" />
+    <Compile Include="src\Mathematics\VectorFunctions\VectorFunctions.Normalization.cs" />
+    <Compile Include="src\Mathematics\VectorFunctions\VectorFunctions.Other.cs" />
+    <Compile Include="src\Mathematics\VectorFunctions\VectorFunctions.Product.cs" />
+    <Compile Include="src\Mathematics\VectorFunctions\VectorFunctions.Projection.cs" />
+    <Compile Include="src\Mathematics\Vector\Vector.AdditionsSubtraction.cs" />
+    <Compile Include="src\Mathematics\Vector\Vector.Angels.cs" />
+    <Compile Include="src\Mathematics\Vector\Vector.Cloning.cs" />
+    <Compile Include="src\Mathematics\Vector\Vector.Conversion.cs" />
+    <Compile Include="src\Mathematics\Vector\Vector.cs" />
+    <Compile Include="src\Mathematics\Vector\Vector.Equality.cs" />
+    <Compile Include="src\Mathematics\Vector\Vector.Initializers.cs" />
+    <Compile Include="src\Mathematics\Vector\Vector.Normalization.cs" />
+    <Compile Include="src\Mathematics\Vector\Vector.Operators.cs" />
+    <Compile Include="src\Mathematics\Vector\Vector.Other.cs" />
+    <Compile Include="src\Mathematics\Vector\Vector.Product.cs" />
+    <Compile Include="src\Mathematics\Vector\Vector.Projection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="RYBIMDev.addin" />
