@@ -99,6 +99,7 @@
     <Compile Include="src\Mathematics\MatrixFunctions\MatrixFunctions.Reflection.cs" />
     <Compile Include="src\Mathematics\MatrixFunctions\MatrixFunctions.Rotation.cs" />
     <Compile Include="src\Mathematics\MatrixFunctions\MatrixFunctions.Shearing.cs" />
+    <Compile Include="src\Mathematics\MatrixFunctions\MatrixFunctions.Solvers.cs.cs" />
     <Compile Include="src\Mathematics\MatrixHelpers\Matrix3DReflectionPlane.cs" />
     <Compile Include="src\Mathematics\MatrixHelpers\MatrixAxis.cs" />
     <Compile Include="src\Mathematics\MatrixHelpers\MatrixDirection.cs" />
@@ -121,6 +122,7 @@
     <Compile Include="src\Mathematics\Matrix\Matrix.Other.cs" />
     <Compile Include="src\Mathematics\Matrix\Matrix.Projection.cs" />
     <Compile Include="src\Mathematics\Matrix\Matrix.Rotation.cs" />
+    <Compile Include="src\Mathematics\Matrix\Matrix.Solvers.cs" />
     <Compile Include="src\Mathematics\VectorFunctions\VectorFunctions.AdditionSubtraction.cs" />
     <Compile Include="src\Mathematics\VectorFunctions\VectorFunctions.Angels.cs" />
     <Compile Include="src\Mathematics\VectorFunctions\VectorFunctions.Cloning.cs" />
