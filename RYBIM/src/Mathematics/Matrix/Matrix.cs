@@ -95,7 +95,7 @@ namespace RYBIM.Mathematics
         public virtual void SetAugmentedColumnCount(int cols)
         {
             if (cols >= ColumnCount)
-                throw new ArgumentException(nameof(cols), "ugmented columns must be less than total columns.");
+                throw new ArgumentException(nameof(cols), "augmented columns must be less than total columns.");
 
             this.AugmentedColumnCount = cols;
         }

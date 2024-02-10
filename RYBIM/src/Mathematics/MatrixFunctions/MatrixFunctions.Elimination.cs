@@ -125,12 +125,13 @@ namespace RYBIM.Mathematics
             }
 
             result.FullMatrix = output;
-            result.UnknownsCount = totalColCount - result.AugmentedColumnCount;
             result.TotalRowCount = totalRowCount;
             result.TotalColumnCount = totalColCount;
             result.AugmentedColumnCount = augmentedCols;
+            result.UnknownsCount = totalColCount - result.AugmentedColumnCount;
 
             result.AugmentedColumns = ExtractColumns(output, result.UnknownsCount, totalColCount - 1);
+
             if (augmentedCols > 0 && form == MatrixReductionForm.ReducedRowEchelonForm)
             { // matrix has solution 
                 result = FindSolution(result);

@@ -19,6 +19,7 @@ using System.Net;
 using static Autodesk.Revit.DB.SpecTypeId;
 using System.Reflection.Emit;
 using System.Windows.Media;
+using RYBIM.Mathematics;
 
 namespace RYBIM
 {
@@ -32,16 +33,8 @@ namespace RYBIM
             {
                 UIDocument uidoc = commandData.Application.ActiveUIDocument;
                 Adapter.Init(commandData.Application);
-                using (Transaction transaction = new Transaction(Adapter.doc, "TransactionName"))
-                {
-                    // Start the transaction
-                    transaction.Start();
-                    var f =Adapter.CreateFloorAs3DBox(new XYZ(0, 0, Adapter.ConvertToXYZ(4500)), 9, 9, Adapter.ConvertToXYZ(362));
-                    var c =Adapter.CreateColumnAs3D(new XYZ(0, 0, Adapter.ConvertToXYZ(6000)), Adapter.ConvertToXYZ(300), Adapter.ConvertToXYZ(450), 12);
-                    var b =Adapter.CreateBeamAs3D(new XYZ(0, 0, Adapter.ConvertToXYZ(9000)), Adapter.ConvertToXYZ(400), 12, Adapter.ConvertToXYZ(800));
-                    transaction.Commit();
-                }
             }
+
             catch (Exception e)
             {
                 message = e.Message;

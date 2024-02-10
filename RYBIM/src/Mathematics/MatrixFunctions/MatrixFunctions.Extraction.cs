@@ -23,6 +23,7 @@ namespace RYBIM.Mathematics
             int colCount = input.GetLength(1);
             double[,] output = new double[rowCount, cols.Length];
 
+
             for (int row = 0; row < rowCount; row++)
             {
                 int i = 0;
