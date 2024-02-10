@@ -19,24 +19,49 @@ namespace RYBIM.Analysis
             var G = this.G;
             var Iy = this.Iy;
             var Iz = this.Iz;
-            var J = this.J;
+            var Jx = this.Jx;
             var A = this.A;
             var L = this.L();
 
+            //simplify the following expressions
+            // Ra is the axial rigidity
+            // Rt the torsional rigidity
+            // Rb are bending rigities scaled by the length in various ways
+            var Ra = E * A / L;
+            var Rt = G * Jx / L;
+            var Rby = E * Iy / L;
+            var Rby2 = E * Iy / (L * L);
+            var Rby3 = E * Iy / (L * L * L);
+            var Rbz = E * Iz / L;
+            var Rbz2 = E * Iz / (L * L);
+            var Rbz3 = E * Iz / (L * L * L);
+
             double[,] kRaw = new double[,]
                 {
-                    { A*E/L, 0, 0, 0, 0, 0, -A*E/L, 0, 0, 0, 0, 0 },//DXi
-                    { 0, 12*E*Iz/(L*L*L), 0, 0, 0, 6*E*Iz/(L*L), 0, -12*E*Iz/(L*L*L), 0, 0, 0, 6*E*Iz/(L*L) },//DYi
-                    { 0, 0, 12*E*Iy/(L*L*L), 0, -6*E*Iy/(L*L), 0, 0, 0, -12*E*Iy/(L*L*L), 0, -6*E*Iy/(L*L), 0 },//DZi
-                    { 0, 0, 0, G*J/L, 0, 0, 0, 0, 0, -G*J/L, 0, 0 },//RXi
-                    { 0, 0, -6*E*Iy/(L*L), 0, 4*E*Iy/L, 0, 0, 0, 6*E*Iy/(L*L), 0, 2*E*Iy/L, 0 },//RYi
-                    { 0, 6*E*Iz/(L*L), 0, 0, 0, 4*E*Iz/L, 0, -6*E*Iz/(L*L), 0, 0, 0, 2*E*Iz/L },//RZi
-                    { -A*E/L, 0, 0, 0, 0, 0, A*E/L, 0, 0, 0, 0, 0 },//DXj 
-                    { 0, -12*E*Iz/(L*L*L), 0, 0, 0, -6*E*Iz/(L*L), 0, 12*E*Iz/(L*L*L), 0, 0, 0, -6*E*Iz/(L*L) },//DYj
-                    { 0, 0, -12*E*Iy/(L*L*L), 0, 6*E*Iy/(L*L), 0, 0, 0, 12*E*Iy/(L*L*L), 0, 6*E*Iy/(L*L), 0 },//DZi
-                    { 0, 0, 0, -G*J/L, 0, 0, 0, 0, 0, G*J/L, 0, 0 },//RXj
-                    { 0, 0, -6*E*Iy/(L*L), 0, 2*E*Iy/L, 0, 0, 0, 6*E*Iy/(L*L), 0, 4*E*Iy/L, 0 },//Yj
-                    { 0, 6*E*Iz/(L*L), 0, 0, 0, 2*E*Iz/L, 0, -6*E*Iz/(L*L), 0, 0, 0, 4*E*Iz/L }//RZj
+                    {  Ra,        0,        0,   0,       0,       0, -Ra,        0,        0,   0,      0,       0 },//DXi
+
+                    {   0,  12*Rbz3,        0,   0,       0,  6*Rbz2,   0, -12*Rbz3,        0,   0,      0,  6*Rbz2 },//DYi
+
+                    {   0,        0,  12*Rby3,   0, -6*Rby2,       0,   0,        0, -12*Rby3,   0,  -Rby2,       0 },//DZi
+
+                    {   0,        0,        0,  Rt,       0,       0,   0,        0,        0, -Rt,      0,       0 },//RXi
+
+                    {   0,        0,  -6*Rby2,   0,   4*Rby,       0,   0,        0,   6*Rby2,   0,  2*Rby,       0 },//RYi
+
+                    {   0,   6*Rbz2,        0,   0,       0,   4*Rbz,   0,  -6*Rbz2,        0,   0,      0,   2*Rbz },//RZi
+
+                    { -Ra,        0,        0,   0,       0,       0,  Ra,        0,        0,   0,      0,       0 },//DXj 
+
+                    {   0, -12*Rbz3,        0,   0,       0, -6*Rbz2,   0,  12*Rbz3,        0,   0,      0, -6*Rbz2 },//DYj
+
+                    {   0,        0, -12*Rby3,   0,  6*Rby2,       0,   0,        0,  12*Rby3,   0, 6*Rby2,       0 },//DZi
+
+                    {   0,        0,        0, -Rt,       0,       0,   0,        0,        0,  Rt,      0,       0 },//RXj
+
+                    {   0,        0,  -6*Rby2,   0,   2*Rby,       0,   0,        0,   6*Rby2,   0,  4*Rby,       0 },//Yj
+
+                    {   0,   6*Rbz2,        0,   0,       0,   2*Rbz,   0,  -6*Rbz2,        0,   0,      0,   4*Rbz }//RZj
+
                 };
 
             var k = new Matrix(kRaw);

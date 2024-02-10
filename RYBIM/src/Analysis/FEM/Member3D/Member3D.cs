@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace RYBIM.Analysis
 {
     /// <summary>
-    ///  A class representing a 3D frame element in a finite element model.
+    ///  A class representing a 3D frame element in a finite element model.(3d element)
     /// </summary>
     internal partial class Member3D
     {
@@ -29,11 +29,11 @@ namespace RYBIM.Analysis
         #region Material Properties
         public string MaterialName { get; protected set; }
         /// <summary>
-        ///  The modulus of elasticity of the element
+        ///  The Elastic modulus of the element
         /// </summary>
         public double E { get; protected set; }
         /// <summary>
-        /// The shear modulus of the element
+        /// The Shear modulus of the element
         /// </summary>
         public double G { get; protected set; }
         #endregion
@@ -53,12 +53,12 @@ namespace RYBIM.Analysis
         /// <summary>
         ///  The torsional constant
         /// </summary>
-        public double J { get; protected set; }
+        public double Jx { get; protected set; }
         #endregion
 
 
         public Member3D(string name, Node3D i,Node3D j,string materialName,FEModel3D model,
-            double Iy, double Iz, double J, double A) {
+            double Iy, double Iz, double Jx, double A) {
             this.Name = name;
             this.i_node = i;
             this.j_node = j;
@@ -69,7 +69,7 @@ namespace RYBIM.Analysis
             this.A = A;
             this.Iy = Iy;
             this.Iz = Iz;
-            this.J = J;
+            this.Jx = Jx;
         }
 
         public double L()
