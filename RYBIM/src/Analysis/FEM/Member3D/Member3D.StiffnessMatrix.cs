@@ -11,9 +11,9 @@ namespace RYBIM.Analysis
     internal partial class Member3D
     {
         /// <summary>
-        ///  Returns the uncondensed local stiffness matrix for the member.
+        ///  Returns the local stiffness matrix for the member.
         /// </summary>
-        public Matrix k_unc()
+        public Matrix k()
         {
             var E = this.E;
             var G = this.G;
@@ -66,6 +66,16 @@ namespace RYBIM.Analysis
 
             var k = new Matrix(kRaw);
             return k;
+        }
+
+        /// <summary>
+        ///  Returns the global elastic stiffness matrix for the member.
+        /// </summary>
+        public Matrix K()
+        {
+            //T^-1 * k * T
+            var T = this.T();
+            return T.Invert().Multiply(this.k()).Multiply(T);
         }
     }
 }

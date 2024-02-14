@@ -54,6 +54,18 @@ namespace RYBIM.Analysis
         public bool support_RY { get; protected set; }
         public bool support_RZ { get; protected set; }
 
+        public double? EnforcedDX { get; protected set; }
+        public double? EnforcedDY { get; protected set; }
+        public double? EnforcedDZ { get; protected set; }
+        public double? EnforcedRX { get; protected set; }
+        public double? EnforcedRY { get; protected set; }
+        public double? EnforcedRZ { get; protected set; }
+
+        /// <summary>
+        /// used for contour smoothing.
+        /// </summary>
+        public List<double> Contour { get; protected set; }
+
         #endregion
         public Node3D(string name, double X, double Y, double Z) {
             this.Name = name;
@@ -86,6 +98,18 @@ namespace RYBIM.Analysis
             support_RX = false;
             support_RY = false;
             support_RZ = false;
+
+            //  used when you don't know the magnitude of a force applied to a part,
+            //  but you do know how much the part displaces as a result of that force.
+            EnforcedDX = null;
+            EnforcedDY = null;
+            EnforcedDZ = null;
+            EnforcedRX = null;
+            EnforcedRY = null;
+            EnforcedRZ = null;
+
+            //Initialize the color contour value for the node.
+            Contour = new List<double>();
         }
 
         /// <summary>

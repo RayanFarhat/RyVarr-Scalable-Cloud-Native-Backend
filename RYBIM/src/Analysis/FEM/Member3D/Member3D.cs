@@ -16,7 +16,10 @@ namespace RYBIM.Analysis
         ///  A unique name for the member given by the user
         /// </summary>
         public string Name { get; protected set; }
-
+        /// <summary>
+        ///  A unique index number for the member assigned by the program
+        /// </summary>
+        public double? ID { get; protected set; }
         public Node3D i_node { get; protected set; }
         public Node3D j_node { get; protected set; }
 
@@ -56,20 +59,48 @@ namespace RYBIM.Analysis
         public double Jx { get; protected set; }
         #endregion
 
+        #region Loads Properties
+        /// <summary>
+        /// list that show the releaded degree of freedom.
+        /// </summary>
+        public List<bool> Releases { get; protected set; }
+
+        /// <summary>
+        /// A list of point loads applied to the member (Direction, P, X)
+        /// </summary>
+        public List<PointLoad> PtLoads { get; protected set; }
+        /// <summary>
+        /// A list of distributed loads applied to the member (Direction, w1,w2,x1,x2)
+        /// </summary>
+        public List<DistributedLoad> DistLoads { get; protected set; }
+        #endregion
+
 
         public Member3D(string name, Node3D i,Node3D j,string materialName,FEModel3D model,
             double Iy, double Iz, double Jx, double A) {
             this.Name = name;
-            this.i_node = i;
-            this.j_node = j;
-            this.MaterialName = materialName;
+            this.ID = null;
             this.Model = model;
+
+            this.i_node = i;
+            this.j_node = j;   
+            //material
+            this.MaterialName = materialName;
+            if (model.Materials[materialName] == null)
+            {
+                throw new MemberAccessException($"{materialName} does not exist in the model.");
+            }
             this.E = model.Materials[materialName].E;
             this.G = model.Materials[materialName].G;
+            //define section
             this.A = A;
             this.Iy = Iy;
             this.Iz = Iz;
             this.Jx = Jx;
+            // loads
+            Releases = new List<bool> {false,false, false, false, false, false, false, false, false, false, false, false };
+            PtLoads = new List<PointLoad>();
+            DistLoads = new List<DistributedLoad>();
         }
 
         public double L()
