@@ -20,5 +20,9 @@ namespace RYBIM.Analysis
         /// the place of the point load on the axial beam
         /// </summary>
         public double X { get; set; }
+        /// <summary>
+        /// the load case name of the point load
+        /// </summary>
+        public string CaseName { get; set; }
     }
 }

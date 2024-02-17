@@ -56,10 +56,13 @@ namespace RYBIM.Mathematics
 
         public Vector(int dimension)
         {
+
+            // c# default values is zeros
             InnerArray = new double[dimension];
         }
         public Vector(double[] vector)
         {
+            // c# default values is zeros
             InnerArray = vector;
         }
 

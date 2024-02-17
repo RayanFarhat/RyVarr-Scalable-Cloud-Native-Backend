@@ -73,6 +73,19 @@ namespace RYBIM.Analysis
         /// A list of distributed loads applied to the member (Direction, w1,w2,x1,x2)
         /// </summary>
         public List<DistributedLoad> DistLoads { get; protected set; }
+        /// <summary>
+        /// A list of mathematically continuous beam segments for z-bending
+        /// </summary>
+        public List<BeamSegZ> SegmentsZ { get; protected set; }
+        /// <summary>
+        /// A list of mathematically continuous beam segments for y-bending
+        /// </summary>
+        public List<BeamSegY> SegmentsY { get; protected set; }
+        /// <summary>
+        /// A list of mathematically continuous beam segments for torsion
+        /// </summary>
+        public List<BeamSegZ> SegmentsX { get; protected set; }
+
         #endregion
 
 
@@ -101,6 +114,9 @@ namespace RYBIM.Analysis
             Releases = new List<bool> {false,false, false, false, false, false, false, false, false, false, false, false };
             PtLoads = new List<PointLoad>();
             DistLoads = new List<DistributedLoad>();
+            SegmentsZ = new List<BeamSegZ>();
+            SegmentsY = new List<BeamSegY>();
+            SegmentsX = new List<BeamSegZ>();
         }
 
         public double L()

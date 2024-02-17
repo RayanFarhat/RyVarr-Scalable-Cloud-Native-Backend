@@ -18,7 +18,7 @@ namespace RYBIM.Analysis
         #region Properties
         public Dictionary<string, Node3D> Nodes = new Dictionary<string, Node3D>();
         public Dictionary<string, Material> Materials = new Dictionary<string, Material>();
-
+        public Dictionary<string, LoadCombo> LoadCombos = new Dictionary<string, LoadCombo>();
         #endregion
         public FEModel3D() {
         }

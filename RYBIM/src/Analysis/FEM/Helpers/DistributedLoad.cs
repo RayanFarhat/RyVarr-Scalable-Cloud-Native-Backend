@@ -28,5 +28,9 @@ namespace RYBIM.Analysis
         ///The end numeric value (magnitude) of the load to x2.
         /// </summary>
         public double w2 { get; set; }
+        /// <summary>
+        /// the load case name of the point load
+        /// </summary>
+        public string CaseName { get; set; }
     }
 }

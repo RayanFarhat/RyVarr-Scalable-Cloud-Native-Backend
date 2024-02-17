@@ -42,7 +42,7 @@ namespace RYBIM.Analysis
 
                     {   0,  12*Rbz3,        0,   0,       0,  6*Rbz2,   0, -12*Rbz3,        0,   0,      0,  6*Rbz2 },//DYi
 
-                    {   0,        0,  12*Rby3,   0, -6*Rby2,       0,   0,        0, -12*Rby3,   0,  -Rby2,       0 },//DZi
+                    {   0,        0,  12*Rby3,   0, -6*Rby2,       0,   0,        0, -12*Rby3,   0,  -6*Rby2,       0 },//DZi
 
                     {   0,        0,        0,  Rt,       0,       0,   0,        0,        0, -Rt,      0,       0 },//RXi
 
