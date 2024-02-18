@@ -91,7 +91,11 @@
     <Compile Include="src\Analysis\FEM\Member3D\Member3D.cs" />
     <Compile Include="src\Analysis\FEM\Member3D\Member3D.Displacement.cs" />
     <Compile Include="src\Analysis\FEM\Member3D\Member3D.Forces.cs" />
+    <Compile Include="src\Analysis\FEM\Member3D\Member3D.Moment.cs" />
+    <Compile Include="src\Analysis\FEM\Member3D\Member3D.Segments.cs" />
+    <Compile Include="src\Analysis\FEM\Member3D\Member3D.Shear.cs" />
     <Compile Include="src\Analysis\FEM\Member3D\Member3D.StiffnessMatrix.cs" />
+    <Compile Include="src\Analysis\FEM\Member3D\Member3D.Torsion.cs" />
     <Compile Include="src\Analysis\FEM\Member3D\Member3D.TransformMatrix.cs" />
     <Compile Include="src\Analysis\FEM\Node3D.cs" />
     <Compile Include="src\Analysis\FEM\Helpers\NodeLoad.cs" />

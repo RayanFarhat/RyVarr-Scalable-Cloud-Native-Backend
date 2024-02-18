@@ -30,7 +30,7 @@ namespace RYBIM.Analysis
         /// <summary>
         ///   Returns the minimum torsional moment in the segment.
         /// </summary>
-        public double Min_Torsion(double x)
+        public double Min_Torsion()
         {
             // The torsional moment is constant across the segment
             // Since the torsional moment is constant on the segment, the minimum torsional moment is T1

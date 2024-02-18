@@ -27,6 +27,10 @@ namespace RYBIM.Analysis
         ///  Members need a link to the model they belong to
         /// </summary>
         public FEModel3D Model { get; protected set; }
+        /// <summary>
+        ///  The current solved load combination
+        /// </summary>
+        public LoadCombo SolvedCombo { get; protected set; }
 
         #endregion
         #region Material Properties
@@ -117,11 +121,26 @@ namespace RYBIM.Analysis
             SegmentsZ = new List<BeamSegZ>();
             SegmentsY = new List<BeamSegY>();
             SegmentsX = new List<BeamSegZ>();
+
+            // The 'Member3D' object will store results for one load combination at a time.
+            // SolvedCombo variable will be used to track whether the member needs to be resegmented before running calculations for any given load combination.
+            SolvedCombo = null;
         }
 
         public double L()
         {
             return this.i_node.Distance(this.j_node);
+        }
+        /// <summary>
+        ///   Segment the member if necessary.
+        /// </summary>
+        private void Check_segments(string combo_name)
+        {
+            if (SolvedCombo == null || combo_name != SolvedCombo.Name)
+            {
+                Update_segments(combo_name);
+                SolvedCombo = this.Model.LoadCombos[combo_name];
+            }
         }
     }
 }

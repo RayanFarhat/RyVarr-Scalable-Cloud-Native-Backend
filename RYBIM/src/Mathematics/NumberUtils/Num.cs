@@ -46,5 +46,20 @@ namespace RYBIM.Mathematics
                 return true;
             return false;
         }
+        public static double[] Linspace(double start, double end, int num)
+        {
+            if (num < 2)
+                throw new ArgumentException("Number of samples must be at least 2.");
+
+            double[] linspaceArray = new double[num];
+            double step = (end - start) / (num - 1);
+
+            for (int i = 0; i < num; i++)
+            {
+                linspaceArray[i] = start + step * i;
+            }
+
+            return linspaceArray;
+        }
     }
 }

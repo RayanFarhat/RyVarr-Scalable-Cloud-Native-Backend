@@ -15,63 +15,63 @@ namespace RYBIM.Analysis
         /// <summary>
         /// The starting location of the segment relative to the start of the beam
         /// </summary>
-        public double? x1 { get; protected set; } = null;
+        public double? x1 { get; set; } = null;
         /// <summary>
         /// The ending location of the segment relative to the start of the beam
         /// </summary>
-        public double? x2 { get; protected set; } = null;
+        public double? x2 { get; set; } = null;
         /// <summary>
         /// The distributed load magnitude at the start of the segment
         /// </summary>
-        public double? w1 { get; protected set; } = null;
+        public double? w1 { get; set; } = null;
         /// <summary>
         /// The distributed load magnitude at the end of the segment
         /// </summary>
-        public double? w2 { get; protected set; } = null;
+        public double? w2 { get; set; } = null;
         /// <summary>
         /// The distributed axial load magnitude at the start of the segment
         /// </summary>
-        public double? p1 { get; protected set; } = null;
+        public double? p1 { get; set; } = null;
         /// <summary>
         /// The distributed axial load magnitude at the end of the segment
         /// </summary>
-        public double? p2 { get; protected set; } = null;
+        public double? p2 { get; set; } = null;
         /// <summary>
         /// The internal shear force at the start of the segment
         /// </summary>
-        public double? V1 { get; protected set; } = null;
+        public double? V1 { get; set; } = null;
         /// <summary>
         /// The internal moment at the start of the segment
         /// </summary>
-        public double? M1 { get; protected set; } = null;
+        public double? M1 { get; set; } = null;
         /// <summary>
         /// The internal axial force at the start of the segment
         /// </summary>
-        public double? P1 { get; protected set; } = null;
+        public double? P1 { get; set; } = null;
         /// <summary>
         /// Torsional moment at start of segment
         /// </summary>
-        public double? T1 { get; protected set; } = null;
+        public double? T1 { get; set; } = null;
         /// <summary>
         /// The slope (radians) at the start of the segment
         /// </summary>
-        public double? theta1 { get; protected set; } = null;
+        public double? theta1 { get; set; } = null;
         /// <summary>
         /// The transverse displacement at the start of the segment
         /// </summary>
-        public double? delta1 { get; protected set; } = null;
+        public double? delta1 { get; set; } = null;
         /// <summary>
         /// The axial displacement at the start of the segment
         /// </summary>
-        public double? delta_x1 { get; protected set; } = null;
+        public double? delta_x1 { get; set; } = null;
         /// <summary>
         /// The flexural stiffness of the segment
         /// </summary>
-        public double? EI { get; protected set; } = null;
+        public double? EI { get; set; } = null;
         /// <summary>
         /// The axial stiffness of the segment
         /// </summary>
-        public double? EA { get; protected set; } = null;
+        public double? EA { get; set; } = null;
 
         #endregion
         public BeamSegZ() { }
