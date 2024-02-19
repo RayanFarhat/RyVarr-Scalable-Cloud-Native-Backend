@@ -8,6 +8,16 @@ namespace RYBIM.Analysis
 {
     public struct DistributedLoad
     {
+        public DistributedLoad(Direction direction, double x1, double x2, double w1, double w2, string CaseName) : this()
+        {
+            this.direction = direction;
+            this.x1 = x1;
+            this.x2 = x2;
+            this.w1 = w1;
+            this.w2 = w2;
+            this.CaseName = CaseName;
+        }
+
         /// <summary>
         /// e global direction the load is being applied in.
         /// </summary>

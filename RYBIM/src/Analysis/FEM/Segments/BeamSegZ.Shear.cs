@@ -7,7 +7,7 @@ using RYBIM.Mathematics;
 
 namespace RYBIM.Analysis
 {
-    internal partial class BeamSegZ
+    public partial class BeamSegZ
     {
         /// <summary>
         ///   Returns the shear force at a location 'x' on the segment.

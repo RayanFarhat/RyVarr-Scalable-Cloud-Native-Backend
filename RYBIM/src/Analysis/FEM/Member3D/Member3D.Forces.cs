@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RYBIM.Analysis
 {
-    internal partial class Member3D
+    public partial class Member3D
     {
         /// <summary>
         ///   Returns the member's elastic local end force vector for the given load combination.

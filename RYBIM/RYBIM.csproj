@@ -88,7 +88,9 @@
     <Compile Include="src\Analysis\FEM\Helpers\FixedEndReactions.cs" />
     <Compile Include="src\Analysis\FEM\Helpers\LoadCombo.cs" />
     <Compile Include="src\Analysis\FEM\Helpers\PointLoad.cs" />
+    <Compile Include="src\Analysis\FEM\Member3D\Member3D.Axial.cs" />
     <Compile Include="src\Analysis\FEM\Member3D\Member3D.cs" />
+    <Compile Include="src\Analysis\FEM\Member3D\Member3D.Deflection.cs" />
     <Compile Include="src\Analysis\FEM\Member3D\Member3D.Displacement.cs" />
     <Compile Include="src\Analysis\FEM\Member3D\Member3D.Forces.cs" />
     <Compile Include="src\Analysis\FEM\Member3D\Member3D.Moment.cs" />
@@ -99,6 +101,7 @@
     <Compile Include="src\Analysis\FEM\Member3D\Member3D.TransformMatrix.cs" />
     <Compile Include="src\Analysis\FEM\Node3D.cs" />
     <Compile Include="src\Analysis\FEM\Helpers\NodeLoad.cs" />
+    <Compile Include="src\Analysis\FEM\PhysMember\PhysMember.cs" />
     <Compile Include="src\Analysis\FEM\Segments\BeamSegY.cs" />
     <Compile Include="src\Analysis\FEM\Segments\BeamSegZ.Axial.cs" />
     <Compile Include="src\Analysis\FEM\Segments\BeamSegZ.cs" />

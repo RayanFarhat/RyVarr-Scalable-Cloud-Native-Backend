@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RYBIM.Analysis
 {
-    internal partial class Member3D
+    public partial class Member3D
     {
         /// <summary>
         ///  Returns the transformation matrix for the member.

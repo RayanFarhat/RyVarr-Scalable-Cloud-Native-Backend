@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace RYBIM.Analysis
 {
-    internal partial class Member3D
+    public partial class Member3D
     {
         /// <summary>
         ///   Returns the shear at a point along the member's length.
@@ -114,9 +114,9 @@ namespace RYBIM.Analysis
                 Vmin = SegmentsY[0].Shear(0);
                 foreach (var segment in SegmentsY)
                 {
-                    var segMax = segment.Min_Shear();
-                    if (segMax < Vmin)
-                        Vmin = segMax;
+                    var segMin = segment.Min_Shear();
+                    if (segMin < Vmin)
+                        Vmin = segMin;
                 }
             }
             else

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RYBIM.Analysis
 {
-    internal partial class Member3D
+    public partial class Member3D
     {
         /// <summary>
         ///   Returns the moment at a point along the member's length.
@@ -111,9 +111,9 @@ namespace RYBIM.Analysis
                 Mmin = SegmentsY[0].Moment(0);
                 foreach (var segment in SegmentsY)
                 {
-                    var segMax = segment.Min_Moment();
-                    if (segMax < Mmin)
-                        Mmin = segMax;
+                    var segMin = segment.Min_Moment();
+                    if (segMin < Mmin)
+                        Mmin = segMin;
                 }
             }
             else

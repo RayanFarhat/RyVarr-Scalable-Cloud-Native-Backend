@@ -10,7 +10,7 @@ namespace RYBIM.Analysis
     /// <summary>
     ///  A mathematically continuous beam segment
     /// </summary>
-    internal partial class BeamSegY : BeamSegZ
+    public partial class BeamSegY : BeamSegZ
     {
         /// <summary>
         ///   Returns the moment at a location 'x' on the segment.

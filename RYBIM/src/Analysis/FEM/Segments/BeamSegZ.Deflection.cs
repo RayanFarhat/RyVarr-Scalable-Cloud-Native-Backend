@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RYBIM.Analysis
 {
-    internal partial class BeamSegZ
+    public partial class BeamSegZ
     {
         /// <summary>
         ///  Returns the deflection at a location 'x' on the segment.

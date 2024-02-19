@@ -9,7 +9,7 @@ namespace RYBIM.Analysis
     /// <summary>
     ///  A mathematically continuous beam segment
     /// </summary>
-    internal partial class BeamSegZ
+    public partial class BeamSegZ
     {
         #region Main Properties
         /// <summary>

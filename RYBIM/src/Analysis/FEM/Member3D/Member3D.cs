@@ -9,7 +9,7 @@ namespace RYBIM.Analysis
     /// <summary>
     ///  A class representing a 3D frame element in a finite element model.(3d element)
     /// </summary>
-    internal partial class Member3D
+    public partial class Member3D
     {
         #region Main Properties
         /// <summary>
@@ -115,6 +115,7 @@ namespace RYBIM.Analysis
             this.Iz = Iz;
             this.Jx = Jx;
             // loads
+            // order Dxi, Dyi, Dzi, Rxi, Ryi, Rzi, Dxj, Dyj, Dzj, Rxj, Ryj, Rzj
             Releases = new List<bool> {false,false, false, false, false, false, false, false, false, false, false, false };
             PtLoads = new List<PointLoad>();
             DistLoads = new List<DistributedLoad>();

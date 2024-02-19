@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RYBIM.Analysis
 {
-    internal partial class BeamSegZ
+    public partial class BeamSegZ
     {
         /// <summary>
         ///   Returns the torsional moment in the segment.

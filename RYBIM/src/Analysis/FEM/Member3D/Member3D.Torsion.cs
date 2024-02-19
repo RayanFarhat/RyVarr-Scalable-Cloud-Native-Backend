@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RYBIM.Analysis
 {
-    internal partial class Member3D
+    public partial class Member3D
     {
         /// <summary>
         /// Returns the torsional moment at a point along the member's length.
@@ -58,10 +58,10 @@ namespace RYBIM.Analysis
             var Tmin = SegmentsX[0].Torsion();
             foreach (var segment in SegmentsX)
             {
-                var segMax = segment.Min_Torsion();
-                if (segMax < Tmin)
+                var segMin = segment.Min_Torsion();
+                if (segMin < Tmin)
                 {
-                    Tmin = segMax;
+                    Tmin = segMin;
                 }
             }
             return Tmin;

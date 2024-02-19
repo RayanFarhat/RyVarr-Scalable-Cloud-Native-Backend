@@ -13,6 +13,9 @@ namespace RYBIM.Analysis
         FZ,
         MX,
         MY,
-        MZ
+        MZ,
+        DX,
+        DY,
+        DZ
     }
 }

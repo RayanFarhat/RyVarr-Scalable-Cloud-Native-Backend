@@ -8,6 +8,13 @@ namespace RYBIM.Analysis
 {
     public struct PointLoad
     {
+        public PointLoad(Direction direction, double P, double X, string CaseName) : this()
+        {
+            this.direction = direction;
+            this.P = P;
+            this.X = X;
+            this.CaseName = CaseName;
+        }
         /// <summary>
         /// e global direction the load is being applied in.
         /// </summary>
