@@ -101,7 +101,13 @@
     <Compile Include="src\Analysis\FEM\Member3D\Member3D.TransformMatrix.cs" />
     <Compile Include="src\Analysis\FEM\Node3D.cs" />
     <Compile Include="src\Analysis\FEM\Helpers\NodeLoad.cs" />
+    <Compile Include="src\Analysis\FEM\PhysMember\PhysMember.Axial.cs" />
     <Compile Include="src\Analysis\FEM\PhysMember\PhysMember.cs" />
+    <Compile Include="src\Analysis\FEM\PhysMember\PhysMember.Deflection.cs" />
+    <Compile Include="src\Analysis\FEM\PhysMember\PhysMember.Members.cs" />
+    <Compile Include="src\Analysis\FEM\PhysMember\PhysMember.Moment.cs" />
+    <Compile Include="src\Analysis\FEM\PhysMember\PhysMember.Shear.cs" />
+    <Compile Include="src\Analysis\FEM\PhysMember\PhysMember.Torsion.cs" />
     <Compile Include="src\Analysis\FEM\Segments\BeamSegY.cs" />
     <Compile Include="src\Analysis\FEM\Segments\BeamSegZ.Axial.cs" />
     <Compile Include="src\Analysis\FEM\Segments\BeamSegZ.cs" />
