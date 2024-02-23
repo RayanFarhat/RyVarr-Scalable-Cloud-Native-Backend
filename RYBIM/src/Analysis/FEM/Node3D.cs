@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RYBIM.Mathematics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,33 +34,33 @@ namespace RYBIM.Analysis
         /// <summary>
         /// A list of loads applied to the node (Direction, P)
         /// </summary>
-        public List<NodeLoad> NodeLoads { get; protected set; }
+        public List<NodeLoad> NodeLoads { get; set; }
 
-        public Dictionary<string, double> DX { get; protected set; }
-        public Dictionary<string, double> DY { get; protected set; }
-        public Dictionary<string, double> DZ { get; protected set; }
-        public Dictionary<string, double> RX { get; protected set; }
-        public Dictionary<string, double> RY { get; protected set; }
-        public Dictionary<string, double> RZ { get; protected set; }
-        public Dictionary<string, double> RxnFX { get; protected set; }
-        public Dictionary<string, double> RxnFY { get; protected set; }
-        public Dictionary<string, double> RxnFZ { get; protected set; }
-        public Dictionary<string, double> RxnMX { get; protected set; }
-        public Dictionary<string, double> RxnMY { get; protected set; }
-        public Dictionary<string, double> RxnMZ { get; protected set; }
-        public bool support_DX { get; protected set; }
-        public bool support_DY { get; protected set; }
-        public bool support_DZ { get; protected set; }
-        public bool support_RX { get; protected set; }
-        public bool support_RY { get; protected set; }
-        public bool support_RZ { get; protected set; }
+        public Dictionary<string, double> DX { get; set; }
+        public Dictionary<string, double> DY { get; set; }
+        public Dictionary<string, double> DZ { get; set; }
+        public Dictionary<string, double> RX { get; set; }
+        public Dictionary<string, double> RY { get; set; }
+        public Dictionary<string, double> RZ { get; set; }
+        public Dictionary<string, double> RxnFX { get; set; }
+        public Dictionary<string, double> RxnFY { get; set; }
+        public Dictionary<string, double> RxnFZ { get; set; }
+        public Dictionary<string, double> RxnMX { get; set; }
+        public Dictionary<string, double> RxnMY { get; set; }
+        public Dictionary<string, double> RxnMZ { get; set; }
+        public bool support_DX { get; set; }
+        public bool support_DY { get; set; }
+        public bool support_DZ { get; set; }
+        public bool support_RX { get; set; }
+        public bool support_RY { get; set; }
+        public bool support_RZ { get; set; }
 
-        public double? EnforcedDX { get; protected set; }
-        public double? EnforcedDY { get; protected set; }
-        public double? EnforcedDZ { get; protected set; }
-        public double? EnforcedRX { get; protected set; }
-        public double? EnforcedRY { get; protected set; }
-        public double? EnforcedRZ { get; protected set; }
+        public double? EnforcedDX { get; set; }
+        public double? EnforcedDY { get; set; }
+        public double? EnforcedDZ { get; set; }
+        public double? EnforcedRX { get; set; }
+        public double? EnforcedRY { get; set; }
+        public double? EnforcedRZ { get; set; }
 
         /// <summary>
         /// used for contour smoothing.
@@ -122,6 +123,18 @@ namespace RYBIM.Analysis
                 Math.Pow(this.Y - other.Y, 2) +
                 Math.Pow(this.Z - other.Z, 2)
                 , 0.5);
+        }
+        public static bool operator ==(Node3D a, Node3D b)
+        {
+            if ((a as object) == null || (b as object) == null)
+                return false;
+            return a.Name == b.Name;
+        }
+        public static bool operator !=(Node3D a, Node3D b)
+        {
+            if ((a as object) == null || (b as object) == null)
+                return false;
+            return a.Name != b.Name;
         }
     }
 }

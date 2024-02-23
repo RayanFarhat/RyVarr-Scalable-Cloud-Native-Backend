@@ -16,11 +16,28 @@ namespace RYBIM.Analysis
     {
 
         #region Properties
-        public Dictionary<string, Node3D> Nodes = new Dictionary<string, Node3D>();
-        public Dictionary<string, Material> Materials = new Dictionary<string, Material>();
-        public Dictionary<string, LoadCombo> LoadCombos = new Dictionary<string, LoadCombo>();
+        /// <summary>
+        /// A dictionary of the model's nodes.
+        /// </summary>
+        public Dictionary<string, Node3D> Nodes { get; set; }
+        /// <summary>
+        /// A dictionary of the model's materials.
+        /// </summary>
+        public Dictionary<string, Material> Materials { get; set; }
+        /// <summary>
+        /// A dictionary of the model's load combinations.
+        /// </summary>
+        public Dictionary<string, LoadCombo> LoadCombos { get; set; }
+        /// <summary>
+        /// A dictionary of the model's physical members.
+        /// </summary>
+        public Dictionary<string, PhysMember> Members { get; set; }
         #endregion
         public FEModel3D() {
+            Nodes = new Dictionary<string, Node3D>();
+            Materials = new Dictionary<string, Material>();
+            LoadCombos = new Dictionary<string, LoadCombo>();
+            Members = new Dictionary<string, PhysMember>();
         }
     }
 }

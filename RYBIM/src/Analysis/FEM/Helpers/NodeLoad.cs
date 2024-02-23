@@ -16,5 +16,16 @@ namespace RYBIM.Analysis
         ///The numeric value (magnitude) of the load.
         /// </summary>
         public double Value { get; set; }
+        /// <summary>
+        ///The case name of the load.
+        /// </summary>
+        public string CaseName { get; set; }
+
+        public NodeLoad(Direction direction, double value, string caseName)
+        {
+            this.direction = direction;
+            this.Value = value;
+            this.CaseName = caseName;
+        }
     }
 }
