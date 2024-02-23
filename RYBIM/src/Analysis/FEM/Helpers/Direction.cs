@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 namespace RYBIM.Analysis
 {
+    /// <summary>
+    /// the possible directions, lower-case notation indicates use of the beam's local
+    /// coordinate system while upper-case indicates use of the element's globl
+    /// coordinate system.
+    /// </summary>
     public enum Direction
     {
         FX,
@@ -14,8 +19,11 @@ namespace RYBIM.Analysis
         MX,
         MY,
         MZ,
-        DX,
-        DY,
-        DZ
+        Fx,
+        Fy,
+        Fz,
+        Mx,
+        My,
+        Mz,
     }
 }

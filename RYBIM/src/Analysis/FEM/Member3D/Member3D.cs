@@ -67,16 +67,16 @@ namespace RYBIM.Analysis
         /// <summary>
         /// list that show the releaded degree of freedom.
         /// </summary>
-        public List<bool> Releases { get; protected set; }
+        public List<bool> Releases { get; set; }
 
         /// <summary>
         /// A list of point loads applied to the member (Direction, P, X)
         /// </summary>
-        public List<PointLoad> PtLoads { get; protected set; }
+        public List<PointLoad> PtLoads { get; set; }
         /// <summary>
         /// A list of distributed loads applied to the member (Direction, w1,w2,x1,x2)
         /// </summary>
-        public List<DistributedLoad> DistLoads { get; protected set; }
+        public List<DistributedLoad> DistLoads { get; set; }
         /// <summary>
         /// A list of mathematically continuous beam segments for z-bending
         /// </summary>

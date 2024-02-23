@@ -12,7 +12,7 @@ namespace RYBIM.Analysis
         /// <summary>
         ///    Returns the deflection at a point along the member's length.
         /// </summary>
-        ///   <param name="D"> The direction in which to find the deflection. Must be one of DX or DY or DZ</param>
+        ///   <param name="D"> The direction in which to find the deflection. Must be one of local Fx or Fy or Fz</param>
         ///   <param name="x"> The location at which to find the deflection.</param>
         public new double Deflection(Direction D, double x, string combo_name = "Combo 1")
         {
@@ -24,7 +24,7 @@ namespace RYBIM.Analysis
         /// <summary>
         ///   Returns the maximum deflection in the member for the given direction.
         /// </summary>
-        ///   <param name="D"> The direction in which to find the maximum  deflection. Must be one of DX or DY or DZ</param>
+        ///   <param name="D"> The direction in which to find the maximum  deflection. Must be one of local Fx or Fy or Fz</param>
         public new double Max_Deflection(Direction D, string combo_name = "Combo 1")
         {
             var Dmax = Sub_Members.First().Value.Max_Deflection(D, combo_name);
@@ -41,7 +41,7 @@ namespace RYBIM.Analysis
         /// <summary>
         ///   Returns the minimum deflection in the member for the given direction.
         /// </summary>
-        ///   <param name="D"> The direction in which to find the minimum deflection. Must be one of DX or DY or DZ</param>
+        ///   <param name="D"> The direction in which to find the minimum deflection. Must be one of local Fx or Fy or Fz</param>
         public new double Min_Deflection(Direction D, string combo_name = "Combo 1")
         {
             var Dmin = Sub_Members.First().Value.Min_Deflection(D, combo_name);
@@ -58,7 +58,7 @@ namespace RYBIM.Analysis
         /// <summary>
         ///    Returns the relative deflection at a point along the member's length.
         /// </summary>
-        ///   <param name="D"> The direction in which to find the relative deflection. Must be one of DY or DZ</param>
+        ///   <param name="D"> The direction in which to find the relative deflection. Must be one of local Fy or Fz</param>
         ///   <param name="x"> The location at which to find the relative deflection.</param>
         public new double Rel_Deflection(Direction D, double x, string combo_name = "Combo 1")
         {

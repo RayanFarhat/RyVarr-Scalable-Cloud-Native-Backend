@@ -12,12 +12,12 @@ namespace RYBIM.Analysis
         /// <summary>
         ///   Returns the moment at a point along the member's length.
         /// </summary>
-        ///   <param name="D"> The direction in which to find the moment. Must be one of MY or MZ</param>
+        ///   <param name="D"> The local direction in which to find the moment. Must be one of My or Mz</param>
         ///   <param name="x"> The location at which to find the moment.</param>
         public double Moment(Direction D, double x, string combo_name = "Combo 1")
         {
             Check_segments(combo_name);
-            if (D == Direction.MY)
+            if (D == Direction.My)
             {
                 // Check which segment 'x' falls on
                 foreach (var segment in SegmentsY)
@@ -35,7 +35,7 @@ namespace RYBIM.Analysis
                     return SegmentsY[lastIndex].Moment(x - (double)SegmentsY[lastIndex].x1);
                 }
             }
-            else if (D == Direction.MZ)
+            else if (D == Direction.Mz)
             {
                 // Check which segment 'x' falls on
                 foreach (var segment in SegmentsZ)
@@ -58,12 +58,12 @@ namespace RYBIM.Analysis
         /// <summary>
         ///  Returns the maximum moment in the member for the given direction.
         /// </summary>
-        ///   <param name="D">The direction in which to find the moment. Must be one of MY or MZ</param>
+        ///   <param name="D">The local direction in which to find the moment. Must be one of My or Mz</param>
         public double Max_Moment(Direction D, string combo_name = "Combo 1")
         {
             Check_segments(combo_name);
             double Mmax = 0;
-            if (D == Direction.MZ)
+            if (D == Direction.Mz)
             {
                 Mmax = SegmentsZ[0].Moment(0);
                 foreach (var segment in SegmentsZ)
@@ -73,7 +73,7 @@ namespace RYBIM.Analysis
                         Mmax = segMax;
                 }
             }
-            else if (D == Direction.MY)
+            else if (D == Direction.My)
             {
                 Mmax = SegmentsY[0].Moment(0);
                 foreach (var segment in SegmentsY)
@@ -91,12 +91,12 @@ namespace RYBIM.Analysis
         /// <summary>
         ///   Returns the minimum moment in the member for the given direction.
         /// </summary>
-        ///   <param name="D">The direction in which to find the moment. Must be one of My or Mz</param>
+        ///   <param name="D">The local direction in which to find the moment. Must be one of My or Mz</param>
         public double Min_Moment(Direction D, string combo_name = "Combo 1")
         {
             Check_segments(combo_name);
             double Mmin = 0;
-            if (D == Direction.MZ)
+            if (D == Direction.Mz)
             {
                 Mmin = SegmentsZ[0].Moment(0);
                 foreach (var segment in SegmentsZ)
@@ -106,7 +106,7 @@ namespace RYBIM.Analysis
                         Mmin = segMin;
                 }
             }
-            else if (D == Direction.MY)
+            else if (D == Direction.My)
             {
                 Mmin = SegmentsY[0].Moment(0);
                 foreach (var segment in SegmentsY)
@@ -124,7 +124,7 @@ namespace RYBIM.Analysis
         /// <summary>
         /// Returns the array of the moment in the member for the given direction.
         /// </summary>
-        ///   <param name="D">The direction in which to find the moment. Must be one of MY or MZ</param>
+        ///   <param name="D">The local direction in which to find the moment. Must be one of My or Mz</param>
         ///   <param name="n_points">The number of points in the array to generate over the full length of the member.</param>
         public double[][] Moment_Array(Direction D, int n_points, string combo_name = "Combo 1")
         {

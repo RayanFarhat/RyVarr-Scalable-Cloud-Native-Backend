@@ -85,7 +85,8 @@ namespace RYBIM.Analysis
         ///   <param name="caseName">The name of the load case the load belongs to. Defaults to 'Case 1'.</param>
         public void Add_node_load(string node_name, Direction D, double P, string caseName = "Case 1")
         {
-            if (D == Direction.DX || D == Direction.DY || D == Direction.DZ)
+            if (D == Direction.Fx || D == Direction.Fy || D == Direction.Fz
+                || D == Direction.Mx || D == Direction.My || D == Direction.Mz)
             {
                 throw new Exception($"Direction must be 'FX', 'FY', 'FZ', 'MX', 'MY', or 'MZ'. {D} was given.");
             }
@@ -96,19 +97,19 @@ namespace RYBIM.Analysis
         /// Defines a nodal displacement at a node.
         /// </summary>
         ///   <param name="node_name">The name of the node where the nodal displacement is being applied.</param>
-        ///   <param name="D">The global direction the nodal displacement is being applied in. Displacements are 'DX', 'DY', and 'DZ'. Rotations are 'MX', 'MY', and 'MZ'.</param>
+        ///   <param name="D">The global direction the nodal displacement is being applied in. Displacements are 'FX', 'FY', and 'FZ'. Rotations are 'MX', 'MY', and 'MZ'.</param>
         ///   <param name="magnitude">The magnitude of the displacement.</param>
         public void def_node_disp(string node_name, Direction D, double magnitude)
         {
-            if (D == Direction.DX)
+            if (D == Direction.FX)
             {
                 Nodes[node_name].EnforcedDX = magnitude;
             }
-            else if (D == Direction.DY)
+            else if (D == Direction.FY)
             {
                 Nodes[node_name].EnforcedDY = magnitude;
             }
-            else if (D == Direction.DZ)
+            else if (D == Direction.FZ)
             {
                 Nodes[node_name].EnforcedDZ = magnitude;
             }
@@ -126,7 +127,7 @@ namespace RYBIM.Analysis
             }
             else
             {
-                throw new Exception($"Direction must be 'DX', 'DY', 'DZ', 'RX', 'RY', or 'RZ'. {D} was given.");
+                throw new Exception($"Direction must be 'FX', 'FY', 'FZ', 'RX', 'RY', or 'RZ'. {D} was given.");
             }
         }
         /// <summary>

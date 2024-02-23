@@ -15,18 +15,20 @@ namespace RYBIM.Analysis
         ///   <param name="P">The magnitude of the point load</param>
         ///   <param name="x">The location of the point load relative to the start of the member</param>
         ///   <param name="L">The length of the member</param>
-        ///   <param name="D">The direction of the point load. Must be one of Fy or Fz</param>
+        ///   <param name="D">The direction of the point load. Must be one of FY or FZ</param>
         public static Vector FER_PtLoad(double P, double x, double L, Direction D)
         {
             var b = L - x;
             var FER = new Vector(12);
-            if (D == Direction.FY){
+            if (D == Direction.FY || D == Direction.Fy)
+            {
                 FER[1] = -P * Math.Pow(b, 2) * (L + 2 * x) / Math.Pow(L, 3);
                 FER[5] = -P * x * Math.Pow(b, 2) / Math.Pow(L, 2);
                 FER[7] = -P * Math.Pow(x, 2) * (L + 2 * b) / Math.Pow(L, 3);
                 FER[11] = P * b * Math.Pow(x, 2) / Math.Pow(L, 2);
             }
-            else if(D == Direction.FZ){
+            else if(D == Direction.FZ || D == Direction.Fz)
+            {
                 FER[2] = -P * Math.Pow(b, 2) * (L + 2 * x) / Math.Pow(L, 3);
                 FER[4] = P * x * Math.Pow(b, 2) / Math.Pow(L, 2);
                 FER[8] = -P * Math.Pow(x, 2) * (L + 2 * b) / Math.Pow(L, 3);
@@ -40,19 +42,19 @@ namespace RYBIM.Analysis
         ///   <param name="M">The magnitude of the moment</param>
         ///   <param name="x">The location of the moment relative to the start of the member</param>
         ///   <param name="L">The length of the member</param>
-        ///   <param name="D">The direction of the point load. Must be one of My or Mz</param>
+        ///   <param name="D">The direction of the point load. Must be one of MY or MZ</param>
         public static Vector FER_Moment(double M, double x, double L, Direction D)
         {
             var b = L - x;
             var FER = new Vector(12);
-            if (D == Direction.MY)
+            if (D == Direction.MY || D == Direction.My)
             {
                 FER[1] = 6 * M * x * b / Math.Pow(L, 3);
                 FER[5] = M * b * (2*x - b)/Math.Pow(L, 2);
                 FER[7] = -6 * M * x * b / Math.Pow(L, 3);
                 FER[11] = M * x * (2 * b - x) / Math.Pow(L, 2);
             }
-            else if (D == Direction.MZ)
+            else if (D == Direction.MZ || D == Direction.Mz)
             {
                 FER[2] = -6 * M * x * b / Math.Pow(L, 3);
                 FER[4] = M * b * (2 * x - b) / Math.Pow(L, 2);
@@ -118,7 +120,7 @@ namespace RYBIM.Analysis
         ///   <param name="w1">The start numeric value (magnitude) of the load from x1</param>
         ///   <param name="w2">The end numeric value (magnitude) of the load to x2.</param>
         ///   <param name="L">The length of the member</param>
-        ///   <param name="D">The direction of the point load. Must be one of Fy or Fz</param>
+        ///   <param name="D">The direction of the point load. Must be one of FY or FZ</param>
 
         public static Vector FER_LinLoad(double x1, double x2, double w1, double w2, double L, Direction D)
         {
@@ -144,14 +146,14 @@ namespace RYBIM.Analysis
                     + 12*w1*Math.Pow(x1, 3) + 9*w1*Math.Pow(x1, 2)*x2 + 6*w1*x1*Math.Pow(x2, 2) + 3*w1*Math.Pow(x2, 3) + 3*w2*Math.Pow(x1, 3) 
                     + 6*w2*Math.Pow(x1, 2)*x2 + 9*w2*x1*Math.Pow(x2, 2) + 12*w2*Math.Pow(x2, 3)/ (60 * Math.Pow(L, 2));
 
-            if (D == Direction.FY)
+            if (D == Direction.FY || D == Direction.Fy)
             {
                 FER[1] = diff * a;
                 FER[5] = diff * b;
                 FER[7] = - diff * c;
                 FER[11] = diff * d;
             }
-            else if (D == Direction.FZ)
+            else if (D == Direction.FZ || D == Direction.Fz)
             {
                 FER[2] = diff * a;
                 FER[4] = - diff * b;

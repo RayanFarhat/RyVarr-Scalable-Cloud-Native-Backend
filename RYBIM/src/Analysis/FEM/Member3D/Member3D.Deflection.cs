@@ -13,13 +13,13 @@ namespace RYBIM.Analysis
         /// <summary>
         ///   Returns the deflection at a point along the member's length.
         /// </summary>
-        ///   <param name="D">The direction in which to find the deflection. Must be one of DX or DY or DZ</param>
+        ///   <param name="D">The local direction in which to find the deflection. Must be one of local Fx or Fy or Fz</param>
         ///   <param name="x">The location at which to find the deflection.</param>
         public double Deflection(Direction D, double x, string combo_name = "Combo 1")
         {
             Check_segments(combo_name);
 
-            if (D == Direction.DX)
+            if (D == Direction.Fx)
             {
                 // Check which segment 'x' falls on
                 foreach (var segment in SegmentsZ)
@@ -37,7 +37,7 @@ namespace RYBIM.Analysis
                     return SegmentsZ[lastIndex].AxialDeflection(x - (double)SegmentsZ[lastIndex].x1);
                 }
             }
-            else if (D == Direction.DY)
+            else if (D == Direction.Fy)
             {
                 // Check which segment 'x' falls on
                 foreach (var segment in SegmentsZ)
@@ -55,7 +55,7 @@ namespace RYBIM.Analysis
                     return SegmentsZ[lastIndex].Deflection(x - (double)SegmentsZ[lastIndex].x1);
                 }
             }
-            else if (D == Direction.DZ)
+            else if (D == Direction.Fz)
             {
                 // Check which segment 'x' falls on
                 foreach (var segment in SegmentsY)
@@ -78,7 +78,7 @@ namespace RYBIM.Analysis
         /// <summary>
         ///   Returns the maximum deflection in the member.
         /// </summary>
-        ///   <param name="D">The direction in which to find the maximum deflection. Must be one of  DY or DZ</param>
+        ///   <param name="D">The local direction in which to find the maximum deflection. Must be one of local Fy or Fz</param>
         public double Max_Deflection(Direction D, string combo_name = "Combo 1")
         {
             Check_segments(combo_name);
@@ -96,7 +96,7 @@ namespace RYBIM.Analysis
         /// <summary>
         ///   Returns the minimum deflection in the member.
         /// </summary>
-        ///   <param name="D">The direction in which to find the minimum deflection. Must be one of  DY or DZ</param>
+        ///   <param name="D">The local direction in which to find the minimum deflection. Must be one of local Fy or Fz</param>
         public double Min_Deflection(Direction D, string combo_name = "Combo 1")
         {
             Check_segments(combo_name);
@@ -114,7 +114,7 @@ namespace RYBIM.Analysis
         /// <summary>
         /// Returns the array of the deflection in the member for the given direction.
         /// </summary>
-        ///   <param name="D">The direction in which to find the deflection. Must be one of DX or DY or DZ</param>
+        ///   <param name="D">The local direction in which to find the deflection. Must be one of local Fx or Fy or Fz</param>
         ///   <param name="n_points">The number of points in the array to generate over the full length of the member.</param>
         public double[][] Deflection_Array(Direction D, int n_points, string combo_name = "Combo 1")
         {
@@ -129,8 +129,8 @@ namespace RYBIM.Analysis
         /// <summary>
         ///   Returns the relative deflection at a point along the member's length.
         /// </summary>
-        ///   <param name="D">The direction in which to find the relative  deflection. Must be one of DY or DZ</param>
-        ///   <param name="x">    The location at which to find the relative deflection.</param>
+        ///   <param name="D">The local direction in which to find the relative  deflection. Must be one of local Fy or Fz</param>
+        ///   <param name="x">The location at which to find the relative deflection.</param>
         public double Rel_Deflection(Direction D, double x, string combo_name = "Combo 1")
         {
             Check_segments(combo_name);
@@ -142,7 +142,7 @@ namespace RYBIM.Analysis
             var dzj = d[8];
             var L = this.L();
 
-            if (D == Direction.DY)
+            if (D == Direction.FY)
             {
                 // Check which segment 'x' falls on
                 foreach (var segment in SegmentsZ)
@@ -160,7 +160,7 @@ namespace RYBIM.Analysis
                     return SegmentsZ[lastIndex].Deflection(x - (double)SegmentsZ[lastIndex].x1) - dyj;
                 }
             }
-            else if (D == Direction.DZ)
+            else if (D == Direction.FZ)
             {
                 // Check which segment 'x' falls on
                 foreach (var segment in SegmentsY)
@@ -183,7 +183,7 @@ namespace RYBIM.Analysis
         /// <summary>
         /// Returns the array of the relative deflection in the member for the given direction.
         /// </summary>
-        ///   <param name="D">The direction in which to find the relative deflection. Must be one of DY or DZ</param>
+        ///   <param name="D">The local direction in which to find the relative deflection. Must be one of local Fy or Fz</param>
         ///   <param name="n_points">The number of points in the array to generate over the full length of the member.</param>
         public double[][] Rel_Deflection_Array(Direction D, int n_points, string combo_name = "Combo 1")
         {

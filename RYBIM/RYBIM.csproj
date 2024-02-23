@@ -84,7 +84,9 @@
     <Compile Include="RevitAdapter\UIAdapter.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="src\Analysis\FEM\FEModel3D\FEModel3D.Member.cs" />
     <Compile Include="src\Analysis\FEM\FEModel3D\FEModel3D.Node.cs" />
+    <Compile Include="src\Analysis\FEM\FEModel3D\FEModel3D.Other.cs" />
     <Compile Include="src\Analysis\FEM\Helpers\Direction.cs" />
     <Compile Include="src\Analysis\FEM\FEModel3D\FEModel3D.cs" />
     <Compile Include="src\Analysis\FEM\Helpers\DistributedLoad.cs" />

@@ -148,31 +148,91 @@ namespace RYBIM.Analysis
                     {
                         if (case_name == PtLoad.CaseName && Num.IsFirstSmallerOrEqualThanSecond(PtLoad.X,x))
                         {
-                            if (PtLoad.direction == Direction.FX)
+                            if (PtLoad.direction == Direction.Fx)
                             {
                                 SegmentsZ[i].P1 += factor * PtLoad.P;
                             }
-                            else if (PtLoad.direction == Direction.FY)
+                            else if (PtLoad.direction == Direction.Fy)
                             {
                                 SegmentsZ[i].V1 += factor * PtLoad.P;
                                 SegmentsZ[i].M1 -= factor * PtLoad.P * (x - PtLoad.X);
                             }
-                            else if (PtLoad.direction == Direction.FZ)
+                            else if (PtLoad.direction == Direction.Fz)
                             {
                                 SegmentsY[i].V1 += factor * PtLoad.P;
                                 SegmentsY[i].M1 += factor * PtLoad.P * (x - PtLoad.X);
                             }
-                            else if (PtLoad.direction == Direction.MX)
+                            else if (PtLoad.direction == Direction.Mx)
                             {
                                 SegmentsX[i].T1 += factor * PtLoad.P;
                             }
-                            else if (PtLoad.direction == Direction.MY)
+                            else if (PtLoad.direction == Direction.My)
                             {
                                 SegmentsY[i].M1 += factor * PtLoad.P;
                             }
-                            else if (PtLoad.direction == Direction.MZ)
+                            else if (PtLoad.direction == Direction.Mz)
                             {
                                 SegmentsZ[i].M1 += factor * PtLoad.P;
+                            }
+                            else if (PtLoad.direction == Direction.FX || PtLoad.direction == Direction.FY || PtLoad.direction == Direction.FZ)
+                            {
+                                double FX = 0;
+                                double FY = 0;
+                                double FZ = 0;
+                                if (PtLoad.direction == Direction.FX)
+                                    FX = 1;
+                                else if (PtLoad.direction == Direction.FY)
+                                    FY = 1;
+                                else if (PtLoad.direction == Direction.FZ)
+                                    FZ = 1;
+                                var DirCos = new Matrix(3);
+                                var T = this.T();
+                                for (int row = 0; row < 3; row++)
+                                {
+                                    for (int col = 0; col < 3; col++)
+                                    {
+                                        DirCos[row, col] = T[row,col];
+                                    }
+                                }
+                                var loadMat = new Matrix(3,1);
+                                loadMat[0,0] = FX*PtLoad.P;
+                                loadMat[1,0] = FY*PtLoad.P;
+                                loadMat[2,0] = FZ*PtLoad.P;
+                                Vector force = Vector.FromMatrix(DirCos.Multiply(loadMat));
+                                SegmentsZ[i].P1 += factor * force[0];
+                                SegmentsZ[i].V1 += factor * force[1];
+                                SegmentsZ[i].M1 += factor * force[1] * (x - PtLoad.X);
+                                SegmentsY[i].V1 += factor * force[2];
+                                SegmentsY[i].M1 += factor * force[2] * (x - PtLoad.X);
+                            }
+                            else if (PtLoad.direction == Direction.MX || PtLoad.direction == Direction.MY || PtLoad.direction == Direction.MZ)
+                            {
+                                double MX = 0;
+                                double MY = 0;
+                                double MZ = 0;
+                                if (PtLoad.direction == Direction.MX)
+                                    MX = 1;
+                                else if (PtLoad.direction == Direction.MY)
+                                    MY = 1;
+                                else if (PtLoad.direction == Direction.MZ)
+                                    MZ = 1;
+                                var DirCos = new Matrix(3);
+                                var T = this.T();
+                                for (int row = 0; row < 3; row++)
+                                {
+                                    for (int col = 0; col < 3; col++)
+                                    {
+                                        DirCos[row, col] = T[row, col];
+                                    }
+                                }
+                                var loadMat = new Matrix(3, 1);
+                                loadMat[0, 0] = MX * PtLoad.P;
+                                loadMat[1, 0] = MY * PtLoad.P;
+                                loadMat[2, 0] = MZ * PtLoad.P;
+                                Vector force = Vector.FromMatrix(DirCos.Multiply(loadMat));
+                                SegmentsX[i].T1 += factor * force[0];
+                                SegmentsY[i].M1 += factor * force[1];
+                                SegmentsZ[i].M1 += factor * force[2];
                             }
                         }
                     }
@@ -191,7 +251,7 @@ namespace RYBIM.Analysis
                             // Determine if the load affects the segment
                             if (Num.IsFirstSmallerOrEqualThanSecond(x1, x))
                             {
-                                if (D == Direction.FX)
+                                if (D == Direction.Fx)
                                 {
                                     //  Determine if the load is on this segment
                                     if (Num.IsFirstBiggerThanSecond(x2, x))
@@ -207,7 +267,7 @@ namespace RYBIM.Analysis
                                     SegmentsZ[i].P1 += (w1 + w2) / 2 * (x2 - x1);
                                     SegmentsY[i].P1 += (w1 + w2) / 2 * (x2 - x1);
                                 }
-                                else if (D == Direction.FY)
+                                else if (D == Direction.Fy)
                                 {
                                     //  Determine if the load is on this segment
                                     if (Num.IsFirstBiggerThanSecond(x2, x))
@@ -225,7 +285,7 @@ namespace RYBIM.Analysis
                                     SegmentsZ[i].V1 += (w1 + w2) / 2 * (x2 - x1);
                                     SegmentsZ[i].M1 -= (x1 - x2) * (2 * w1 * x1 - 3 * w1 * x + w1 * x2 + w2 * x1 - 3 * w2 * x + 2 * w2 * x2) / 6;
                                 }
-                                else if (D == Direction.FZ)
+                                else if (D == Direction.Fz)
                                 {
                                     //  Determine if the load is on this segment
                                     if (Num.IsFirstBiggerThanSecond(x2, x))
@@ -241,6 +301,71 @@ namespace RYBIM.Analysis
                                     // Calculate the shear and moment at the start of the segment due to the load
                                     SegmentsY[i].V1 += (w1 + w2) / 2 * (x2 - x1);
                                     SegmentsY[i].M1 += (x1 - x2) * (2 * w1 * x1 - 3 * w1 * x + w1 * x2 + w2 * x1 - 3 * w2 * x + 2 * w2 * x2) / 6;
+                                }
+                                else if (D == Direction.FX || D == Direction.FY || D == Direction.FZ)
+                                {
+                                    double FX = 0;
+                                    double FY = 0;
+                                    double FZ = 0;
+                                    if (D == Direction.FX)
+                                        FX = 1;
+                                    else if (D == Direction.FY)
+                                        FY = 1;
+                                    else if (D == Direction.FZ)
+                                        FZ = 1;
+                                    var DirCos = new Matrix(3);
+                                    var T = this.T();
+                                    for (int row = 0; row < 3; row++)
+                                    {
+                                        for (int col = 0; col < 3; col++)
+                                        {
+                                            DirCos[row, col] = T[row, col];
+                                        }
+                                    }
+                                    var loadMat1 = new Matrix(3, 1);
+                                    loadMat1[0, 0] = FX * distLoad.w1;
+                                    loadMat1[1, 0] = FY * distLoad.w1;
+                                    loadMat1[2, 0] = FZ * distLoad.w1;
+                                    var loadMat2 = new Matrix(3, 1);
+                                    loadMat2[0, 0] = FX * distLoad.w2;
+                                    loadMat2[1, 0] = FY * distLoad.w2;
+                                    loadMat2[2, 0] = FZ * distLoad.w2;
+                                    Vector f1 = Vector.FromMatrix(DirCos.Multiply(loadMat1));
+                                    Vector f2 = Vector.FromMatrix(DirCos.Multiply(loadMat2));
+
+                                    // Determine if the load is on this segment
+                                    if (Num.IsFirstBiggerThanSecond(x2,x))
+                                    {
+                                        // Break up the load and place it on the segment
+                                        SegmentsZ[i].p1 += (f2[0] - f1[0]) / (x2 - x1) * (x - x1) + f1[0];
+                                        SegmentsZ[i].p2 += (f2[0] - f1[0]) / (x2 - x1) * (SegmentsZ[i].x2 - x1) + f1[0];
+                                        SegmentsY[i].p1 += (f2[0] - f1[0]) / (x2 - x1) * (x - x1) + f1[0];
+                                        SegmentsY[i].p2 += (f2[0] - f1[0]) / (x2 - x1) * (SegmentsY[i].x2 - x1) + f1[0];
+
+                                        SegmentsZ[i].w1 += (f2[1] - f1[1]) / (x2 - x1) * (x - x1) + f1[1];
+                                        SegmentsZ[i].w2 += (f2[1] - f1[1]) / (x2 - x1) * (SegmentsZ[i].x2 - x1) + f1[1];
+
+                                        SegmentsY[i].w1 += (f2[2] - f1[2]) / (x2 - x1) * (SegmentsY[i].x1 - x1) + f1[2];
+                                        SegmentsY[i].w2 += (f2[2] - f1[2]) / (x2 - x1) * (SegmentsY[i].x2 - x1) + f1[2];
+
+                                        // Calculate the magnitude of the load at the start of the segment
+                                        w2 = w1 + (w2 - w1) / (x2 - x1) * (x - x1);
+                                        loadMat2 = new Matrix(3, 1);
+                                        loadMat2[0, 0] = FX * distLoad.w2;
+                                        loadMat2[1, 0] = FY * distLoad.w2;
+                                        loadMat2[2, 0] = FZ * distLoad.w2;
+                                        f2 = Vector.FromMatrix(DirCos.Multiply(loadMat2));
+                                        x2 = x;
+                                    }
+                                    // Calculate the axial force, shear and moment at the start of the segment
+                                    SegmentsZ[i].P1 += (f1[0] + f2[0]) / 2 * (x2 - x1);
+                                    SegmentsY[i].P1 += (f1[0] + f2[0]) / 2 * (x2 - x1);
+
+                                    SegmentsZ[i].V1 += (f1[1] + f2[1]) / 2 * (x2 - x1);
+                                    SegmentsZ[i].M1 -= (x1 - x2) * (2 * f1[1] * x1 - 3 * f1[1] * x + f1[1] * x2 + f2[1] * x1 - 3 * f2[1] * x + 2 * f2[1] * x2) / 6;
+
+                                    SegmentsY[i].V1 += (f1[2] + f2[2]) / 2 * (x2 - x1);
+                                    SegmentsY[i].M1 += (x1 - x2) * (2 * f1[2] * x1 - 3 * f1[2] * x + f1[2] * x2 + f2[2] * x1 - 3 * f2[2] * x + 2 * f2[2] * x2) / 6;
                                 }
                             }
                         }
