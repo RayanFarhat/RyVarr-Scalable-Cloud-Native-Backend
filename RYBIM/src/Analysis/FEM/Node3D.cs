@@ -19,6 +19,10 @@ namespace RYBIM.Analysis
         /// </summary>
         public string Name { get; protected set; }
         /// <summary>
+        /// A unique index number for the node assigned by the program
+        /// </summary>
+        public int? ID { get; set; }
+        /// <summary>
         /// Global X coordinate.
         /// </summary>
         public double X { get; protected set; }
@@ -70,6 +74,7 @@ namespace RYBIM.Analysis
         #endregion
         public Node3D(string name, double X, double Y, double Z) {
             this.Name = name;
+            this.ID = null;
             this.X = X;
             this.Y = Y;
             this.Z = Z;

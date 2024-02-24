@@ -1,5 +1,6 @@
 ﻿using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
+using RYBIM.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,12 +33,17 @@ namespace RYBIM.Analysis
         /// A dictionary of the model's physical members.
         /// </summary>
         public Dictionary<string, PhysMember> Members { get; set; }
+        /// <summary>
+        /// A dictionary of the model's nodal displacements by load combination.
+        /// </summary>
+        public Dictionary<string, Vector> _D { get; set; }
         #endregion
         public FEModel3D() {
             Nodes = new Dictionary<string, Node3D>();
             Materials = new Dictionary<string, Material>();
             LoadCombos = new Dictionary<string, LoadCombo>();
             Members = new Dictionary<string, PhysMember>();
+            _D = new Dictionary<string, Vector>();
         }
     }
 }

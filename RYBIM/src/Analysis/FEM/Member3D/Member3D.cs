@@ -19,7 +19,7 @@ namespace RYBIM.Analysis
         /// <summary>
         ///  A unique index number for the member assigned by the program
         /// </summary>
-        public double? ID { get; protected set; }
+        public int? ID { get; set; }
         public Node3D i_node { get; protected set; }
         public Node3D j_node { get; protected set; }
 

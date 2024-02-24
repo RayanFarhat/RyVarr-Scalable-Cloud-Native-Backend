@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RYBIM.Mathematics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -66,6 +67,15 @@ namespace RYBIM.Analysis
             }
             var new_loadCombo = new LoadCombo(name, factors, combo_tags);
             LoadCombos.Add(name, new_loadCombo);
+        }
+        /// <summary>
+        /// Returns the global displacement vector for the model.
+        /// </summary>
+        /// <param name="combo_name">The name of the load combination to get the results for. Defaults to 'Combo 1'.</param>
+        /// <returns>The global displacement vector for the model</returns>
+        public Vector D(string combo_name = "Combo 1")
+        {
+            return _D[combo_name];
         }
     }
 }
