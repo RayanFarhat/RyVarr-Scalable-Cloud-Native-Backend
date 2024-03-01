@@ -45,12 +45,13 @@ The transformation matrix is needed to transform between the local and global ax
 The shape of the matrix is 12X12. to find the matrix we first must find the direction cosine vector of the member vector:
 
 This are the cosines of the angles the vector forms with the coordinate axes.
-$ T_{x} = ( cos\alpha = {v_{x} \over || \vec{v} ||},cos\beta = {v_{y} \over || \vec{v} ||}, cos\theta = {v_{z} \over || \vec{v} ||}) $
-To find the $ T_{z}$, we must find the the projection of the member on global XZ plane $ proj_{z}$.
+$T_{x} = ( cos\alpha = {v_{x} \over || \vec{v} ||},cos\beta = {v_{y} \over || \vec{v} ||}, cos\theta = {v_{z} \over || \vec{v} ||})$
+To find the $T_{z}$, we must find the the projection of the member on global XZ plane $ proj_{z}$.
 $proj_{z} = (v_{x},0,v_{z})$
 
 Then when we cross product the $proj_{z}$ with $T_{x}$ we will get the $T_{z}$, now then easily we can get  $T_{y}$ by cross product the $T_{x}$ with $T_{y}$.
 Now, relatively to the order of the DOF, we build the matrix: 
+
 $$T =
 \left(\begin{array}{cc} 
 T_{x1} & T_{x2} & T_{x3} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\
@@ -73,7 +74,7 @@ $L = TG$.
 So that mean this equation is also true: $G = T^{-1}L$
 * This is appliable for converting local force or displacment vector to global vector.
 
-That mean $F = T^{-1}f,f = TF $ and $U = T^{-1}u,u = TU $.
+That mean $F = T^{-1}f,f = TF$ and $U = T^{-1}u,u = TU$.
 
 The member stiffness equations in global coordinates will be written $F = KU$.
 The member stiffness equations in loval coordinates will be written $f = ku$.
@@ -87,7 +88,7 @@ where :
 * $k$ is the local stiffness matrix of the element.
 
 to get how to get global stiffness matrix form local stiffness matrix we do:  
-$F = T^{-1}f \rarr KU = T^{-1}ku \rarr  KU = T^{-1}kTU \rarr  K = T^{-1}kT$
+$F = T^{-1}f ⟶ KU = T^{-1}ku ⟶  KU = T^{-1}kTU ⟶  K = T^{-1}kT$
 Then The equation we need is $K = T^{-1}kT$
 
 #### fixed end reactions or support reactions:
@@ -102,8 +103,9 @@ For each point load we check the direction and add the result to the vector:
 
 * Fy(load on member's local y-axis): 
 $f_{er2} +=-{P(L-x)^2(L+2x) \over L^3}$,
-$ f_{er6} +=-{Px(L-x)^2 \over L^2},
- f_{er8} +=-{Px^2(L+2(L-x))^2 \over L^3}, f_{er12} +={Px^2(L-x) \over L^2}$.
+$f_{er6} +=-{Px(L-x)^2 \over L^2}$,
+$f_{er8} +=-{Px^2(L+2(L-x))^2 \over L^3}$,
+$f_{er12} +={Px^2(L-x) \over L^2}$.
 
 * Fz(load on member's local z-axis): $f_{er3} +=-{P(L-x)^2(L+2x) \over L^3}, f_{er5} +={Px(L-x)^2 \over L^2}, f_{er9} +=-{Px^2(L+2(L-x))^2 \over L^3}, f_{er11} +=-{Px^2(L-x) \over L^2}$.
 
