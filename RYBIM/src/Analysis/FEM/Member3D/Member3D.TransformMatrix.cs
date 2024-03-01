@@ -24,15 +24,15 @@ namespace RYBIM.Analysis
             var L = this.L();
 
             // Init direction cosines for every local axis
-            var X = new Vector(new double[3]);
-            var Y = new Vector(new double[3]);
+            var X = new Vector(new double[3]);// cos(theta), sin(theta), ??
+            var Y = new Vector(new double[3]);// sin(theta), cos(theta), ??
             var Z = new Vector(new double[3]);
 
             // Calculate the direction cosines for the local x-axis
             // like X[1] = cos(theta),
             // where theta is angle between local x-axis and global y-axis
-            X[0] = (x2 - x1) / L;
-            X[1] = (y2 - y1) / L;
+            X[0] = (x2 - x1) / L; //cos(theta)
+            X[1] = (y2 - y1) / L; //sin(theta)
             X[2] = (z2 - z1) / L;
 
             // Calculate the remaining direction cosines.
@@ -42,11 +42,13 @@ namespace RYBIM.Analysis
                 // For vertical members, keep the local y-axis in the XY plane to make 2D problems easier to solve in the XY plane
                 if (Num.IsFirstBiggerThanSecond(y2,y1))
                 {
+                    // theta = 90
                     Y[0] = -1; Y[1] = 0; Y[2] = 0;
                     Z[0] = 0;  Z[1] = 0; Z[2] = 1;
                 }
                 else
                 {
+                    // theta = -90
                     Y[0] = 1; Y[1] = 0; Y[2] = 0;
                     Z[0] = 0; Z[1] = 0; Z[2] = 1;
                 }
@@ -106,7 +108,8 @@ namespace RYBIM.Analysis
                 dirCos[2,i] = Z[i];
             }
             var transMatrix = new Matrix(12);
-            // it is like numpy  transMatrix[0:3, 0:3] = dirCos
+            // it is like numpy
+            // transMatrix[0:3, 0:3] = dirCos
             // transMatrix[3:6, 3:6] = dirCos
             // transMatrix[6:9, 6:9] = dirCos
             // transMatrix[9:12, 9:12] = dirCos

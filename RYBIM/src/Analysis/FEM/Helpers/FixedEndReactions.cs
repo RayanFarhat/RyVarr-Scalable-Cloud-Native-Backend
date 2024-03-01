@@ -88,15 +88,12 @@ namespace RYBIM.Analysis
         ///   <param name="L">The length of the member</param>
         public static Vector FER_AxialLinLoad(double x1, double x2, double w1, double w2, double L)
         {
-            var FER = new Vector(12);
-            var diff = 1 / (6 * L) * (x1 - x2);
-            var a = 2 * w1 * x1;
-            var b = 2 * w2 * x2;
-            var c = w2 * x1;
-            var d = w1 * x2;
-            FER[0] = diff*(3*L*w1 + 3*L*w2 - a - b - c -d);
-            FER[6] = diff*(a+b+c+d);
-            return FER;
+            // trapezoidal distributed load is equal to w1 triangle load + w2 triangle load
+            var p = Math.Abs(x1 - x2)*(w1+w2)/2;
+            // location of load based on the law 
+            var x = Math.Abs(x1 - x2)*(w1 + 2*w2)/(3*(w1+w2));
+
+            return FER_AxialPtLoad(p,x,L);
         }
         /// <summary>
         ///   Returns the fixed end reaction vector for a concentrated torque.
@@ -124,43 +121,12 @@ namespace RYBIM.Analysis
 
         public static Vector FER_LinLoad(double x1, double x2, double w1, double w2, double L, Direction D)
         {
-            var FER = new Vector(12);
+            // trapezoidal distributed load is equal to w1 triangle load + w2 triangle load
+            var p = Math.Abs(x1 - x2) * (w1 + w2) / 2;
+            // location of load based on the law 
+            var x = Math.Abs(x1 - x2) * (w1 + 2 * w2) / (3 * (w1 + w2));
 
-            var diff = x1 - x2;
-
-            var a = 10*Math.Pow(L, 3)*w1 + 10*Math.Pow(L, 3)*w2 - 15*L*w1*Math.Pow(x1, 2) - 10*L*w1*x1*x2 -5*L*w1*Math.Pow(x2, 2)
-                    - 5*L*w2*Math.Pow(x1, 2) - 10*L*w2*x1*x2 -15*L*w2*Math.Pow(x2, 2) + 8*w1*Math.Pow(x1, 3) + 6*w1*Math.Pow(x1, 2)*x2 
-                    + 4*w1*x1*Math.Pow(x2, 2) + 2*w1*Math.Pow(x2, 3) + 2*w2*Math.Pow(x1, 3) + 4*w2*Math.Pow(x1, 2)*x2 + 6*w2*x1*Math.Pow(x2, 2)
-                    + 8*w2*Math.Pow(x2, 3)/ (20 * Math.Pow(L, 3));
-
-            var b = 20*Math.Pow(L, 2)*w1*x1 + 10*Math.Pow(L, 2)*w1*x2 + 10*Math.Pow(L, 2)*w2*x1 + 20*Math.Pow(L, 2)*w2*x2 -30*L*w1*Math.Pow(x1, 2)
-                    - 20*L*w1*x1*x2 - 10*L*w1*Math.Pow(x2, 2) - 10*L*w2*Math.Pow(x1, 2) - 20*L*w2*x1*x2 - 30*L*w2*Math.Pow(x2, 2) + 12*w1*Math.Pow(x1, 3)
-                    + 9*w1*Math.Pow(x1, 2)*x2 + 6*w1*x1*Math.Pow(x2, 2) + 3*w1*Math.Pow(x2, 3) + 3*w2*Math.Pow(x1, 3) + 6*w2*Math.Pow(x1, 2)*x2
-                    + 9*w2*x1*Math.Pow(x2, 2) +12*w2*Math.Pow(x2, 3) / (60 * Math.Pow(L, 2));
-
-            var c = -15*L*w1*Math.Pow(x1, 2) - 10*L*w1*x1*x2 - 5*L*w1*Math.Pow(x2, 2) - 5*L*w2*Math.Pow(x1, 2) - 10*L*w2*x1*x2 - 15*L*w2*Math.Pow(x2, 2)
-                    + 8*w1*Math.Pow(x1, 3) + 6*w1*Math.Pow(x1, 2)*x2 + 4*w1*x1*Math.Pow(x2, 2) + 2*w1*Math.Pow(x2, 3) + 2*w2*Math.Pow(x1, 3)
-                    + 4*w2*Math.Pow(x1, 2)*x2 + 6*w2*x1*Math.Pow(x2, 2) + 8*w2*Math.Pow(x2, 3)/ (20 * Math.Pow(L, 3));
-
-            var d = -15*L*w1*Math.Pow(x1, 2) - 10*L*w1*x1*x2 - 5*L*w1*Math.Pow(x2, 2) - 5*L*w2*Math.Pow(x1, 2) - 10*L*w2*x1*x2 - 15*L*w2*Math.Pow(x2, 2)
-                    + 12*w1*Math.Pow(x1, 3) + 9*w1*Math.Pow(x1, 2)*x2 + 6*w1*x1*Math.Pow(x2, 2) + 3*w1*Math.Pow(x2, 3) + 3*w2*Math.Pow(x1, 3) 
-                    + 6*w2*Math.Pow(x1, 2)*x2 + 9*w2*x1*Math.Pow(x2, 2) + 12*w2*Math.Pow(x2, 3)/ (60 * Math.Pow(L, 2));
-
-            if (D == Direction.FY || D == Direction.Fy)
-            {
-                FER[1] = diff * a;
-                FER[5] = diff * b;
-                FER[7] = - diff * c;
-                FER[11] = diff * d;
-            }
-            else if (D == Direction.FZ || D == Direction.Fz)
-            {
-                FER[2] = diff * a;
-                FER[4] = - diff * b;
-                FER[8] = - diff * c;
-                FER[10] = - diff * d;
-            }
-            return FER;
+            return FER_PtLoad(p,x,L,D);
         }
     }
 }
