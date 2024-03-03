@@ -125,3 +125,51 @@ Also for each linear distributed load we convert it to point load and we check t
 
 ![alt text](images/reactionLaws.png)
 ![alt text](images/distToPt.png)
+#### Beam Segment Equations(after analysis)
+Loading along a beam is not always mathematically continuous. Concentrated forces and moments, as well as starting and ending points of distributed loads interupt the mathematical continuity of the beam. For this reason, it is convenient to segment the beam between discontinuities to form a series of mathematically continuous segments. This allows for the direct calculation of maximum/minimum forces, rotations, and deflections in each segment.
+
+Every segment is partitioned to segZ for bending about local z-axis, segY for bending about local y-axis, segX for torsional moment.
+Note that mean that segZ is viewed in XY axis, SegY in XZ axis.
+![alt text](images/segment.png)
+##### Linear Distributed Load Equation
+The equation for a linear distributed load is expressed as follows:
+$w_{x} = w_{1} + {{w_{2} - w_{1}}\over L} x$
+Where:
+* $w_{1}$ is the magnitude of distributed load at starting point.
+* $w_{2}$ is the magnitude of distributed load at ending point.
+* $L$ is the Length of the segment.
+
+We will use this for the other equations, of course if there is no distributed load Then the value is fixed along the segment.
+
+##### Shear Force Equation
+The change in the shear force is equal to the area under (or integral of) the load diagram. If the shear force at the start of the segment, $V_{1}$, is known, the shear force at any point $x$, relative to the start of the segment can be expressed as:
+$V_{x} = V_{1} + \int_0^x w_{x}dx$ 
+* $V_{1} = f_{2}$ for segZ and $V_{1} = f_{3}$ for segY.
+* Where $f$ is the local end force vector.
+
+##### Moment Equation
+Similarly, the change in the moment diagram is equal to the area under the shear diagram. If the moment at the start of the segment, $M_{1}$ is known, the moment at any point, relative to the start of the segment can be expressed as:
+$M_{x} = M_{1} - \int_0^x V_{x}dx$
+* $M_{1} = f_{6} - \int V_{1} = f_{6} - f_{2}x$ for segZ.
+* $M_{1} = f_{5} - \int V_{1} = f_{5} - f_{3}x$ for segY.
+
+##### Slope Equation
+The slope of the elastic curve $\theta$, can be obtained by integrating the moment diagram and dividing by the flexural rigidity $EL$.
+$\theta_{x} = \theta_{1} - {1\over EI}\int_0^x M_{x}$
+* $\theta_{1} = {1 \over 3}({(f_{6} - F_{er6})L \over EIz} - {(f_{12} - F_{er12})L \over 2EIz} + {3(d_{yj}-d_{yi})\over L})$ for segZ.
+* $\theta_{1} = -{1 \over 3}({-(f_{5} - F_{er5})L \over EIy} - {-(f_{11} - F_{er11})L \over 2EIy} + {3(d_{zj}-d_{zi})\over L})$ for segY.
+(The traditional slope-deflection equations assume a sign convention opposite of what we uses for moments about the local y-axis, so a negative value has been applied to those values specifically.)
+
+This equations derived from slope-deflection equations:
+$M_{i} = {2EI \over L}(2\theta_{1} + \theta_{2} - 3\varphi) + FEM_{i}$.
+$M_{j} = {2EI \over L}(\theta_{1} + 2\theta_{2} - 3\varphi) + FEM_{j}$.
+Where:
+* $M_{i},M_{j}$ end moment for each node i,j.
+* $FEM_{i},FEM_{j}$ fixed end moment for each node i,j.
+* $\varphi = {(d_{j}-d_{i})\over L}$ is the chord rotation.
+
+##### Deflection Equation
+Integrating one more time gives us the equation for the deflection along the segment.
+$\delta_{x} = \delta_{1} + \int_0^x \theta_{x}$
+* $\delta_{1} = d_{yi}$ is Deflection at the start of the segZ.
+* $\delta_{1} = d_{zi}$ is Deflection at the start of the segY.
