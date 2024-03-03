@@ -130,6 +130,7 @@ Loading along a beam is not always mathematically continuous. Concentrated force
 
 Every segment is partitioned to segZ for bending about local z-axis, segY for bending about local y-axis, segX for torsional moment.
 Note that mean that segZ is viewed in XY axis, SegY in XZ axis.
+
 ![alt text](images/segment.png)
 ##### Linear Distributed Load Equation
 The equation for a linear distributed load is expressed as follows:
