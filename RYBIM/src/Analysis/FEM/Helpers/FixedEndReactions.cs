@@ -88,6 +88,7 @@ namespace RYBIM.Analysis
         ///   <param name="L">The length of the member</param>
         public static Vector FER_AxialLinLoad(double x1, double x2, double w1, double w2, double L)
         {
+            //TODO: make sure the var x is right (the correct location)
             // trapezoidal distributed load is equal to w1 triangle load + w2 triangle load
             var p = Math.Abs(x1 - x2)*(w1+w2)/2;
             // location of load based on the law 

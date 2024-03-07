@@ -126,6 +126,7 @@
     <Compile Include="src\Analysis\FEM\Segments\BeamSegZ.Shear.cs" />
     <Compile Include="src\Analysis\FEM\Segments\BeamSegZ.Torsion.cs" />
     <Compile Include="src\Analysis\Material.cs" />
+    <Compile Include="src\Analysis\Statics.cs" />
     <Compile Include="src\Mathematics\AngleUnit.cs" />
     <Compile Include="src\Mathematics\Converters.cs" />
     <Compile Include="src\Mathematics\NumberUtils\Num.cs" />

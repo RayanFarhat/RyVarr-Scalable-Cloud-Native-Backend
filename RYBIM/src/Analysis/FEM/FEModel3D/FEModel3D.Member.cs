@@ -117,5 +117,22 @@ namespace RYBIM.Analysis
             // Add the distributed load to the member
             Members[member_name].DistLoads.Add(new DistributedLoad(D,x1,x2,w1,w2, caseName));
         }
+        /// <summary>
+        /// Adds self weight to all members in the model. Note that this only works for members.
+        /// </summary>
+        /// <param name="global_direction">The global direction to apply the member load in: 'FX', 'FY', or 'FZ'.</param>
+        /// <param name="factor">A factor to apply to the member self-weight. Can be used to account for items like connections.</param>
+        /// <param name="caseName">The load case to apply the self-weight to. Defaults to 'Case 1'</param>
+        public void add_member_self_weight(Direction global_direction, double factor, string caseName = "Case 1")
+        {
+            // Step through each member in the model
+            foreach (var member in this.Members.Values)
+            {
+                // Calculate the self weight of the member
+                var self_weight = factor * this.Materials[member.MaterialName].rho * member.A;
+                // Add the self-weight load to the member
+                add_member_dist_load(member.Name,global_direction,self_weight,self_weight,0,member.L(),caseName);
+            }
+        }
     }
 }

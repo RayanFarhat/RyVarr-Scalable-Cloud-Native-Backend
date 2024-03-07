@@ -22,6 +22,7 @@ The Degrees of freedom of the vectors is ordered by this order:
 * Iy = The y-axis moment of inertia.
 * Iz = The z-axis moment of inertia.
 * J = The torsional constant.
+
 #### The local stiffness matrix for every member is:
 $$k = 
 \left(\begin{array}{cc} 
@@ -145,14 +146,19 @@ We will use this for the other equations, of course if there is no distributed l
 ##### Shear Force Equation
 The change in the shear force is equal to the area under (or integral of) the load diagram. If the shear force at the start of the segment, $V_{1}$, is known, the shear force at any point $x$, relative to the start of the segment can be expressed as:
 $V_{x} = V_{1} + \int_0^x w_{x}dx$ 
-* $V_{1} = f_{2}$ for segZ and $V_{1} = f_{3}$ for segY.
+* $V_{1} = f_{2} + \sum_{i=1}^{Py} Py_{i}$ plus for segZ and $V_{1} = f_{3} + \sum_{i=1}^{Pz} Pz_{i}$ for segY.
 * Where $f$ is the local end force vector.
+* Where $Py$ is the vector of all the point loads in the local Y direction on the element where the location $x$ of the point load is smaller or equal to $x$.
+* Where $Pz$ is the vector of all the point loads in the local Z direction on the element where the location $x$ of the point load is smaller or equal to $x$.
 
 ##### Moment Equation
 Similarly, the change in the moment diagram is equal to the area under the shear diagram. If the moment at the start of the segment, $M_{1}$ is known, the moment at any point, relative to the start of the segment can be expressed as:
 $M_{x} = M_{1} - \int_0^x V_{x}dx$
-* $M_{1} = f_{6} - \int V_{1} = f_{6} - f_{2}x$ for segZ.
-* $M_{1} = f_{5} - \int V_{1} = f_{5} - f_{3}x$ for segY.
+* $M_{1} = f_{6} - f_{2}x - \sum_{i=1}^{Py} Py_{i} + \sum_{i=1}^{Mz} Mz_{i}$ for segZ.
+* $M_{1} = f_{5} + f_{3}x + \sum_{i=1}^{Pz} Pz_{i} + \sum_{i=1}^{My} My_{i}$ for segY.
+* $f_{2}x$ and $f_{3}x$ is moment as distanced from $x_{1}$ by x.
+* Where $Mz$ is the vector of all the moment loads in the local Z direction on the element where the location $x$ of the Moment load is smaller or equal to $x$.
+* Where $My$ is the vector of all the moment loads in the local Y direction on the element where the location $x$ of the Moment load is smaller or equal to $x$.
 
 ##### Slope Equation
 The slope of the elastic curve $\theta$, can be obtained by integrating the moment diagram and dividing by the flexural rigidity $EL$.
