@@ -65,30 +65,27 @@ namespace RYBIM.Analysis
             Vector FER = new Vector(this.Nodes.Count * 6);
 
             // Step through each sub-member and add terms
-            foreach (var phys_member in Members.Values)
+            foreach (var member in Members.Values)
             {
-                foreach (var member in phys_member.Sub_Members.Values)
+                // Get the member's global fixed end reaction vector
+                // Storing it as a local variable eliminates the need to rebuild it every time a term is needed
+                var member_FER = member.FER(combo_name);
+
+                // Step through each term in the member's fixed end reaction vector
+                // 'a' below is the row index in the member's fixed end reaction vector
+                // 'm' below is the corresponding row index in the global fixed end reaction vector
+                for (int a = 0; a < 12; a++)
                 {
-                    // Get the member's global fixed end reaction vector
-                    // Storing it as a local variable eliminates the need to rebuild it every time a term is needed
-                    var member_FER = member.FER(combo_name);
+                    int m;
+                    // Determine if index 'a' is related to the i-node or j-node
+                    // Find the corresponding index 'm' in the global fixed end reaction vector
+                    if (a < 6)
+                        m = (int)member.i_node.ID * 6 + a;
+                    else
+                        m = (int)member.j_node.ID * 6 + (a-6);
 
-                    // Step through each term in the member's fixed end reaction vector
-                    // 'a' below is the row index in the member's fixed end reaction vector
-                    // 'm' below is the corresponding row index in the global fixed end reaction vector
-                    for (int a = 0; a < 12; a++)
-                    {
-                        int m;
-                        // Determine if index 'a' is related to the i-node or j-node
-                        // Find the corresponding index 'm' in the global fixed end reaction vector
-                        if (a < 6)
-                            m = (int)member.i_node.ID * 6 + a;
-                        else
-                            m = (int)member.j_node.ID * 6 + (a-6);
-
-                        // Now that 'm' is known, place the term in the global fixed end reaction vector
-                        FER[m] += member_FER[a];
-                    }
+                    // Now that 'm' is known, place the term in the global fixed end reaction vector
+                    FER[m] += member_FER[a];
                 }
             }
             return FER;

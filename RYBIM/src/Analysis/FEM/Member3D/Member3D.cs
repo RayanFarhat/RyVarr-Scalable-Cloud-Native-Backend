@@ -30,7 +30,7 @@ namespace RYBIM.Analysis
         /// <summary>
         ///  The current solved load combination
         /// </summary>
-        public LoadCombo SolvedCombo { get; protected set; }
+        public LoadCombo SolvedCombo { get; set; }
 
         #endregion
         #region Material Properties

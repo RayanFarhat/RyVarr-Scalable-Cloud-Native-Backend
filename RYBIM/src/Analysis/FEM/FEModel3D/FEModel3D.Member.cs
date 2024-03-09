@@ -44,7 +44,7 @@ namespace RYBIM.Analysis
             }
             var new_member = new PhysMember(name, Nodes[i_node_name], Nodes[j_node_name], material_name,
                 this, Iy, Iz, J, A);
-            this.Members[name] = new_member;
+            this.Members.Add(name, new_member);
         }
         /// <summary>
         /// Removes a member from the model. All member loads associated with the member will also be removed.

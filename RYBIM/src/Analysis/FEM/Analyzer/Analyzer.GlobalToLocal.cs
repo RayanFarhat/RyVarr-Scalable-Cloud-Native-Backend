@@ -61,33 +61,29 @@ namespace RYBIM.Analysis
                         node.support_RX || node.support_RY || node.support_RZ)
                     {
                         // Step through each physical member in the model
-                        foreach (var phys_member in model.Members.Values)
+                        foreach (var member in model.Members.Values)
                         {
-                            // Sum the sub-member end forces at the node
-                            foreach (var member in phys_member.Sub_Members.Values)
+                            if(member.i_node == node)
                             {
-                                if(member.i_node == node)
-                                {
-                                    // Get the member's global force vector
-                                    var F = member.F(combo.Name);
-                                    node.RxnFX[combo.Name] += F[0];
-                                    node.RxnFY[combo.Name] += F[1];
-                                    node.RxnFZ[combo.Name] += F[2];
-                                    node.RxnMX[combo.Name] += F[3];
-                                    node.RxnMY[combo.Name] += F[4];
-                                    node.RxnMZ[combo.Name] += F[5];
-                                }
-                                else if (member.j_node == node)
-                                {
-                                    // Get the member's global force vector
-                                    var F = member.F(combo.Name);
-                                    node.RxnFX[combo.Name] += F[6];
-                                    node.RxnFY[combo.Name] += F[7];
-                                    node.RxnFZ[combo.Name] += F[8];
-                                    node.RxnMX[combo.Name] += F[9];
-                                    node.RxnMY[combo.Name] += F[10];
-                                    node.RxnMZ[combo.Name] += F[11];
-                                }
+                                // Get the member's global force vector
+                                var F = member.F(combo.Name);
+                                node.RxnFX[combo.Name] += F[0];
+                                node.RxnFY[combo.Name] += F[1];
+                                node.RxnFZ[combo.Name] += F[2];
+                                node.RxnMX[combo.Name] += F[3];
+                                node.RxnMY[combo.Name] += F[4];
+                                node.RxnMZ[combo.Name] += F[5];
+                            }
+                            else if (member.j_node == node)
+                            {
+                                // Get the member's global force vector
+                                var F = member.F(combo.Name);
+                                node.RxnFX[combo.Name] += F[6];
+                                node.RxnFY[combo.Name] += F[7];
+                                node.RxnFZ[combo.Name] += F[8];
+                                node.RxnMX[combo.Name] += F[9];
+                                node.RxnMY[combo.Name] += F[10];
+                                node.RxnMZ[combo.Name] += F[11];
                             }
                         }
                         // Sum the joint loads applied to the node

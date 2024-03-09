@@ -11,34 +11,63 @@ namespace RYBIM.Mathematics
         public static double[] Solve(double[,] coefficients, double[] constants)
         {
             int n = constants.Length;
+            double[] x = new double[n];
+            double[,] augmentedMatrix = new double[n, n + 1];
 
-            // Forward Elimination
-            for (int pivot = 0; pivot < n - 1; pivot++)
+            // Create augmented matrix [A | b]
+            for (int i = 0; i < n; i++)
             {
-                for (int row = pivot + 1; row < n; row++)
+                for (int j = 0; j < n; j++)
                 {
-                    double factor = coefficients[row, pivot] / coefficients[pivot, pivot];
-                    for (int col = pivot; col < n; col++)
-                    {
-                        coefficients[row, col] -= factor * coefficients[pivot, col];
-                    }
-                    constants[row] -= factor * constants[pivot];
+                    augmentedMatrix[i, j] = coefficients[i, j];
                 }
+                augmentedMatrix[i, n] = constants[i];
             }
 
-            // Back Substitution
-            double[] solution = new double[n];
-            for (int i = n - 1; i >= 0; i--)
+            // Perform Gaussian elimination
+            for (int i = 0; i < n; i++)
             {
-                double sum = 0.0;
+                // Find pivot for column i
+                int maxRow = i;
                 for (int j = i + 1; j < n; j++)
                 {
-                    sum += coefficients[i, j] * solution[j];
+                    if (Math.Abs(augmentedMatrix[j, i]) > Math.Abs(augmentedMatrix[maxRow, i]))
+                    {
+                        maxRow = j;
+                    }
                 }
-                solution[i] = (constants[i] - sum) / coefficients[i, i];
+
+                // Swap current row with the row containing the pivot
+                for (int k = i; k <= n; k++)
+                {
+                    double temp = augmentedMatrix[i, k];
+                    augmentedMatrix[i, k] = augmentedMatrix[maxRow, k];
+                    augmentedMatrix[maxRow, k] = temp;
+                }
+
+                // Make all elements below the pivot zero in current column
+                for (int j = i + 1; j < n; j++)
+                {
+                    double factor = augmentedMatrix[j, i] / augmentedMatrix[i, i];
+                    for (int k = i; k <= n; k++)
+                    {
+                        augmentedMatrix[j, k] -= factor * augmentedMatrix[i, k];
+                    }
+                }
             }
 
-            return solution;
+            // Back substitution
+            for (int i = n - 1; i >= 0; i--)
+            {
+                x[i] = augmentedMatrix[i, n];
+                for (int j = i + 1; j < n; j++)
+                {
+                    x[i] -= augmentedMatrix[i, j] * x[j];
+                }
+                x[i] /= augmentedMatrix[i, i];
+            }
+
+            return x;
         }
     }
 }

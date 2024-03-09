@@ -41,27 +41,27 @@ namespace RYBIM.Analysis
             for (int i = 0; i < disconts.Count - 1; i++)
             {
                 // z-direction segments (bending about local z-axis)
-                var newSeg = new BeamSegZ();   // Create the new segment
-                newSeg.x1 = disconts[i];       // Segment start location
-                newSeg.x2 = disconts[i + 1];   // Segment end location
-                newSeg.EI = this.E * this.Iz;  // Segment flexural stiffness
-                newSeg.EA = this.E * this.A;   // Segment axial stiffness
-                SegmentsZ.Add(newSeg);
+                var newSegZ = new BeamSegZ();   // Create the new segment
+                newSegZ.x1 = disconts[i];       // Segment start location
+                newSegZ.x2 = disconts[i + 1];   // Segment end location
+                newSegZ.EI = this.E * this.Iz;  // Segment flexural stiffness
+                newSegZ.EA = this.E * this.A;   // Segment axial stiffness
+                SegmentsZ.Add(newSegZ);
 
                 // y-direction segments (bending about local y-axis)
-                newSeg = new BeamSegY();       // Create the new segment
-                newSeg.x1 = disconts[i];       // Segment start location
-                newSeg.x2 = disconts[i + 1];   // Segment end location
-                newSeg.EI = this.E * this.Iy;  // Segment flexural stiffness
-                newSeg.EA = this.E * this.A;   // Segment axial stiffness
-                SegmentsZ.Add(newSeg);
+                var newSegY = new BeamSegY();       // Create the new segment
+                newSegY.x1 = disconts[i];       // Segment start location
+                newSegY.x2 = disconts[i + 1];   // Segment end location
+                newSegY.EI = this.E * this.Iy;  // Segment flexural stiffness
+                newSegY.EA = this.E * this.A;   // Segment axial stiffness
+                SegmentsY.Add(newSegY);
 
                 // x-direction segments (for torsional moment)
-                newSeg = new BeamSegZ();       // Create the new segment
-                newSeg.x1 = disconts[i];       // Segment start location
-                newSeg.x2 = disconts[i + 1];   // Segment end location
-                newSeg.EA = this.E * this.A;   // Segment axial stiffness
-                SegmentsZ.Add(newSeg);
+                var newSegX = new BeamSegZ();       // Create the new segment
+                newSegX.x1 = disconts[i];       // Segment start location
+                newSegX.x2 = disconts[i + 1];   // Segment end location
+                newSegX.EA = this.E * this.A;   // Segment axial stiffness
+                SegmentsX.Add(newSegX);
             }
 
             // Member local end force vector

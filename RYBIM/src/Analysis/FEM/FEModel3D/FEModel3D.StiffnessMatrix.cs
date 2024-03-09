@@ -22,41 +22,37 @@ namespace RYBIM.Analysis
             var K = new Matrix(Nodes.Count * 6);
 
             // Add stiffness terms for each physical member in the model
-            foreach (var phys_member in Members.Values)
+            foreach (var member in Members.Values)
             {
-                // Step through each sub-member in the physical member and add terms
-                foreach (var member in phys_member.Sub_Members.Values)
+                //  Get the member's global stiffness matrix
+                // Storing it as a local variable eliminates the need to rebuild it every time a term is needed
+                var member_K = member.K();
+
+                // Step through each term in the member's stiffness matrix
+                // 'a' & 'b' below are row/column indices in the member's stiffness matrix
+                // 'm' & 'n' are corresponding row/column indices in the global stiffness matrix
+                for (int a = 0; a < 12; a++)
                 {
-                    //  Get the member's global stiffness matrix
-                    // Storing it as a local variable eliminates the need to rebuild it every time a term is needed
-                    var member_K = member.K();
+                    int m;
+                    // Determine if index 'a' is related to the i-node or j-node
+                    // Find the corresponding index 'm' in the global stiffness matrix
+                    if (a < 6)
+                        m = (int)member.i_node.ID * 6 + a;
+                    else
+                        m = (int)member.j_node.ID * 6 + (a - 6);
 
-                    // Step through each term in the member's stiffness matrix
-                    // 'a' & 'b' below are row/column indices in the member's stiffness matrix
-                    // 'm' & 'n' are corresponding row/column indices in the global stiffness matrix
-                    for (int a = 0; a < 12; a++)
+                    for (int b = 0; b < 12; b++)
                     {
-                        int m;
-                        // Determine if index 'a' is related to the i-node or j-node
-                        // Find the corresponding index 'm' in the global stiffness matrix
-                        if (a < 6)
-                            m = (int)member.i_node.ID * 6 + a;
+                        int n;
+                        // Determine if index 'b' is related to the i-node or j-node
+                        // Find the corresponding index 'n' in the global stiffness matrix
+                        if (b < 6)
+                            n = (int)member.i_node.ID * 6 + b;
                         else
-                            m = (int)member.j_node.ID * 6 + (a - 6);
+                            n = (int)member.j_node.ID * 6 + (b - 6);
 
-                        for (int b = 0; b < 12; b++)
-                        {
-                            int n;
-                            // Determine if index 'b' is related to the i-node or j-node
-                            // Find the corresponding index 'n' in the global stiffness matrix
-                            if (b < 6)
-                                n = (int)member.i_node.ID * 6 + b;
-                            else
-                                n = (int)member.j_node.ID * 6 + (b - 6);
-
-                            // Now that 'm' and 'n' are known, place the term in the global stiffness matrix
-                            K[m, n] += member_K[a, b];
-                        }
+                        // Now that 'm' and 'n' are known, place the term in the global stiffness matrix
+                        K[m, n] += member_K[a, b];
                     }
                 }
             }

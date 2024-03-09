@@ -44,7 +44,7 @@ namespace RYBIM.Analysis
         ///   <param name="factors">A dictionary containing load cases and their corresponding factors (e.g. {'D':1.2, 'L':1.6, 'S':0.5}).</param>
         ///   <param name="combo_tags">A list of tags used to categorize load combinations. Default is `None`. This can be useful for filtering results later on,
         ///   or for limiting analysis to only those combinations with certain tags. This feature is provided for convenience. It is not necessary to use tags.</param>
-        public void add_load_combo(Dictionary<string, double> factors, List<string> combo_tags = null, string name = null)
+        public void add_load_combo(Dictionary<string, double> factors, string name = null, List<string> combo_tags = null)
         {
             // Name the material  or check it doesn't already exist
             if (name != null)

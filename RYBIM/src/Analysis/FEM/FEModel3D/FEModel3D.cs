@@ -32,7 +32,7 @@ namespace RYBIM.Analysis
         /// <summary>
         /// A dictionary of the model's physical members.
         /// </summary>
-        public Dictionary<string, PhysMember> Members { get; set; }
+        public Dictionary<string, Member3D> Members { get; set; }
         /// <summary>
         /// A dictionary of the model's nodal displacements by load combination.
         /// </summary>
@@ -42,7 +42,7 @@ namespace RYBIM.Analysis
             Nodes = new Dictionary<string, Node3D>();
             Materials = new Dictionary<string, Material>();
             LoadCombos = new Dictionary<string, LoadCombo>();
-            Members = new Dictionary<string, PhysMember>();
+            Members = new Dictionary<string, Member3D>();
             _D = new Dictionary<string, Vector>();
         }
     }

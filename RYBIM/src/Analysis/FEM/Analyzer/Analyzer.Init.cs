@@ -54,15 +54,13 @@ namespace RYBIM.Analysis
 
             // Descritize all the physical members and number each member in the model
             int id = 0;
-            foreach (var phys_member in model.Members.Values)
+
+            foreach (var member in model.Members.Values)
             {
-                phys_member.Descritize();
-                foreach (var member in phys_member.Sub_Members.Values)
-                {
-                    member.ID = id;
-                    id++;
-                }
+                member.ID = id;
+                id++;
             }
+            
         }
     }
 }
