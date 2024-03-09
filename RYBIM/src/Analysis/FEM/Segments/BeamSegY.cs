@@ -26,7 +26,6 @@ namespace RYBIM.Analysis
         /// </summary>
         public new double Slope(double x)
         {
-            var delta_x = Deflection(x);
             // theta_1 + (-V1*x**2/2 - w1*x**3/6 + x*(-M1) + x**4*(w1 - w2)/(24*L))/EI
             return (double)(theta1 + (
                 -V1 * Math.Pow(x, 2) / 2 - w1 * Math.Pow(x, 3) / 6 + x * (-M1) + Math.Pow(x, 4) * (w1 - w2) / (24 * Length())

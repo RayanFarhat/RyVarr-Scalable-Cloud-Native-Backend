@@ -85,8 +85,10 @@
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\Analysis\FEM\Analyzer\Analyzer.Checks.cs" />
+    <Compile Include="src\Analysis\FEM\Analyzer\Analyzer.GlobalToLocal.cs" />
     <Compile Include="src\Analysis\FEM\Analyzer\Analyzer.Init.cs" />
     <Compile Include="src\Analysis\FEM\Analyzer\Analyzer.Other.cs" />
+    <Compile Include="src\Analysis\FEM\FEModel3D\FEModel3D.Analysis.cs" />
     <Compile Include="src\Analysis\FEM\FEModel3D\FEModel3D.Forces.cs" />
     <Compile Include="src\Analysis\FEM\FEModel3D\FEModel3D.Member.cs" />
     <Compile Include="src\Analysis\FEM\FEModel3D\FEModel3D.Node.cs" />

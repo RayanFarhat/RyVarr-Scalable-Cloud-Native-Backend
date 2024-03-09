@@ -153,7 +153,8 @@ $V_{x} = V_{1} + \int_0^x w_{x}dx$
 
 ##### Moment Equation
 Similarly, the change in the moment diagram is equal to the area under the shear diagram. If the moment at the start of the segment, $M_{1}$ is known, the moment at any point, relative to the start of the segment can be expressed as:
-$M_{x} = M_{1} - \int_0^x V_{x}dx$
+$M_{x} = M_{1} - \int_0^x V_{x}dx$ for segZ.
+$M_{x} = -M_{1} - \int_0^x V_{x}dx$ for segY.
 * $M_{1} = f_{6} - f_{2}x - \sum_{i=1}^{Py} Py_{i} + \sum_{i=1}^{Mz} Mz_{i}$ for segZ.
 * $M_{1} = f_{5} + f_{3}x + \sum_{i=1}^{Pz} Pz_{i} + \sum_{i=1}^{My} My_{i}$ for segY.
 * $f_{2}x$ and $f_{3}x$ is moment as distanced from $x_{1}$ by x.
@@ -162,7 +163,9 @@ $M_{x} = M_{1} - \int_0^x V_{x}dx$
 
 ##### Slope Equation
 The slope of the elastic curve $\theta$, can be obtained by integrating the moment diagram and dividing by the flexural rigidity $EL$.
-$\theta_{x} = \theta_{1} - {1\over EI}\int_0^x M_{x}$
+$\theta_{x} = \theta_{1} - {1\over EI}\int_0^x M_{x}$ for segZ.
+$\theta_{x} = \theta_{1} + {1\over EI}\int_0^x M_{x}$ for segY.
+
 * $\theta_{1} = {1 \over 3}({(f_{6} - F_{er6})L \over EIz} - {(f_{12} - F_{er12})L \over 2EIz} + {3(d_{yj}-d_{yi})\over L})$ for segZ.
 * $\theta_{1} = -{1 \over 3}({-(f_{5} - F_{er5})L \over EIy} - {-(f_{11} - F_{er11})L \over 2EIy} + {3(d_{zj}-d_{zi})\over L})$ for segY.
 (The traditional slope-deflection equations assume a sign convention opposite of what we uses for moments about the local y-axis, so a negative value has been applied to those values specifically.)
@@ -177,6 +180,7 @@ Where:
 
 ##### Deflection Equation
 Integrating one more time gives us the equation for the deflection along the segment.
-$\delta_{x} = \delta_{1} + \int_0^x \theta_{x}$
+$\delta_{x} = \delta_{1} + \int_0^x \theta_{x}$ for segZ.
+$\delta_{x} = \delta_{1} - \int_0^x \theta_{x}$ for segY.
 * $\delta_{1} = d_{yi}$ is Deflection at the start of the segZ.
 * $\delta_{1} = d_{zi}$ is Deflection at the start of the segY.

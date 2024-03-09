@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RYBIM.Mathematics;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace RYBIM.Analysis
         public static void prepareModel(FEModel3D model)
         {
             // Reset any nodal displacements
-            model._D = new Dictionary<string, double>();
+            model._D = new Dictionary<string, Vector>();
             foreach (var node in model.Nodes.Values)
             {
                 node.DX = new Dictionary<string, double>();
