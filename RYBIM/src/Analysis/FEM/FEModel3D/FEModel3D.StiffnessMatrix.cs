@@ -18,6 +18,9 @@ namespace RYBIM.Analysis
         ///   to True.Set to False if you want the model to run faster.</param>
         public Matrix K(string combo_name = "Combo 1", bool check_stability = true)
         {
+            //TODO: check if remove combo_name
+
+
             // Initialize a dense matrix of zeros
             var K = new Matrix(Nodes.Count * 6);
 

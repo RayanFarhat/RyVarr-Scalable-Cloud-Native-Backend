@@ -29,10 +29,10 @@ namespace RYBIM
                 var model = new FEModel3D();
                 model.AddNode(0,0,0,"n1");
                 model.AddNode(20,0,0,"n2");
-                model.add_material(29000, 11200, 0.3, 33,null,"mat");
-                model.AddMember("n1", "n2", "mat", 100, 150, 2, 50, "elem");
-                model.def_support("n1", true, true, true, true, false, false);
-                model.def_support("n2", true, true, true, false, false, false);
+                model.add_material(29000, 11200, 0.3, 2.836e-4, null,"mat");
+                model.AddMember("n1", "n2", "mat", 100, 150, 250, 20, "elem");
+                model.def_support("n1", true, true, true, true, true, true);
+                model.def_support("n2", false, false, false, false, false, false);
 
                 var factors = new Dictionary<string, double>
                 {
@@ -40,10 +40,11 @@ namespace RYBIM
                 };
                // model.add_load_combo(factors, "1.4D");
 
-                model.add_member_pt_load("elem", Direction.Fy, -20, 10);
+                model.add_member_pt_load("elem", Direction.Fy, -100000, 19);
 
                 model.Analyze();
-                //var f = new Form1(model.Members["elem"].Shear_Array(Direction.FY,120,"1.4D"));
+                var f = new Form1(model.Members["elem"].Deflection_Array(Direction.Fy,120));
+                f.ShowDialog();
                 double[][] twoDArray = new double[2][];
                 twoDArray[0] = new double[]{ 0,2,4};
                 twoDArray[1] = new double[] { 6, 3, 4 };
@@ -52,33 +53,6 @@ namespace RYBIM
                 //model.Members["elem"].Update_segments();
                 var mem = model.Members["elem"];
                 mem.Update_segments();
-
-                TaskDialog.Show("sss", model.K().ToString());
-
-                // Prepare the model for analysis
-                Analyzer.prepareModel(model);
-                var K = model.K();
-                // Identify which load combinations have the tags the user has given
-                var comboList = Analyzer.identify_combos(model);
-                // Step through each load combination
-                foreach (var combo in comboList)
-                {
-                    // Get the global fixed end reaction vector
-                    var FER = model.FER(combo.Name);
-                    // Get the global nodal force vector      
-                    var P = model.P(combo.Name);
-                    // Calculate the unknown displacements D
-                    //TODO check why Solve return NaN values
-                    var tmpK = ((Matrix)K.Clone());
-                    var D = tmpK.Solve(P.Subtract(FER));
-                    TaskDialog.Show("sss", tmpK.ToString());
-
-                    TaskDialog.Show("sss", D.ToString());
-
-                    // Store the calculated displacements to the model and the nodes in the model
-                    Analyzer.StoreDisplacements(model, D, combo);
-                }
-                Analyzer.calcReactions(model, null);
             }
 
             catch (Exception e)

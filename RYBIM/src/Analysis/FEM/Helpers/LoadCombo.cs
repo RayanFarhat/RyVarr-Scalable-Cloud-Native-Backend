@@ -29,7 +29,7 @@ namespace RYBIM.Analysis
         #endregion
         public LoadCombo(string name, Dictionary<string,double> factors = null ,List<string> combo_tags = null) {
             this.Name = name;
-            if( factors != null )
+            if( factors == null )
             {
                 Factors = new Dictionary<string, double>();
             }

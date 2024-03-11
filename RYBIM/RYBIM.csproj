@@ -91,6 +91,7 @@
     <Compile Include="src\Analysis\FEM\Analyzer\Analyzer.GlobalToLocal.cs" />
     <Compile Include="src\Analysis\FEM\Analyzer\Analyzer.Init.cs" />
     <Compile Include="src\Analysis\FEM\Analyzer\Analyzer.Other.cs" />
+    <Compile Include="src\Analysis\FEM\Analyzer\Analyzer.Partition.cs" />
     <Compile Include="src\Analysis\FEM\FEModel3D\FEModel3D.Analysis.cs" />
     <Compile Include="src\Analysis\FEM\FEModel3D\FEModel3D.Forces.cs" />
     <Compile Include="src\Analysis\FEM\FEModel3D\FEModel3D.Member.cs" />

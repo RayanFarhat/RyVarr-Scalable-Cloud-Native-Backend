@@ -16,10 +16,16 @@ namespace RYBIM.Analysis
         /// Stores calculated displacements from the solver into the model's displacement vector `_D` and into each node object in the model
         /// </summary>
         /// <param name="model">The finite element model being evaluated.</param>
-        /// <param name="D">A vector of calculated displacements</param>
+        /// <param name="D1">An array of calculated displacements.</param>
+        /// <param name="D2">An array of enforced displacements.</param>
+        /// <param name="D1_indices">A list of the degree of freedom indices for each displacement in D1</param>
+        /// <param name="D2_indices">A list of the degree of freedom indices for each displacement in D2</param>
         /// <param name="combo">The load combination to store the displacements for</param>
-        public static void StoreDisplacements(FEModel3D model, Vector D, LoadCombo combo)
+        public static void StoreDisplacements(FEModel3D model, Vector D1, Vector D2, List<int> D1_indices, List<int> D2_indices, LoadCombo combo)
         {
+            // The raw results from the solver are partitioned. Unpartition them.
+            var D = Unpartition_D(model, D1, D2, D1_indices, D2_indices);
+
             model._D[combo.Name] = D;
             // Store the calculated global nodal displacements into each node object
             foreach (var node in model.Nodes.Values)

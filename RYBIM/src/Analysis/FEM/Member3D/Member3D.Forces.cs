@@ -48,13 +48,13 @@ namespace RYBIM.Analysis
                     if (ptLoad.CaseName == case_name)
                     {
                         if (ptLoad.direction == Direction.Fx)
-                            FER.Add(FixedEndReactions.FER_AxialPtLoad(factor*ptLoad.P,ptLoad.X,L()));
+                            FER = FER.Add(FixedEndReactions.FER_AxialPtLoad(factor*ptLoad.P,ptLoad.X,L()));
                         else if (ptLoad.direction == Direction.Fy || ptLoad.direction == Direction.Fz)
-                            FER.Add(FixedEndReactions.FER_PtLoad(factor * ptLoad.P, ptLoad.X, L(), ptLoad.direction));
+                            FER = FER.Add(FixedEndReactions.FER_PtLoad(factor * ptLoad.P, ptLoad.X, L(), ptLoad.direction));
                         else if (ptLoad.direction == Direction.Mx)
-                            FER.Add(FixedEndReactions.FER_Torque(factor * ptLoad.P, ptLoad.X, L()));
+                            FER = FER.Add(FixedEndReactions.FER_Torque(factor * ptLoad.P, ptLoad.X, L()));
                         else if (ptLoad.direction == Direction.My || ptLoad.direction == Direction.Mz)
-                            FER.Add(FixedEndReactions.FER_Moment(factor * ptLoad.P, ptLoad.X, L(), ptLoad.direction));
+                            FER = FER.Add(FixedEndReactions.FER_Moment(factor * ptLoad.P, ptLoad.X, L(), ptLoad.direction));
                         else if (ptLoad.direction == Direction.FX || ptLoad.direction == Direction.FY || ptLoad.direction == Direction.FZ)
                         {
                             double FX = 0;
@@ -80,9 +80,9 @@ namespace RYBIM.Analysis
                             loadMat[1, 0] = FY * ptLoad.P;
                             loadMat[2, 0] = FZ * ptLoad.P;
                             Vector force = Vector.FromMatrix(DirCos.Multiply(loadMat));
-                            FER.Add(FixedEndReactions.FER_AxialPtLoad(factor * force[0], ptLoad.X, L()));
-                            FER.Add(FixedEndReactions.FER_PtLoad(factor * force[1], ptLoad.X, L(), Direction.FY));
-                            FER.Add(FixedEndReactions.FER_PtLoad(factor * force[2], ptLoad.X, L(), Direction.FZ));
+                            FER = FER.Add(FixedEndReactions.FER_AxialPtLoad(factor * force[0], ptLoad.X, L()));
+                            FER = FER.Add(FixedEndReactions.FER_PtLoad(factor * force[1], ptLoad.X, L(), Direction.FY));
+                            FER = FER.Add(FixedEndReactions.FER_PtLoad(factor * force[2], ptLoad.X, L(), Direction.FZ));
                         }
                         else if (ptLoad.direction == Direction.MX || ptLoad.direction == Direction.MY || ptLoad.direction == Direction.MZ)
                         {
@@ -109,9 +109,9 @@ namespace RYBIM.Analysis
                             loadMat[1, 0] = MY * ptLoad.P;
                             loadMat[2, 0] = MZ * ptLoad.P;
                             Vector force = Vector.FromMatrix(DirCos.Multiply(loadMat));
-                            FER.Add(FixedEndReactions.FER_Torque(factor * force[0], ptLoad.X, L()));
-                            FER.Add(FixedEndReactions.FER_Moment(factor * force[1], ptLoad.X, L(), Direction.MY));
-                            FER.Add(FixedEndReactions.FER_Moment(factor * force[2], ptLoad.X, L(), Direction.MZ));
+                            FER = FER.Add(FixedEndReactions.FER_Torque(factor * force[0], ptLoad.X, L()));
+                            FER = FER.Add(FixedEndReactions.FER_Moment(factor * force[1], ptLoad.X, L(), Direction.MY));
+                            FER = FER.Add(FixedEndReactions.FER_Moment(factor * force[2], ptLoad.X, L(), Direction.MZ));
                         }
                     }
                 }
@@ -122,9 +122,9 @@ namespace RYBIM.Analysis
                     if (distLoad.CaseName == case_name)
                     {
                         if (distLoad.direction == Direction.Fx)
-                            FER.Add(FixedEndReactions.FER_AxialLinLoad(distLoad.x1,distLoad.x2,distLoad.w1,distLoad.w2,L()));
+                            FER = FER.Add(FixedEndReactions.FER_AxialLinLoad(distLoad.x1,distLoad.x2,distLoad.w1,distLoad.w2,L()));
                         else if (distLoad.direction == Direction.Fy || distLoad.direction == Direction.Fz)
-                            FER.Add(FixedEndReactions.FER_LinLoad(distLoad.x1, distLoad.x2, distLoad.w1, distLoad.w2, L(), distLoad.direction));
+                            FER = FER.Add(FixedEndReactions.FER_LinLoad(distLoad.x1, distLoad.x2, distLoad.w1, distLoad.w2, L(), distLoad.direction));
                         else if (distLoad.direction == Direction.FX || distLoad.direction == Direction.FY || distLoad.direction == Direction.FZ)
                         {
                             double FX = 0;
@@ -155,9 +155,9 @@ namespace RYBIM.Analysis
                             loadMat2[2, 0] = FZ * distLoad.w2;
                             Vector f1 = Vector.FromMatrix(DirCos.Multiply(loadMat1));
                             Vector f2 = Vector.FromMatrix(DirCos.Multiply(loadMat2));
-                            FER.Add(FixedEndReactions.FER_AxialLinLoad(distLoad.x1, distLoad.x2, factor * f1[0], factor * f2[0], L()));
-                            FER.Add(FixedEndReactions.FER_LinLoad(distLoad.x1, distLoad.x2, factor * f1[1], factor * f2[1], L(), Direction.FY));
-                            FER.Add(FixedEndReactions.FER_LinLoad(distLoad.x1, distLoad.x2, factor * f1[2], factor * f2[2], L(), Direction.FZ));
+                            FER = FER.Add(FixedEndReactions.FER_AxialLinLoad(distLoad.x1, distLoad.x2, factor * f1[0], factor * f2[0], L()));
+                            FER = FER.Add(FixedEndReactions.FER_LinLoad(distLoad.x1, distLoad.x2, factor * f1[1], factor * f2[1], L(), Direction.FY));
+                            FER = FER.Add(FixedEndReactions.FER_LinLoad(distLoad.x1, distLoad.x2, factor * f1[2], factor * f2[2], L(), Direction.FZ));
                         }
                     }
                 }

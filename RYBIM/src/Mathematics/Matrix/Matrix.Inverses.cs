@@ -26,5 +26,27 @@ namespace RYBIM.Mathematics
         {
             return MatrixFunctions.IsInvertible(this.InnerMatrix);
         }
+        /// <summary>
+        /// Check if matrix is singular in faast way
+        public bool IsSingular()
+        {
+            var K = this.Multiply(this.Invert());
+            for (global::System.Int32 i = 0; i < K.RowCount; i++)
+            {
+                for (global::System.Int32 j = 0; j < K.RowCount; j++)
+                {
+                    if (i == j && K[i, j] != 1)
+                    {
+                        return true;
+                    }
+                    else if (i != j && K[i, j] != 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
     }
 }

@@ -19,10 +19,10 @@ namespace RYBIM.Analysis
             var objChart = chart1.ChartAreas[0];
             objChart.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
             objChart.AxisX.Minimum = 0;
-            objChart.AxisX.Maximum = 20;
+            objChart.AxisX.Maximum = 50;
             objChart.AxisY.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
-            objChart.AxisY.Minimum = -20;
-            objChart.AxisY.Maximum = 20;
+            objChart.AxisY.Minimum = -200;
+            objChart.AxisY.Maximum = 200;
             chart1.Series.Clear();
             Series series = new Series("Series Name") { ChartType = SeriesChartType.Line};
             chart1.Series.Add(series);

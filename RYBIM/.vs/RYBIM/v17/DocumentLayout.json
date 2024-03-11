@@ -7,16 +7,12 @@
       "RelativeMoniker": "D:0:0:{071CE39E-3E9C-4EEF-A2FA-A739D7C3D5E1}|RYBIM.csproj|solutionrelative:main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{071CE39E-3E9C-4EEF-A2FA-A739D7C3D5E1}|RYBIM.csproj|c:\\users\\ryanf\\desktop\\ryvarr\\rybim\\src\\mathematics\\matrixfunctions\\matrixfunctions.solvers.cs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{071CE39E-3E9C-4EEF-A2FA-A739D7C3D5E1}|RYBIM.csproj|solutionrelative:src\\mathematics\\matrixfunctions\\matrixfunctions.solvers.cs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{071CE39E-3E9C-4EEF-A2FA-A739D7C3D5E1}|RYBIM.csproj|c:\\users\\ryanf\\desktop\\ryvarr\\rybim\\src\\analysis\\fem\\femodel3d\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{071CE39E-3E9C-4EEF-A2FA-A739D7C3D5E1}|RYBIM.csproj|solutionrelative:src\\analysis\\fem\\femodel3d\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{071CE39E-3E9C-4EEF-A2FA-A739D7C3D5E1}|RYBIM.csproj|c:\\users\\ryanf\\desktop\\ryvarr\\rybim\\src\\analysis\\fem\\femodel3d\\femodel3d.analysis.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{071CE39E-3E9C-4EEF-A2FA-A739D7C3D5E1}|RYBIM.csproj|solutionrelative:src\\analysis\\fem\\femodel3d\\femodel3d.analysis.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{071CE39E-3E9C-4EEF-A2FA-A739D7C3D5E1}|RYBIM.csproj|c:\\users\\ryanf\\desktop\\ryvarr\\rybim\\src\\analysis\\fem\\analyzer\\analyzer.other.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{071CE39E-3E9C-4EEF-A2FA-A739D7C3D5E1}|RYBIM.csproj|solutionrelative:src\\analysis\\fem\\analyzer\\analyzer.other.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,28 +34,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MatrixFunctions.Solvers.cs.cs",
-              "DocumentMoniker": "C:\\Users\\ryanf\\Desktop\\RyVarr\\RYBIM\\src\\Mathematics\\MatrixFunctions\\MatrixFunctions.Solvers.cs.cs",
-              "RelativeDocumentMoniker": "src\\Mathematics\\MatrixFunctions\\MatrixFunctions.Solvers.cs.cs",
-              "ToolTip": "C:\\Users\\ryanf\\Desktop\\RyVarr\\RYBIM\\src\\Mathematics\\MatrixFunctions\\MatrixFunctions.Solvers.cs.cs",
-              "RelativeToolTip": "src\\Mathematics\\MatrixFunctions\\MatrixFunctions.Solvers.cs.cs",
-              "ViewState": "AQIAABwAAAAAAAAAAAAQwA0AAAAVAAAA",
+              "DocumentIndex": 0,
+              "Title": "Main.cs",
+              "DocumentMoniker": "C:\\Users\\ryanf\\Desktop\\RyVarr\\RYBIM\\Main.cs",
+              "RelativeDocumentMoniker": "Main.cs",
+              "ToolTip": "C:\\Users\\ryanf\\Desktop\\RyVarr\\RYBIM\\Main.cs",
+              "RelativeToolTip": "Main.cs",
+              "ViewState": "AQIAABYAAAAAAAAAAAAQwCMAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-09T18:13:12.381Z",
+              "WhenOpened": "2024-03-11T08:53:37.772Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Analyzer.Other.cs",
-              "DocumentMoniker": "C:\\Users\\ryanf\\Desktop\\RyVarr\\RYBIM\\src\\Analysis\\FEM\\Analyzer\\Analyzer.Other.cs",
-              "RelativeDocumentMoniker": "src\\Analysis\\FEM\\Analyzer\\Analyzer.Other.cs",
-              "ToolTip": "C:\\Users\\ryanf\\Desktop\\RyVarr\\RYBIM\\src\\Analysis\\FEM\\Analyzer\\Analyzer.Other.cs",
-              "RelativeToolTip": "src\\Analysis\\FEM\\Analyzer\\Analyzer.Other.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAAWwCcAAAANAAAA",
+              "DocumentIndex": 1,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Users\\ryanf\\Desktop\\RyVarr\\RYBIM\\src\\Analysis\\FEM\\FEModel3D\\Form1.cs",
+              "RelativeDocumentMoniker": "src\\Analysis\\FEM\\FEModel3D\\Form1.cs",
+              "ToolTip": "C:\\Users\\ryanf\\Desktop\\RyVarr\\RYBIM\\src\\Analysis\\FEM\\FEModel3D\\Form1.cs",
+              "RelativeToolTip": "src\\Analysis\\FEM\\FEModel3D\\Form1.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAABcAAAApAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-09T17:48:55.552Z",
+              "WhenOpened": "2024-03-11T09:00:05.325Z",
               "EditorCaption": ""
             },
             {
@@ -70,22 +66,9 @@
               "RelativeDocumentMoniker": "src\\Analysis\\FEM\\FEModel3D\\FEModel3D.Analysis.cs",
               "ToolTip": "C:\\Users\\ryanf\\Desktop\\RyVarr\\RYBIM\\src\\Analysis\\FEM\\FEModel3D\\FEModel3D.Analysis.cs",
               "RelativeToolTip": "src\\Analysis\\FEM\\FEModel3D\\FEModel3D.Analysis.cs",
-              "ViewState": "AQIAAAsAAAAAAAAAAAAAwBEAAAAAAAAA",
+              "ViewState": "AQIAAB8AAAAAAAAAAAAQwBIAAAAtAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-09T17:48:45.449Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Main.cs",
-              "DocumentMoniker": "C:\\Users\\ryanf\\Desktop\\RyVarr\\RYBIM\\Main.cs",
-              "RelativeDocumentMoniker": "Main.cs",
-              "ToolTip": "C:\\Users\\ryanf\\Desktop\\RyVarr\\RYBIM\\Main.cs",
-              "RelativeToolTip": "Main.cs",
-              "ViewState": "AQIAADIAAAAAAAAAAAAQwEYAAAA8AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-09T17:24:16.062Z",
+              "WhenOpened": "2024-03-11T08:23:06.269Z",
               "EditorCaption": ""
             }
           ]
