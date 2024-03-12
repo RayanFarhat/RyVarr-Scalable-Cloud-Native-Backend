@@ -50,6 +50,8 @@ namespace RYBIM.Analysis
             double a = (double)((w2 - w1) / (2 * Length()));
             double b = (double)(w1);
             double c = (double)(V1);
+            double x1, x2;// not thr segment.x1 and segment.x2
+
             //  Determine possible locations of maximum moment
             if (Num.IsEqual(a, 0))
             {
@@ -107,6 +109,8 @@ namespace RYBIM.Analysis
             double a = (double)((w2 - w1) / (2 * Length()));
             double b = (double)(w1);
             double c = (double)(V1);
+            double x1, x2;// not thr segment.x1 and segment.x2
+
             //  Determine possible locations of minimum moment
             if (Num.IsEqual(a, 0))
             {

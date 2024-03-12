@@ -46,15 +46,16 @@ namespace RYBIM.Analysis
         /// </summary>
         public static void renumber(FEModel3D model)
         {
+            int id = 0;
             // Number each node in the model
-            for (int i = 0; i < model.Nodes.Count; i++)
+            foreach (var node in model.Nodes.Values)
             {
-                model.Nodes.ElementAt(i).Value.ID = i;
+                node.ID = id;
+                id++;
             }
 
-            // Descritize all the physical members and number each member in the model
-            int id = 0;
-
+            // Number each member in the model
+            id = 0;
             foreach (var member in model.Members.Values)
             {
                 member.ID = id;

@@ -84,7 +84,7 @@ namespace RYBIM.Analysis
                 }
             }
             else
-                throw new Exception("Direction is not MY or MZ.");
+                throw new Exception("Direction is not My or Mz.");
 
             return Mmax;
         }
@@ -117,7 +117,7 @@ namespace RYBIM.Analysis
                 }
             }
             else
-                throw new Exception("Direction is not MY or MZ.");
+                throw new Exception("Direction is not My or Mz.");
 
             return Mmin;
         }

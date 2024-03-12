@@ -87,12 +87,12 @@ namespace RYBIM.Analysis
             SegmentsZ[0].delta1 = delta1y;
             SegmentsY[0].delta1 = delta1z;
             //  1/3*((m1z - fem1z)*L/(E*Iz) - (m2z - fem2z)*L/(2*E*Iz) + 3*(delta2y - delta1y)/L)
-            SegmentsZ[0].theta1 = (1 / 3) * (
+            SegmentsZ[0].theta1 = (1.0 / 3.0) * (
                 (m1z - fem1z) * L / (E * Iz) 
                 - (m2z - fem2z) * L / (2 * E * Iz) + 3*(delta2y - delta1y)/L
                 );
             // -1/3*((m1y - fem1y)*L/(E*Iy) - (m2y - fem2y)*L/(2*E*Iy) + 3*(delta2z - delta1z)/L)
-            SegmentsY[0].theta1 = -(1 / 3) * (
+            SegmentsY[0].theta1 = -(1.0 / 3.0) * (
                 (m1y - fem1y) * L / (E * Iy)
                 - (m2y - fem2y) * L / (2 * E * Iy) + 3 * (delta2z - delta1z) / L
                 );
@@ -121,7 +121,6 @@ namespace RYBIM.Analysis
                 // The first segment has already been initialized
                 if (i > 0)
                 {
-                    // TODO: make sure if SegmentsZ[i - 1].Length()
                     SegmentsZ[i].theta1 = SegmentsZ[i - 1].Slope(SegmentsZ[i - 1].Length());
                     SegmentsZ[i].delta1 = SegmentsZ[i - 1].Deflection(SegmentsZ[i - 1].Length());
                     SegmentsZ[i].delta_x1 = SegmentsZ[i - 1].AxialDeflection(SegmentsZ[i - 1].Length());

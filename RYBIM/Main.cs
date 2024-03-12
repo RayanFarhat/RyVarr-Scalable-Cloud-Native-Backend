@@ -27,32 +27,27 @@ namespace RYBIM
                 Adapter.Init(commandData.Application);
 
                 var model = new FEModel3D();
-                model.AddNode(0,0,0,"n1");
-                model.AddNode(20,0,0,"n2");
-                model.add_material(29000, 11200, 0.3, 2.836e-4, null,"mat");
-                model.AddMember("n1", "n2", "mat", 100, 150, 250, 20, "elem");
-                model.def_support("n1", true, true, true, true, true, true);
-                model.def_support("n2", false, false, false, false, false, false);
+                model.AddNode(0, 0, 0, "n1");
+                model.AddNode(10, 0, 0, "n2");
+                model.add_material(29000.0, 11200, 0.3, 2.836e-4, null, "mat");
+                model.AddMember("n1", "n2", "mat", 100, 100.0, 250, 20, "elem");
+                model.def_support("n1", true, true, true, false, false, false);
+                model.def_support("n2", true, true, true, true, true, true);
 
                 var factors = new Dictionary<string, double>
                 {
                     { "D", 1.4 }
                 };
-               // model.add_load_combo(factors, "1.4D");
+                // model.add_load_combo(factors, "1.4D");
 
-                model.add_member_pt_load("elem", Direction.Fy, -100000, 19);
+                model.add_member_pt_load("elem", Direction.FY, -100, 5);
 
                 model.Analyze();
-                var f = new Form1(model.Members["elem"].Deflection_Array(Direction.Fy,120));
+                var f = new Form1(model.Members["elem"].Deflection_Array(Direction.Fy, 1001));
                 f.ShowDialog();
-                double[][] twoDArray = new double[2][];
-                twoDArray[0] = new double[]{ 0,2,4};
-                twoDArray[1] = new double[] { 6, 3, 4 };
-                var ff = new Form1(twoDArray);
-                //ff.ShowDialog();
-                //model.Members["elem"].Update_segments();
-                var mem = model.Members["elem"];
-                mem.Update_segments();
+
+
+
             }
 
             catch (Exception e)

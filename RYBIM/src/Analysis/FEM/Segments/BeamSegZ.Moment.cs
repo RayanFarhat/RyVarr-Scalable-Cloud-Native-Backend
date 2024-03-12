@@ -13,8 +13,6 @@ namespace RYBIM.Analysis
         ///   Returns the moment at a location 'x' on the segment.
         public double Moment(double x)
         {
-            var Px = Axial(x);
-            var delta_x = Deflection(x);
             // M1 - V1*x - w1*x**2/2 - x**3*(-w1 + w2)/(6*L)
             return (double)(M1 - V1 * x - w1 * Math.Pow(x, 2) / 2 - Math.Pow(x, 3) * (w2 - w1) / (6 * Length()));
         }
@@ -27,6 +25,8 @@ namespace RYBIM.Analysis
             double a = (double)(-(w2-w1)/(2*Length()));
             double b = (double)(-w1);
             double c = (double)(-V1);
+            double x1, x2;// not thr segment.x1 and segment.x2
+
             //  Determine possible locations of maximum moment
             if (Num.IsEqual(a,0))
             {
@@ -47,8 +47,8 @@ namespace RYBIM.Analysis
             {
                 // x1 = (-b+(b**2-4*a*c)**0.5)/(2*a)
                 //x2 = (-b - (b * *2 - 4 * a * c) * *0.5) / (2 * a)
-                x1 = Math.Pow(-b+(Math.Pow(b,2)-4*a*c),0.5)/(2*a);
-                x2 = Math.Pow(-b-(Math.Pow(b,2)-4*a*c),0.5)/(2*a);
+                x1 = (-b + Math.Sqrt(Math.Pow(b, 2) - 4 * a * c)) / (2 * a);
+                x2 = (-b - Math.Sqrt(Math.Pow(b, 2) - 4 * a * c)) / (2 * a);
             }
             //x1 < 0 or x1 > L
             if (Num.IsFirstSmallerThanSecond((double)x1, 0) || Num.IsFirstBiggerThanSecond((double)x1, Length()))
@@ -61,8 +61,8 @@ namespace RYBIM.Analysis
             double x4 = Length();
 
             // Find the moment at each location of interest
-            var M1 = Moment((double)x1);
-            var M2 = Moment((double)x2);
+            var M1 = Moment(x1);
+            var M2 = Moment(x2);
             var M3 = Moment(x3);
             var M4 = Moment(x4);
             //Return the maximum moment
@@ -84,7 +84,9 @@ namespace RYBIM.Analysis
             double a = (double)(-(w2 - w1) / (2 * Length()));
             double b = (double)(-w1);
             double c = (double)(-V1);
-            //  Determine possible locations of maximum moment
+            double x1, x2;// not thr segment.x1 and segment.x2
+
+            //  Determine possible locations of minimum  moment
             if (Num.IsEqual(a, 0))
             {
                 if (!Num.IsEqual(b, 0))
@@ -103,9 +105,9 @@ namespace RYBIM.Analysis
             else
             {
                 // x1 = (-b+(b**2-4*a*c)**0.5)/(2*a)
-                //x2 = (-b - (b * *2 - 4 * a * c) * *0.5) / (2 * a)
-                x1 = Math.Pow(-b + (Math.Pow(b, 2) - 4 * a * c), 0.5) / (2 * a);
-                x2 = Math.Pow(-b - (Math.Pow(b, 2) - 4 * a * c), 0.5) / (2 * a);
+                // x2 = (-b - (b**2 - 4*a*c)**0.5) / (2 * a)
+                x1 = (-b + Math.Sqrt(Math.Pow(b, 2) - 4 * a * c)) / (2 * a);
+                x2 = (-b - Math.Sqrt(Math.Pow(b, 2) - 4 * a * c)) / (2 * a);
             }
             //x1 < 0 or x1 > L
             if (Num.IsFirstSmallerThanSecond((double)x1, 0) || Num.IsFirstBiggerThanSecond((double)x1, Length()))
@@ -118,10 +120,11 @@ namespace RYBIM.Analysis
             double x4 = Length();
 
             // Find the moment at each location of interest
-            var M1 = Moment((double)x1);
-            var M2 = Moment((double)x2);
+            var M1 = Moment(x1);
+            var M2 = Moment(x2);
             var M3 = Moment(x3);
             var M4 = Moment(x4);
+
             //Return the minimum moment
             var min = M1;
             if (min > M2)
