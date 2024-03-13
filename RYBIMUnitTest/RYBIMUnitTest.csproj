@@ -52,7 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DoubleTest.cs" />
+    <Compile Include="MatrixTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimpleBeamPtLoadTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

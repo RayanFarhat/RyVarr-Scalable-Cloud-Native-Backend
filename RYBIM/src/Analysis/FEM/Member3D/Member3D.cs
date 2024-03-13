@@ -128,6 +128,10 @@ namespace RYBIM.Analysis
             SolvedCombo = null;
         }
 
+        /// <summary>
+        /// Function that return the length of the member.
+        /// </summary>
+        /// <returns>length of the member</returns>
         public double L()
         {
             return this.i_node.Distance(this.j_node);

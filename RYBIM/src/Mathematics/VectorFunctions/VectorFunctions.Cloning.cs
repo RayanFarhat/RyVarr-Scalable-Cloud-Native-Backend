@@ -28,7 +28,7 @@ namespace RYBIM.Mathematics
                 return false;
 
             for (int i = 0; i < length; i++)
-                if (input1[i] != input2[i])
+                if(!Num.IsEqual(input1[i], input2[i]))
                     return false;
 
             return true;

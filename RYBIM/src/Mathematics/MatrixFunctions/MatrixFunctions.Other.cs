@@ -24,8 +24,8 @@ namespace RYBIM.Mathematics
             {
                 for (int col = 0; col < colCount; col++)
                 {
-                    if (matrix1[row, col] != matrix2[row, col])
-                        return false;
+                    if (!Num.IsEqual(matrix1[row, col], matrix2[row, col]))
+                            return false;
                 }
             }
 

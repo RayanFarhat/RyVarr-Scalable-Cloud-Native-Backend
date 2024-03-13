@@ -98,11 +98,12 @@
     <Compile Include="src\Analysis\FEM\FEModel3D\FEModel3D.Node.cs" />
     <Compile Include="src\Analysis\FEM\FEModel3D\FEModel3D.Other.cs" />
     <Compile Include="src\Analysis\FEM\FEModel3D\FEModel3D.StiffnessMatrix.cs" />
-    <Compile Include="src\Analysis\FEM\FEModel3D\Form1.cs">
+    <Compile Include="src\Analysis\FEM\Member3D\Member3D.Plot.cs" />
+    <Compile Include="src\Analysis\FEM\Member3D\MemberPlot.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="src\Analysis\FEM\FEModel3D\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="src\Analysis\FEM\Member3D\MemberPlot.Designer.cs">
+      <DependentUpon>MemberPlot.cs</DependentUpon>
     </Compile>
     <Compile Include="src\Analysis\FEM\Helpers\Direction.cs" />
     <Compile Include="src\Analysis\FEM\FEModel3D\FEModel3D.cs" />
@@ -206,8 +207,8 @@
     <None Include="RYBIMDev.addin" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="src\Analysis\FEM\FEModel3D\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="src\Analysis\FEM\Member3D\MemberPlot.resx">
+      <DependentUpon>MemberPlot.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
