@@ -1,4 +1,5 @@
 ﻿using Autodesk.Revit.DB;
+using Autodesk.Revit.DB.Structure;
 using Autodesk.Revit.UI;
 using System;
 using System.Collections.Generic;
@@ -37,6 +38,12 @@ namespace RYBIM.RevitAdapter
                 }
             }
             return structuralSlabs;
+        }
+        public static IList<AnalyticalMember> getAllAnalyticalMembers()
+        {
+            FilteredElementCollector collectorAnalyticalLinks = new FilteredElementCollector(doc);
+            var list = collectorAnalyticalLinks.OfClass(typeof(AnalyticalMember)).ToElements();
+            return list.Cast<AnalyticalMember>().ToList();
         }
         public static FilteredElementCollector GetLevels()
         {

@@ -92,13 +92,12 @@ to get how to get global stiffness matrix form local stiffness matrix we do:
 $F = T^{-1}f ⟶ KU = T^{-1}ku ⟶  KU = T^{-1}kTU ⟶  K = T^{-1}kT$
 Then The equation we need is $K = T^{-1}kT$
 
-#### fixed end reactions or support reactions:
+#### fixed end reactions Vector:
 
-structures are often supported or constrained at certain points. In such cases, additional reactions or forces can arise at these constrained points due to the supports.
-in this case the equation $f=ku$ is turned to $f=ku+f_{er}$. where $f_{er}$ is the fixed end reaction vector.
+The fixed end reactions vector $f_{er}$ is build by iterating on every point and distributed loads.
+* We calculate the reactions of the element as if it is fixed at both ends(We explain below how to handle elements with diffrent supports).
 
-The vector is build by iterating on every point and distributed laods.
-we start with $f_{er} = (0,0,0,0,0,0,0,0,0,0,0,0)$.
+We start with $f_{er} = (0,0,0,0,0,0,0,0,0,0,0,0)$.
 For each point load we check the direction and add the result to the vector:
 * Fx(local axial point load): $f_{er1} +=-{P(L-x) \over L}, f_{er7} +=-{Px \over L}$.
 
@@ -126,6 +125,23 @@ Also for each linear distributed load we convert it to point load and we check t
 
 ![alt text](images/reactionLaws.png)
 ![alt text](images/distToPt.png)
+
+#### Local end forces vector(after analysis)
+
+structures are supported or constrained at certain points. In such cases, additional reactions or forces can arise at these constrained points due to the supports.
+
+where we repersent the vector that contain only the reactions of the element as $f_{er}$.
+
+* The external force vector is $f_{ext}=ku$.
+* The internal force vector is $f = f_{ext} + f_{er}$.
+* We find the internal shear and moment from the vector $f$.
+
+where $u$ is the displacment vector that found from the global analysis.
+##### how to find reactions for elements with different supports:
+* If the element is fixed in both ends, then the $u$ vector is all zeros, then $f = f_{er}$.
+* If the element have different supports, then the $u$ vector is not zero where the degree of freedom is free, That's mean that $f_{ext}$ vector is not zero.
+* So if the element has pinned support for example you will get it from fixed end reaction + the external forces you get from the stiffness matrix and the displacment vector.
+
 #### Beam Segment Equations(after analysis)
 Loading along a beam is not always mathematically continuous. Concentrated forces and moments, as well as starting and ending points of distributed loads interupt the mathematical continuity of the beam. For this reason, it is convenient to segment the beam between discontinuities to form a series of mathematically continuous segments. This allows for the direct calculation of maximum/minimum forces, rotations, and deflections in each segment.
 

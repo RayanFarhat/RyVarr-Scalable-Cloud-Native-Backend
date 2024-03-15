@@ -108,7 +108,7 @@
     <Compile Include="src\Analysis\FEM\Helpers\Direction.cs" />
     <Compile Include="src\Analysis\FEM\FEModel3D\FEModel3D.cs" />
     <Compile Include="src\Analysis\FEM\Helpers\DistributedLoad.cs" />
-    <Compile Include="src\Analysis\FEM\Helpers\FixedEndReactions.cs" />
+    <Compile Include="src\Analysis\FEM\Helpers\FixedEndsReactions.cs" />
     <Compile Include="src\Analysis\FEM\Helpers\LoadCombo.cs" />
     <Compile Include="src\Analysis\FEM\Helpers\PointLoad.cs" />
     <Compile Include="src\Analysis\FEM\Member3D\Member3D.Axial.cs" />

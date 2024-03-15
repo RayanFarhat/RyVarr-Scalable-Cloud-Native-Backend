@@ -12,6 +12,8 @@ using RYBIM.RevitAdapter;
 using RYBIM.Analysis;
 using System.Data;
 using RYBIM.Mathematics;
+using Autodesk.Revit.DB.Structure;
+using System.Xml.Linq;
 
 namespace RYBIM
 {
@@ -30,10 +32,15 @@ namespace RYBIM
                 model.AddNode(0, 0, 0, "n1");
                 model.AddNode(10, 0, 0, "n2");
                 model.add_material(29000.0, 11200, 0.3, 2.836e-4, null, "mat");
-                model.AddMember("n1", "n2", "mat", 100, 100.0, 250, 20, "elem");
+                model.AddMember("n1", "n2", "mat", 100, 100, 250, 20, "elem");
                 model.def_support("n1", true, true, true, true, true, true);
-                model.def_support("n2", false, false, false, false, false, false);
+                model.def_support("n2", true, true, true, true, true, true);
 
+                model.AddNode(20, 0, 0, "n3");
+                model.AddNode(30, 0, 0, "n4");
+                model.AddMember("n3", "n4", "mat", 100, 100.0, 250, 20, "elem2");
+                model.def_support("n3", true, true, true, true, true, true);
+                model.def_support("n4", true, true, true, true, true, false);
 
                 var factors = new Dictionary<string, double>
                 {
@@ -42,14 +49,17 @@ namespace RYBIM
                 // model.add_load_combo(factors, "1.4D");
 
                 model.add_member_pt_load("elem", Direction.Fy, -100, 5);
+                model.add_member_pt_load("elem2", Direction.Fy, -100, 5);
                 //model.Add_node_load("n2", Direction.FY, -100);
 
                 model.Analyze();
+                throw new Exception($"{model.Members["elem2"].d()}");
 
-                //model.Members["elem"].plot_Shear(Direction.Fy);
-                //model.Members["elem"].plot_Moment(Direction.Mz);
-                model.Members["elem"].plot_Deflection(Direction.Fy);
-
+                model.Members["elem"].plot_Shear(Direction.Fy);
+                model.Members["elem2"].plot_Shear(Direction.Fy);
+                //.Members["elem"].plot_Moment(Direction.Mz);
+                //model.Members["elem2"].plot_Moment(Direction.Mz);
+                //model.Members["elem"].plot_Deflection(Direction.Fy);
             }
 
             catch (Exception e)

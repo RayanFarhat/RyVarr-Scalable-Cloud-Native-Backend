@@ -41,7 +41,7 @@ namespace RYBIM.Analysis
             {
                 SeriesName = "Moment on XY-axis";
             }
-            else if (D == Direction.Fz)
+            else if (D == Direction.My)
             {
                 SeriesName = "Moment on XZ-axis";
             }

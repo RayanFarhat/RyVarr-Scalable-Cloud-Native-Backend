@@ -67,7 +67,7 @@ namespace RYBIM.Analysis
                     }
                     // Calculate the unknown displacements D1
                     var F = P1.Subtract(FER1);
-                    var F2 = Vector.FromMatrix(K12.Multiply(D2));
+                    var F2 = Vector.FromMatrix(K12.Multiply(D2));//F2 = 0 when there is no enforced displacment
                     // this is equal to D1 = K11^-1 * F.Subtract(F2), but Solve is faster, any problems then switch to the old one
                     D1 = K11.Solve(F.Subtract(F2));
                 }

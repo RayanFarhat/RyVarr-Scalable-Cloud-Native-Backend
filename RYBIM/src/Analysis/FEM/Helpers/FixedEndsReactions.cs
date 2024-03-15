@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RYBIM.Analysis
 {
-    internal static class FixedEndReactions
+    internal static class FixedEndsReactions
     {
         /// <summary>
         ///   Returns the fixed end reaction vector for a point load.
@@ -47,14 +47,14 @@ namespace RYBIM.Analysis
         {
             var b = L - x;
             var FER = new Vector(12);
-            if (D == Direction.MY || D == Direction.My)
+            if (D == Direction.MZ || D == Direction.Mz)
             {
                 FER[1] = 6 * M * x * b / Math.Pow(L, 3);
                 FER[5] = M * b * (2*x - b)/Math.Pow(L, 2);
                 FER[7] = -6 * M * x * b / Math.Pow(L, 3);
                 FER[11] = M * x * (2 * b - x) / Math.Pow(L, 2);
             }
-            else if (D == Direction.MZ || D == Direction.Mz)
+            else if (D == Direction.MY || D == Direction.My)
             {
                 FER[2] = -6 * M * x * b / Math.Pow(L, 3);
                 FER[4] = M * b * (2 * x - b) / Math.Pow(L, 2);
