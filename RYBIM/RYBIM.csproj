@@ -75,17 +75,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\RectangularConcrete.cs" />
-    <Compile Include="RevitAdapter\Adapter.cs" />
-    <Compile Include="RevitAdapter\Adapter_Create.cs" />
-    <Compile Include="RevitAdapter\Adapter_Debug.cs" />
-    <Compile Include="RevitAdapter\Adapter_Edit.cs" />
-    <Compile Include="RevitAdapter\Adapter_Filter.cs" />
-    <Compile Include="RevitAdapter\Adapter_Geometry.cs" />
-    <Compile Include="RevitAdapter\Adapter_Rebar.cs" />
-    <Compile Include="RevitAdapter\Adapter_Selector.cs" />
-    <Compile Include="RevitAdapter\UIAdapter.cs" />
-    <Compile Include="Main.cs" />
+    <Compile Include="src\RC\RCModel\RCModel.Generator.cs" />
+    <Compile Include="src\RevitCommands\RectangularConcrete.cs" />
+    <Compile Include="src\RC\RCModel\RCModel.cs" />
+    <Compile Include="src\RevitAdapter\Adapter.cs" />
+    <Compile Include="src\RevitAdapter\Adapter_Create.cs" />
+    <Compile Include="src\RevitAdapter\Adapter_Debug.cs" />
+    <Compile Include="src\RevitAdapter\Adapter_Edit.cs" />
+    <Compile Include="src\RevitAdapter\Adapter_Filter.cs" />
+    <Compile Include="src\RevitAdapter\Adapter_Geometry.cs" />
+    <Compile Include="src\RevitAdapter\Adapter_Rebar.cs" />
+    <Compile Include="src\RevitAdapter\Adapter_Selector.cs" />
+    <Compile Include="src\RevitAdapter\UIAdapter.cs" />
+    <Compile Include="src\Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\Analysis\FEM\Analyzer\Analyzer.Checks.cs" />
     <Compile Include="src\Analysis\FEM\Analyzer\Analyzer.GlobalToLocal.cs" />

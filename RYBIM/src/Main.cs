@@ -4,16 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Windows.Media.Imaging;
-using System.Threading.Tasks;
-using Autodesk.Revit.Creation;
 using RYBIM.RevitAdapter;
 using RYBIM.Analysis;
-using System.Data;
-using RYBIM.Mathematics;
 using Autodesk.Revit.DB.Structure;
-using System.Xml.Linq;
+using RYBIM.RC;
 
 namespace RYBIM
 {
@@ -36,12 +30,6 @@ namespace RYBIM
                 model.def_support("n1", true, true, true, true, true, true);
                 model.def_support("n2", true, true, true, true, true, true);
 
-                model.AddNode(20, 0, 0, "n3");
-                model.AddNode(30, 0, 0, "n4");
-                model.AddMember("n3", "n4", "mat", 100, 100.0, 250, 20, "elem2");
-                model.def_support("n3", true, true, true, true, true, true);
-                model.def_support("n4", true, true, true, true, true, false);
-
                 var factors = new Dictionary<string, double>
                 {
                     { "D", 1.4 }
@@ -49,17 +37,23 @@ namespace RYBIM
                 // model.add_load_combo(factors, "1.4D");
 
                 model.add_member_pt_load("elem", Direction.Fy, -100, 5);
-                model.add_member_pt_load("elem2", Direction.Fy, -100, 5);
                 //model.Add_node_load("n2", Direction.FY, -100);
 
                 model.Analyze();
-                throw new Exception($"{model.Members["elem2"].d()}");
 
-                model.Members["elem"].plot_Shear(Direction.Fy);
-                model.Members["elem2"].plot_Shear(Direction.Fy);
+                //model.Members["elem"].plot_Shear(Direction.Fy);
                 //.Members["elem"].plot_Moment(Direction.Mz);
-                //model.Members["elem2"].plot_Moment(Direction.Mz);
                 //model.Members["elem"].plot_Deflection(Direction.Fy);
+
+                using (Transaction transaction = new Transaction(Adapter.doc, "Create Curve"))
+                {
+                    transaction.Start();
+                    var m = new RCModel();
+                    m.generateElements();
+                    transaction.Commit();
+                }
+
+      
             }
 
             catch (Exception e)

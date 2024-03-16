@@ -15,7 +15,7 @@ namespace RYBIM.RevitAdapter
             string str = "Parameters for " + e.Name + "\n";
             if (e is FamilyInstance)
             {
-                var location = getLocationAsMin(e);
+                var location = getMinPoint(e);
                 str += $"at : X: {location.X}, Y: {location.Y}, Z: {location.Z}\n";
                 var box = getWidthDepthHeight(e);
                 str += $"Width: {box.X}\nDepth: {box.Y}\nHeight: {box.Z}\n";

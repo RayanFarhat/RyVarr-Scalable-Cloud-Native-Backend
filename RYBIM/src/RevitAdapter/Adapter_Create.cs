@@ -14,6 +14,14 @@ namespace RYBIM.RevitAdapter
     public partial class Adapter
     {
         // must inside Transaction
+        public static AnalyticalMember CreateAnalyticalMember(XYZ startPoint, XYZ endPoint, AnalyticalStructuralRole role)
+        {
+            Line line = Line.CreateBound(startPoint, endPoint);
+
+            var member = AnalyticalMember.Create(doc, line);
+            member.StructuralRole = role;
+            return member;
+        }
         public static FamilyInstance CreateColumn(XYZ locationinMin, FamilySymbol symbol, Level level, double Height=0)
         {
             if (!symbol.IsActive)

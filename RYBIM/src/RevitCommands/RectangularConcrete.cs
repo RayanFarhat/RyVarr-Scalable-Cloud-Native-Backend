@@ -4,7 +4,7 @@ using RYBIM.RevitAdapter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-namespace RYBIM.Commands
+namespace RYBIM.RevitCommands
 {
     [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
     public class RectangularConcrete : IExternalCommand

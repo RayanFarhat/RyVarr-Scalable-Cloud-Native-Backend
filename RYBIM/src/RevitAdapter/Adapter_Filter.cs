@@ -11,7 +11,7 @@ namespace RYBIM.RevitAdapter
 {
     public partial class Adapter
     {
-        public static List<Element> getAllColomns()
+        public static List<Element> getAllColumns()
         {
             ElementCategoryFilter filter = new ElementCategoryFilter(BuiltInCategory.OST_StructuralColumns);
             FilteredElementCollector collector = new FilteredElementCollector(doc);
@@ -44,6 +44,17 @@ namespace RYBIM.RevitAdapter
             FilteredElementCollector collectorAnalyticalLinks = new FilteredElementCollector(doc);
             var list = collectorAnalyticalLinks.OfClass(typeof(AnalyticalMember)).ToElements();
             return list.Cast<AnalyticalMember>().ToList();
+        }
+        public static AnalyticalMember GetAnalyticalMember(ElementId memberId)
+        {
+            IList<AnalyticalMember> analyticalMembers = getAllAnalyticalMembers();
+
+            foreach (AnalyticalMember member in analyticalMembers)
+            {
+                if (member.Id == memberId)
+                    return member;
+            }
+            return null;
         }
         public static FilteredElementCollector GetLevels()
         {
