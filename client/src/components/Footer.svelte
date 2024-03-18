@@ -1,7 +1,7 @@
 <footer class="footer p-10 bg-base-200 text-base-content">
   <aside>
     <div class="flex-1 px-2 mx-2 font-extrabold">RyVarr</div>
-    <p>Copyright © 2023 <br /> All right reserved</p>
+    <p>Copyright © 2024 <br /> All right reserved</p>
   </aside>
   <!-- <nav>
     <header class="footer-title">Company</header>

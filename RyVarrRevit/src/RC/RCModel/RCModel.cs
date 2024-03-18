@@ -33,12 +33,12 @@ namespace RyVarrRevit.RC
             }
         }
         /// <summary>
-        /// A dictionary that save the analytical elements Ids linked with there physical elements Ids.
+        /// The finite element model
         /// </summary>
         public FEModel3D FEModel { get; set; }
 
-        /// <summary>physical
-        /// A dictionary that save the analytical elements Ids linked with there analytical elements Ids.
+        /// <summary>
+        /// A dictionary that save the analytical elements Ids linked with there physicals elements Ids.
         /// </summary>
         public Dictionary<string, string> Elements { get; set; }
 

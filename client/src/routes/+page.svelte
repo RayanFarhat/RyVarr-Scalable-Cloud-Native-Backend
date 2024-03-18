@@ -1,11 +1,9 @@
 <script>
     import Intro from "../components/MainPage/Intro.svelte";
-    import Products from "../components/MainPage/Products.svelte";
-    import Services from "../components/MainPage/Services.svelte";
-    import WhyUs from "../components/MainPage/WhyUs.svelte";
+    import Download from "../components/MainPage/Download.svelte";
+    import Features from "../components/MainPage/Features.svelte";
 </script>
 
 <Intro />
-<Products />
-<Services />
-<WhyUs />
+<Features />
+<Download />

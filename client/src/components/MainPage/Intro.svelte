@@ -32,16 +32,16 @@
     <!-- second col -->
     <div>
       <h1 class="text-5xl font-bold">
-        Custom Software Development for
+        Revit Reinforced Concrete Structural Analysis and Rebar in
         <span
           class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary"
         >
-          Structure Engineers</span
+          Minutes</span
         >
       </h1>
       <p class="py-6">
-        Automate your engineering workflow by utilizing custom software designed
-        by you and built by us.
+        Finish simple reinforced concrete building project in revit with
+        minutes.
       </p>
       <div>
         <a class="p-0 hover:bg-transparentt" href={btnUrl}

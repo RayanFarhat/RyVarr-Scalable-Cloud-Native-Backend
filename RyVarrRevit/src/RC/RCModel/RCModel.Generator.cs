@@ -19,6 +19,12 @@ namespace RyVarrRevit.RC
         {
             FEModel.Nodes.Clear();
             Elements.Clear();
+            var list = Adapter.getAllAnalyticalMembers();
+            foreach (var mem in list)
+            {
+                mem.DeleteSubelements(mem.GetSubelements());
+                Adapter.doc.Delete(mem.Id);
+            }
             AddColsElems();
             AddBeamsElems();
         }
