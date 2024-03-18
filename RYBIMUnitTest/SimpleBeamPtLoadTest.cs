@@ -1,13 +1,13 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RYBIM.Analysis;
-using RYBIM.Mathematics;
+using RyVarrRevit.Analysis;
+using RyVarrRevit.Mathematics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RYBIMUnitTest
+namespace RyVarrRevitUnitTest
 {
     [TestClass]
     public class SimpleBeamPtLoadTest

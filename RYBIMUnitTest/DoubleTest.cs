@@ -1,8 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using RYBIM.Mathematics;
+using RyVarrRevit.Mathematics;
 
-namespace RYBIMUnitTest
+namespace RyVarrRevitUnitTest
 {
     [TestClass]
     public class DoubleTest

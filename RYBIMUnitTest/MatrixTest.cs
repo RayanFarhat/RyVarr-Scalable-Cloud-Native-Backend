@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RYBIM.Mathematics;
+using RyVarrRevit.Mathematics;
 
 
-namespace RYBIMUnitTest
+namespace RyVarrRevitUnitTest
 {
     [TestClass]
     public class MatrixTest
