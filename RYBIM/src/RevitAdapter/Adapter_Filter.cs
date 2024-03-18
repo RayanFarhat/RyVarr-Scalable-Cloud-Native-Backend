@@ -68,11 +68,22 @@ namespace RYBIM.RevitAdapter
             var list = collectorAnalyticalLinks.OfClass(typeof(PointLoad)).ToElements();
             return list.Cast<PointLoad>().ToList();
         }
+        
+        public static PointLoadType getPointLoadType()
+        {
+            FilteredElementCollector collectorAnalyticalLinks = new FilteredElementCollector(doc);
+            return collectorAnalyticalLinks.OfClass(typeof(PointLoadType)).ToElements()[0] as PointLoadType;
+        }
         public static List<LineLoad> getAllLineLoads()
         {
             FilteredElementCollector collectorAnalyticalLinks = new FilteredElementCollector(doc);
             var list = collectorAnalyticalLinks.OfClass(typeof(LineLoad)).ToElements();
             return list.Cast<LineLoad>().ToList();
+        }
+        public static LineLoadType getLineLoadType()
+        {
+            FilteredElementCollector collectorAnalyticalLinks = new FilteredElementCollector(doc);
+            return collectorAnalyticalLinks.OfClass(typeof(LineLoadType)).ToElements()[0] as LineLoadType;
         }
         public static FilteredElementCollector GetLevels()
         {

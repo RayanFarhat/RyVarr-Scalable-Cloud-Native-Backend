@@ -49,21 +49,13 @@ namespace RYBIM
                 using (Transaction transaction = new Transaction(Adapter.doc, "Create Curve"))
                 {
                     transaction.Start();
-                    var m = new RCModel();
-                    //m.generateElements();
-                    Options opt = new Options();
-                    opt.ComputeReferences = true;
-                    opt.IncludeNonVisibleObjects = true;
-                    Adapter.getAllAnalyticalMembers()[0].get_Geometry(opt);
-                    var columnReference = Adapter.getAllAnalyticalMembers()[0].GetCurve().GetEndPointReference(0);
-         
-                    Adapter.doc.Create.NewPointBoundaryConditions(columnReference,
-                    TranslationRotationValue.Fixed, 0,
-                    TranslationRotationValue.Fixed, 0,
-                    TranslationRotationValue.Fixed, 0,
-                    TranslationRotationValue.Release, 0,
-                    TranslationRotationValue.Release, 0,
-                    TranslationRotationValue.Release, 0);
+
+                    var mems = Adapter.getAllAnalyticalMembers();
+
+                    Adapter.CreateLineLoad(mems[0], mems[0].GetCurve().GetEndPoint(0), mems[0].GetCurve().GetEndPoint(1),
+                        new XYZ(0,2000,0), new XYZ(0, 200, 0), new XYZ(0, 0, 0), new XYZ(0, 0, 0));
+                    TaskDialog.Show("ss", $"{Adapter.getAllPointLoads().Count}");
+
                     transaction.Commit();
                 }
 
@@ -92,36 +84,9 @@ namespace RYBIM
             UIAdapter.CreateTab("RYBIM");
 
             // RectangularConcrete panel
-            UIAdapter.AddPanel("Rectangular Concrete");
-            UIAdapter.AddTextBox(0, "RectangularConcreteTextBox", "Ask RYBIM", "Responsible for copying, editing, and creating rectangular concrete elements.",
-                "For now, to make sure that the plugin work with no issues,\n" +
-                "make sure that the family name for rectangular concrete columns is 'Concrete-Rectangular-Column'\n" +
-                "and the family name for rectangular concrete beams is 'Concrete-Rectangular Beam'\n" +
-                "and Paramaters for them for width and height is 'b' and 'h'\n" +
-                "and Thickness Parameter for Floors is 'Default Thickness'\n");
-            UIAdapter.AddPushBtn(0, "Run", "RYBIM.Commands.RectangularConcrete", "press to generate RYBIM results");
-            UIAdapter.TextBoxes[0].EnterPressed += ProcessText;
-            void ProcessText(object sender, Autodesk.Revit.UI.Events.TextBoxEnterPressedEventArgs args)
-            {
-                string strText = (sender as TextBox).Value as string;
-                TaskDialog.Show("Revit", strText);
-            }
-            UIAdapter.panels[0].AddSlideOut();
-            // add radio button group
-            RadioButtonGroupData radioData = new RadioButtonGroupData("RectangularConcreteRadioGroup");
-            RadioButtonGroup radioButtonGroup = UIAdapter.panels[0].AddItem(radioData) as RadioButtonGroup;
-
-            // create toggle buttons and add to radio button group
-            ToggleButtonData tb1 = new ToggleButtonData("toggleButtonPoint", "Point");
-            tb1.ToolTip = "RYBIM will perform your command based on origin point, press run and then select point";
-            ToggleButtonData tb2 = new ToggleButtonData("toggleButtonTwoPoint", "TwoPoint");
-            tb2.ToolTip = "RYBIM will perform your command based on origin point, press run and then select two point";
-            ToggleButtonData tb3 = new ToggleButtonData("toggleButtonElements", "Elements");
-            tb3.ToolTip = "RYBIM will perform your command based on selected elements, select element adn then press run";
-            radioButtonGroup.AddItem(tb1);
-            radioButtonGroup.AddItem(tb2);
-            radioButtonGroup.AddItem(tb3);
-            UIAdapter.AddRadioButtonGroup(radioButtonGroup);
+            UIAdapter.AddPanel("Members creation");
+            UIAdapter.AddPushBtn(0, "Generate", "RYBIM.RevitCommands.MembersGenerator", "press to generate Analytical Members from your rectungular concrete elements.");
+          
 
             //text panel
             UIAdapter.AddPanel("textPanel");

@@ -4,6 +4,7 @@ using Autodesk.Revit.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -21,6 +22,30 @@ namespace RYBIM.RevitAdapter
             var member = AnalyticalMember.Create(doc, line);
             member.StructuralRole = role;
             return member;
+        }
+        /// <summary>
+        /// Create point load on Analytical Member
+        /// </summary>
+        /// <param name="member">Analytical Member to put the load on</param>
+        /// <param name="forceVeector">The applied 3d force vector.</param>
+        /// <param name="momentVector">The applied 3d moment vector.</param>
+        /// <param name="point">the location on the load(must be point on the member)</param>
+        /// <returns>The created point load</returns>
+        public static PointLoad CreatePointLoad(AnalyticalMember member, XYZ forceVeector, XYZ momentVector,XYZ point)
+        {
+            var load = Autodesk.Revit.DB.Structure.PointLoad.Create(doc, member.Id, point, forceVeector, momentVector, null);
+            load.OrientTo = LoadOrientTo.HostLocalCoordinateSystem;
+            return load;
+        }
+        public static LineLoad CreateLineLoad(AnalyticalMember member, XYZ startPoint, XYZ endPoint,
+            XYZ forceVeector1, XYZ forceVeector2, XYZ momentVector1, XYZ momentVector2)
+        {
+            Line line = Line.CreateBound(startPoint, endPoint);
+            var load = Autodesk.Revit.DB.Structure.LineLoad.Create(doc, member.Id, line, forceVeector1, momentVector1, null);
+            load.OrientTo = LoadOrientTo.HostLocalCoordinateSystem;
+            load.ForceVector2 = forceVeector2;
+            load.MomentVector2 = momentVector2;
+            return load;
         }
         /// <summary>
         /// Create Boundary Condition

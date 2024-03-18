@@ -12,7 +12,10 @@ namespace RYBIM.RC
 {
     public partial class RCModel
     {
-        public void generateElements()
+        /// <summary>
+        /// Ensure data between physical and analytical and RyVarr elements is consistent and up-to-date.
+        /// </summary>
+        public void SynchronizeModels()
         {
             FEModel.Nodes.Clear();
             Elements.Clear();
