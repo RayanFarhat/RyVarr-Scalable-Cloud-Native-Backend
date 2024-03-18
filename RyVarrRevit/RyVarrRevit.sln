@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RyVarrRevit", "RyVarrRevit.csproj", "{071CE39E-3E9C-4EEF-A2FA-A739D7C3D5E1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RyVarrRevitUnitTest", "..\RYBIMUnitTest\RyVarrRevitUnitTest.csproj", "{D09BE36B-ECFC-484C-B1B1-082E46E8C1C9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RyVarrRevitUnitTest", "..\RyVarrRevitUnitTest\RyVarrRevitUnitTest.csproj", "{D09BE36B-ECFC-484C-B1B1-082E46E8C1C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
