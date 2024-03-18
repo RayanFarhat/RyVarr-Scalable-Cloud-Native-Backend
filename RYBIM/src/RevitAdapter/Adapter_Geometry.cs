@@ -179,5 +179,25 @@ namespace RYBIM.RevitAdapter
             return (p1: new XYZ(centerX1,centerY1,centerZ1), p2: new XYZ(centerX2, centerY2, centerZ2));
         }
 
+        /// <summary>
+        /// compute reference and get the Curve End Point Reference
+        /// </summary>
+        /// <param name="e">any line element</param>
+        /// <param name="index">0 for start point,1 for the end point</param>
+        /// <returns></returns>
+        public static Reference GetCurveEndPointReference(Element e,int index)
+        {
+            Options opt = new Options();
+            opt.ComputeReferences = true;
+            opt.IncludeNonVisibleObjects = true;
+            Reference ptRef = null;
+            foreach (GeometryObject geoObj in e.get_Geometry(opt))
+            {
+                Curve cv = geoObj as Curve;
+                if (cv == null) continue;
+                ptRef = cv.GetEndPointReference(index);
+            }
+            return ptRef;
+        }
     }
 }

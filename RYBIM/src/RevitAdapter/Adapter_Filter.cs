@@ -56,6 +56,24 @@ namespace RYBIM.RevitAdapter
             }
             return null;
         }
+        public static List<BoundaryConditions> getAllBoundaryConditions()
+        {
+            FilteredElementCollector collectorAnalyticalLinks = new FilteredElementCollector(doc);
+            var list = collectorAnalyticalLinks.OfClass(typeof(BoundaryConditions)).ToElements();
+            return list.Cast<BoundaryConditions>().ToList();
+        }
+        public static List<PointLoad> getAllPointLoads()
+        {
+            FilteredElementCollector collectorAnalyticalLinks = new FilteredElementCollector(doc);
+            var list = collectorAnalyticalLinks.OfClass(typeof(PointLoad)).ToElements();
+            return list.Cast<PointLoad>().ToList();
+        }
+        public static List<LineLoad> getAllLineLoads()
+        {
+            FilteredElementCollector collectorAnalyticalLinks = new FilteredElementCollector(doc);
+            var list = collectorAnalyticalLinks.OfClass(typeof(LineLoad)).ToElements();
+            return list.Cast<LineLoad>().ToList();
+        }
         public static FilteredElementCollector GetLevels()
         {
             return new FilteredElementCollector(Adapter.doc)

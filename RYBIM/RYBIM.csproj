@@ -75,6 +75,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\RC\RCModel\RCModel.FEModel3D.cs" />
     <Compile Include="src\RC\RCModel\RCModel.Generator.cs" />
     <Compile Include="src\RevitCommands\RectangularConcrete.cs" />
     <Compile Include="src\RC\RCModel\RCModel.cs" />

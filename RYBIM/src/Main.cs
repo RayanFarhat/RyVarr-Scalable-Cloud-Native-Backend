@@ -8,6 +8,7 @@ using RYBIM.RevitAdapter;
 using RYBIM.Analysis;
 using Autodesk.Revit.DB.Structure;
 using RYBIM.RC;
+using System.Data.Common;
 
 namespace RYBIM
 {
@@ -49,11 +50,23 @@ namespace RYBIM
                 {
                     transaction.Start();
                     var m = new RCModel();
-                    m.generateElements();
+                    //m.generateElements();
+                    Options opt = new Options();
+                    opt.ComputeReferences = true;
+                    opt.IncludeNonVisibleObjects = true;
+                    Adapter.getAllAnalyticalMembers()[0].get_Geometry(opt);
+                    var columnReference = Adapter.getAllAnalyticalMembers()[0].GetCurve().GetEndPointReference(0);
+         
+                    Adapter.doc.Create.NewPointBoundaryConditions(columnReference,
+                    TranslationRotationValue.Fixed, 0,
+                    TranslationRotationValue.Fixed, 0,
+                    TranslationRotationValue.Fixed, 0,
+                    TranslationRotationValue.Release, 0,
+                    TranslationRotationValue.Release, 0,
+                    TranslationRotationValue.Release, 0);
                     transaction.Commit();
                 }
 
-      
             }
 
             catch (Exception e)

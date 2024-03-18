@@ -22,6 +22,33 @@ namespace RYBIM.RevitAdapter
             member.StructuralRole = role;
             return member;
         }
+        /// <summary>
+        /// Create Boundary Condition
+        /// </summary>
+        /// <param name="member">Analytical Member to add Boundary Condition on</param>
+        /// <param name="index">0 for start point,1 for the end point</param>
+        /// <param name="support_DX">Indicates whether the node is supported against translation in the global X-direction.Defaults to False.</param>
+        /// <param name="support_DY">Indicates whether the node is supported against translation in the global Y-direction.Defaults to False.</param>
+        /// <param name="support_DZ">Indicates whether the node is supported against translation in the global Z-direction.Defaults to False.</param>
+        /// <param name="support_RX">Indicates whether the node is supported against rotation about the global X-axis.Defaults to False.</param>
+        /// <param name="support_RY">Indicates whether the node is supported against rotation about the global Y-axis.Defaults to False.</param>
+        /// <param name="support_RZ">Indicates whether the node is supported against rotation about the global Z-axis.Defaults to False.</param>
+        /// <returns>return the Boundary Condition objec that created</returns>
+        public static BoundaryConditions CreateBoundaryCondition(AnalyticalMember member,int index,
+            bool support_DX = false, bool support_DY = false, bool support_DZ = false,
+            bool support_RX = false, bool support_RY = false, bool support_RZ = false)
+        {
+            var ptRef = GetCurveEndPointReference(member, index);
+            var dx = support_DX ? TranslationRotationValue.Fixed : TranslationRotationValue.Release;
+            var dy = support_DY ? TranslationRotationValue.Fixed : TranslationRotationValue.Release;
+            var dz = support_DZ ? TranslationRotationValue.Fixed : TranslationRotationValue.Release;
+            var rx = support_RX ? TranslationRotationValue.Fixed : TranslationRotationValue.Release;
+            var ry = support_RY ? TranslationRotationValue.Fixed : TranslationRotationValue.Release;
+            var rz = support_RZ ? TranslationRotationValue.Fixed : TranslationRotationValue.Release;
+
+            return doc.Create.NewPointBoundaryConditions(ptRef,
+                    dx, 0, dy, 0, dz, 0, rx, 0, ry, 0, rz, 0);
+        }
         public static FamilyInstance CreateColumn(XYZ locationinMin, FamilySymbol symbol, Level level, double Height=0)
         {
             if (!symbol.IsActive)
