@@ -56,6 +56,12 @@ namespace RyVarrRevit.RevitAdapter
             }
             return null;
         }
+        public static IList<Material> getAllMaterials()
+        {
+            FilteredElementCollector collectorAnalyticalLinks = new FilteredElementCollector(doc);
+            var list = collectorAnalyticalLinks.OfClass(typeof(Material)).ToElements();
+            return list.Cast<Material>().ToList();
+        }
         public static List<BoundaryConditions> getAllBoundaryConditions()
         {
             FilteredElementCollector collectorAnalyticalLinks = new FilteredElementCollector(doc);

@@ -77,12 +77,13 @@ namespace RyVarrRevit
             UIAdapter.CreateTab("RyVarr");
 
             // RectangularConcrete panel
-            UIAdapter.AddPanel("Members creation");
-            UIAdapter.AddPushBtn(0, "Generate", "RyVarrRevit.RevitCommands.MembersGenerator", "press to generate Analytical Members from your rectungular concrete elements.");
+            UIAdapter.AddPanel("Reading");
+            UIAdapter.AddPushBtn(0, "Sync", "RyVarrRevit.RevitCommands.ModelSync",
+                "press to ensure data between physical and analytical and RyVarr elements is consistent and up-to-date.");
           
 
             //text panel
-            UIAdapter.AddPanel("textPanel");
+            UIAdapter.AddPanel("Test");
             UIAdapter.AddPushBtn(1, "btn", "RyVarrRevit.Test", "press this btn");
 
             return Result.Succeeded;

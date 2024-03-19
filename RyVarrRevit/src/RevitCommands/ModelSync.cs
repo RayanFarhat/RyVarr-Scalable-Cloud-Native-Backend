@@ -8,7 +8,7 @@ using System.Linq;
 namespace RyVarrRevit.RevitCommands
 {
     [Autodesk.Revit.Attributes.Transaction(Autodesk.Revit.Attributes.TransactionMode.Manual)]
-    public class MembersGenerator : IExternalCommand
+    public class ModelSync : IExternalCommand
     {
         public Autodesk.Revit.UI.Result Execute(ExternalCommandData commandData,
           ref string message, ElementSet elements)
@@ -17,7 +17,7 @@ namespace RyVarrRevit.RevitCommands
             {
                 UIDocument uidoc = commandData.Application.ActiveUIDocument;
                 Adapter.Init(commandData.Application);
-                using (Transaction transaction = new Transaction(Adapter.doc, "Generate Analytical models"))
+                using (Transaction transaction = new Transaction(Adapter.doc, "Model Synchronization"))
                 {
                     transaction.Start();
                     RCModel.Instance.SynchronizeModels();

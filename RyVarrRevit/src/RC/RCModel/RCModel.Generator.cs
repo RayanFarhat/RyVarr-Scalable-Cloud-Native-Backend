@@ -1,21 +1,15 @@
 ﻿using Autodesk.Revit.DB.Structure;
 using Autodesk.Revit.DB;
 using RyVarrRevit.RevitAdapter;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
 
 namespace RyVarrRevit.RC
 {
     public partial class RCModel
     {
         /// <summary>
-        /// Ensure data between physical and analytical and RyVarr elements is consistent and up-to-date.
+        ///Generate Analytical Members from columnes and beams, after delete all other analytical members
         /// </summary>
-        public void SynchronizeModels()
+        public void GenerateAnalyticalMembers()
         {
             FEModel.Nodes.Clear();
             Elements.Clear();

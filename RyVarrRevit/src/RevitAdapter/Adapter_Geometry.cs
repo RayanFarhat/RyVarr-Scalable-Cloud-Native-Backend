@@ -81,6 +81,9 @@ namespace RyVarrRevit.RevitAdapter
             }
             return null;
         }
+        /// <summary>
+        /// width x depth y height z
+        /// </summary>
         public static XYZ getWidthDepthHeight(Element e)
         {
             var p = GetSolid(e.get_Geometry(new Options())).GetBoundingBox().Max;
@@ -198,6 +201,12 @@ namespace RyVarrRevit.RevitAdapter
                 ptRef = cv.GetEndPointReference(index);
             }
             return ptRef;
+        }
+        public static XYZ getCentroid(Element e)
+        {
+            Options options = new Options();
+            options.IncludeNonVisibleObjects = true;
+            return GetSolid(e.get_Geometry(options)).ComputeCentroid();
         }
     }
 }
