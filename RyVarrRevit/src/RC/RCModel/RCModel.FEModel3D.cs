@@ -17,6 +17,87 @@ namespace RyVarrRevit.RC
 {
     public partial class RCModel
     {
+        public void addAllLoads()
+        {
+            var ptLoads = Adapter.getAllPointLoads();
+            foreach (var ptLoad in ptLoads)
+            {
+                var hostId = ptLoad.HostElementId.ToString();
+                if (FEModel.Members.ContainsKey(hostId))
+                {
+                    var localXPosition = Math.Round(getDistance(ptLoad.Point, FEModel.Members[hostId].i_node), 6);
+                    if (ptLoad.OrientTo == LoadOrientTo.Project)
+                    {
+                        if (ptLoad.ForceVector.X != 0)
+                            FEModel.add_member_pt_load(hostId, Direction.FX, ptLoad.ForceVector.X, localXPosition);
+                        if (ptLoad.ForceVector.Y != 0)
+                            FEModel.add_member_pt_load(hostId, Direction.FY, ptLoad.ForceVector.Y, localXPosition);
+                        if (ptLoad.ForceVector.Z != 0)
+                            FEModel.add_member_pt_load(hostId, Direction.FZ, ptLoad.ForceVector.Z, localXPosition);
+                        if (ptLoad.MomentVector.X != 0)
+                            FEModel.add_member_pt_load(hostId, Direction.MX, ptLoad.MomentVector.X, localXPosition);
+                        if (ptLoad.MomentVector.Y != 0)
+                            FEModel.add_member_pt_load(hostId, Direction.MY, ptLoad.MomentVector.Y, localXPosition);
+                        if (ptLoad.MomentVector.Z != 0)
+                            FEModel.add_member_pt_load(hostId, Direction.MZ, ptLoad.MomentVector.Z, localXPosition);
+                    }
+                    else
+                    {
+                        if (ptLoad.ForceVector.X != 0)
+                            FEModel.add_member_pt_load(hostId, Direction.Fx, ptLoad.ForceVector.X, localXPosition);
+                        if (ptLoad.ForceVector.Y != 0)
+                            FEModel.add_member_pt_load(hostId, Direction.Fy, ptLoad.ForceVector.Y, localXPosition);
+                        if (ptLoad.ForceVector.Z != 0)
+                            FEModel.add_member_pt_load(hostId, Direction.Fz, ptLoad.ForceVector.Z, localXPosition);
+                        if (ptLoad.MomentVector.X != 0)
+                            FEModel.add_member_pt_load(hostId, Direction.Mx, ptLoad.MomentVector.X, localXPosition);
+                        if (ptLoad.MomentVector.Y != 0)
+                            FEModel.add_member_pt_load(hostId, Direction.My, ptLoad.MomentVector.Y, localXPosition);
+                        if (ptLoad.MomentVector.Z != 0)
+                            FEModel.add_member_pt_load(hostId, Direction.Mz, ptLoad.MomentVector.Z, localXPosition);
+                    }
+                }
+            }
+            var distLoads = Adapter.getAllLineLoads();
+            foreach (var distLoad in distLoads)
+            {
+                var hostId = distLoad.HostElementId.ToString();
+                if (FEModel.Members.ContainsKey(hostId))
+                {
+                    var localX1Position = Math.Round(getDistance(distLoad.StartPoint, FEModel.Members[hostId].i_node), 6);
+                    var localX2Position = Math.Round(getDistance(distLoad.EndPoint, FEModel.Members[hostId].i_node), 6);
+                    var forceVector1 = distLoad.ForceVector1;
+                    var forceVector2 = distLoad.ForceVector2;
+                    if (localX1Position > localX2Position)
+                    {
+                        var tmp = localX1Position;
+                        localX1Position = localX2Position;
+                        localX2Position = tmp;
+                        forceVector1 = distLoad.ForceVector2;
+                        forceVector2 = distLoad.ForceVector1;
+                    }
+                    if (distLoad.OrientTo == LoadOrientTo.Project)
+                    {
+                        if (forceVector1.X != 0 || forceVector2.X != 0)
+                            FEModel.add_member_dist_load(hostId,Direction.FX, forceVector1.X, forceVector2.X, localX1Position,localX2Position);
+                        if (forceVector1.Y != 0 || forceVector2.Y != 0)
+                            FEModel.add_member_dist_load(hostId, Direction.FY, forceVector1.Y, forceVector2.Y, localX1Position, localX2Position);
+                        if (forceVector1.Z != 0 || forceVector2.Z != 0)
+                            FEModel.add_member_dist_load(hostId, Direction.FZ, forceVector1.Z, forceVector2.Z, localX1Position, localX2Position);
+                    }
+                    else
+                    {
+                        if (forceVector1.X != 0 || forceVector2.X != 0)
+                            FEModel.add_member_dist_load(hostId, Direction.Fx, forceVector1.X, forceVector2.X, localX1Position, localX2Position);
+                        if (forceVector1.Y != 0 || forceVector2.Y != 0)
+                            FEModel.add_member_dist_load(hostId, Direction.Fy, forceVector1.Y, forceVector2.Y, localX1Position, localX2Position);
+                        if (forceVector1.Z != 0 || forceVector2.Z != 0)
+                            FEModel.add_member_dist_load(hostId, Direction.Fz, forceVector1.Z, forceVector2.Z, localX1Position, localX2Position);
+                    }
+
+                }
+            }
+        }
         public void addElement(Element elem, AnalyticalMember member)
         {
 
@@ -136,6 +217,13 @@ namespace RyVarrRevit.RC
                Math.Pow(p1.X - p2.X, 2) +
                Math.Pow(p1.Y - p2.Y, 2) +
                Math.Pow(p1.Z - p2.Z, 2));
+        }
+        public double getDistance(XYZ p, Node3D n)
+        {
+            return Math.Sqrt(
+               Math.Pow(p.X - n.X, 2) +
+               Math.Pow(p.Y - n.Y, 2) +
+               Math.Pow(p.Z - n.Z, 2));
         }
     }
 }

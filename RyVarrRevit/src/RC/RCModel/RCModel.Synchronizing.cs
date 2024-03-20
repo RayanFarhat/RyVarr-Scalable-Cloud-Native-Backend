@@ -33,7 +33,6 @@ namespace RyVarrRevit.RC
             if (elements.Count != members.Count)
             {
                 throw new Exception("number of analytical members is not equal to the number of beams and columns");
-
             }
             foreach (var elem in elements)
             {
@@ -76,6 +75,7 @@ namespace RyVarrRevit.RC
                     FEModel.def_support(nodeName,support_DX,support_DY,support_DZ,support_RX,support_RY,support_RZ);
                 }
             }
+            addAllPtLoads();
         }
     }
 }
