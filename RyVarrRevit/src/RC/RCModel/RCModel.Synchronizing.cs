@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.DB.Structure;
+using Autodesk.Revit.UI;
 using RyVarrRevit.Analysis;
 using RyVarrRevit.RevitAdapter;
 
@@ -57,6 +58,23 @@ namespace RyVarrRevit.RC
                     throw new Exception($"some member added two times for some reason.");
                 }
                 addElement(elem, closestMember);
+            }
+
+            // add Boundary Conditions to model nodes
+            var boundaries = Adapter.getAllBoundaryConditions();
+            foreach (var boundary in boundaries)
+            {
+                var nodeName = getNodeName(boundary.Point);
+                if (FEModel.Nodes.ContainsKey(nodeName))
+                {
+                    bool support_DX = boundary.LookupParameter("X Translation").AsValueString() == "Fixed" ? true : false;
+                    bool support_DY = boundary.LookupParameter("Y Translation").AsValueString() == "Fixed" ? true : false;
+                    bool support_DZ = boundary.LookupParameter("Z Translation").AsValueString() == "Fixed" ? true : false;
+                    bool support_RX = boundary.LookupParameter("X Rotation").AsValueString() == "Fixed" ? true : false;
+                    bool support_RY = boundary.LookupParameter("Y Rotation").AsValueString() == "Fixed" ? true : false;
+                    bool support_RZ = boundary.LookupParameter("Z Rotation").AsValueString() == "Fixed" ? true : false;
+                    FEModel.def_support(nodeName,support_DX,support_DY,support_DZ,support_RX,support_RY,support_RZ);
+                }
             }
         }
     }
