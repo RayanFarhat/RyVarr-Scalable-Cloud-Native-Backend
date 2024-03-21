@@ -77,5 +77,107 @@ namespace RyVarrRevit.Analysis
         {
             return _D[combo_name];
         }
+        /// <summary>
+        /// override the Main ToString method to print every thing in the model
+        /// </summary>
+        /// <returns>string with every thing in the model</returns>
+        public override string ToString()
+        {
+            var str = "";
+            foreach (var combo in this.LoadCombos)
+            {
+                str += combo.Value.Name + ":\n";
+                foreach (var factor in combo.Value.Factors)
+                {
+                    str += $"   case name {factor.Key}, factor = {factor.Value}\n";
+                }
+            }
+            str += "Nodes:\n";
+            foreach (var node in this.Nodes)
+            {
+                str += $"{node.Key} : dx={node.Value.support_DX},dy={node.Value.support_DY},dz={node.Value.support_DZ},rx={node.Value.support_RX},ry={node.Value.support_RY},rz={node.Value.support_RZ}\n";
+            }
+            foreach (var mem in this.Members)
+            {
+                str += $"member {mem.Key}:\n    node i {mem.Value.i_node.Name}\n    node j {mem.Value.j_node.Name}\n    len {mem.Value.L()}\n";
+                foreach (var ptLoad in mem.Value.PtLoads)
+                {
+                    string strDir;
+                    switch (ptLoad.direction)
+                    {
+                        case Direction.FX:
+                            strDir = "FX";
+                            break;
+                        case Direction.FY:
+                            strDir = "FY";
+                            break;
+                        case Direction.FZ:
+                            strDir = "FZ";
+                            break;
+                        case Direction.Fx:
+                            strDir = "Fx";
+                            break;
+                        case Direction.Fy:
+                            strDir = "Fy";
+                            break;
+                        case Direction.Fz:
+                            strDir = "Fz";
+                            break;
+                        case Direction.MX:
+                            strDir = "MX";
+                            break;
+                        case Direction.MY:
+                            strDir = "MY";
+                            break;
+                        case Direction.MZ:
+                            strDir = "MZ";
+                            break;
+                        case Direction.Mx:
+                            strDir = "Mx";
+                            break;
+                        case Direction.My:
+                            strDir = "My";
+                            break;
+                        case Direction.Mz:
+                            strDir = "Mz";
+                            break;
+                        default:
+                            strDir = "Unknown Dir";
+                            break;
+                    }
+                    str += $"   point load {ptLoad.P}, direction {strDir}, position on member {ptLoad.X}, case name {ptLoad.CaseName}\n";
+                }
+                foreach (var distLoad in mem.Value.DistLoads)
+                {
+                    string strDir;
+                    switch (distLoad.direction)
+                    {
+                        case Direction.FX:
+                            strDir = "FX";
+                            break;
+                        case Direction.FY:
+                            strDir = "FY";
+                            break;
+                        case Direction.FZ:
+                            strDir = "FZ";
+                            break;
+                        case Direction.Fx:
+                            strDir = "Fx";
+                            break;
+                        case Direction.Fy:
+                            strDir = "Fy";
+                            break;
+                        case Direction.Fz:
+                            strDir = "Fz";
+                            break;
+                        default:
+                            strDir = "Unknown Dir";
+                            break;
+                    }
+                    str += $"   line load w1 {distLoad.w1},w2 {distLoad.w2}, direction {strDir}, x1 {distLoad.x1},x2 {distLoad.x2}, case name {distLoad.CaseName}\n";
+                }
+            }
+            return str;
+        }
     }
 }

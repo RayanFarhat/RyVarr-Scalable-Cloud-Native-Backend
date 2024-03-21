@@ -10,11 +10,13 @@ namespace RyVarrRevit.Analysis
 {
     public partial class Member3D
     {
+        public static int count = 0;
         /// <summary>
         ///   Returns the member's local displacement vector.
         /// </summary>
         public Vector d(string combo_name = "Combo 1")
         {
+            count++;
             var mat = T().Multiply(D(combo_name));
             return Vector.FromMatrix(mat);
         }

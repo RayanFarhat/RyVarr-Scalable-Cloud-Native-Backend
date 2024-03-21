@@ -93,7 +93,10 @@ namespace RyVarrRevit.Analysis
             var p = Math.Abs(x1 - x2)*(w1+w2)/2;
             // location of load based on the law 
             var x = Math.Abs(x1 - x2)*(w1 + 2*w2)/(3*(w1+w2));
-
+            if (w1 == 0 && w2 == 0)
+            {
+                return new Vector(12);
+            }
             return FER_AxialPtLoad(p,x,L);
         }
         /// <summary>
@@ -126,7 +129,10 @@ namespace RyVarrRevit.Analysis
             var p = Math.Abs(x1 - x2) * (w1 + w2) / 2;
             // location of load based on the law 
             var x = Math.Abs(x1 - x2) * (w1 + 2 * w2) / (3 * (w1 + w2));
-
+            if (w1 == 0 && w2 == 0)
+            {
+                return new Vector(12);
+            }
             return FER_PtLoad(p,x,L,D);
         }
     }

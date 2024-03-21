@@ -91,6 +91,18 @@ namespace RyVarrRevit.RevitAdapter
             FilteredElementCollector collectorAnalyticalLinks = new FilteredElementCollector(doc);
             return collectorAnalyticalLinks.OfClass(typeof(LineLoadType)).ToElements()[0] as LineLoadType;
         }
+        public static List<LoadCombination> getAllLoadCombinations()
+        {
+            FilteredElementCollector collectorAnalyticalLinks = new FilteredElementCollector(doc);
+            var list = collectorAnalyticalLinks.OfClass(typeof(LoadCombination)).ToElements();
+            return list.Cast<LoadCombination>().ToList();
+        }
+        public static List<LoadCase> getAllLoadCases()
+        {
+            FilteredElementCollector collectorAnalyticalLinks = new FilteredElementCollector(doc);
+            var list = collectorAnalyticalLinks.OfClass(typeof(LoadCase)).ToElements();
+            return list.Cast<LoadCase>().ToList();
+        }
         public static FilteredElementCollector GetLevels()
         {
             return new FilteredElementCollector(Adapter.doc)

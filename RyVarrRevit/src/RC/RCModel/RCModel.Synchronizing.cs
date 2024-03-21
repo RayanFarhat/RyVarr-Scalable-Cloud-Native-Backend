@@ -23,6 +23,8 @@ namespace RyVarrRevit.RC
             FEModel.Nodes.Clear();
             FEModel.Members.Clear();
             FEModel.Materials.Clear();
+            FEModel.LoadCombos.Clear();
+            //addLoadCombos();
             addRevitMaterialsToFEModel();
 
             var members = Adapter.getAllAnalyticalMembers();
@@ -75,7 +77,11 @@ namespace RyVarrRevit.RC
                     FEModel.def_support(nodeName,support_DX,support_DY,support_DZ,support_RX,support_RY,support_RZ);
                 }
             }
-            addAllPtLoads();
+            addAllLoads();
+            FEModel.Analyze();
+            var m = FEModel.Members.ElementAt(4).Value;
+            m.plot_Shear(Direction.Fz);
+            //TaskDialog.Show("sss", FEModel.K().ToString());
         }
     }
 }

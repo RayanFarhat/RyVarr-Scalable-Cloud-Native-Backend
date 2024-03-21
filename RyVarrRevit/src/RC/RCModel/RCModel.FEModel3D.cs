@@ -153,6 +153,31 @@ namespace RyVarrRevit.RC
                 FEModel.Materials.Add(mat.Name,ryMat);
             }
         }
+        public void addLoadCombos()
+        {
+            var combos = Adapter.getAllLoadCombinations();
+            var cases = Adapter.getAllLoadCases();
+            if (combos.Count == 0)
+            {
+                TaskDialog.Show("RyVarr Error", "there is no Load Combination specified.");
+            }
+            foreach (var combo in combos)
+            {
+                var factors = new Dictionary<string, double>();
+                // iterate over each case and his factor
+                foreach (var component in combo.GetComponents())
+                {
+                    foreach (var loadCase in cases)
+                    {
+                        if (loadCase.Id == component.LoadCaseOrCombinationId)
+                        {
+                            factors.Add(loadCase.Name, component.Factor);
+                        }
+                    }
+                }
+                FEModel.add_load_combo(factors, combo.Name);
+            }
+        }
         /// <summary>
         /// get node name that inside the FEModel nodes
         /// </summary>

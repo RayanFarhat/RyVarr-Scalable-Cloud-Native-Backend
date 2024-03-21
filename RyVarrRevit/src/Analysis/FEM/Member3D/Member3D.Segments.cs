@@ -23,12 +23,15 @@ namespace RyVarrRevit.Analysis
 
             foreach (var load in this.PtLoads)
             {
-                disconts.Add(load.X);
+                if (!disconts.Contains(load.X))
+                    disconts.Add(load.X);
             }
             foreach (var load in this.DistLoads)
             {
-                disconts.Add(load.x1);
-                disconts.Add(load.x2);
+                if (!disconts.Contains(load.x1))
+                    disconts.Add(load.x1);
+                if (!disconts.Contains(load.x2))
+                    disconts.Add(load.x2);
             }
             // Sort the list and eliminate duplicate values
             disconts.Sort();
