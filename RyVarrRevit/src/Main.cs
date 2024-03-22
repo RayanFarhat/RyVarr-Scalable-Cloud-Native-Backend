@@ -28,7 +28,7 @@ namespace RyVarrRevit
                 model.AddNode(10, 0, 0, "n2");
                 model.add_material(29000.0, 11200, 0.3, 2.836e-4, null, "mat");
                 model.AddMember("n1", "n2", "mat", 100, 100, 250, 20, "elem");
-                model.def_support("n1", true, true, true, true, true, true);
+                model.def_support("n1", true, true, true, false, false, false);
                 model.def_support("n2", true, true, true, true, true, true);
 
                 var factors = new Dictionary<string, double>
@@ -36,15 +36,18 @@ namespace RyVarrRevit
                     { "D", 1.4 }
                 };
                 // model.add_load_combo(factors, "1.4D");
-
-                model.add_member_pt_load("elem", Direction.Fy, -100, 5);
+                model.add_member_dist_load("elem", Direction.Fy, -100, -100, 0, 10);
+                //model.add_member_pt_load("elem", Direction.Fy, -100, 5);
                 //model.Add_node_load("n2", Direction.FY, -100);
 
                 model.Analyze();
 
                 //model.Members["elem"].plot_Shear(Direction.Fy);
-                //.Members["elem"].plot_Moment(Direction.Mz);
-                //model.Members["elem"].plot_Deflection(Direction.Fy);
+                //model.Members["elem"].plot_Moment(Direction.Mz);
+                model.Members["elem"].plot_Deflection(Direction.Fy);
+                //TaskDialog.Show("ccs",model.Members["elem"].Deflection(Direction.Fy,6).ToString());
+                //model.Members["elem"].Deflection(Direction.Fy, 4);
+                //TaskDialog.Show("ccs", model.Members["elem"].fer().ToString());
 
                 using (Transaction transaction = new Transaction(Adapter.doc, "Create Curve"))
                 {

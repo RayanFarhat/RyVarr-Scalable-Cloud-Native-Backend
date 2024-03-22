@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -125,15 +126,44 @@ namespace RyVarrRevit.Analysis
 
         public static Vector FER_LinLoad(double x1, double x2, double w1, double w2, double L, Direction D)
         {
-            // trapezoidal distributed load is equal to w1 triangle load + w2 triangle load
-            var p = Math.Abs(x1 - x2) * (w1 + w2) / 2;
-            // location of load based on the law 
-            var x = Math.Abs(x1 - x2) * (w1 + 2 * w2) / (3 * (w1 + w2));
-            if (w1 == 0 && w2 == 0)
+            var FER = new Vector(12);
+
+            var diff = x1 - x2;
+            //(10*L**3*w1 + 10*L**3*w2 - 15*L*w1*x1**2 - 10*L*w1*x1*x2 - 5*L*w1*x2**2 - 5*L*w2*x1**2 - 10*L*w2*x1*x2 - 15*L*w2*x2**2 + 8*w1*x1**3 + 6*w1*x1**2*x2 +
+            //4*w1*x1*x2**2 + 2*w1*x2**3 + 2*w2*x1**3 + 4*w2*x1**2*x2 + 6*w2*x1*x2**2 + 8*w2*x2**3)/(20*L**3))
+            var a = (10 * Math.Pow(L, 3) * w1 + 10 * Math.Pow(L, 3) * w2 - 15 * L * w1 * Math.Pow(x1, 2) - 10 * L * w1 * x1 * x2 - 5 * L * w1 * Math.Pow(x2, 2)
+                    - 5 * L * w2 * Math.Pow(x1, 2) - 10 * L * w2 * x1 * x2 - 15 * L * w2 * Math.Pow(x2, 2) + 8 * w1 * Math.Pow(x1, 3) + 6 * w1 * Math.Pow(x1, 2) * x2
+                    + 4 * w1 * x1 * Math.Pow(x2, 2) + 2 * w1 * Math.Pow(x2, 3) + 2 * w2 * Math.Pow(x1, 3) + 4 * w2 * Math.Pow(x1, 2) * x2 + 6 * w2 * x1 * Math.Pow(x2, 2)
+                    + 8 * w2 * Math.Pow(x2, 3)) / (20 * Math.Pow(L, 3));
+
+            var b = (20 * Math.Pow(L, 2) * w1 * x1 + 10 * Math.Pow(L, 2) * w1 * x2 + 10 * Math.Pow(L, 2) * w2 * x1 + 20 * Math.Pow(L, 2) * w2 * x2 - 30 * L * w1 * Math.Pow(x1, 2)
+                    - 20 * L * w1 * x1 * x2 - 10 * L * w1 * Math.Pow(x2, 2) - 10 * L * w2 * Math.Pow(x1, 2) - 20 * L * w2 * x1 * x2 - 30 * L * w2 * Math.Pow(x2, 2) + 12 * w1 * Math.Pow(x1, 3)
+                    + 9 * w1 * Math.Pow(x1, 2) * x2 + 6 * w1 * x1 * Math.Pow(x2, 2) + 3 * w1 * Math.Pow(x2, 3) + 3 * w2 * Math.Pow(x1, 3) + 6 * w2 * Math.Pow(x1, 2) * x2
+                    + 9 * w2 * x1 * Math.Pow(x2, 2) + 12 * w2 * Math.Pow(x2, 3)) / (60 * Math.Pow(L, 2));
+
+            var c = (-15 * L * w1 * Math.Pow(x1, 2) - 10 * L * w1 * x1 * x2 - 5 * L * w1 * Math.Pow(x2, 2) - 5 * L * w2 * Math.Pow(x1, 2) - 10 * L * w2 * x1 * x2 - 15 * L * w2 * Math.Pow(x2, 2)
+                    + 8 * w1 * Math.Pow(x1, 3) + 6 * w1 * Math.Pow(x1, 2) * x2 + 4 * w1 * x1 * Math.Pow(x2, 2) + 2 * w1 * Math.Pow(x2, 3) + 2 * w2 * Math.Pow(x1, 3)
+                    + 4 * w2 * Math.Pow(x1, 2) * x2 + 6 * w2 * x1 * Math.Pow(x2, 2) + 8 * w2 * Math.Pow(x2, 3)) / (20 * Math.Pow(L, 3));
+
+            var d = (-15 * L * w1 * Math.Pow(x1, 2) - 10 * L * w1 * x1 * x2 - 5 * L * w1 * Math.Pow(x2, 2) - 5 * L * w2 * Math.Pow(x1, 2) - 10 * L * w2 * x1 * x2 - 15 * L * w2 * Math.Pow(x2, 2)
+                    + 12 * w1 * Math.Pow(x1, 3) + 9 * w1 * Math.Pow(x1, 2) * x2 + 6 * w1 * x1 * Math.Pow(x2, 2) + 3 * w1 * Math.Pow(x2, 3) + 3 * w2 * Math.Pow(x1, 3)
+                    + 6 * w2 * Math.Pow(x1, 2) * x2 + 9 * w2 * x1 * Math.Pow(x2, 2) + 12 * w2 * Math.Pow(x2, 3)) / (60 * Math.Pow(L, 2));
+
+            if (D == Direction.FY || D == Direction.Fy)
             {
-                return new Vector(12);
+                FER[1] = diff * a;
+                FER[5] = diff * b;
+                FER[7] = -diff * c;
+                FER[11] = diff * d;
             }
-            return FER_PtLoad(p,x,L,D);
+            else if (D == Direction.FZ || D == Direction.Fz)
+            {
+                FER[2] = diff * a;
+                FER[4] = -diff * b;
+                FER[8] = -diff * c;
+                FER[10] = -diff * d;
+            }
+            return FER;
         }
     }
 }

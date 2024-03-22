@@ -10,7 +10,7 @@ namespace RyVarrRevit.Mathematics
     {
         public static bool IsFirstBiggerThanSecond(double d1, double d2)
         {
-            if (Math.Abs(d1 - d2) < 0.0001)
+            if (Math.Abs(d1 - d2) < 0.000001)
                 return false;
             if (d1 > d2)
                 return true;
@@ -18,7 +18,7 @@ namespace RyVarrRevit.Mathematics
         }
         public static bool IsFirstSmallerThanSecond(double d1, double d2)
         {
-            if (Math.Abs(d1 - d2) < 0.0001)
+            if (Math.Abs(d1 - d2) < 0.000001)
                 return false;
             if (d1 < d2)
                 return true;
@@ -28,7 +28,7 @@ namespace RyVarrRevit.Mathematics
         {
             if (d1 > d2)
                 return true;
-            if (Math.Abs(d1 - d2) < 0.0001)
+            if (Math.Abs(d1 - d2) < 0.000001)
                 return true;
             return false;
         }
@@ -36,13 +36,13 @@ namespace RyVarrRevit.Mathematics
         {
             if (d1 < d2)
                 return true;
-            if (Math.Abs(d1 - d2) < 0.0001)
+            if (Math.Abs(d1 - d2) < 0.000001)
                 return true;
             return false;
         }
         public static bool IsEqual(double d1, double d2)
         {
-            if (Math.Abs(d1 - d2) < 0.0001)
+            if (Math.Abs(d1 - d2) < 0.000001)
                 return true;
             return false;
         }

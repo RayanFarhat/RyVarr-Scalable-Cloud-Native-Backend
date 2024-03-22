@@ -78,9 +78,11 @@ namespace RyVarrRevit.RC
                 }
             }
             addAllLoads();
+
+            //////////
             FEModel.Analyze();
             var m = FEModel.Members.ElementAt(4).Value;
-            m.plot_Shear(Direction.Fz);
+            m.plot_Moment(Direction.My);
             //TaskDialog.Show("sss", FEModel.K().ToString());
         }
     }
