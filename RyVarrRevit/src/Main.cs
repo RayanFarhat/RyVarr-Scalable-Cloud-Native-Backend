@@ -24,8 +24,8 @@ namespace RyVarrRevit
                 Adapter.Init(commandData.Application);
 
                 var model = new FEModel3D();
-                model.AddNode(0, 0, 0, "n1");
-                model.AddNode(10, 0, 0, "n2");
+                model.AddNode(-23.079116, 9.779291, 9.84252, "n1");
+                model.AddNode(-13.845813, 9.779291, 9.84252, "n2");
                 model.add_material(29000.0, 11200, 0.3, 2.836e-4, null, "mat");
                 model.AddMember("n1", "n2", "mat", 100, 100, 250, 20, "elem");
                 model.def_support("n1", true, true, true, false, false, false);
@@ -36,18 +36,27 @@ namespace RyVarrRevit
                     { "D", 1.4 }
                 };
                 // model.add_load_combo(factors, "1.4D");
-                model.add_member_dist_load("elem", Direction.Fy, -100, -100, 0, 10);
-                //model.add_member_pt_load("elem", Direction.Fy, -100, 5);
+                model.add_member_dist_load("elem", Direction.Fy, -1000, -3000, 2.223, 6.16);
+                model.add_member_pt_load("elem", Direction.Fy, -1000, 7.3187);
+                model.add_member_dist_load("elem", Direction.Fz, -1000, -3000, 2.223, 6.16);
+                model.add_member_pt_load("elem", Direction.Fz, -1000, 7.3187);
                 //model.Add_node_load("n2", Direction.FY, -100);
 
                 model.Analyze();
 
                 //model.Members["elem"].plot_Shear(Direction.Fy);
-                //model.Members["elem"].plot_Moment(Direction.Mz);
-                model.Members["elem"].plot_Deflection(Direction.Fy);
+
+                model.Members["elem"].plot_Moment(Direction.Mz);
+                model.Members["elem"].plot_Moment(Direction.My);
+                //TaskDialog.Show("dd",$"mz {model.Members["elem"].Moment(Direction.Mz,4)}\n my {model.Members["elem"].Moment(Direction.My, 4)}");
+                //model.Members["elem"].plot_Deflection(Direction.Fy);
+                //model.Members["elem"].plot_Deflection(Direction.Fz);
+
                 //TaskDialog.Show("ccs",model.Members["elem"].Deflection(Direction.Fy,6).ToString());
                 //model.Members["elem"].Deflection(Direction.Fy, 4);
                 //TaskDialog.Show("ccs", model.Members["elem"].fer().ToString());
+
+                // TODO moment on Mz is fine, on My is bad
 
                 using (Transaction transaction = new Transaction(Adapter.doc, "Create Curve"))
                 {

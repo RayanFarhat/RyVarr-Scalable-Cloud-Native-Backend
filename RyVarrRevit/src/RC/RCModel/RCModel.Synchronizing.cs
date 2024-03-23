@@ -82,8 +82,9 @@ namespace RyVarrRevit.RC
             //////////
             FEModel.Analyze();
             var m = FEModel.Members.ElementAt(4).Value;
-            m.plot_Moment(Direction.My);
-            //TaskDialog.Show("sss", FEModel.K().ToString());
+            //m.plot_Moment(Direction.My);
+            m.plot_Deflection(Direction.Fz);
+            //TaskDialog.Show("sss", FEModel.ToString());
         }
     }
 }

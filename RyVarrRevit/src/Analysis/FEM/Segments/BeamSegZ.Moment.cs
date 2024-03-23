@@ -22,7 +22,7 @@ namespace RyVarrRevit.Analysis
         public double Max_Moment()
         {
             // Find the quadratic equation parameters
-            double a = (double)(-(w2-w1)/(2*Length()));
+            double a = (double)(-(w2 - w1) / (2 * Length()));
             double b = (double)(-w1);
             double c = (double)(-V1);
             double x1, x2;// not thr segment.x1 and segment.x2
@@ -45,8 +45,8 @@ namespace RyVarrRevit.Analysis
             }
             else
             {
-                // x1 = (-b+(b**2-4*a*c)**0.5)/(2*a)
-                //x2 = (-b - (b * *2 - 4 * a * c) * *0.5) / (2 * a)
+                //  x1 = (-b+(b**2-4*a*c)**0.5)/(2*a)
+                //  x2 = (-b-(b**2-4*a*c)**0.5)/(2*a)
                 x1 = (-b + Math.Sqrt(Math.Pow(b, 2) - 4 * a * c)) / (2 * a);
                 x2 = (-b - Math.Sqrt(Math.Pow(b, 2) - 4 * a * c)) / (2 * a);
             }

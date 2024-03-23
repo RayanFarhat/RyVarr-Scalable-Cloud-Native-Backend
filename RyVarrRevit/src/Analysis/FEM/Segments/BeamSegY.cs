@@ -136,9 +136,9 @@ namespace RyVarrRevit.Analysis
             else
             {
                 // x1 = (-b+(b**2-4*a*c)**0.5)/(2*a)
-                //x2 = (-b - (b * *2 - 4 * a * c) * *0.5) / (2 * a)
-                x1 = Math.Pow(-b + (Math.Pow(b, 2) - 4 * a * c), 0.5) / (2 * a);
-                x2 = Math.Pow(-b - (Math.Pow(b, 2) - 4 * a * c), 0.5) / (2 * a);
+                // x2 = (-b-(b**2-4*a*c)**0.5)/(2*a)
+                x1 = (-b + Math.Sqrt(Math.Pow(b, 2) - 4 * a * c)) / (2 * a);
+                x2 = (-b - Math.Sqrt(Math.Pow(b, 2) - 4 * a * c)) / (2 * a);
             }
             //x1 < 0 or x1 > L
             if (Num.IsFirstSmallerThanSecond((double)x1, 0) || Num.IsFirstBiggerThanSecond((double)x1, Length()))

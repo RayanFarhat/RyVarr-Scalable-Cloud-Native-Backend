@@ -89,16 +89,15 @@ namespace RyVarrRevit.Analysis
         ///   <param name="L">The length of the member</param>
         public static Vector FER_AxialLinLoad(double x1, double x2, double w1, double w2, double L)
         {
-            //TODO: make sure the var x is right (the correct location)
-            // trapezoidal distributed load is equal to w1 triangle load + w2 triangle load
-            var p = Math.Abs(x1 - x2)*(w1+w2)/2;
-            // location of load based on the law 
-            var x = Math.Abs(x1 - x2)*(w1 + 2*w2)/(3*(w1+w2));
-            if (w1 == 0 && w2 == 0)
-            {
-                return new Vector(12);
-            }
-            return FER_AxialPtLoad(p,x,L);
+            var FER = new Vector(12);
+            var diff = 1 / (6 * L) * (x1 - x2);
+            var a = 2 * w1 * x1;
+            var b = 2 * w2 * x2;
+            var c = w2 * x1;
+            var d = w1 * x2;
+            FER[0] = diff*(3*L*w1 + 3*L*w2 - a - b - c -d);
+            FER[6] = diff*(a+b+c+d);
+            return FER;
         }
         /// <summary>
         ///   Returns the fixed end reaction vector for a concentrated torque.
