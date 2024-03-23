@@ -24,7 +24,7 @@ namespace RyVarrRevit.RC
             FEModel.Members.Clear();
             FEModel.Materials.Clear();
             FEModel.LoadCombos.Clear();
-            //addLoadCombos();
+            addLoadCombos();
             addRevitMaterialsToFEModel();
 
             var members = Adapter.getAllAnalyticalMembers();
@@ -78,13 +78,6 @@ namespace RyVarrRevit.RC
                 }
             }
             addAllLoads();
-
-            //////////
-            FEModel.Analyze();
-            var m = FEModel.Members.ElementAt(4).Value;
-            //m.plot_Moment(Direction.My);
-            m.plot_Deflection(Direction.Fz);
-            //TaskDialog.Show("sss", FEModel.ToString());
         }
     }
 }

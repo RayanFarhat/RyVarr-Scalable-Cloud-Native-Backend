@@ -1,10 +1,13 @@
 ﻿using Autodesk.Revit.DB;
+using Autodesk.Revit.UI.Selection;
+using Autodesk.Revit.UI;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace RyVarrRevit.RevitAdapter
 {
@@ -25,6 +28,15 @@ namespace RyVarrRevit.RevitAdapter
                 elements.Add(element);
             }
             return elements;
+        }
+        public static Element SelectElement()
+        {
+            Reference pickedRef = uidoc.Selection.PickObject(ObjectType.Element, "Please select one element");
+            if (pickedRef == null)
+            {
+                return null;
+            }
+            return doc.GetElement(pickedRef.ElementId);
         }
     }
 }

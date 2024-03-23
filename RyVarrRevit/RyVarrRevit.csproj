@@ -206,6 +206,8 @@
     <Compile Include="src\Mathematics\Vector\Vector.Other.cs" />
     <Compile Include="src\Mathematics\Vector\Vector.Product.cs" />
     <Compile Include="src\Mathematics\Vector\Vector.Projection.cs" />
+    <Compile Include="src\RevitCommands\PlotMember.cs" />
+    <Compile Include="src\RevitCommands\StartAnalysis.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="RyVarrRevitDev.addin" />

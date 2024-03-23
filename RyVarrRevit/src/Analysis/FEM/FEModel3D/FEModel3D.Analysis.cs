@@ -38,7 +38,7 @@ namespace RyVarrRevit.Analysis
             var K22 = k_par.k22;
 
             // Identify which load combinations have the tags the user has given
-            var comboList = Analyzer.identify_combos(this);
+            var comboList = Analyzer.identify_combos(this, Combo_tags);
             // Step through each load combination
             foreach (var combo in comboList)
             {

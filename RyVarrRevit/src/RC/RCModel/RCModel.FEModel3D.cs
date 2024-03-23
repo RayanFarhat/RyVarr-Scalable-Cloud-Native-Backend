@@ -29,32 +29,32 @@ namespace RyVarrRevit.RC
                     if (ptLoad.OrientTo == LoadOrientTo.Project)
                     {
                         if (ptLoad.ForceVector.X != 0)
-                            FEModel.add_member_pt_load(hostId, Direction.FX, ptLoad.ForceVector.X, localXPosition);
+                            FEModel.add_member_pt_load(hostId, Direction.FX, ptLoad.ForceVector.X, localXPosition, ptLoad.LoadCaseName);
                         if (ptLoad.ForceVector.Y != 0)
-                            FEModel.add_member_pt_load(hostId, Direction.FY, ptLoad.ForceVector.Y, localXPosition);
+                            FEModel.add_member_pt_load(hostId, Direction.FY, ptLoad.ForceVector.Y, localXPosition, ptLoad.LoadCaseName);
                         if (ptLoad.ForceVector.Z != 0)
-                            FEModel.add_member_pt_load(hostId, Direction.FZ, ptLoad.ForceVector.Z, localXPosition);
+                            FEModel.add_member_pt_load(hostId, Direction.FZ, ptLoad.ForceVector.Z, localXPosition, ptLoad.LoadCaseName);
                         if (ptLoad.MomentVector.X != 0)
-                            FEModel.add_member_pt_load(hostId, Direction.MX, ptLoad.MomentVector.X, localXPosition);
+                            FEModel.add_member_pt_load(hostId, Direction.MX, ptLoad.MomentVector.X, localXPosition, ptLoad.LoadCaseName);
                         if (ptLoad.MomentVector.Y != 0)
-                            FEModel.add_member_pt_load(hostId, Direction.MY, ptLoad.MomentVector.Y, localXPosition);
+                            FEModel.add_member_pt_load(hostId, Direction.MY, ptLoad.MomentVector.Y, localXPosition, ptLoad.LoadCaseName);
                         if (ptLoad.MomentVector.Z != 0)
-                            FEModel.add_member_pt_load(hostId, Direction.MZ, ptLoad.MomentVector.Z, localXPosition);
+                            FEModel.add_member_pt_load(hostId, Direction.MZ, ptLoad.MomentVector.Z, localXPosition, ptLoad.LoadCaseName);
                     }
                     else
                     {
                         if (ptLoad.ForceVector.X != 0)
-                            FEModel.add_member_pt_load(hostId, Direction.Fx, ptLoad.ForceVector.X, localXPosition);
+                            FEModel.add_member_pt_load(hostId, Direction.Fx, ptLoad.ForceVector.X, localXPosition, ptLoad.LoadCaseName);
                         if (ptLoad.ForceVector.Y != 0)
-                            FEModel.add_member_pt_load(hostId, Direction.Fy, ptLoad.ForceVector.Y, localXPosition);
+                            FEModel.add_member_pt_load(hostId, Direction.Fy, ptLoad.ForceVector.Y, localXPosition, ptLoad.LoadCaseName);
                         if (ptLoad.ForceVector.Z != 0)
-                            FEModel.add_member_pt_load(hostId, Direction.Fz, ptLoad.ForceVector.Z, localXPosition);
+                            FEModel.add_member_pt_load(hostId, Direction.Fz, ptLoad.ForceVector.Z, localXPosition, ptLoad.LoadCaseName);
                         if (ptLoad.MomentVector.X != 0)
-                            FEModel.add_member_pt_load(hostId, Direction.Mx, ptLoad.MomentVector.X, localXPosition);
+                            FEModel.add_member_pt_load(hostId, Direction.Mx, ptLoad.MomentVector.X, localXPosition, ptLoad.LoadCaseName);
                         if (ptLoad.MomentVector.Y != 0)
-                            FEModel.add_member_pt_load(hostId, Direction.My, ptLoad.MomentVector.Y, localXPosition);
+                            FEModel.add_member_pt_load(hostId, Direction.My, ptLoad.MomentVector.Y, localXPosition, ptLoad.LoadCaseName);
                         if (ptLoad.MomentVector.Z != 0)
-                            FEModel.add_member_pt_load(hostId, Direction.Mz, ptLoad.MomentVector.Z, localXPosition);
+                            FEModel.add_member_pt_load(hostId, Direction.Mz, ptLoad.MomentVector.Z, localXPosition, ptLoad.LoadCaseName);
                     }
                 }
             }
@@ -79,22 +79,21 @@ namespace RyVarrRevit.RC
                     if (distLoad.OrientTo == LoadOrientTo.Project)
                     {
                         if (forceVector1.X != 0 || forceVector2.X != 0)
-                            FEModel.add_member_dist_load(hostId,Direction.FX, forceVector1.X, forceVector2.X, localX1Position,localX2Position);
+                            FEModel.add_member_dist_load(hostId,Direction.FX, forceVector1.X, forceVector2.X, localX1Position,localX2Position, distLoad.LoadCaseName);
                         if (forceVector1.Y != 0 || forceVector2.Y != 0)
-                            FEModel.add_member_dist_load(hostId, Direction.FY, forceVector1.Y, forceVector2.Y, localX1Position, localX2Position);
+                            FEModel.add_member_dist_load(hostId, Direction.FY, forceVector1.Y, forceVector2.Y, localX1Position, localX2Position, distLoad.LoadCaseName);
                         if (forceVector1.Z != 0 || forceVector2.Z != 0)
-                            FEModel.add_member_dist_load(hostId, Direction.FZ, forceVector1.Z, forceVector2.Z, localX1Position, localX2Position);
+                            FEModel.add_member_dist_load(hostId, Direction.FZ, forceVector1.Z, forceVector2.Z, localX1Position, localX2Position, distLoad.LoadCaseName);
                     }
                     else
                     {
                         if (forceVector1.X != 0 || forceVector2.X != 0)
-                            FEModel.add_member_dist_load(hostId, Direction.Fx, forceVector1.X, forceVector2.X, localX1Position, localX2Position);
+                            FEModel.add_member_dist_load(hostId, Direction.Fx, forceVector1.X, forceVector2.X, localX1Position, localX2Position, distLoad.LoadCaseName);
                         if (forceVector1.Y != 0 || forceVector2.Y != 0)
-                            FEModel.add_member_dist_load(hostId, Direction.Fy, forceVector1.Y, forceVector2.Y, localX1Position, localX2Position);
+                            FEModel.add_member_dist_load(hostId, Direction.Fy, forceVector1.Y, forceVector2.Y, localX1Position, localX2Position, distLoad.LoadCaseName);
                         if (forceVector1.Z != 0 || forceVector2.Z != 0)
-                            FEModel.add_member_dist_load(hostId, Direction.Fz, forceVector1.Z, forceVector2.Z, localX1Position, localX2Position);
+                            FEModel.add_member_dist_load(hostId, Direction.Fz, forceVector1.Z, forceVector2.Z, localX1Position, localX2Position, distLoad.LoadCaseName);
                     }
-
                 }
             }
         }

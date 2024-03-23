@@ -9,6 +9,7 @@ using RyVarrRevit.Analysis;
 using Autodesk.Revit.DB.Structure;
 using RyVarrRevit.RC;
 using System.Data.Common;
+using System.Windows.Forms;
 
 namespace RyVarrRevit
 {
@@ -46,8 +47,8 @@ namespace RyVarrRevit
 
                 //model.Members["elem"].plot_Shear(Direction.Fy);
 
-                model.Members["elem"].plot_Moment(Direction.Mz);
-                model.Members["elem"].plot_Moment(Direction.My);
+                //model.Members["elem"].plot_Moment(Direction.Mz);
+                //model.Members["elem"].plot_Moment(Direction.My);
                 //TaskDialog.Show("dd",$"mz {model.Members["elem"].Moment(Direction.Mz,4)}\n my {model.Members["elem"].Moment(Direction.My, 4)}");
                 //model.Members["elem"].plot_Deflection(Direction.Fy);
                 //model.Members["elem"].plot_Deflection(Direction.Fz);
@@ -56,8 +57,8 @@ namespace RyVarrRevit
                 //model.Members["elem"].Deflection(Direction.Fy, 4);
                 //TaskDialog.Show("ccs", model.Members["elem"].fer().ToString());
 
-                // TODO moment on Mz is fine, on My is bad
 
+                TaskDialog.Show("ss",$"{Adapter.doc.DisplayUnitSystem}");
                 using (Transaction transaction = new Transaction(Adapter.doc, "Create Curve"))
                 {
                     transaction.Start();
@@ -90,13 +91,36 @@ namespace RyVarrRevit
 
             // RectangularConcrete panel
             UIAdapter.AddPanel("Reading");
-            UIAdapter.AddPushBtn(0, "Sync", "RyVarrRevit.RevitCommands.ModelSync",
+            UIAdapter.AddPushBtn("ModelSync", "Reading", "Sync", "RyVarrRevit.RevitCommands.ModelSync",
                 "press to ensure data between physical and analytical and RyVarr elements is consistent and up-to-date.");
-          
+            UIAdapter.AddPushBtn("StartAnalysis", "Reading", "Analyze", "RyVarrRevit.RevitCommands.StartAnalysis",
+                "Start the structural analysis after synchronizing the model.");
+
+            UIAdapter.AddPanel("Analysis Results");
+
+            UIAdapter.AddTextBox("combo name", "Analysis Results", "comboName", "enter used combo", "check your load combinations names and select onen",
+                "Put here the load combination thet you want to see the results of.");
+            UIAdapter.AddPushBtn("PlotMember", "Analysis Results", "Plot Member", "RyVarrRevit.RevitCommands.PlotMember",
+                "Select member and plot his diagrams.");
+
+            UIAdapter.panels["Analysis Results"].AddSlideOut();
+
+            RadioButtonGroupData radioData = new RadioButtonGroupData("radioGroup");
+            RadioButtonGroup radioButtonGroup = UIAdapter.panels["Analysis Results"].AddItem(radioData) as RadioButtonGroup;
+            ToggleButtonData tbX = new ToggleButtonData("toggleButtonX", "X");
+            tbX.ToolTip = "Toggle to see the results on the X axis";
+            ToggleButtonData tbY = new ToggleButtonData("toggleButtonY", "Y");
+            tbY.ToolTip = "Toggle to see the results on the Y axis";
+            ToggleButtonData tbZ = new ToggleButtonData("toggleButtonZ", "Z");
+            tbZ.ToolTip = "Toggle to see the results on the Z axis";
+            radioButtonGroup.AddItem(tbX);
+            radioButtonGroup.AddItem(tbY);
+            radioButtonGroup.AddItem(tbZ);
+            UIAdapter.AddRadioButtonGroup("axisRadio", radioButtonGroup);
 
             //text panel
             UIAdapter.AddPanel("Test");
-            UIAdapter.AddPushBtn(1, "btn", "RyVarrRevit.Test", "press this btn");
+            UIAdapter.AddPushBtn("Test", "Test", "btn", "RyVarrRevit.Test", "press this btn");
 
             return Result.Succeeded;
         }

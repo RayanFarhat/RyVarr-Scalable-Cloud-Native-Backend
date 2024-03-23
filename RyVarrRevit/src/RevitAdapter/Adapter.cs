@@ -15,12 +15,14 @@ namespace RyVarrRevit.RevitAdapter
         public static UIDocument uidoc;
         public static Application app;
         public static Document doc;
+        public static bool IsUnitSystemMetric;
         public static void Init(UIApplication uiApplication)
         {
             uiapp = uiApplication;
             uidoc = uiapp.ActiveUIDocument;
             app = uiapp.Application;
             doc = uidoc.Document;
+            IsUnitSystemMetric = doc.DisplayUnitSystem == DisplayUnit.METRIC? true: false;
         }
         public static double ConvertToMM(double value) { return UnitUtils.ConvertFromInternalUnits(value, UnitTypeId.Millimeters); }
         public static double ConvertToXYZ(double value) { return UnitUtils.ConvertToInternalUnits(value, UnitTypeId.Millimeters); }

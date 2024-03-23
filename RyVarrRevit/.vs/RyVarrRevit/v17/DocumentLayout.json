@@ -3,16 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\ryanf\\Desktop\\RyVarr\\RyVarrRevit\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{071CE39E-3E9C-4EEF-A2FA-A739D7C3D5E1}|RyVarrRevit.csproj|C:\\Users\\ryanf\\Desktop\\RyVarr\\RyVarrRevit\\src\\rc\\rcmodel\\rcmodel.synchronizing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{071CE39E-3E9C-4EEF-A2FA-A739D7C3D5E1}|RyVarrRevit.csproj|solutionrelative:src\\rc\\rcmodel\\rcmodel.synchronizing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{071CE39E-3E9C-4EEF-A2FA-A739D7C3D5E1}|RyVarrRevit.csproj|c:\\users\\ryanf\\desktop\\ryvarr\\ryvarrrevit\\src\\revitcommands\\modelsync.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{071CE39E-3E9C-4EEF-A2FA-A739D7C3D5E1}|RyVarrRevit.csproj|solutionrelative:src\\revitcommands\\modelsync.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{071CE39E-3E9C-4EEF-A2FA-A739D7C3D5E1}|RyVarrRevit.csproj|C:\\Users\\ryanf\\Desktop\\RyVarr\\RyVarrRevit\\src\\revitcommands\\plotmember.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{071CE39E-3E9C-4EEF-A2FA-A739D7C3D5E1}|RyVarrRevit.csproj|solutionrelative:src\\revitcommands\\plotmember.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{071CE39E-3E9C-4EEF-A2FA-A739D7C3D5E1}|RyVarrRevit.csproj|c:\\users\\ryanf\\desktop\\ryvarr\\ryvarrrevit\\src\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{071CE39E-3E9C-4EEF-A2FA-A739D7C3D5E1}|RyVarrRevit.csproj|solutionrelative:src\\main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{071CE39E-3E9C-4EEF-A2FA-A739D7C3D5E1}|RyVarrRevit.csproj|C:\\Users\\ryanf\\Desktop\\RyVarr\\RyVarrRevit\\src\\analysis\\fem\\femodel3d\\femodel3d.analysis.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{071CE39E-3E9C-4EEF-A2FA-A739D7C3D5E1}|RyVarrRevit.csproj|solutionrelative:src\\analysis\\fem\\femodel3d\\femodel3d.analysis.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{071CE39E-3E9C-4EEF-A2FA-A739D7C3D5E1}|RyVarrRevit.csproj|C:\\Users\\ryanf\\Desktop\\RyVarr\\RyVarrRevit\\src\\rc\\rcmodel\\rcmodel.synchronizing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{071CE39E-3E9C-4EEF-A2FA-A739D7C3D5E1}|RyVarrRevit.csproj|solutionrelative:src\\rc\\rcmodel\\rcmodel.synchronizing.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{071CE39E-3E9C-4EEF-A2FA-A739D7C3D5E1}|RyVarrRevit.csproj|C:\\Users\\ryanf\\Desktop\\RyVarr\\RyVarrRevit\\src\\rc\\rcmodel\\rcmodel.femodel3d.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{071CE39E-3E9C-4EEF-A2FA-A739D7C3D5E1}|RyVarrRevit.csproj|solutionrelative:src\\rc\\rcmodel\\rcmodel.femodel3d.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,41 +42,65 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Main.cs",
-              "DocumentMoniker": "C:\\Users\\ryanf\\Desktop\\RyVarr\\RyVarrRevit\\src\\Main.cs",
-              "RelativeDocumentMoniker": "src\\Main.cs",
-              "ToolTip": "C:\\Users\\ryanf\\Desktop\\RyVarr\\RyVarrRevit\\src\\Main.cs",
-              "RelativeToolTip": "src\\Main.cs",
-              "ViewState": "AQIAACgAAAAAAAAAAAAQwEIAAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-21T19:55:01.164Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "FEModel3D.Analysis.cs",
-              "DocumentMoniker": "C:\\Users\\ryanf\\Desktop\\RyVarr\\RyVarrRevit\\src\\Analysis\\FEM\\FEModel3D\\FEModel3D.Analysis.cs",
-              "RelativeDocumentMoniker": "src\\Analysis\\FEM\\FEModel3D\\FEModel3D.Analysis.cs",
-              "ToolTip": "C:\\Users\\ryanf\\Desktop\\RyVarr\\RyVarrRevit\\src\\Analysis\\FEM\\FEModel3D\\FEModel3D.Analysis.cs",
-              "RelativeToolTip": "src\\Analysis\\FEM\\FEModel3D\\FEModel3D.Analysis.cs",
-              "ViewState": "AQIAADUAAAAAAAAAAAAAADcAAAAaAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-21T16:03:59.175Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "ModelSync.cs",
+              "DocumentMoniker": "C:\\Users\\ryanf\\Desktop\\RyVarr\\RyVarrRevit\\src\\RevitCommands\\ModelSync.cs",
+              "RelativeDocumentMoniker": "src\\RevitCommands\\ModelSync.cs",
+              "ToolTip": "C:\\Users\\ryanf\\Desktop\\RyVarr\\RyVarrRevit\\src\\RevitCommands\\ModelSync.cs",
+              "RelativeToolTip": "src\\RevitCommands\\ModelSync.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAABcAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-23T21:33:11.313Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "RCModel.FEModel3D.cs",
+              "DocumentMoniker": "C:\\Users\\ryanf\\Desktop\\RyVarr\\RyVarrRevit\\src\\RC\\RCModel\\RCModel.FEModel3D.cs",
+              "RelativeDocumentMoniker": "src\\RC\\RCModel\\RCModel.FEModel3D.cs",
+              "ToolTip": "C:\\Users\\ryanf\\Desktop\\RyVarr\\RyVarrRevit\\src\\RC\\RCModel\\RCModel.FEModel3D.cs",
+              "RelativeToolTip": "src\\RC\\RCModel\\RCModel.FEModel3D.cs",
+              "ViewState": "AQIAAFgAAAAAAAAAAAAmwF8AAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-23T16:44:17.637Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "RCModel.Synchronizing.cs",
               "DocumentMoniker": "C:\\Users\\ryanf\\Desktop\\RyVarr\\RyVarrRevit\\src\\RC\\RCModel\\RCModel.Synchronizing.cs",
               "RelativeDocumentMoniker": "src\\RC\\RCModel\\RCModel.Synchronizing.cs",
               "ToolTip": "C:\\Users\\ryanf\\Desktop\\RyVarr\\RyVarrRevit\\src\\RC\\RCModel\\RCModel.Synchronizing.cs",
               "RelativeToolTip": "src\\RC\\RCModel\\RCModel.Synchronizing.cs",
-              "ViewState": "AQIAAD0AAAAAAAAAAAAQwFMAAAAvAAAA",
+              "ViewState": "AQIAACUAAAAAAAAAAAAQwDwAAAATAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-19T11:23:48.78Z",
+              "WhenOpened": "2024-03-23T16:43:04.491Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PlotMember.cs",
+              "DocumentMoniker": "C:\\Users\\ryanf\\Desktop\\RyVarr\\RyVarrRevit\\src\\RevitCommands\\PlotMember.cs",
+              "RelativeDocumentMoniker": "src\\RevitCommands\\PlotMember.cs",
+              "ToolTip": "C:\\Users\\ryanf\\Desktop\\RyVarr\\RyVarrRevit\\src\\RevitCommands\\PlotMember.cs",
+              "RelativeToolTip": "src\\RevitCommands\\PlotMember.cs",
+              "ViewState": "AQIAAB8AAAAAAAAAAAAQwCwAAAAnAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-23T16:19:05.385Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Main.cs",
+              "DocumentMoniker": "C:\\Users\\ryanf\\Desktop\\RyVarr\\RyVarrRevit\\src\\Main.cs",
+              "RelativeDocumentMoniker": "src\\Main.cs",
+              "ToolTip": "C:\\Users\\ryanf\\Desktop\\RyVarr\\RyVarrRevit\\src\\Main.cs",
+              "RelativeToolTip": "src\\Main.cs",
+              "ViewState": "AQIAAGQAAAAAAAAAAAAiwHUAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-21T19:55:01.164Z",
               "EditorCaption": ""
             }
           ]

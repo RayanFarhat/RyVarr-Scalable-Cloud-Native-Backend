@@ -10,22 +10,22 @@ namespace RyVarrRevitUnitTest
         [TestMethod]
         public void IsEqual()
         {
-            Assert.IsTrue(Num.IsEqual(3.00223, 3.00228) && !Num.IsEqual(3.00223, 3.00238));
+            Assert.IsTrue(Num.IsEqual(3.0000223, 3.0000228) && !Num.IsEqual(3.0000223, 3.0000238));
         }
         [TestMethod]
         public void IsFirstBiggerThanSecond()
         {
-            Assert.IsTrue(Num.IsFirstBiggerThanSecond(3.0023, 3.0021) && !Num.IsFirstBiggerThanSecond(3.00229, 3.0022));
+            Assert.IsTrue(Num.IsFirstBiggerThanSecond(3.000023, 3.000021) && !Num.IsFirstBiggerThanSecond(3.0000229, 3.000022));
         }
         [TestMethod]
         public void IsFirstBiggerOrEqualThanSecond()
         {
-            Assert.IsTrue(Num.IsFirstBiggerOrEqualThanSecond(3.00223, 3.00228) && !Num.IsFirstBiggerOrEqualThanSecond(3.00209, 3.0022));
+            Assert.IsTrue(Num.IsFirstBiggerOrEqualThanSecond(3.0000223, 3.0000228) && !Num.IsFirstBiggerOrEqualThanSecond(3.0000209, 3.000022));
         }
         [TestMethod]
         public void IsFirstSmallerThanSecond()
         {
-            Assert.IsTrue(Num.IsFirstSmallerThanSecond(3.0024, 3.0026) && !Num.IsFirstSmallerThanSecond(3.00223, 3.00228));
+            Assert.IsTrue(Num.IsFirstSmallerThanSecond(3.000024, 3.000026) && !Num.IsFirstSmallerThanSecond(3.0000223, 3.0000228));
         }
         [TestMethod]
         public void IsFirstSmallerOrEqualThanSecond()
