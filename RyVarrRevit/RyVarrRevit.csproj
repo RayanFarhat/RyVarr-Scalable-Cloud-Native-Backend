@@ -75,10 +75,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\Analysis\FEM\Analyzer\Analyzer.Buckling.cs" />
     <Compile Include="src\RC\RCModel\RCModel.FEModel3D.cs" />
     <Compile Include="src\RC\RCModel\RCModel.Generator.cs" />
     <Compile Include="src\RC\RCModel\RCModel.Synchronizing.cs" />
-    <Compile Include="src\RevitCommands\ModelSync.cs" />
     <Compile Include="src\RC\RCModel\RCModel.cs" />
     <Compile Include="src\RevitAdapter\Adapter.cs" />
     <Compile Include="src\RevitAdapter\Adapter_Create.cs" />

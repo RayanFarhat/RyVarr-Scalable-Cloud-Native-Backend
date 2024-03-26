@@ -75,6 +75,10 @@ namespace RyVarrRevit.Analysis
                 Analyzer.StoreDisplacements(this,D1,D2,D1_indices,D2_indices, combo);
             }
             Analyzer.calcReactions(this, Combo_tags);
+            if (Analyzer.BucklingExist(this, Combo_tags))
+            {
+                throw new Exception("The structure is unstable. Buckling Detected!");
+            }
         }
     }
 }

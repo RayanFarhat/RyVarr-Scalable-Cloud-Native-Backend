@@ -123,8 +123,9 @@ where $P$ is the magnitude of the load, $L$ the length of the member, $x$ is The
 
 Also for each linear distributed load we convert it to point load and we check the direction and add the result to the vector just like for point loads:
 
-![alt text](images/reactionLaws.png)
-![alt text](images/distToPt.png)
+![alt text](images/pointReactionLaws.png)
+![alt text](images/distReactionLaws1.png)
+![alt text](images/distReactionLaws2.png)
 
 #### Local end forces vector(after analysis)
 

@@ -30,7 +30,7 @@ namespace RyVarrRevit
                 model.add_material(29000.0, 11200, 0.3, 2.836e-4, null, "mat");
                 model.AddMember("n1", "n2", "mat", 100, 100, 250, 20, "elem");
                 model.def_support("n1", true, true, true, false, false, false);
-                model.def_support("n2", true, true, true, true, true, true);
+                model.def_support("n2", true, true, true, true, false, false);
 
                 var factors = new Dictionary<string, double>
                 {
@@ -57,8 +57,6 @@ namespace RyVarrRevit
                 //model.Members["elem"].Deflection(Direction.Fy, 4);
                 //TaskDialog.Show("ccs", model.Members["elem"].fer().ToString());
 
-
-                TaskDialog.Show("ss",$"{Adapter.doc.DisplayUnitSystem}");
                 using (Transaction transaction = new Transaction(Adapter.doc, "Create Curve"))
                 {
                     transaction.Start();
@@ -91,31 +89,29 @@ namespace RyVarrRevit
 
             // RectangularConcrete panel
             UIAdapter.AddPanel("Reading");
-            UIAdapter.AddPushBtn("ModelSync", "Reading", "Sync", "RyVarrRevit.RevitCommands.ModelSync",
-                "press to ensure data between physical and analytical and RyVarr elements is consistent and up-to-date.");
             UIAdapter.AddPushBtn("StartAnalysis", "Reading", "Analyze", "RyVarrRevit.RevitCommands.StartAnalysis",
                 "Start the structural analysis after synchronizing the model.");
 
-            UIAdapter.AddPanel("Analysis Results");
+            UIAdapter.AddPanel("Plot Diagrams");
 
-            UIAdapter.AddTextBox("combo name", "Analysis Results", "comboName", "enter used combo", "check your load combinations names and select onen",
+            UIAdapter.AddTextBox("combo name", "Plot Diagrams", "comboName", "enter used combo", "check your load combinations names and select one",
                 "Put here the load combination thet you want to see the results of.");
-            UIAdapter.AddPushBtn("PlotMember", "Analysis Results", "Plot Member", "RyVarrRevit.RevitCommands.PlotMember",
+            UIAdapter.AddPushBtn("PlotMember", "Plot Diagrams", "Plot Member", "RyVarrRevit.RevitCommands.PlotMember",
                 "Select member and plot his diagrams.");
 
-            UIAdapter.panels["Analysis Results"].AddSlideOut();
+            UIAdapter.panels["Plot Diagrams"].AddSlideOut();
 
             RadioButtonGroupData radioData = new RadioButtonGroupData("radioGroup");
-            RadioButtonGroup radioButtonGroup = UIAdapter.panels["Analysis Results"].AddItem(radioData) as RadioButtonGroup;
+            RadioButtonGroup radioButtonGroup = UIAdapter.panels["Plot Diagrams"].AddItem(radioData) as RadioButtonGroup;
             ToggleButtonData tbX = new ToggleButtonData("toggleButtonX", "X");
             tbX.ToolTip = "Toggle to see the results on the X axis";
             ToggleButtonData tbY = new ToggleButtonData("toggleButtonY", "Y");
             tbY.ToolTip = "Toggle to see the results on the Y axis";
             ToggleButtonData tbZ = new ToggleButtonData("toggleButtonZ", "Z");
             tbZ.ToolTip = "Toggle to see the results on the Z axis";
-            radioButtonGroup.AddItem(tbX);
-            radioButtonGroup.AddItem(tbY);
             radioButtonGroup.AddItem(tbZ);
+            radioButtonGroup.AddItem(tbY);
+            radioButtonGroup.AddItem(tbX);
             UIAdapter.AddRadioButtonGroup("axisRadio", radioButtonGroup);
 
             //text panel

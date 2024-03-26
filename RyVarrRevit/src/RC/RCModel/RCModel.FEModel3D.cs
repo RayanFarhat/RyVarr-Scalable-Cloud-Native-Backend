@@ -23,7 +23,24 @@ namespace RyVarrRevit.RC
             foreach (var ptLoad in ptLoads)
             {
                 var hostId = ptLoad.HostElementId.ToString();
-                if (FEModel.Members.ContainsKey(hostId))
+                string nodeName = getNodeName(ptLoad.Point);
+                // if node load
+                if (FEModel.Nodes.ContainsKey(nodeName))
+                {
+                    if (ptLoad.ForceVector.X != 0)
+                        FEModel.Add_node_load(nodeName, Direction.FX, ptLoad.ForceVector.X, ptLoad.LoadCaseName);
+                    if (ptLoad.ForceVector.Y != 0)
+                        FEModel.Add_node_load(nodeName, Direction.FY, ptLoad.ForceVector.Y, ptLoad.LoadCaseName);
+                    if (ptLoad.ForceVector.Z != 0)
+                        FEModel.Add_node_load(nodeName, Direction.FZ, ptLoad.ForceVector.Z, ptLoad.LoadCaseName);
+                    if (ptLoad.MomentVector.X != 0)
+                        FEModel.Add_node_load(nodeName, Direction.MX, ptLoad.MomentVector.X, ptLoad.LoadCaseName);
+                    if (ptLoad.MomentVector.Y != 0)
+                        FEModel.Add_node_load(nodeName, Direction.MY, ptLoad.MomentVector.Y, ptLoad.LoadCaseName);
+                    if (ptLoad.MomentVector.Z != 0)
+                        FEModel.Add_node_load(nodeName, Direction.MZ, ptLoad.MomentVector.Z, ptLoad.LoadCaseName);
+                }
+                else if (FEModel.Members.ContainsKey(hostId))
                 {
                     var localXPosition = Math.Round(getDistance(ptLoad.Point, FEModel.Members[hostId].i_node), 6);
                     if (ptLoad.OrientTo == LoadOrientTo.Project)
@@ -109,7 +126,7 @@ namespace RyVarrRevit.RC
 
             ElementType type = Adapter.doc.GetElement(elem.GetTypeId()) as ElementType;
             Parameter hPar = type.LookupParameter("h");
-            double h = hPar.AsDouble();
+            double h = hPar.AsDouble();// in beam, h is on the z axis direction
             Parameter bPar = type.LookupParameter("b");
             double b = bPar.AsDouble();
             double A = h * b;//doesn't matter for beams as they dont get axial loads

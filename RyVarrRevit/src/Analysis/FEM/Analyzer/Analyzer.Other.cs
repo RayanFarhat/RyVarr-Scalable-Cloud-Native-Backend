@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace RyVarrRevit.Analysis
 {
+    /// <summary>
+    /// A handler of analysis method in FEM
+    /// </summary>
     public static partial class Analyzer
     {
         /// <summary>

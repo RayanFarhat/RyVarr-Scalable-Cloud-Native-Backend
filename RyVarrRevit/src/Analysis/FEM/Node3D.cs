@@ -129,6 +129,32 @@ namespace RyVarrRevit.Analysis
                 Math.Pow(this.Z - other.Z, 2)
                 , 0.5);
         }
+        public bool isFixed()
+        {
+            if (support_DX == true && support_DY == true && support_DZ == true&&
+                support_RX == true && support_RY == true && support_RZ == true)
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool isFree()
+        {
+            if (support_DX == false && support_DY == false && support_DZ == false &&
+                support_RX == false && support_RY == false && support_RZ == false)
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool isPinned()
+        {
+            if (support_DX == true && support_DY == true && support_DZ == true && !isFixed())
+            {
+                return true;
+            }
+            return false;
+        }
         public static bool operator ==(Node3D a, Node3D b)
         {
             if ((a as object) == null || (b as object) == null)

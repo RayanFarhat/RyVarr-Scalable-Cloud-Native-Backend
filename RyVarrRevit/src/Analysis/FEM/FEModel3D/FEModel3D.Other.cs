@@ -95,7 +95,7 @@ namespace RyVarrRevit.Analysis
             str += "Nodes:\n";
             foreach (var node in this.Nodes)
             {
-                str += $"{node.Key} : dx={node.Value.support_DX},dy={node.Value.support_DY},dz={node.Value.support_DZ},rx={node.Value.support_RX},ry={node.Value.support_RY},rz={node.Value.support_RZ}\n";
+                str += $"{node.Key} x:{node.Value.X}, y:{node.Value.Y}, z:{node.Value.Z}  \n : dx={node.Value.support_DX},dy={node.Value.support_DY},dz={node.Value.support_DZ},rx={node.Value.support_RX},ry={node.Value.support_RY},rz={node.Value.support_RZ}\n";
             }
             foreach (var mem in this.Members)
             {

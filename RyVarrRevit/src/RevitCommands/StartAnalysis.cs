@@ -20,9 +20,10 @@ namespace RyVarrRevit.RevitCommands
             {
                 UIDocument uidoc = commandData.Application.ActiveUIDocument;
                 Adapter.Init(commandData.Application);
+                RCModel.Instance.SynchronizeModels();
                 RCModel.Instance.FEModel.Analyze();
+                UIAdapter.TextBoxes["combo name"].Value = RCModel.Instance.FEModel.LoadCombos.First().Key;
                 TaskDialog.Show("RyVarr", "Analysis is done.");
-
             }
             catch (Exception e)
             {
