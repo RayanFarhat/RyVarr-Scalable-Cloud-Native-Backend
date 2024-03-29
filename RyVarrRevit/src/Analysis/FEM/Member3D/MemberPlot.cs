@@ -7,7 +7,7 @@ namespace RyVarrRevit.Analysis
 {
     public partial class MemberPlot : Form
     {
-        public MemberPlot(string SeriesName, double[][] xy, double len, double min_y,double max_y, string min_label, string max_label)
+        public MemberPlot(string SeriesName, double[][] xy, double len, double min_y,double max_y, string min_label, string max_label, string Xtitle, string Ytitle)
         {
             if (min_y == max_y)
             {
@@ -22,11 +22,13 @@ namespace RyVarrRevit.Analysis
             objChart.AxisX.Minimum = 0;
             objChart.AxisX.Maximum = len;
             objChart.AxisX.Crossing = 0;
+            objChart.AxisX.Title = Xtitle;
 
             objChart.AxisY.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
-            objChart.AxisY.Minimum = min_y;
-            objChart.AxisY.Maximum = max_y;
+            objChart.AxisY.Minimum = min_y + min_y / 15;
+            objChart.AxisY.Maximum = max_y + max_y/15;
             objChart.AxisY.Crossing = 0;
+            objChart.AxisY.Title = Ytitle;
 
             chart1.Series.Clear();
             Series series = new Series(SeriesName) { ChartType = SeriesChartType.Line};

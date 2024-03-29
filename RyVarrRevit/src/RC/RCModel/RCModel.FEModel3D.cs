@@ -9,6 +9,7 @@ using RyVarrRevit.RevitAdapter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Media3D;
@@ -42,7 +43,9 @@ namespace RyVarrRevit.RC
                 }
                 else if (FEModel.Members.ContainsKey(hostId))
                 {
-                    var localXPosition = Math.Round(getDistance(ptLoad.Point, FEModel.Members[hostId].i_node), 6);
+                    var localXPosition = getDistance(getPointInMetric(ptLoad.Point), FEModel.Members[hostId].i_node);
+                    localXPosition = Math.Round(localXPosition, 6);
+
                     if (ptLoad.OrientTo == LoadOrientTo.Project)
                     {
                         if (ptLoad.ForceVector.X != 0)
@@ -81,8 +84,11 @@ namespace RyVarrRevit.RC
                 var hostId = distLoad.HostElementId.ToString();
                 if (FEModel.Members.ContainsKey(hostId))
                 {
-                    var localX1Position = Math.Round(getDistance(distLoad.StartPoint, FEModel.Members[hostId].i_node), 6);
-                    var localX2Position = Math.Round(getDistance(distLoad.EndPoint, FEModel.Members[hostId].i_node), 6);
+                    var localX1Position = getDistance(getPointInMetric(distLoad.StartPoint), FEModel.Members[hostId].i_node);
+                    var localX2Position = getDistance(getPointInMetric(distLoad.EndPoint), FEModel.Members[hostId].i_node);
+                    localX1Position = Math.Round(localX1Position, 6);
+                    localX2Position = Math.Round(localX2Position, 6);
+
                     var forceVector1 = distLoad.ForceVector1;
                     var forceVector2 = distLoad.ForceVector2;
                     if (localX1Position > localX2Position)
@@ -116,7 +122,6 @@ namespace RyVarrRevit.RC
         }
         public void addElement(Element elem, AnalyticalMember member)
         {
-
             Elements.Add(member.Id.ToString(), elem.Id.ToString());
             var n1 = member.GetCurve().GetEndPoint(0);
             var n2 = member.GetCurve().GetEndPoint(1);
@@ -129,6 +134,16 @@ namespace RyVarrRevit.RC
             double h = hPar.AsDouble();// in beam, h is on the z axis direction
             Parameter bPar = type.LookupParameter("b");
             double b = bPar.AsDouble();
+            if (Adapter.IsUnitSystemMetric)
+            {
+                h = Adapter.ConvertToM(h);
+                b = Adapter.ConvertToM(b);
+            }
+            else
+            {
+                h = Adapter.ConvertToFeet(h);
+                b = Adapter.ConvertToFeet(b);
+            }
             double A = h * b;//doesn't matter for beams as they dont get axial loads
             //Iy, Iz doesn't matter for columns as they dont get lateral loads
             double Iy = b * Math.Pow(h, 3) / 12;
@@ -201,9 +216,27 @@ namespace RyVarrRevit.RC
         /// <returns></returns>
         public string getNodeName(XYZ p)
         {
-            var xStr = p.X.ToString("0.######");
-            var yStr = p.Y.ToString("0.######");
-            var zStr = p.Z.ToString("0.######");
+            var nodeX = p.X;
+            var nodeY = p.Y;
+            var nodeZ = p.Z;
+            if (Adapter.IsUnitSystemMetric)
+            {
+                nodeX = Adapter.ConvertToM(nodeX);
+                nodeY = Adapter.ConvertToM(nodeY);
+                nodeZ = Adapter.ConvertToM(nodeZ);
+            }
+            else
+            {
+                nodeX = Adapter.ConvertToFeet(nodeX);
+                nodeY = Adapter.ConvertToFeet(nodeY);
+                nodeZ = Adapter.ConvertToFeet(nodeZ);
+            }
+            nodeX = Math.Round(nodeX, 6);
+            nodeY = Math.Round(nodeY, 6);
+            nodeZ = Math.Round(nodeZ, 6);
+            var xStr = nodeX.ToString();
+            var yStr = nodeY.ToString();
+            var zStr = nodeZ.ToString();
             return xStr + "," + yStr + "," + zStr;
         }
         /// <summary>
@@ -218,11 +251,48 @@ namespace RyVarrRevit.RC
             {
                 return;
             }
-            var nodeX = Math.Round(p.X, 6);
-            var nodeY = Math.Round(p.Y, 6);
-            var nodeZ = Math.Round(p.Z, 6);
+            var nodeX = p.X;
+            var nodeY = p.Y;
+            var nodeZ = p.Z;
+            if (Adapter.IsUnitSystemMetric)
+            {
+                nodeX = Adapter.ConvertToM(nodeX);
+                nodeY = Adapter.ConvertToM(nodeY);
+                nodeZ = Adapter.ConvertToM(nodeZ);
+            }
+            else
+            {
+                nodeX = Adapter.ConvertToFeet(nodeX);
+                nodeY = Adapter.ConvertToFeet(nodeY);
+                nodeZ = Adapter.ConvertToFeet(nodeZ);
+            }
+            nodeX = Math.Round(nodeX, 6);
+            nodeY = Math.Round(nodeY, 6);
+            nodeZ = Math.Round(nodeZ, 6);
             var node = new Node3D(nodeName, nodeX, nodeY, nodeZ);
             FEModel.Nodes.Add(nodeName, node);
+        }
+        public XYZ getPointInMetric(XYZ p)
+        {
+            var nodeX = p.X;
+            var nodeY = p.Y;
+            var nodeZ = p.Z;
+            if (Adapter.IsUnitSystemMetric)
+            {
+                nodeX = Adapter.ConvertToM(nodeX);
+                nodeY = Adapter.ConvertToM(nodeY);
+                nodeZ = Adapter.ConvertToM(nodeZ);
+            }
+            else
+            {
+                nodeX = Adapter.ConvertToFeet(nodeX);
+                nodeY = Adapter.ConvertToFeet(nodeY);
+                nodeZ = Adapter.ConvertToFeet(nodeZ);
+            }
+            nodeX = Math.Round(nodeX, 6);
+            nodeY = Math.Round(nodeY, 6);
+            nodeZ = Math.Round(nodeZ, 6);
+            return new XYZ(nodeX, nodeY, nodeZ);
         }
         /// <summary>
         /// check distance between two points is less than 50cm

@@ -24,8 +24,8 @@ namespace RyVarrRevit.RevitAdapter
             doc = uidoc.Document;
             IsUnitSystemMetric = doc.DisplayUnitSystem == DisplayUnit.METRIC? true: false;
         }
-        public static double ConvertToMM(double value) { return UnitUtils.ConvertFromInternalUnits(value, UnitTypeId.Millimeters); }
-        public static double ConvertToXYZ(double value) { return UnitUtils.ConvertToInternalUnits(value, UnitTypeId.Millimeters); }
-
+        public static double ConvertToM(double value) { return UnitUtils.ConvertFromInternalUnits(value, UnitTypeId.Meters); }
+        public static double ConvertToFeet(double value) { return UnitUtils.ConvertFromInternalUnits(value, UnitTypeId.Feet); }
+        public static double ConvertToXYZ(double value) { return UnitUtils.ConvertToInternalUnits(value, UnitTypeId.Meters); }
     }
 }

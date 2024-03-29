@@ -45,6 +45,15 @@ namespace RyVarrRevit
 
                 model.Analyze();
 
+
+                Units units = Adapter.doc.GetUnits();
+                FormatOptions myFormat = units.GetFormatOptions(SpecTypeId.Force);
+                ForgeTypeId mySymbol = myFormat.GetSymbolTypeId();
+                string unitSymbol = LabelUtils.GetLabelForSymbol(mySymbol);
+                string unitSymbol2 = LabelUtils.GetLabelForUnit(UnitTypeId.KilonewtonsPerMeter);
+                TaskDialog.Show("ss", $"{unitSymbol}");
+
+
                 //model.Members["elem"].plot_Shear(Direction.Fy);
 
                 //model.Members["elem"].plot_Moment(Direction.Mz);

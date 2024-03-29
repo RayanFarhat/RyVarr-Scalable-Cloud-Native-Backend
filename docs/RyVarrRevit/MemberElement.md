@@ -98,34 +98,73 @@ The fixed end reactions vector $f_{er}$ is build by iterating on every point and
 * We calculate the reactions of the element as if it is fixed at both ends(We explain below how to handle elements with diffrent supports).
 
 We start with $f_{er} = (0,0,0,0,0,0,0,0,0,0,0,0)$.
-For each point load we check the direction and add the result to the vector:
-* Fx(local axial point load): $f_{er1} +=-{P(L-x) \over L}, f_{er7} +=-{Px \over L}$.
-
+For each load type we check the direction and add the result to the vector:
+(You will notice a difference in Y-axis and Z-axis as the sign convention is diffrent)
+![alt text](images/axialPtLoad.png)
+* Fx(local axial point load): $R_{1}=-{Pb \over L}, R_{2} =-{Pa \over L}$. 
+add them to $f_{er1},f_{er7}$
+![alt text](images/PtLoad.png)
+* $V_{1} =-{Pb^2(3a+b) \over L^3}$
+* $V_{2} =-{Pa^2(a+3b) \over L^3}$
+* $M_{1} ={Pab^2 \over L^2}$
+* $M_{2} ={Pa^2b \over L^2}$
 * Fy(load on member's local y-axis): 
-$f_{er2} +=-{P(L-x)^2(L+2x) \over L^3}$,
-$f_{er6} +=-{Px(L-x)^2 \over L^2}$,
-$f_{er8} +=-{Px^2(L+2(L-x))^2 \over L^3}$,
-$f_{er12} +={Px^2(L-x) \over L^2}$.
+$f_{er2} +=V_{1}$,
+$f_{er6} -=M_{1}$,
+$f_{er8} +=V_{2}$,
+$f_{er12} +=M_{2}$.
 
-* Fz(load on member's local z-axis): $f_{er3} +=-{P(L-x)^2(L+2x) \over L^3}, f_{er5} +={Px(L-x)^2 \over L^2}, f_{er9} +=-{Px^2(L+2(L-x))^2 \over L^3}, f_{er11} +=-{Px^2(L-x) \over L^2}$.
+* Fz(load on member's local z-axis):
+$f_{er3} +=V_{1}$,
+$f_{er5} +=M_{1}$,
+$f_{er9} +=V_{2}$,
+$f_{er11} -=M_{2}$.
 
-* Mx(magnitude of the torque): $f_{er3} +=-{P(L-x) \over L}, f_{er10} +=-{Px \over L}$.
+![alt text](images/MomentLoad.png)
+* $V_{1} ={6Mab \over L^3}$
+* $V_{2} ={6Mab \over L^3}$
+* $M_{1} ={Mb(2a-b) \over L^2}$
+* $M_{2} ={Ma(2b-a) \over L^2}$
 
-* My(moment on member's local y-axis):  $f_{er4} +=-{6Px(L-x) \over L^3}, f_{er5} +={P(L-x)(2x-(L-x))\over L^2}, f_{er9} +={6Px(L-x)\over L^3}, f_{er11} +={Px(2(L-x)-x) \over L^2}$.
+* Mx(magnitude of the torque): $M_{1}=-{Mb \over L}, M_{2} =-{Ma \over L}$. 
+add them to $f_{er4},f_{er10}$
 
-* Mz(moment on member's local z-axis):  $f_{er2} +={6Px(L-x) \over L^3}, f_{er6} +={P(L-x)(2x-(L-x))\over L^2}, f_{er8} +=-{6Px(L-x)\over L^3}, f_{er12} +={Px(2(L-x)-x) \over L^2}$.
+* My(moment on member's local y-axis):
+$f_{er3} -=V_{1}$,
+$f_{er5} +=M_{1}$,
+$f_{er9} +=V_{2}$,
+$f_{er11} +=M_{2}$.
 
+* Mz(moment on member's local z-axis):
+$f_{er2} +=V_{1}$,
+$f_{er6} +=M_{1}$,
+$f_{er8} -=V_{2}$,
+$f_{er12} +=M_{2}$.
+
+![alt text](images/axialDistLoad.png)
+* Fx(local axial distributed load): 
+$R_{1}=-{(x_{2}-x_{1})(3Lw_{1}+3Lw_{2} - 2w_{1}x_{1} - 2w_{2}x_{2} - w_{2}x_{1}- w_{1}x_{2}) \over 6L}$, 
+$R_{2} =-{(x_{2}-x_{1})(2w_{1}x_{1} + 2w_{2}x_{2} + w_{2}x_{1} + w_{1}x_{2}) \over 6L}$. 
+add them to $f_{er1},f_{er7}$
+![alt text](images/distLoad.png)
+* $V_{1} ={L_{w}w_{m} - V_{2}}$
+* $V_{2} ={L_{w}(s_{1}w_{m}+s_{2}w_{d}) \over 20L^3}$
+* $M_{1} =({M_{2} + V_{2}L - aL_{w}w_{m} - {L^2_{w}(2w_{2}+w_{1}) \over 6}})$
+* $M_{2} =-{L_{w}(s_{3}w_{m}+s_{4}w_{d}) \over 120L^2}$
+* added the same as for point load
+
+Where:
+* $L_{w} = L - a - b$
+* $w_{m} = {w_{1}+w_{2}\over 2}$
+* $w_{d} = {w_{2}-w_{1}}$
+* $s_{1} = 10[(L^2+a^2)(L+a) - (a^2+b^2)(a-b) - Lb(L+b) - a^3]$
+* $s_{2} = L_{w}[L(2L+a+b) - 3(a-b)^2 - 2ab]$
+* $s_{3} = 120ab(a+L_{w}) + 10L_{w}(6a^2 + 4LL_{w} - 3L_{w}^200)$
+* $s_{4} = 10LL_{w}^2 - 10L_{w}a(L-3b)-9L_{w}^3$
+--------------------------------
 * FX,FY,FZ(load on member's global axis): we use the the direction cosine vectors to get the Fx,Fy,Fz. and then we add to $f_{er}$ like above.
 
 * MX,MY,MZ(moment on member's global axis): we use the the direction cosine vectors to get the Mx,My,Mz. and then we add to $f_{er}$ like above.
-
-where $P$ is the magnitude of the load, $L$ the length of the member, $x$ is The location of the load relative to the start of the member.
-
-Also for each linear distributed load we convert it to point load and we check the direction and add the result to the vector just like for point loads:
-
-![alt text](images/pointReactionLaws.png)
-![alt text](images/distReactionLaws1.png)
-![alt text](images/distReactionLaws2.png)
 
 #### Local end forces vector(after analysis)
 
