@@ -25,7 +25,6 @@ namespace RyVarrRevit.RevitCommands
                 UIAdapter.TextBoxes["combo name"].Value = RCModel.Instance.FEModel.LoadCombos.First().Key;
                 TaskDialog.Show("RyVarr", "Analysis is done.");
                 TaskDialog.Show("RyVarr", $"{RCModel.Instance.FEModel}");
-                //TODO fix bad plot when have dist load with w1 and w2 diffrent
             }
             catch (Exception e)
             {

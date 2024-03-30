@@ -47,7 +47,7 @@ The shape of the matrix is 12X12. to find the matrix we first must find the dire
 
 This are the cosines of the angles the vector forms with the coordinate axes.
 $T_{x} = ( cos\alpha = {v_{x} \over || \vec{v} ||},cos\beta = {v_{y} \over || \vec{v} ||}, cos\theta = {v_{z} \over || \vec{v} ||})$
-To find the $T_{z}$, we must find the the projection of the member on global XZ plane $ proj_{z}$.
+To find the $T_{z}$, we must find the the projection of the member on global XZ plane $proj_{z}$.
 $proj_{z} = (v_{x},0,v_{z})$
 
 Then when we cross product the $proj_{z}$ with $T_{x}$ we will get the $T_{z}$, now then easily we can get  $T_{y}$ by cross product the $T_{x}$ with $T_{y}$.
@@ -142,11 +142,14 @@ $f_{er8} -=V_{2}$,
 $f_{er12} +=M_{2}$.
 
 ![alt text](images/axialDistLoad.png)
+
 * Fx(local axial distributed load): 
 $R_{1}=-{(x_{2}-x_{1})(3Lw_{1}+3Lw_{2} - 2w_{1}x_{1} - 2w_{2}x_{2} - w_{2}x_{1}- w_{1}x_{2}) \over 6L}$, 
 $R_{2} =-{(x_{2}-x_{1})(2w_{1}x_{1} + 2w_{2}x_{2} + w_{2}x_{1} + w_{1}x_{2}) \over 6L}$. 
 add them to $f_{er1},f_{er7}$
+
 ![alt text](images/distLoad.png)
+
 * $V_{1} ={L_{w}w_{m} - V_{2}}$
 * $V_{2} ={L_{w}(s_{1}w_{m}+s_{2}w_{d}) \over 20L^3}$
 * $M_{1} =({M_{2} + V_{2}L - aL_{w}w_{m} - {L^2_{w}(2w_{2}+w_{1}) \over 6}})$
@@ -202,20 +205,30 @@ We will use this for the other equations, of course if there is no distributed l
 ##### Shear Force Equation
 The change in the shear force is equal to the area under (or integral of) the load diagram. If the shear force at the start of the segment, $V_{1}$, is known, the shear force at any point $x$, relative to the start of the segment can be expressed as:
 $V_{x} = V_{1} + \int_0^x w_{x}dx$ 
-* $V_{1} = f_{2} + \sum_{i=1}^{Py} Py_{i}$ plus for segZ and $V_{1} = f_{3} + \sum_{i=1}^{Pz} Pz_{i}$ for segY.
+* $V_{1} = f_{2} + \sum_{i=1}^{Py} Py_{i} + \sum_{i=1}^{Dy} Dy_{i}$ plus for segZ 
+and $V_{1} = f_{3} + \sum_{i=1}^{Pz} Pz_{i}+ \sum_{i=1}^{Dz} Dz_{i}$ for segY.
 * Where $f$ is the local end force vector.
 * Where $Py$ is the vector of all the point loads in the local Y direction on the element where the location $x$ of the point load is smaller or equal to $x$.
 * Where $Pz$ is the vector of all the point loads in the local Z direction on the element where the location $x$ of the point load is smaller or equal to $x$.
+* Where $Dy$ is the vector of all the distributed shear loads in the local Y direction on the element where the start location $x$ of the segment is after or inside the distributed load.
+* Where $Dz$ is the vector of all the distributed shear loads in the local Z direction on the element where the start location $x$ of the segment is after or inside the distributed load.
+* The shear of each distributed load in $Dy$ and $Dz$ is ${(w_{1} + w_{2}) \over 2} * (x_{2} - x_{1})$.
+($w_{2}$ and $x_{2}$ is modified if the start of the segment is inside the distributed load)
 
 ##### Moment Equation
 Similarly, the change in the moment diagram is equal to the area under the shear diagram. If the moment at the start of the segment, $M_{1}$ is known, the moment at any point, relative to the start of the segment can be expressed as:
 $M_{x} = M_{1} - \int_0^x V_{x}dx$ for segZ.
 $M_{x} = -M_{1} - \int_0^x V_{x}dx$ for segY.
-* $M_{1} = f_{6} - f_{2}x - \sum_{i=1}^{Py} Py_{i} + \sum_{i=1}^{Mz} Mz_{i}$ for segZ.
-* $M_{1} = f_{5} + f_{3}x + \sum_{i=1}^{Pz} Pz_{i} + \sum_{i=1}^{My} My_{i}$ for segY.
+* $M_{1} = f_{6} - f_{2}x - \sum_{i=1}^{Py} Py_{i} + \sum_{i=1}^{Mz} Mz_{i}- \sum_{i=1}^{Dy} Dy_{i}$ for segZ.
+* $M_{1} = f_{5} + f_{3}x + \sum_{i=1}^{Pz} Pz_{i} + \sum_{i=1}^{My} My_{i}+ \sum_{i=1}^{Dz} Dz_{i}$ for segY.
 * $f_{2}x$ and $f_{3}x$ is moment as distanced from $x_{1}$ by x.
 * Where $Mz$ is the vector of all the moment loads in the local Z direction on the element where the location $x$ of the Moment load is smaller or equal to $x$.
 * Where $My$ is the vector of all the moment loads in the local Y direction on the element where the location $x$ of the Moment load is smaller or equal to $x$.
+* Where $Dy$ is the vector of all the distributed moment loads in the local Y direction on the element where the start location $x$ of the segment is after or inside the distributed load.
+* Where $Dz$ is the vector of all the distributed moment loads in the local Z direction on the element where the start location $x$ of the segment is after or inside the distributed load.
+* The moment of each distributed load in $Dy$ and $Dz$ is
+ $(x_{1} - x_{2}) * {2w_{1}x_{1} - 3w_{1}x + w_{1}x_{2} + w_{2}x_{1} - 3w_{2}x + 2w_{2}x_{2} \over 6}$.
+($w_{2}$ and $x_{2}$ is modified if the start of the segment is inside the distributed load)
 
 ##### Slope Equation
 The slope of the elastic curve $\theta$, can be obtained by integrating the moment diagram and dividing by the flexural rigidity $EL$.
