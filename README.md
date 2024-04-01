@@ -14,7 +14,7 @@ The backend is cloud native so it can scale easly with caching using Orleans.
 ## Features
 ### Backend
 - [X] API that handle user authentication and authorization.
-- [ ] NGINX using HTTPS/TLS.
+- [X] NGINX using HTTPS/TLS.
 - [X] Saving and managing users and accounts data in Postgresql database.
 - [X] Adding NGINX as an API Gateway, Load Balancer and Reverse Proxy.
 - [X] Making the backend cloud native and can be scaled and distributed, so it works on monolithic or microservices architecture the same way.
@@ -24,7 +24,6 @@ The backend is cloud native so it can scale easly with caching using Orleans.
 - [X] Terminate the Pro subscription once the subscription period has elapsed, Including reset the role of the user.
 - [X] Working with HamzaCAD service to allow only Pro users to use it.
 - [X] Sending email for user to conform there email using Smtp protocol.
-- [ ] Prevent sharing accounts with SignalR.
 - [X] Allow Users to reset there password when they forgot it by sending email to the user.
 - [X] Create two separate Docker Compose files, each with different configurations, to distinguish between the production and development environments.
 - [ ] Setup continuous deployment to VPS.
@@ -37,7 +36,7 @@ The backend is cloud native so it can scale easly with caching using Orleans.
 - [X] Handling Payment API.
 - [X] Adding HamzaCAD service page.
 - [X] Adding profile page.
-- [ ] Adding Terms of use and Privacy policy pages.
+- [X] Adding Terms of use and Privacy policy pages.
 ### HamzaCAD
 - [X] convert Rectilinear Polygons to Rectangles.
 - [X] make the text structure editor.
